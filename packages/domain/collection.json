@@ -1,0 +1,42 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "name": "domain",
+  "version": "0.0.1",
+  "schematics": {
+    "create": {
+      "factory": "./src/schematics/create/schematic",
+      "schema": "./src/schematics/create/schema.json",
+      "description": "create domain schematic"
+    },
+    "addE2EProject": {
+      "factory": "./src/schematics/add-e2e-project/schematic",
+      "schema": "./src/schematics/add-e2e-project/schema.json",
+      "description": "Add E2E project schematic"
+    },
+    "addLibraries": {
+      "factory": "./src/schematics/add-libraries/schematic",
+      "schema": "./src/schematics/add-libraries/schema.json",
+      "description": "Add libraries to domain"
+    },
+    "removeE2EProject": {
+      "factory": "./src/schematics/remove-e2e-project/schematic",
+      "schema": "./src/schematics/remove-e2e-project/schema.json",
+      "description": "Remove E2E project schematic"
+    },
+    "removeLibraries": {
+      "factory": "./src/schematics/remove-libraries/schematic",
+      "schema": "./src/schematics/remove-libraries/schema.json",
+      "description": "Remove libraries from domain"
+    },
+    "move": {
+      "factory": "./src/schematics/move/schematic",
+      "schema": "./src/schematics/move/schema.json",
+      "description": "Move domain"
+    },
+    "remove": {
+      "factory": "./src/schematics/remove/schematic",
+      "schema": "./src/schematics/remove/schema.json",
+      "description": "Remove domain"
+    }
+  }
+}
