@@ -1,5 +1,5 @@
 {
-  "name": "@srlee/domain",
+  "name": "@srleecode/domain",
   "description": "Nrwl nx plugin to allow operations at the domain level",
   "author": "Scott Lee",
   "version": "1.0.0",
@@ -27,7 +27,7 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "publish": "np"
+    "publish": "npm run build && npm publish ./dist/packages/domain --access=public"
   },
   "private": true,
   "dependencies": {},
@@ -47,7 +47,6 @@
     "eslint": "7.7.0",
     "eslint-config-prettier": "6.11.0",
     "jest": "26.4.1",
-    "np": "^6.5.0",
     "path": "^0.12.7",
     "prettier": "2.0.5",
     "ts-jest": "26.2.0",
