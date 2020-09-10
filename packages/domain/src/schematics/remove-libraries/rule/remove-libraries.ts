@@ -7,13 +7,9 @@ import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
 export const removeLibrariesRules = (
   application: string,
   domain: string,
-  includedLibraryTypes: DomainLibraryName[]
+  libraries: DomainLibraryName[]
 ): Rule[] => {
-  const projectNames = getProjectNames(
-    application,
-    domain,
-    includedLibraryTypes
-  );
+  const projectNames = getProjectNames(application, domain, libraries);
   return projectNames.map((projectName) =>
     getExternalSchematic('@nrwl/workspace', 'remove', {
       projectName,

@@ -20,18 +20,16 @@ import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';
 
 export default function (options: RemoveLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
-    const { application, domain, includedLibraryTypes } = options;
-    checkLibrariesExist(application, domain, includedLibraryTypes, tree);
+    const { application, domain, libraries } = options;
+    checkLibrariesExist(application, domain, libraries, tree);
     let rules: Rule[] = [];
     if (isHavingE2ECypressProject(application, domain, tree)) {
-      rules.push(
-        removeE2EImplicitDependencies(application, domain, includedLibraryTypes)
-      );
+      rules.push(removeE2EImplicitDependencies(application, domain, libraries));
       if (
         !isHavingImplicitDependenciesAfterRemoval(
           application,
           domain,
-          includedLibraryTypes,
+          libraries,
           tree
         )
       ) {
@@ -39,19 +37,12 @@ export default function (options: RemoveLibrariesSchematicSchema): Rule {
       }
     }
 
-    rules = rules.concat(
-      removeLibrariesRules(application, domain, includedLibraryTypes)
-    );
-    if (includedLibraryTypes.includes(DomainLibraryName.Util)) {
+    rules = rules.concat(removeLibrariesRules(application, domain, libraries));
+    if (libraries.includes(DomainLibraryName.Util)) {
       rules.push(removeMockFileResolutionPath(application, domain));
     }
     if (
-      isDomainEmptyAfterLibraryRemoval(
-        application,
-        domain,
-        includedLibraryTypes,
-        tree
-      )
+      isDomainEmptyAfterLibraryRemoval(application, domain, libraries, tree)
     ) {
       rules.push(deleteDomainFolder(application, domain));
     }

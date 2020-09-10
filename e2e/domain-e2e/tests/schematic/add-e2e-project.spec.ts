@@ -6,7 +6,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
-        `generate @srlee/domain:addE2EProject --application ${application} --domain ${domain}`
+        `generate @srleecode/domain:addE2EProject --application ${application} --domain ${domain}`
       );
 
       const nxJson = readJson('nx.json');

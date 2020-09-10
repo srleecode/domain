@@ -20,28 +20,21 @@ import { addE2EImplicitDependencies } from '../shared/rule/add-e2e-implicit-depe
 export default function (options: AddLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     const normalizedOptions = normalizeOptions(options);
-    const { application, domain, includedLibraryTypes } = options;
+    const { application, domain, libraries } = options;
     checkDomainExists(application, domain, tree);
-    checkLibrariesDontExist(
-      application,
-      application,
-      includedLibraryTypes,
-      tree
-    );
+    checkLibrariesDontExist(application, application, libraries, tree);
     const rules = addLibrariesRules(normalizedOptions.libraryDefinitions);
-    if (includedLibraryTypes.includes(DomainLibraryName.Util)) {
+    if (libraries.includes(DomainLibraryName.Util)) {
       rules.push(addMockFile(application, domain));
       rules.push(addMockFileResolutionPath(application, domain));
     }
     if (!!options.addJestJunitReporter) {
-      includedLibraryTypes.forEach((libraryType) =>
+      libraries.forEach((libraryType) =>
         rules.push(addJestJunitReporter(application, domain, libraryType))
       );
     }
     if (isHavingE2ECypressProject(application, domain, tree)) {
-      rules.push(
-        addE2EImplicitDependencies(application, domain, includedLibraryTypes)
-      );
+      rules.push(addE2EImplicitDependencies(application, domain, libraries));
     }
     return chain(rules);
   };
@@ -56,7 +49,7 @@ const normalizeOptions = (
       options.application,
       options.domain,
       options.prefix,
-      options.includedLibraryTypes,
+      options.libraries,
       options.style
     ),
   };

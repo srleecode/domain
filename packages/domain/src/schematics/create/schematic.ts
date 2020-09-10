@@ -42,14 +42,14 @@ export default function (options: CreateSchematicSchema): Rule {
         )
       );
     }
-    if (options.includedLibraryTypes.includes(DomainLibraryName.Util)) {
+    if (options.libraries.includes(DomainLibraryName.Util)) {
       rules.push(addMockFile(options.application, options.domain));
       rules.push(
         addMockFileResolutionPath(options.application, options.domain)
       );
     }
     if (!!options.addJestJunitReporter) {
-      options.includedLibraryTypes.forEach((libraryType) =>
+      options.libraries.forEach((libraryType) =>
         rules.push(
           addJestJunitReporter(options.application, options.domain, libraryType)
         )
@@ -60,7 +60,7 @@ export default function (options: CreateSchematicSchema): Rule {
         addE2EProjectRules(
           options.application,
           options.domain,
-          options.includedLibraryTypes,
+          options.libraries,
           options.linter,
           tree
         )
@@ -77,7 +77,7 @@ const normalizeOptions = (options: CreateSchematicSchema): NormalizedSchema => {
       options.application,
       options.domain,
       options.prefix,
-      options.includedLibraryTypes,
+      options.libraries,
       options.style
     ),
   };

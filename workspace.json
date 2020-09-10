@@ -64,7 +64,7 @@
           "builder": "@nrwl/nx-plugin:e2e",
           "options": {
             "target": "domain:build",
-            "npmPackageName": "@srlee/domain",
+            "npmPackageName": "@srleecode/domain",
             "pluginOutputPath": "dist/packages/domain",
             "jestConfig": "e2e/domain-e2e/jest.config.js",
             "tsSpecConfig": "e2e/domain-e2e/tsconfig.spec.json",

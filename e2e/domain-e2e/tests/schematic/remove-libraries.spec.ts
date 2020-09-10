@@ -10,7 +10,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
-        `generate @srlee/domain:removeLibraries --application ${application} --domain ${domain} --includedLibraryTypes ui`
+        `generate @srleecode/domain:removeLibraries --application ${application} --domain ${domain} --libraries ui`
       );
 
       expect(() =>
@@ -22,7 +22,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
-        `generate @srlee/domain:removeLibraries --application ${application} --domain ${domain} --includedLibraryTypes util`
+        `generate @srleecode/domain:removeLibraries --application ${application} --domain ${domain} --libraries util`
       );
 
       expect(() =>
@@ -34,7 +34,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'single-library-domain';
       await runNxCommandAsync(
-        `generate @srlee/domain:removeLibraries --application ${application} --domain ${domain} --includedLibraryTypes data-access`
+        `generate @srleecode/domain:removeLibraries --application ${application} --domain ${domain} --libraries data-access`
       );
 
       expect(() =>
@@ -53,7 +53,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
       await runNxCommandAsync(
-        `generate @srlee/domain:removeLibraries --application ${application} --domain ${domain} --includedLibraryTypes data-access,feature,shell,ui,util`
+        `generate @srleecode/domain:removeLibraries --application ${application} --domain ${domain} --libraries data-access,feature,shell,ui,util`
       );
 
       expect(() =>

@@ -12,7 +12,7 @@ describe('domain', () => {
       libraryTypes = ['data-access']
     ) => {
       await runNxCommandAsync(
-        `generate @srlee/domain:remove --application ${application} --domain ${domain}`
+        `generate @srleecode/domain:remove --application ${application} --domain ${domain}`
       );
       libraryTypes.forEach((type) =>
         expect(() =>

@@ -13,7 +13,7 @@ describe('domain', () => {
       libraryTypes = ['data-access']
     ) => {
       await runNxCommandAsync(
-        `generate @srlee/domain:move --application ${application} --domain ${domain} --newDomain ${newDomain}`
+        `generate @srleecode/domain:move --application ${application} --domain ${domain} --newDomain ${newDomain}`
       );
       libraryTypes.forEach((type) =>
         expect(() =>
@@ -72,7 +72,7 @@ describe('domain', () => {
       const domain = 'parent-domain-with-child/shared';
       const newDomain = 'new-parent-domain-with-child/shared';
       await runNxCommandAsync(
-        `generate @srlee/domain:move --application ${application} --domain ${domain} --newDomain ${newDomain}`
+        `generate @srleecode/domain:move --application ${application} --domain ${domain} --newDomain ${newDomain}`
       );
       expect(() =>
         checkFilesExist(
@@ -85,7 +85,7 @@ describe('domain', () => {
       const domain = 'extra-options-test-domain/shared';
       const newDomain = 'new-extra-options-test-domain/shared';
       await runNxCommandAsync(
-        `generate @srlee/domain:move --application ${application} --domain ${domain} --newDomain ${newDomain}`
+        `generate @srleecode/domain:move --application ${application} --domain ${domain} --newDomain ${newDomain}`
       );
       expect(() =>
         checkFilesExist(`libs/${application}/${newDomain}/feature/src/index.ts`)

@@ -10,7 +10,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
-        `generate @srlee/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --includedLibraryTypes ui`
+        `generate @srleecode/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --libraries ui`
       );
 
       expect(() =>
@@ -22,7 +22,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
       await runNxCommandAsync(
-        `generate @srlee/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --includedLibraryTypes shell,ui,util`
+        `generate @srleecode/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --libraries shell,ui,util`
       );
 
       expect(() =>
@@ -40,7 +40,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
-        `generate @srlee/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --includedLibraryTypes util`
+        `generate @srleecode/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --libraries util`
       );
 
       expect(() =>
@@ -52,7 +52,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'extra-options-test-domain/shared';
       await runNxCommandAsync(
-        `generate @srlee/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --includedLibraryTypes util --addJestJunitReporter true`
+        `generate @srleecode/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --libraries util --addJestJunitReporter true`
       );
       const jestConfig = readFile(
         `libs/${application}/${domain}/util/jest.config.js`

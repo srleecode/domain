@@ -8,14 +8,14 @@ import {
 
 describe('domain', () => {
   beforeAll(() => {
-    ensureNxProject('@srlee/domain', 'dist/packages/domain');
+    ensureNxProject('@srleecode/domain', 'dist/packages/domain');
   });
   describe('create', () => {
     it('should create leaf domain', async (done) => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
-        `generate @srlee/domain:create --application ${application} --domain ${domain} --prefix srlee --includedLibraryTypes data-access`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access`
       );
 
       expect(() =>
@@ -29,7 +29,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'single-library-domain';
       await runNxCommandAsync(
-        `generate @srlee/domain:create --application ${application} --domain ${domain} --prefix srlee --includedLibraryTypes data-access --addCypressProject true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access --addCypressProject true`
       );
 
       expect(() =>
@@ -43,7 +43,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
       await runNxCommandAsync(
-        `generate @srlee/domain:create --application ${application} --domain ${domain} --prefix srlee --includedLibraryTypes data-access,feature --addCypressProject true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,feature --addCypressProject true`
       );
 
       expect(() =>
@@ -60,7 +60,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
-        `generate @srlee/domain:create --application ${application} --domain ${domain} --prefix srlee --includedLibraryTypes data-access --addJestJunitReporter true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access --addJestJunitReporter true`
       );
       const jestConfig = readFile(
         `libs/${application}/${domain}/data-access/jest.config.js`
@@ -73,7 +73,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'extra-options-test-domain/shared';
       await runNxCommandAsync(
-        `generate @srlee/domain:create --application ${application} --domain ${domain} --prefix srlee --includedLibraryTypes feature,ui --addCypressProject true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries feature,ui --addCypressProject true`
       );
       const nxJson = readJson('nx.json');
       const workspaceJson = readJson('workspace.json');
@@ -86,7 +86,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'leaf-domain-with-util';
       await runNxCommandAsync(
-        `generate @srlee/domain:create --application ${application} --domain ${domain} --prefix srlee --includedLibraryTypes util`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries util`
       );
 
       expect(() =>
@@ -99,10 +99,10 @@ describe('domain', () => {
       const parentDomain = 'parent-domain-with-child/shared';
       const childDomain = `parent-domain-with-child/child-domain`;
       await runNxCommandAsync(
-        `generate @srlee/domain:create --application ${application} --domain ${parentDomain} --prefix srlee --includedLibraryTypes data-access`
+        `generate @srleecode/domain:create --application ${application} --domain ${parentDomain} --prefix srlee --libraries data-access`
       );
       await runNxCommandAsync(
-        `generate @srlee/domain:create --application ${application} --domain ${childDomain} --prefix srlee --includedLibraryTypes data-access`
+        `generate @srleecode/domain:create --application ${application} --domain ${childDomain} --prefix srlee --libraries data-access`
       );
 
       expect(() =>
@@ -123,7 +123,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'parent-domain/shared';
       await runNxCommandAsync(
-        `generate @srlee/domain:create --application ${application} --domain ${domain} --prefix srlee --includedLibraryTypes data-access`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access`
       );
 
       expect(() =>

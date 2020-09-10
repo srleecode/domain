@@ -10,13 +10,13 @@ import { createCypressProject } from './create-cypress-project';
 export const addE2EProjectRules = (
   application: string,
   domain: string,
-  includedLibraryTypes: DomainLibraryName[],
+  libraries: DomainLibraryName[],
   linter: Linter,
   tree: Tree
 ): Rule[] => [
   createCypressProject(application, domain, linter),
   renameE2EProjectInNxJson(application, domain),
   renameE2EProjectInWorkspaceJson(application, domain, tree),
-  addE2EImplicitDependencies(application, domain, includedLibraryTypes),
+  addE2EImplicitDependencies(application, domain, libraries),
   removeDevServerTargets(application, domain, tree),
 ];

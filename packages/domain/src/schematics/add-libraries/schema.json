@@ -31,7 +31,7 @@
       ],
       "x-prompt": "What is the prefix to apply to generated selectors?"
     },
-    "includedLibraryTypes": {
+    "libraries": {
       "description": "The library types that will be generated",
       "type": "array",
       "uniqueItems": true,

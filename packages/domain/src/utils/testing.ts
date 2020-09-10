@@ -4,7 +4,7 @@ import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { externalSchematic } from '@angular-devkit/schematics';
 
 export const testRunner = new SchematicTestRunner(
-  '@srlee/domain',
+  '@srleecode/domain',
   join(__dirname, '../../collection.json')
 );
 

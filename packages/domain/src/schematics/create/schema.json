@@ -31,10 +31,14 @@
       ],
       "x-prompt": "What is the prefix to apply to generated selectors?"
     },
-    "includedLibraryTypes": {
+    "libraries": {
       "description": "The library types that will be generated",
       "type": "array",
+      "items": {
+        "type": "string"
+      },
       "uniqueItems": true,
+      "alias": "l",
       "default": ["data-access", "feature", "shell", "ui", "util"],
       "x-prompt": {
         "message": "Which library types do you want to generate?",
@@ -110,5 +114,5 @@
       "x-prompt": "Add a storybook app?"
     }
   },
-  "required": ["application", "domain", "prefix"]
+  "required": ["application", "domain", "prefix", "libraries"]
 }

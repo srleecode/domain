@@ -9,21 +9,21 @@ export const getDomainLibraryDefinitions = (
   application: string,
   domain: string,
   prefix: string,
-  includedLibraryTypes: DomainLibraryName[],
+  libraries: DomainLibraryName[],
   style: StyleType
 ): LibraryDefinition[] => {
   const parsedDomain = getParsedDomain(domain);
   let directory = `${application}/${domain}`;
   let scope = `${application}-${parsedDomain}`;
-  return DOMAIN_LIBRARY_TYPES.filter((type) =>
-    includedLibraryTypes.includes(type)
-  ).map((type) => ({
-    projectName: `${type}`,
-    tags: [`app:${application}`, `scope:${scope}`, `type:${type}`],
-    prefix,
-    style,
-    directory,
-  }));
+  return DOMAIN_LIBRARY_TYPES.filter((type) => libraries.includes(type)).map(
+    (type) => ({
+      projectName: `${type}`,
+      tags: [`app:${application}`, `scope:${scope}`, `type:${type}`],
+      prefix,
+      style,
+      directory,
+    })
+  );
 };
 
 export const isLibraryExisting = (
@@ -38,8 +38,6 @@ export const isLibraryExisting = (
 export const getProjectNames = (
   application: string,
   domain: string,
-  includedLibraryTypes: DomainLibraryName[]
+  libraries: DomainLibraryName[]
 ): string[] =>
-  includedLibraryTypes.map(
-    (type) => `${application}-${getParsedDomain(domain)}-${type}`
-  );
+  libraries.map((type) => `${application}-${getParsedDomain(domain)}-${type}`);
