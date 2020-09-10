@@ -43,7 +43,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,feature --addCypressProject true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,feature `
       );
 
       expect(() =>

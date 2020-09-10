@@ -78,6 +78,7 @@ export const getProjects = (
   const nxJson = getNxJson(tree);
   const parsedDomainName = getParsedDomain(domain).replace('-shared', '');
   const applicationDomain = `${application}-${parsedDomainName}`;
+  const projectSecondLevelDomain = domain.split('-')[1];
   return Object.keys(nxJson.projects)
     .map(
       (projectName): Project => {
@@ -97,9 +98,8 @@ export const getProjects = (
     )
     .filter(
       (project) =>
-        project.name.startsWith(applicationDomain) &&
-        (project.secondLevelDomain === '' ||
-          getSecondLevelDomain(domain) === project.secondLevelDomain)
+        project.name ===
+        `${application}-${getParsedDomain(domain)}-${project.type}`
     );
 };
 
@@ -111,18 +111,35 @@ const getLibraryType = (splitProjectName: string[]): DomainLibraryName => {
   ) {
     return DomainLibraryName.DataAccess;
   }
-  return splitProjectName[splitProjectName.length - 1] as DomainLibraryName;
+  const libraryType = splitProjectName[
+    splitProjectName.length - 1
+  ] as DomainLibraryName;
+  if (
+    [
+      DomainLibraryName.Feature,
+      DomainLibraryName.Shell,
+      DomainLibraryName.Ui,
+      DomainLibraryName.Util,
+    ].includes(libraryType)
+  ) {
+    return libraryType;
+  }
+  return undefined;
 };
 
 const getProjectsSecondLevelDomain = (
   projectName: string,
   parentDomainPrefix: string,
   libraryType: DomainLibraryName
-): string =>
-  projectName
-    .replace(`${parentDomainPrefix}`, '')
-    .replace(`${libraryType.toString()}`, '')
-    .slice(1, -1); // remove "-" from ends of string
+): string => {
+  if (!!libraryType) {
+    return projectName
+      .replace(`${parentDomainPrefix}`, '')
+      .replace(`${libraryType.toString()}`, '')
+      .slice(1, -1); // remove "-" from ends of string
+  }
+  return undefined;
+};
 
 export const isTwoLevelDomain = (domain: string): boolean =>
   domain.includes('/');

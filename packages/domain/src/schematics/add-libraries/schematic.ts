@@ -13,9 +13,9 @@ import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
 import { addMockFile } from '../shared/rule/add-mock-file';
 import { addMockFileResolutionPath } from '../shared/rule/add-mock-file-resolution-path';
 import { addJestJunitReporter } from '../shared/rule/add-jest-junit-reporter';
-import { checkDomainExists } from '../move/validation/check-domain-exists';
 import { isHavingE2ECypressProject } from '../../utils/e2e-project';
 import { addE2EImplicitDependencies } from '../shared/rule/add-e2e-implicit-dependencies';
+import { checkDomainExists } from '../shared/validation/check-domain-exists';
 
 export default function (options: AddLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {

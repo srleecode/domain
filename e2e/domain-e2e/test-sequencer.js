@@ -5,10 +5,10 @@ class CustomSequencer extends Sequencer {
   testsOrder = {
     'create.spec.ts': 0,
     'add-libraries.spec.ts': 1,
-    'remove-libraries.spec.ts': 2,
-    'move.spec.ts': 3,
-    'remove.spec.ts': 4,
-    'add-e2e-project.spec.ts': 5,
+    'add-e2e-project.spec.ts': 2,
+    'remove-libraries.spec.ts': 3,
+    'move.spec.ts': 4,
+    'remove.spec.ts': 5,
     'remove-e2e-project.spec.ts': 6,
   };
   sort(tests) {

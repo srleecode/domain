@@ -195,6 +195,7 @@ describe('domain tests with tree', () => {
 
   describe('getProjects', () => {
     const leafDomain = 'leaf-domain';
+    const leafExtraWordDomain = 'leaf-domain-extra-word';
     const parentDomain = 'parent-domain';
     const childDomain = 'child-domain';
     const dataAccesslibraryType = DomainLibraryName.DataAccess;
@@ -218,6 +219,9 @@ describe('domain tests with tree', () => {
         paths: {
           [`${tsConfigPrefix}/${leafDomain}/${dataAccesslibraryType}`]: [''],
           [`${tsConfigPrefix}/${leafDomain}/${utilLibraryType}`]: [''],
+          [`${tsConfigPrefix}/${leafExtraWordDomain}/${dataAccesslibraryType}`]: [
+            '',
+          ],
           [`${tsConfigPrefix}/${parentDomain}/shared/${utilLibraryType}`]: [''],
           [`${tsConfigPrefix}/${parentDomain}/${childDomain}/${utilLibraryType}`]: [
             '',

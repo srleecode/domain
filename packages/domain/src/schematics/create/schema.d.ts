@@ -6,7 +6,7 @@ export interface CreateSchematicSchema {
   application: string;
   domain: string;
   prefix: string;
-  includedLibraryTypes?: DomainLibraryName[];
+  libraries?: DomainLibraryName[];
   style?: StyleType;
   tsConfigPath?: string;
   addJestJunitReporter?: boolean;
