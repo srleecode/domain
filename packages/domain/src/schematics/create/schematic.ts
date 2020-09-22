@@ -20,7 +20,8 @@ import { addMockFile } from '../shared/rule/add-mock-file';
 import { getDomainLibraryDefinitions } from '../../utils/libraries';
 import { checkDomainLevels } from './validation/check-domain-levels';
 import { addJestJunitReporter } from '../shared/rule/add-jest-junit-reporter';
-import { addE2EProjectRules } from '../add-e2e-project/rule/add-e2e-project-rules';
+import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-rules';
+import { CypressProject } from '../shared/model/cypress-project.enum';
 
 export default function (options: CreateSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -55,14 +56,14 @@ export default function (options: CreateSchematicSchema): Rule {
         )
       );
     }
-    if (!!options.addCypressProject) {
+    if (!!options.addE2EProject) {
       rules = rules.concat(
         addE2EProjectRules(
           options.application,
           options.domain,
           options.libraries,
-          options.linter,
-          tree
+          CypressProject.E2E,
+          options.linter
         )
       );
     }

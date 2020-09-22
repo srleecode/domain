@@ -101,7 +101,7 @@
       "default": false,
       "x-prompt": "Configure jest junit reporter?"
     },
-    "addCypressProject": {
+    "addE2EProject": {
       "description": "Add a e2e cypress project",
       "type": "boolean",
       "default": false,

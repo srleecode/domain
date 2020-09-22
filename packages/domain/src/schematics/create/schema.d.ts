@@ -10,7 +10,7 @@ export interface CreateSchematicSchema {
   style?: StyleType;
   tsConfigPath?: string;
   addJestJunitReporter?: boolean;
-  addCypressProject?: boolean;
+  addE2EProject?: boolean;
   addStorybookProject?: boolean;
   linter: Linter;
 }

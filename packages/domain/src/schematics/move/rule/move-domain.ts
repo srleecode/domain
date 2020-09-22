@@ -7,6 +7,7 @@ import {
 import { getExternalSchematic } from '../../../utils/testing';
 import { Project } from '../../shared/model/project.model';
 import { deleteDomainFolder } from '../../shared/rule/delete-domain-folder';
+import { moveCypressFiles } from './move-cypress-files';
 
 export const moveDomain = (
   application: string,
@@ -15,14 +16,15 @@ export const moveDomain = (
   tree: Tree
 ): Rule[] => {
   const projects = getProjects(application, domain, tree);
-  return getMoveRules(application, domain, newDomain, projects);
+  return getMoveRules(application, domain, newDomain, projects, tree);
 };
 
 const getMoveRules = (
   application: string,
   domain: string,
   newDomain: string,
-  projects: Project[]
+  projects: Project[],
+  tree: Tree
 ): Rule[] => {
   const rules = [];
   projects.forEach((project) => {
@@ -39,7 +41,7 @@ const getMoveRules = (
         })
       );
   });
-
+  rules.push(moveCypressFiles(application, domain, newDomain));
   rules.push(deleteDomainFolder(application, domain));
 
   return rules;

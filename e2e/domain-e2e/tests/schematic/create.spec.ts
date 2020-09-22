@@ -29,7 +29,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'single-library-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access --addCypressProject true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access --addE2EProject true`
       );
 
       expect(() =>
@@ -73,7 +73,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'extra-options-test-domain/shared';
       await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries feature,ui --addCypressProject true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries feature,ui --addE2EProject true`
       );
       const nxJson = readJson('nx.json');
       const workspaceJson = readJson('workspace.json');

@@ -8,20 +8,20 @@
       "schema": "./src/schematics/create/schema.json",
       "description": "create domain schematic"
     },
-    "addE2EProject": {
-      "factory": "./src/schematics/add-e2e-project/schematic",
-      "schema": "./src/schematics/add-e2e-project/schema.json",
-      "description": "Add E2E project schematic"
+    "addCypressProject": {
+      "factory": "./src/schematics/add-cypress-project/schematic",
+      "schema": "./src/schematics/add-cypress-project/schema.json",
+      "description": "Add cypress project schematic"
     },
     "addLibraries": {
       "factory": "./src/schematics/add-libraries/schematic",
       "schema": "./src/schematics/add-libraries/schema.json",
       "description": "Add libraries to domain"
     },
-    "removeE2EProject": {
-      "factory": "./src/schematics/remove-e2e-project/schematic",
-      "schema": "./src/schematics/remove-e2e-project/schema.json",
-      "description": "Remove E2E project schematic"
+    "removeCypressProject": {
+      "factory": "./src/schematics/remove-cypress-project/schematic",
+      "schema": "./src/schematics/remove-cypress-project/schema.json",
+      "description": "Remove cypress project schematic"
     },
     "removeLibraries": {
       "factory": "./src/schematics/remove-libraries/schematic",

@@ -11,31 +11,22 @@ import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
 import { removeMockFileResolutionPath } from '../shared/rule/remove-mock-file-resolution-path';
 import {
   isHavingImplicitDependenciesAfterRemoval,
-  isHavingE2ECypressProject,
-} from '../../utils/e2e-project';
-import { removeE2EProject } from '../shared/rule/remove-e2e-project';
-import { removeE2EImplicitDependencies } from '../shared/rule/remove-e2e-implicit-dependencies';
+  isHavingCypressProject,
+} from '../../utils/cypress-project';
+import { removeCypressProject } from '../shared/rule/remove-cypress-project';
+import { removeCypressProjectImplicitDependencies } from '../shared/rule/remove-cypress-project-implicit-dependencies';
 import { isDomainEmptyAfterLibraryRemoval } from '../../utils/domain';
 import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';
+import { CypressProject } from '../shared/model/cypress-project.enum';
+import { ProjectType } from '@nrwl/workspace';
 
 export default function (options: RemoveLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
     const { application, domain, libraries } = options;
     checkLibrariesExist(application, domain, libraries, tree);
-    let rules: Rule[] = [];
-    if (isHavingE2ECypressProject(application, domain, tree)) {
-      rules.push(removeE2EImplicitDependencies(application, domain, libraries));
-      if (
-        !isHavingImplicitDependenciesAfterRemoval(
-          application,
-          domain,
-          libraries,
-          tree
-        )
-      ) {
-        rules = rules.concat(removeE2EProject(application, domain));
-      }
-    }
+    let rules: Rule[] = [
+      ...getCypressProjectsUpdateRules(application, domain, libraries, tree),
+    ];
 
     rules = rules.concat(removeLibrariesRules(application, domain, libraries));
     if (libraries.includes(DomainLibraryName.Util)) {
@@ -50,3 +41,38 @@ export default function (options: RemoveLibrariesSchematicSchema): Rule {
     return chain(rules);
   };
 }
+
+const getCypressProjectsUpdateRules = (
+  application: string,
+  domain: string,
+  libraries: DomainLibraryName[],
+  tree: Tree
+): Rule[] => {
+  let rules: Rule[] = [];
+  [CypressProject.E2E, CypressProject.Storybook].forEach((projectType) => {
+    if (isHavingCypressProject(application, domain, projectType, tree)) {
+      rules.push(
+        removeCypressProjectImplicitDependencies(
+          application,
+          domain,
+          libraries,
+          projectType
+        )
+      );
+      if (
+        !isHavingImplicitDependenciesAfterRemoval(
+          application,
+          domain,
+          libraries,
+          projectType,
+          tree
+        )
+      ) {
+        rules = rules.concat(
+          removeCypressProject(application, domain, projectType)
+        );
+      }
+    }
+  });
+  return rules;
+};

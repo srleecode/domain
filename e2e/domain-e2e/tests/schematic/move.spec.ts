@@ -92,9 +92,19 @@ describe('domain', () => {
       ).not.toThrow();
       const nxJson = readJson('nx.json');
       const workspaceJson = readJson('workspace.json');
+      const cypressJson = readJson(
+        `apps/e2e/${application}/${newDomain}/cypress.json`
+      );
       const projectName = `e2e-${application}-new-extra-options-test-domain-shared`;
       expect(nxJson.projects[projectName]).toBeDefined();
       expect(workspaceJson.projects[projectName]).toBeDefined();
+      expect(cypressJson).toEqual({
+        ...cypressJson,
+        fixturesFolder: `/libs/${application}/${newDomain}/.e2e/fixtures`,
+        integrationFolder: `/libs/${application}/${newDomain}/.e2e/integration`,
+        pluginsFile: `/libs/${application}/${newDomain}/.cypress/plugins/index`,
+        supportFile: `/libs/${application}/${newDomain}/.cypress/support/index.ts`,
+      });
       done();
     }, 45000);
   });

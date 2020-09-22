@@ -1,14 +1,19 @@
-import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
+import {
+  Rule,
+  Tree,
+  SchematicContext,
+  SchematicsException,
+} from '@angular-devkit/schematics';
 import { deleteInTree } from '../../../utils/tree';
-import { getTopLevelDomain } from '../../../utils/domain';
+import { getParsedDomain } from '../../../utils/domain';
+import { CypressProject } from '../model/cypress-project.enum';
 
 export const deleteCypressProjectFolder = (
   application: string,
-  domain: string
+  domain: string,
+  projectType: CypressProject
 ): Rule => (tree: Tree, context: SchematicContext) => {
-  const cypressProjectFolder = `apps/e2e/${application}/${getTopLevelDomain(
-    domain
-  )}`;
+  const cypressProjectFolder = `apps/${projectType}/${application}/${domain}`;
   deleteInTree(tree, cypressProjectFolder);
   return tree;
 };

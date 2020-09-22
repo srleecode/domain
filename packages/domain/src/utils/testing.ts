@@ -10,7 +10,7 @@ export const testRunner = new SchematicTestRunner(
 
 export const emptyRule = (options: any): Rule => (
   tree: Tree,
-  _context: SchematicContext
+  context: SchematicContext
 ) => tree;
 
 export const getExternalSchematic = (

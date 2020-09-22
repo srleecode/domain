@@ -13,9 +13,10 @@ import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
 import { addMockFile } from '../shared/rule/add-mock-file';
 import { addMockFileResolutionPath } from '../shared/rule/add-mock-file-resolution-path';
 import { addJestJunitReporter } from '../shared/rule/add-jest-junit-reporter';
-import { isHavingE2ECypressProject } from '../../utils/e2e-project';
-import { addE2EImplicitDependencies } from '../shared/rule/add-e2e-implicit-dependencies';
+import { isHavingCypressProject } from '../../utils/cypress-project';
+import { addImplicitDependenciesToCypressProject } from '../shared/rule/add-implicit-dependencies-to-cypress-project';
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
+import { CypressProject } from '../shared/model/cypress-project.enum';
 
 export default function (options: AddLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -33,8 +34,32 @@ export default function (options: AddLibrariesSchematicSchema): Rule {
         rules.push(addJestJunitReporter(application, domain, libraryType))
       );
     }
-    if (isHavingE2ECypressProject(application, domain, tree)) {
-      rules.push(addE2EImplicitDependencies(application, domain, libraries));
+    if (isHavingCypressProject(application, domain, CypressProject.E2E, tree)) {
+      rules.push(
+        addImplicitDependenciesToCypressProject(
+          application,
+          domain,
+          libraries,
+          CypressProject.E2E
+        )
+      );
+    }
+    if (
+      isHavingCypressProject(
+        application,
+        domain,
+        CypressProject.Storybook,
+        tree
+      )
+    ) {
+      rules.push(
+        addImplicitDependenciesToCypressProject(
+          application,
+          domain,
+          libraries,
+          CypressProject.Storybook
+        )
+      );
     }
     return chain(rules);
   };
