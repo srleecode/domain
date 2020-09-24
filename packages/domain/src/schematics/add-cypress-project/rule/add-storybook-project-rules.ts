@@ -17,7 +17,7 @@ import {
   getCypressJsonPath,
 } from '../../../utils/cypress-project';
 import { deleteInTree } from '../../../utils/tree';
-import { getParsedDomain } from 'packages/domain/src/utils/domain';
+import { getParsedDomain } from '../../../utils/domain';
 
 export const addE2EProjectRules = (
   application: string,
@@ -37,7 +37,6 @@ export const addE2EProjectRules = (
     createCypressProject(application, domain, projectType, linter),
     removeUnneededFiles(application, domain, projectType),
     addBaseUrlToCypressConfig(application, domain, projectType),
-    // updateAngularJsonBuilder(cypressProjectName, schema.name),
   ];
 };
 
@@ -66,29 +65,3 @@ const addBaseUrlToCypressConfig = (
       return json;
     }
   );
-
-/*function updateAngularJsonBuilder(
-  application: string,
-  domain: string,
-  projectType: CypressProject,
-  targetProjectName
-): Rule {
-  return updateWorkspaceInTree((workspace) => {
-    const project = workspace.projects[e2eProjectName];
-    const e2eTarget = project.architect['e2e'];
-    project.architect['e2e'] = {
-      ...e2eTarget,
-      options: <any>{
-        ...e2eTarget.options,
-        devServerTarget: `${targetProjectName}:storybook`,
-      },
-      configurations: {
-        ci: {
-          devServerTarget: `${targetProjectName}:storybook:ci`,
-        },
-      },
-    };
-    return workspace;
-  });
-}
-*/

@@ -95,16 +95,25 @@ describe('domain', () => {
       const cypressJson = readJson(
         `apps/e2e/${application}/${newDomain}/cypress.json`
       );
+      const tsConfigJson = readJson(
+        `apps/e2e/${application}/${newDomain}/tsconfig.e2e.json`
+      );
       const projectName = `e2e-${application}-new-extra-options-test-domain-shared`;
       expect(nxJson.projects[projectName]).toBeDefined();
       expect(workspaceJson.projects[projectName]).toBeDefined();
       expect(cypressJson).toEqual({
         ...cypressJson,
-        fixturesFolder: `/libs/${application}/${newDomain}/.e2e/fixtures`,
-        integrationFolder: `/libs/${application}/${newDomain}/.e2e/integration`,
-        pluginsFile: `/libs/${application}/${newDomain}/.cypress/plugins/index`,
-        supportFile: `/libs/${application}/${newDomain}/.cypress/support/index.ts`,
+        fixturesFolder: `../../../../../libs/${application}/${newDomain}/.e2e/fixtures`,
+        integrationFolder: `../../../../../libs/${application}/${newDomain}/.e2e/integration`,
+        pluginsFile: `../../../../../libs/${application}/${newDomain}/.e2e/plugins/index`,
+        supportFile: `../../../../../libs/${application}/${newDomain}/.e2e/support/index.ts`,
       });
+      expect(tsConfigJson.include).toEqual([
+        `../../../../../libs/${application}/${newDomain}/.e2e/**/*.ts`,
+        `../../../../../libs/${application}/${newDomain}/.e2e/**/*.js`,
+        `../../../../../libs/${application}/${newDomain}/.cypress/**/*.ts`,
+        `../../../../../libs/${application}/${newDomain}/.cypress/**/*.js`,
+      ]);
       done();
     }, 45000);
   });

@@ -7,7 +7,9 @@ import { renameCypressProjectInNxJson } from './rename-cypress-project-in-nx-jso
 import { renameCypressProjectInWorkspaceJson } from './rename-cypress-project-in-workspace-json';
 import { createCypressProject } from './create-cypress-project';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
-import { moveE2EFilesToDomain } from './move-e2e-files-to-domain';
+import { moveCypressFilesToDomain } from './move-cypress-files-to-domain';
+import { updateCypressProjectIncludedFiles } from '../../shared/rule/update-cypress-project-included-files';
+import { addCypressSupportFiles } from './add-cypress-support-file';
 
 export const addE2EProjectRules = (
   application: string,
@@ -26,5 +28,7 @@ export const addE2EProjectRules = (
     projectType
   ),
   removeDevServerTargets(application, domain, projectType),
-  moveE2EFilesToDomain(application, domain, projectType),
+  moveCypressFilesToDomain(application, domain, projectType),
+  addCypressSupportFiles(application, domain, projectType),
+  updateCypressProjectIncludedFiles(application, domain, projectType),
 ];

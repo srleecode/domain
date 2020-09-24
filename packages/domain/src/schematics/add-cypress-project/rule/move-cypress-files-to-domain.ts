@@ -3,8 +3,9 @@ import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
 import { getCypressJsonPath } from '../../../utils/cypress-project';
 import { updateJsonInTree } from '@nrwl/workspace';
 import { renameInTree } from '../../../utils/tree';
+import { isTwoLevelDomain } from '../../../utils/domain';
 
-export const moveE2EFilesToDomain = (
+export const moveCypressFilesToDomain = (
   application: string,
   domain: string,
   projectType: CypressProject
@@ -27,18 +28,21 @@ export const moveE2EFilesToDomain = (
     renameInTree(
       tree,
       `apps/${projectType}/${application}/${domain}/src/${filePath}`,
-      `libs/${application}/${domain}/.cypress/${filePath}`
+      `libs/${application}/${domain}/.e2e/${filePath}`
     )
   );
 
+  const libsRelativePath = isTwoLevelDomain(domain)
+    ? '../../../../../libs'
+    : '../../../../libs';
   return updateJsonInTree(
     getCypressJsonPath(application, domain, projectType),
     (json) => ({
       ...json,
-      fixturesFolder: `/libs/${application}/${domain}/.e2e/fixtures`,
-      integrationFolder: `/libs/${application}/${domain}/.e2e/integration`,
-      pluginsFile: `/libs/${application}/${domain}/.cypress/plugins/index`,
-      supportFile: `/libs/${application}/${domain}/.cypress/support/index.ts`,
+      fixturesFolder: `${libsRelativePath}/${application}/${domain}/.e2e/fixtures`,
+      integrationFolder: `${libsRelativePath}/${application}/${domain}/.e2e/integration`,
+      pluginsFile: `${libsRelativePath}/${application}/${domain}/.e2e/plugins/index`,
+      supportFile: `${libsRelativePath}/${application}/${domain}/.e2e/support/index.ts`,
     })
   );
 };
