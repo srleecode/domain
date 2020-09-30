@@ -2,12 +2,12 @@ import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { UnitTestTree } from '@angular-devkit/schematics/testing';
 import { Tree } from '@angular-devkit/schematics';
 import { testRunner } from '../../../utils/testing';
-import { removeDevServerTargets } from './remove-dev-server-target';
+import { updateAngularJson } from './update-angular-json';
 import { readJsonInTree } from '@nrwl/workspace';
 import { getCypressProjectName } from '../../../utils/cypress-project';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
 
-describe('removeDevServerTargets', () => {
+describe('updateAngularJson', () => {
   let appTree: UnitTestTree;
   const application = 'test-application';
   const domain = 'leaf-domain';
@@ -67,7 +67,7 @@ describe('removeDevServerTargets', () => {
   it('should add domain libraries as implicit dependencies', async () => {
     appTree = (await testRunner
       .callRule(
-        removeDevServerTargets(application, domain, CypressProject.E2E),
+        updateAngularJson(application, domain, CypressProject.E2E),
         appTree
       )
       .toPromise()) as UnitTestTree;
@@ -79,5 +79,8 @@ describe('removeDevServerTargets', () => {
     expect(
       workspaceJson.projects[projectName].architect.e2e.configurations
     ).toBeUndefined();
+    expect(
+      workspaceJson.projects[projectName].architect.lint.options.exclude[1]
+    ).toBe('!libs/test-application/leaf-domain/.*/**');
   });
 });

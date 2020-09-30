@@ -1,6 +1,5 @@
 import { StyleType } from '../shared/model/style-type.enum';
 import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
-import { Linter } from '@nrwl/workspace';
 
 export interface CreateSchematicSchema {
   application: string;
@@ -12,5 +11,4 @@ export interface CreateSchematicSchema {
   addJestJunitReporter?: boolean;
   addE2EProject?: boolean;
   addStorybookProject?: boolean;
-  linter: Linter;
 }

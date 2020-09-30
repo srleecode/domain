@@ -1,67 +1,38 @@
-import {
-  Linter,
-  deleteFile,
-  updateJsonInTree,
-  updateWorkspaceInTree,
-} from '@nrwl/workspace';
-import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
-import { removeDevServerTargets } from './remove-dev-server-target';
+import { Rule } from '@angular-devkit/schematics';
+import { updateAngularJson } from './update-angular-json';
 import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
 import { addImplicitDependenciesToCypressProject } from '../../shared/rule/add-implicit-dependencies-to-cypress-project';
 import { renameCypressProjectInNxJson } from './rename-cypress-project-in-nx-json';
 import { renameCypressProjectInWorkspaceJson } from './rename-cypress-project-in-workspace-json';
 import { createCypressProject } from './create-cypress-project';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
-import {
-  getCypressProjectName,
-  getCypressJsonPath,
-} from '../../../utils/cypress-project';
-import { deleteInTree } from '../../../utils/tree';
-import { getParsedDomain } from '../../../utils/domain';
+import { updateCypressProjectIncludedFiles } from '../../shared/rule/update-cypress-project-included-files';
+import { addCypressSupportFiles } from './add-cypress-support-file';
+import { moveStorybookFilesToDomain } from './move-storybook-files-to-domain';
+import { deleteEslintrc } from './delete-eslintrc';
+import { addStorybookConfig } from './add-storybook-config';
 
-export const addE2EProjectRules = (
+export const addStorybookProjectRules = (
   application: string,
   domain: string,
   libraries: DomainLibraryName[],
-  projectType: CypressProject,
-  linter: Linter,
-  tree: Tree
+  projectType: CypressProject
 ): Rule[] => {
-  const cypressProjectName = getCypressProjectName(
-    application,
-    domain,
-    projectType
-  );
-
   return [
-    createCypressProject(application, domain, projectType, linter),
-    removeUnneededFiles(application, domain, projectType),
-    addBaseUrlToCypressConfig(application, domain, projectType),
+    createCypressProject(application, domain, projectType),
+    renameCypressProjectInNxJson(application, domain, projectType),
+    renameCypressProjectInWorkspaceJson(application, domain, projectType),
+    addImplicitDependenciesToCypressProject(
+      application,
+      domain,
+      libraries,
+      projectType
+    ),
+    updateAngularJson(application, domain, projectType),
+    moveStorybookFilesToDomain(application, domain),
+    addCypressSupportFiles(application, domain, projectType),
+    ...updateCypressProjectIncludedFiles(application, domain, projectType),
+    deleteEslintrc(application, domain, projectType),
+    ...addStorybookConfig(application, domain, libraries),
   ];
 };
-
-const removeUnneededFiles = (
-  application: string,
-  domain: string,
-  projectType: CypressProject
-): Rule => (tree: Tree, context: SchematicContext): Tree => {
-  const directory = `apps/${projectType}/${application}/${getParsedDomain(
-    domain
-  )}`;
-  deleteInTree(tree, `${directory}/integration`);
-  deleteInTree(tree, `${directory}/support/app.po.ts`);
-  return tree;
-};
-
-const addBaseUrlToCypressConfig = (
-  application: string,
-  domain: string,
-  projectType: CypressProject
-): Rule =>
-  updateJsonInTree(
-    getCypressJsonPath(application, domain, projectType),
-    (json) => {
-      json.baseUrl = 'http://localhost:4400';
-      return json;
-    }
-  );

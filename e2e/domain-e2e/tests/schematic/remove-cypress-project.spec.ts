@@ -15,6 +15,6 @@ describe('domain', () => {
       expect(nxJson.projects[projectName]).not.toBeDefined();
       expect(workspaceJson.projects[projectName]).not.toBeDefined();
       done();
-    }, 45000);
+    }, 30000);
   });
 });

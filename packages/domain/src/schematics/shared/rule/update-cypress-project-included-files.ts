@@ -7,19 +7,27 @@ export const updateCypressProjectIncludedFiles = (
   application: string,
   domain: string,
   projectType: CypressProject
-): Rule =>
+): Rule[] => [
   updateJsonInTree(
-    `apps/${projectType}/${application}/${domain}/tsconfig.e2e.json`,
+    `apps/${projectType}/${application}/${domain}/tsconfig.json`,
     (json) => {
       const libsRelativePath = isTwoLevelDomain(domain)
         ? '../../../../../libs'
         : '../../../../libs';
       json.include = [
-        `${libsRelativePath}/${application}/${domain}/.e2e/**/*.ts`,
-        `${libsRelativePath}/${application}/${domain}/.e2e/**/*.js`,
+        `${libsRelativePath}/${application}/${domain}/.${projectType}/**/*.ts`,
+        `${libsRelativePath}/${application}/${domain}/.${projectType}/**/*.js`,
         `${libsRelativePath}/${application}/${domain}/.cypress/**/*.ts`,
         `${libsRelativePath}/${application}/${domain}/.cypress/**/*.js`,
       ];
       return json;
     }
-  );
+  ),
+  updateJsonInTree(
+    `apps/${projectType}/${application}/${domain}/tsconfig.e2e.json`,
+    (json) => {
+      delete json.include;
+      return json;
+    }
+  ),
+];

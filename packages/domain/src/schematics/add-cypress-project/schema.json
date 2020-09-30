@@ -16,12 +16,6 @@
       "alias": "d",
       "x-prompt": "What is the domain you are creating the cypress project for?"
     },
-    "linter": {
-      "description": "The tool to use for running lint checks.",
-      "type": "string",
-      "enum": ["eslint", "tslint"],
-      "default": "eslint"
-    },
     "projectType": {
       "description": "The type of project",
       "type": "string",

@@ -17,7 +17,7 @@ describe('domain', () => {
         checkFilesExist(`libs/${application}/${domain}/ui/src/index.ts`)
       ).toThrow();
       done();
-    }, 45000);
+    }, 30000);
     it('should remove mock file and resolution path when removing util library', async (done) => {
       const application = 'test-application';
       const domain = 'leaf-domain';
@@ -29,7 +29,7 @@ describe('domain', () => {
         checkFilesExist(`libs/${application}/${domain}/util/src/testing.ts`)
       ).toThrow();
       done();
-    }, 45000);
+    }, 30000);
     it('should remove domain and e2e project when removing last library in domain', async (done) => {
       const application = 'test-application';
       const domain = 'single-library-domain';
@@ -48,7 +48,7 @@ describe('domain', () => {
       expect(nxJson.projects[projectName]).toBeUndefined();
       expect(workspaceJson.projects[projectName]).toBeUndefined();
       done();
-    }, 45000);
+    }, 30000);
     it('should remove multiple libraries in domain', async (done) => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';

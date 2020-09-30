@@ -1,6 +1,5 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
 import { getExternalSchematic } from '../../../utils/testing';
-
 import { getProjectNames } from '../../../utils/libraries';
 import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
 

@@ -22,6 +22,7 @@ import { checkDomainLevels } from './validation/check-domain-levels';
 import { addJestJunitReporter } from '../shared/rule/add-jest-junit-reporter';
 import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-rules';
 import { CypressProject } from '../shared/model/cypress-project.enum';
+import { addStorybookProjectRules } from '../add-cypress-project/rule/add-storybook-project-rules';
 
 export default function (options: CreateSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -62,8 +63,17 @@ export default function (options: CreateSchematicSchema): Rule {
           options.application,
           options.domain,
           options.libraries,
-          CypressProject.E2E,
-          options.linter
+          CypressProject.E2E
+        )
+      );
+    }
+    if (!!options.addStorybookProject) {
+      rules = rules.concat(
+        addStorybookProjectRules(
+          options.application,
+          options.domain,
+          options.libraries,
+          CypressProject.Storybook
         )
       );
     }

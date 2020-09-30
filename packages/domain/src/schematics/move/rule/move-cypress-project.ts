@@ -17,6 +17,6 @@ export const moveCypressProject = (
     destination: `${projectType}/${application}/${newDomain}`,
   }),
   updateCypressFilesPath(application, domain, newDomain, projectType),
-  updateCypressProjectIncludedFiles(application, newDomain, projectType),
+  ...updateCypressProjectIncludedFiles(application, newDomain, projectType),
   deleteCypressProjectFolder(application, domain, projectType),
 ];

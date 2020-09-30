@@ -24,7 +24,7 @@ describe('domain', () => {
         )
       ).not.toThrow();
       done();
-    }, 45000);
+    }, 30000);
     it('should create single library domain', async (done) => {
       const application = 'test-application';
       const domain = 'single-library-domain';
@@ -38,7 +38,7 @@ describe('domain', () => {
         )
       ).not.toThrow();
       done();
-    }, 45000);
+    }, 30000);
     it('should create multiple library domain', async (done) => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
@@ -55,7 +55,7 @@ describe('domain', () => {
         checkFilesExist(`libs/${application}/${domain}/feature/src/index.ts`)
       ).not.toThrow();
       done();
-    }, 45000);
+    }, 30000);
     it('should add jest junit reporter when it is true', async (done) => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
@@ -68,7 +68,7 @@ describe('domain', () => {
       expect(jestConfig.includes('reporters')).toBe(true);
       expect(jestConfig.includes('jest-junit')).toBe(true);
       done();
-    }, 45000);
+    }, 30000);
     it('should add cypress project when it is true', async (done) => {
       const application = 'test-application';
       const domain = 'extra-options-test-domain/shared';
@@ -81,7 +81,7 @@ describe('domain', () => {
       expect(nxJson.projects[projectName]).toBeDefined();
       expect(workspaceJson.projects[projectName]).toBeDefined();
       done();
-    }, 45000);
+    }, 30000);
     it('should create mock file and resolution path when domain includes util library', async (done) => {
       const application = 'test-application';
       const domain = 'leaf-domain-with-util';
@@ -93,7 +93,7 @@ describe('domain', () => {
         checkFilesExist(`libs/${application}/${domain}/util/src/testing.ts`)
       ).not.toThrow();
       done();
-    }, 45000);
+    }, 30000);
     it('should create child domain', async (done) => {
       const application = 'test-application';
       const parentDomain = 'parent-domain-with-child/shared';
@@ -116,7 +116,7 @@ describe('domain', () => {
         )
       ).not.toThrow();
       done();
-    }, 45000);
+    }, 30000);
   });
   describe('createParent', () => {
     it('should create parent domain', async (done) => {
@@ -132,6 +132,17 @@ describe('domain', () => {
         )
       ).not.toThrow();
       done();
-    }, 45000);
+    }, 30000);
+  });
+  describe('create with storybook project', () => {
+    it('should create domain with storybook project', async (done) => {
+      const application = 'test-application';
+      const domain = 'storybook-domain';
+      await runNxCommandAsync(
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access --addStorybookProject`
+      );
+
+      done();
+    }, 90000);
   });
 });

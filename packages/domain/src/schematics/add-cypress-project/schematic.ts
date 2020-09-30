@@ -9,20 +9,37 @@ import { addE2EProjectRules } from './rule/add-e2e-project-rules';
 import { getProjects } from '../../utils/domain';
 import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
+import { CypressProject } from '../shared/model/cypress-project.enum';
+import { addStorybookProjectRules } from './rule/add-storybook-project-rules';
 
 export default function (options: AddCypressProjectSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
-    const { application, domain, linter, projectType } = options;
+    const { application, domain, projectType } = options;
     checkDomainExists(application, domain, tree);
-    return chain([
-      ...addE2EProjectRules(
-        application,
-        domain,
-        getExistingProjectsLibraryTypes(application, domain, tree),
-        projectType,
-        linter
-      ),
-    ]);
+    const existingProjectLibraryTypes = getExistingProjectsLibraryTypes(
+      application,
+      domain,
+      tree
+    );
+    const rules =
+      options.projectType === CypressProject.E2E
+        ? [
+            ...addE2EProjectRules(
+              application,
+              domain,
+              existingProjectLibraryTypes,
+              projectType
+            ),
+          ]
+        : [
+            ...addStorybookProjectRules(
+              application,
+              domain,
+              existingProjectLibraryTypes,
+              projectType
+            ),
+          ];
+    return chain(rules);
   };
 }
 

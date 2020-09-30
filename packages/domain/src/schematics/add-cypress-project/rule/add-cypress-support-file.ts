@@ -17,17 +17,23 @@ export const addCypressSupportFiles = (
     'support/commands.ts',
     'support/index.ts',
   ];
-  supportFilesToMove.forEach((filePath) =>
-    renameInTree(
-      tree,
-      `libs/${application}/${domain}/.${projectType}/${filePath}`,
-      `libs/${application}/${domain}/.cypress/${filePath}`
-    )
-  );
+
+  supportFilesToMove.forEach((filePath) => {
+    const supportFile = `libs/${application}/${domain}/.${projectType}/${filePath}`;
+    if (!tree.exists(supportFile)) {
+      renameInTree(
+        tree,
+        supportFile,
+        `libs/${application}/${domain}/.cypress/${filePath}`
+      );
+    } else {
+      tree.delete(supportFile);
+    }
+  });
+
   tree.create(
     `libs/${application}/${domain}/.${projectType}/support/index.ts`,
-    `// tslint:disable-next-line:no-import-side-effect
-import '../.cypress/support';`
+    `import '../../.cypress/support';`
   );
 
   return tree;

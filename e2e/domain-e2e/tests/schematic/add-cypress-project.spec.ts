@@ -1,4 +1,9 @@
-import { runNxCommandAsync, readJson } from '@nrwl/nx-plugin/testing';
+import {
+  runNxCommandAsync,
+  readJson,
+  checkFilesExist,
+  readFile,
+} from '@nrwl/nx-plugin/testing';
 
 describe('domain', () => {
   describe('addCypressProject', () => {
@@ -15,6 +20,9 @@ describe('domain', () => {
         `apps/e2e/${application}/${domain}/cypress.json`
       );
       const tsConfigJson = readJson(
+        `apps/e2e/${application}/${domain}/tsconfig.json`
+      );
+      const tsConfigE2EJson = readJson(
         `apps/e2e/${application}/${domain}/tsconfig.e2e.json`
       );
       const projectName = `e2e-${application}-${domain}`;
@@ -38,9 +46,43 @@ describe('domain', () => {
         `../../../../libs/${application}/${domain}/.cypress/**/*.ts`,
         `../../../../libs/${application}/${domain}/.cypress/**/*.js`,
       ]);
-
+      expect(tsConfigE2EJson.include).toBeUndefined();
       done();
-    }, 45000);
+    }, 30000);
+    it('should add e2e project using existing domain', async (done) => {
+      const application = 'test-application';
+      const domain = 'jest-junit-reporter';
+      await runNxCommandAsync(
+        `generate @srleecode/domain:addCypressProject --application ${application} --domain ${domain} --projectType=storybook`
+      );
+      expect(() =>
+        checkFilesExist(`libs/${application}/${domain}/.storybook/config.js`)
+      ).not.toThrow();
+
+      const tsConfigStorybookJson = readJson(
+        `libs/${application}/${domain}/.storybook/tsconfig.json`
+      );
+      expect(tsConfigStorybookJson.exclude).toEqual([
+        '../feature/**/*.spec.ts',
+        '../ui/**/*.spec.ts',
+      ]);
+      expect(tsConfigStorybookJson.include).toEqual([
+        '../feature/src/**/*',
+        '../ui/src/**/*',
+      ]);
+      const configJs = readFile(
+        `libs/${application}/${domain}/.storybook/config.js`
+      );
+      expect(
+        configJs
+          .toString()
+          .includes(
+            `configure([require.context('../feature', true, /\.stories\.js$/), require.context('../ui', true, /\.stories\.js$/)], module);`
+          )
+      ).toBe(true);
+      done();
+    }, 30000);
+
     it('should add implicit dependencies for all libraries in domain', async (done) => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
@@ -58,6 +100,6 @@ describe('domain', () => {
         `${application}-${domain}-util`,
       ]);
       done();
-    }, 45000);
+    }, 30000);
   });
 });
