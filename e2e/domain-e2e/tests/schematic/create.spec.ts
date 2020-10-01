@@ -141,7 +141,9 @@ describe('domain', () => {
       await runNxCommandAsync(
         `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access --addStorybookProject`
       );
-
+      expect(() =>
+        checkFilesExist(`libs/${application}/${domain}/.storybook/config.js`)
+      ).not.toThrow();
       done();
     }, 90000);
   });

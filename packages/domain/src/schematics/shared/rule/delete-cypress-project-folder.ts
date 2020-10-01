@@ -1,11 +1,5 @@
-import {
-  Rule,
-  Tree,
-  SchematicContext,
-  SchematicsException,
-} from '@angular-devkit/schematics';
+import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
 import { deleteInTree } from '../../../utils/tree';
-import { getParsedDomain } from '../../../utils/domain';
 import { CypressProject } from '../model/cypress-project.enum';
 
 export const deleteCypressProjectFolder = (

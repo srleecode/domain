@@ -19,15 +19,12 @@ export const addCypressSupportFiles = (
   ];
 
   supportFilesToMove.forEach((filePath) => {
-    const supportFile = `libs/${application}/${domain}/.${projectType}/${filePath}`;
-    if (!tree.exists(supportFile)) {
-      renameInTree(
-        tree,
-        supportFile,
-        `libs/${application}/${domain}/.cypress/${filePath}`
-      );
+    const cypressProjectSupportFile = `libs/${application}/${domain}/.${projectType}/${filePath}`;
+    const cypressCommonSupportFile = `libs/${application}/${domain}/.cypress/${filePath}`;
+    if (!tree.exists(cypressCommonSupportFile)) {
+      renameInTree(tree, cypressProjectSupportFile, cypressCommonSupportFile);
     } else {
-      tree.delete(supportFile);
+      tree.delete(cypressProjectSupportFile);
     }
   });
 

@@ -47,9 +47,14 @@ describe('domain', () => {
         `../../../../libs/${application}/${domain}/.cypress/**/*.js`,
       ]);
       expect(tsConfigE2EJson.include).toBeUndefined();
+      expect(() =>
+        checkFilesExist(
+          `libs/${application}/${domain}/.cypress/support/index.ts`
+        )
+      ).not.toThrow();
       done();
     }, 30000);
-    it('should add e2e project using existing domain', async (done) => {
+    it('should add storybook project using existing domain', async (done) => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
@@ -80,6 +85,11 @@ describe('domain', () => {
             `configure([require.context('../feature', true, /\.stories\.js$/), require.context('../ui', true, /\.stories\.js$/)], module);`
           )
       ).toBe(true);
+      expect(() =>
+        checkFilesExist(
+          `libs/${application}/${domain}/.cypress/support/index.ts`
+        )
+      ).not.toThrow();
       done();
     }, 30000);
 
