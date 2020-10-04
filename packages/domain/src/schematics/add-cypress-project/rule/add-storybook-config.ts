@@ -5,6 +5,9 @@ import { getDirInTree } from '../../../utils/tree';
 import { getParsedDomain } from '../../../utils/domain';
 import { updateJsonInTree } from '@nrwl/workspace';
 import { updateStorybookTargets } from './update-storybook-targets';
+import { updateStorybookAddonsBasePath } from './update-storybook-addons-base-path';
+import { updateStorybookCypressBaseUrl } from './add-storybook-cypress-base-url';
+import { Domain } from 'domain';
 
 export const addStorybookConfig = (
   application: string,
@@ -22,6 +25,9 @@ export const addStorybookConfig = (
     updatePathInConfigJs(application, domain),
     updateTsConfig(application, domain),
     updateStorybookTargets(application, domain, libraryName),
+    updateStorybookAddonsBasePath(application, domain),
+    updateStorybookCypressBaseUrl(application, domain),
+    removeAddedStoryFilesExclusions(application, domain, libraries[0]),
   ];
 };
 
@@ -50,22 +56,19 @@ const moveStorybookConfig = (
   return tree;
 };
 
-const updatePathInConfigJs = (application: string, domain: string): Rule => {
-  return (tree: Tree, _context: SchematicContext) => {
-    const configJs = tree.read(
-      `libs/${application}/${domain}/.storybook/config.js`
-    );
-    const configJsString = configJs.toString();
-    const updatedConfigJs = configJsString.replace(
-      /configure\(.*;/,
-      `configure([require.context('../feature', true, /\.stories\.js$/), require.context('../ui', true, /\.stories\.js$/)], module);`
-    );
-    tree.overwrite(
-      `libs/${application}/${domain}/.storybook/config.js`,
-      updatedConfigJs
-    );
-    return tree;
-  };
+const updatePathInConfigJs = (application: string, domain: string): Rule => (
+  tree: Tree,
+  _context: SchematicContext
+) => {
+  const configJsFilePath = `libs/${application}/${domain}/.storybook/config.js`;
+  const configJs = tree.read(configJsFilePath);
+  const configJsString = configJs.toString();
+  const updatedConfigJs = configJsString.replace(
+    /configure\(.*;/,
+    `configure([require.context('../feature/src/lib', true, /\.stories\.js$/), require.context('../ui/src/lib', true, /\.stories\.js$/)], module);`
+  );
+  tree.overwrite(configJsFilePath, updatedConfigJs);
+  return tree;
 };
 
 const updateTsConfig = (application: string, domain: string): Rule =>
@@ -76,7 +79,34 @@ const updateTsConfig = (application: string, domain: string): Rule =>
       json.exclude = componentFolders.map(
         (folder) => `../${folder}/**/*.spec.ts`
       );
+      json.compilerOptions = {
+        ...json.compilerOptions,
+        types: [],
+        sourceMap: false,
+      };
       json.include = componentFolders.map((folder) => `../${folder}/src/**/*`);
+      return json;
+    }
+  );
+
+export const removeAddedStoryFilesExclusions = (
+  application: string,
+  domain: string,
+  libraryType: DomainLibraryName
+): Rule =>
+  updateJsonInTree(
+    `libs/${application}/${domain}/${libraryType}/tsconfig.lib.json`,
+    (json) => {
+      json.exclude = (json.exclude || []).filter(
+        (excludePath) => !excludePath.includes('stories')
+      );
+      if (
+        libraryType === DomainLibraryName.Feature ||
+        libraryType === DomainLibraryName.Ui
+      ) {
+        json.exclude.push(['**/*.stories.ts', '**/*.stories.js']);
+      }
+
       return json;
     }
   );

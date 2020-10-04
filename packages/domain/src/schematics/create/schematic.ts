@@ -23,56 +23,49 @@ import { addJestJunitReporter } from '../shared/rule/add-jest-junit-reporter';
 import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-rules';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { addStorybookProjectRules } from '../add-cypress-project/rule/add-storybook-project-rules';
+import { addStoryFileExclusions } from '../shared/rule/add-story-file-exclusions';
 
 export default function (options: CreateSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     checkDomainLevels(options.domain);
+    const {
+      application,
+      domain,
+      libraries,
+      addStorybookProject,
+      addE2EProject,
+    } = options;
     const normalizedOptions = normalizeOptions(options);
     let rules = addLibrariesRules(normalizedOptions.libraryDefinitions);
+    rules.concat(addStoryFileExclusions(application, application, libraries));
     if (isChildDomain(options.domain)) {
-      const parentDomain = getTopLevelDomain(options.domain);
-      const parsedDomain = getParsedDomain(options.domain).replace(
-        '-shared',
-        ''
-      );
-      checkParentDomainExists(options.application, parentDomain, tree);
+      const parentDomain = getTopLevelDomain(domain);
+      const parsedDomain = getParsedDomain(domain).replace('-shared', '');
+      checkParentDomainExists(application, parentDomain, tree);
       rules.push(
-        addParentDomainDependencyRule(
-          options.application,
-          parentDomain,
-          parsedDomain
-        )
+        addParentDomainDependencyRule(application, parentDomain, parsedDomain)
       );
     }
-    if (options.libraries.includes(DomainLibraryName.Util)) {
-      rules.push(addMockFile(options.application, options.domain));
-      rules.push(
-        addMockFileResolutionPath(options.application, options.domain)
-      );
+    if (libraries.includes(DomainLibraryName.Util)) {
+      rules.push(addMockFile(application, domain));
+      rules.push(addMockFileResolutionPath(application, domain));
     }
     if (!!options.addJestJunitReporter) {
-      options.libraries.forEach((libraryType) =>
-        rules.push(
-          addJestJunitReporter(options.application, options.domain, libraryType)
-        )
+      libraries.forEach((libraryType) =>
+        rules.push(addJestJunitReporter(application, domain, libraryType))
       );
     }
-    if (!!options.addE2EProject) {
+    if (!!addE2EProject) {
       rules = rules.concat(
-        addE2EProjectRules(
-          options.application,
-          options.domain,
-          options.libraries,
-          CypressProject.E2E
-        )
+        addE2EProjectRules(application, domain, libraries, CypressProject.E2E)
       );
     }
-    if (!!options.addStorybookProject) {
+    if (!!addStorybookProject) {
       rules = rules.concat(
         addStorybookProjectRules(
-          options.application,
-          options.domain,
-          options.libraries,
+          application,
+          domain,
+          libraries,
           CypressProject.Storybook
         )
       );

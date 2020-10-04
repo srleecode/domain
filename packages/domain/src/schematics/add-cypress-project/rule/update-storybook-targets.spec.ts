@@ -110,6 +110,7 @@ describe('updateStorybookTargets', () => {
         config: {
           configFolder: `libs/${application}/${domain}/.storybook`,
         },
+        uiFramework: '@storybook/angular',
         port: 4400,
       },
     });

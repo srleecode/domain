@@ -17,14 +17,16 @@ import { isHavingCypressProject } from '../../utils/cypress-project';
 import { addImplicitDependenciesToCypressProject } from '../shared/rule/add-implicit-dependencies-to-cypress-project';
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
 import { CypressProject } from '../shared/model/cypress-project.enum';
+import { addStoryFileExclusions } from '../shared/rule/add-story-file-exclusions';
 
 export default function (options: AddLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     const normalizedOptions = normalizeOptions(options);
     const { application, domain, libraries } = options;
     checkDomainExists(application, domain, tree);
-    checkLibrariesDontExist(application, application, libraries, tree);
+    checkLibrariesDontExist(application, domain, libraries, tree);
     const rules = addLibrariesRules(normalizedOptions.libraryDefinitions);
+    rules.concat(addStoryFileExclusions(application, domain, libraries));
     if (libraries.includes(DomainLibraryName.Util)) {
       rules.push(addMockFile(application, domain));
       rules.push(addMockFileResolutionPath(application, domain));

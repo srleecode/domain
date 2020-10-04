@@ -75,6 +75,8 @@ describe('domain', () => {
         '../feature/src/**/*',
         '../ui/src/**/*',
       ]);
+      expect(tsConfigStorybookJson.compilerOptions.sourceMap).toBe(false);
+      expect(tsConfigStorybookJson.compilerOptions.types).toEqual([]);
       const configJs = readFile(
         `libs/${application}/${domain}/.storybook/config.js`
       );
@@ -82,7 +84,7 @@ describe('domain', () => {
         configJs
           .toString()
           .includes(
-            `configure([require.context('../feature', true, /\.stories\.js$/), require.context('../ui', true, /\.stories\.js$/)], module);`
+            `configure([require.context('../feature/src/lib', true, /\.stories\.js$/), require.context('../ui/src/lib', true, /\.stories\.js$/)], module);`
           )
       ).toBe(true);
       expect(() =>
@@ -90,6 +92,16 @@ describe('domain', () => {
           `libs/${application}/${domain}/.cypress/support/index.ts`
         )
       ).not.toThrow();
+      const addonsJs = readFile(
+        `libs/${application}/${domain}/.storybook/addons.js`
+      );
+      expect(addonsJs.toString().trim()).toBe(
+        "import '../../../../.storybook/addons';"
+      );
+      const cypressJson = readJson(
+        `apps/storybook/${application}/${domain}/cypress.json`
+      );
+      expect(cypressJson.baseUrl).toBe('https://localhost:4400');
       done();
     }, 30000);
 
