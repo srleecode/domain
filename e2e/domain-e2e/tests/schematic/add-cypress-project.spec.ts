@@ -79,6 +79,9 @@ describe('domain', () => {
         '../feature/src/**/*',
         '../ui/src/**/*',
       ]);
+      expect(tsConfigStorybookJson.extends).toBe(
+        '../../../../tsconfig.base.json'
+      );
       expect(tsConfigStorybookJson.compilerOptions.sourceMap).toBe(false);
       expect(tsConfigStorybookJson.compilerOptions.types).toEqual([]);
       const configJs = readFile(
@@ -88,7 +91,7 @@ describe('domain', () => {
         configJs
           .toString()
           .includes(
-            `configure([require.context('../feature/src/lib', true, /\.stories\.js$/), require.context('../ui/src/lib', true, /\.stories\.js$/)], module);`
+            `configure([require.context('../feature/src/lib', true, /\.stories\.ts$/), require.context('../ui/src/lib', true, /\.stories\.ts$/)], module);`
           )
       ).toBe(true);
       expect(() =>
@@ -105,7 +108,7 @@ describe('domain', () => {
       const cypressJson = readJson(
         `apps/storybook/${application}/${domain}/cypress.json`
       );
-      expect(cypressJson.baseUrl).toBe('https://localhost:4400');
+      expect(cypressJson.baseUrl).toBe('http://localhost:4400');
       done();
     }, 30000);
 

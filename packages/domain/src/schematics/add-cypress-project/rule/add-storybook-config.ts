@@ -2,12 +2,13 @@ import { getExternalSchematic } from '../../../utils/testing';
 import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
 import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
 import { getDirInTree } from '../../../utils/tree';
-import { getParsedDomain } from '../../../utils/domain';
+import { getParsedDomain, isTwoLevelDomain } from '../../../utils/domain';
 import { updateJsonInTree } from '@nrwl/workspace';
 import { updateStorybookTargets } from './update-storybook-targets';
 import { updateStorybookAddonsBasePath } from './update-storybook-addons-base-path';
 import { updateStorybookCypressBaseUrl } from './add-storybook-cypress-base-url';
-import { Domain } from 'domain';
+import { getTsConfigPath } from '../../../utils/tsconfig';
+import { updateStorybookWebpackBasePath } from './update-storybook-webpack-base-path';
 
 export const addStorybookConfig = (
   application: string,
@@ -28,6 +29,7 @@ export const addStorybookConfig = (
     updateStorybookAddonsBasePath(application, domain),
     updateStorybookCypressBaseUrl(application, domain),
     removeAddedStoryFilesExclusions(application, domain, libraries[0]),
+    updateStorybookWebpackBasePath(application, domain),
   ];
 };
 
@@ -65,17 +67,24 @@ const updatePathInConfigJs = (application: string, domain: string): Rule => (
   const configJsString = configJs.toString();
   const updatedConfigJs = configJsString.replace(
     /configure\(.*;/,
-    `configure([require.context('../feature/src/lib', true, /\.stories\.js$/), require.context('../ui/src/lib', true, /\.stories\.js$/)], module);`
+    `configure([require.context('../feature/src/lib', true, /\.stories\.ts$/), require.context('../ui/src/lib', true, /\.stories\.ts$/)], module);`
   );
   tree.overwrite(configJsFilePath, updatedConfigJs);
   return tree;
 };
 
-const updateTsConfig = (application: string, domain: string): Rule =>
+const updateTsConfig = (application: string, domain: string): Rule => (
+  tree: Tree,
+  _context: SchematicContext
+) =>
   updateJsonInTree(
     `libs/${application}/${domain}/.storybook/tsconfig.json`,
     (json) => {
       const componentFolders = ['feature', 'ui'];
+      const baseRelativePath = isTwoLevelDomain(domain)
+        ? '../../../../../'
+        : '../../../../';
+      json.extends = `${baseRelativePath}${getTsConfigPath(tree)}`;
       json.exclude = componentFolders.map(
         (folder) => `../${folder}/**/*.spec.ts`
       );

@@ -1,6 +1,6 @@
 import { Tree, SchematicContext } from '@angular-devkit/schematics';
 
-export const updateStorybookAddonsBasePath = (
+export const updateStorybookWebpackBasePath = (
   application: string,
   domain: string
 ) => (tree: Tree, _context: SchematicContext): Tree => {

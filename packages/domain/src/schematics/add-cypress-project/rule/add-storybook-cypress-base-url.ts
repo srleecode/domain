@@ -10,7 +10,7 @@ export const updateStorybookCypressBaseUrl = (
   updateJsonInTree(
     getCypressJsonPath(application, domain, CypressProject.Storybook),
     (json) => {
-      json.baseUrl = 'https://localhost:4400';
+      json.baseUrl = 'http://localhost:4400';
       return json;
     }
   );
