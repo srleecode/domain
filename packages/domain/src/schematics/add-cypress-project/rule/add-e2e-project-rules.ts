@@ -9,7 +9,7 @@ import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { moveE2EFilesToDomain } from './move-e2e-files-to-domain';
 import { updateCypressProjectIncludedFiles } from '../../shared/rule/update-cypress-project-included-files';
 import { addCypressSupportFiles } from './add-cypress-support-file';
-import { deleteEslintrc } from './delete-eslintrc';
+import { updateEslintrc } from './update-eslintrc';
 
 export const addE2EProjectRules = (
   application: string,
@@ -30,5 +30,5 @@ export const addE2EProjectRules = (
   moveE2EFilesToDomain(application, domain),
   addCypressSupportFiles(application, domain, projectType),
   ...updateCypressProjectIncludedFiles(application, domain, projectType),
-  deleteEslintrc(application, domain, projectType),
+  updateEslintrc(application, domain, projectType),
 ];

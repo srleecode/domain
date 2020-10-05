@@ -52,6 +52,10 @@ describe('domain', () => {
           `libs/${application}/${domain}/.cypress/support/index.ts`
         )
       ).not.toThrow();
+      const eslintrc = readJson(`apps/e2e/${application}/${domain}/.eslintrc`);
+      expect(eslintrc).toEqual({
+        extends: ['../../../../.eslintrc'],
+      });
       done();
     }, 30000);
     it('should add storybook project using existing domain', async (done) => {

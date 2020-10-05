@@ -9,7 +9,7 @@ import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { updateCypressProjectIncludedFiles } from '../../shared/rule/update-cypress-project-included-files';
 import { addCypressSupportFiles } from './add-cypress-support-file';
 import { moveStorybookFilesToDomain } from './move-storybook-files-to-domain';
-import { deleteEslintrc } from './delete-eslintrc';
+import { updateEslintrc } from './update-eslintrc';
 import { addStorybookConfig } from './add-storybook-config';
 
 export const addStorybookProjectRules = (
@@ -32,7 +32,7 @@ export const addStorybookProjectRules = (
     moveStorybookFilesToDomain(application, domain),
     addCypressSupportFiles(application, domain, projectType),
     ...updateCypressProjectIncludedFiles(application, domain, projectType),
-    deleteEslintrc(application, domain, projectType),
+    updateEslintrc(application, domain, projectType),
     ...addStorybookConfig(application, domain, libraries),
   ];
 };
