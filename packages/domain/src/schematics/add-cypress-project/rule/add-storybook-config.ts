@@ -3,7 +3,7 @@ import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
 import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
 import { getDirInTree } from '../../../utils/tree';
 import { getParsedDomain, isTwoLevelDomain } from '../../../utils/domain';
-import { updateJsonInTree } from '@nrwl/workspace';
+import { Linter, updateJsonInTree } from '@nrwl/workspace';
 import { updateStorybookTargets } from './update-storybook-targets';
 import { updateStorybookAddonsBasePath } from './update-storybook-addons-base-path';
 import { updateStorybookCypressBaseUrl } from './add-storybook-cypress-base-url';
@@ -21,6 +21,9 @@ export const addStorybookConfig = (
   return [
     getExternalSchematic('@nrwl/storybook', 'configuration', {
       name: libraryName,
+      uiFramework: '@storybook/angular',
+      configureCypress: false,
+      linter: Linter.EsLint,
     }),
     moveStorybookConfig(application, domain, libraries[0]),
     updatePathInConfigJs(application, domain),
