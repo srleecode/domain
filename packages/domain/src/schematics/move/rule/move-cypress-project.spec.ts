@@ -2,11 +2,16 @@ import * as testingUtils from '../../../utils/testing';
 import { moveCypressProject } from './move-cypress-project';
 import { getParsedDomain } from '../../../utils/domain';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
+import { createEmptyWorkspace } from '@nrwl/workspace/testing';
+import { UnitTestTree } from '@angular-devkit/schematics/testing';
+import { Tree } from '@angular-devkit/schematics';
 
 describe('moveCypressProject', () => {
   const application = 'test-application';
+  let appTree: UnitTestTree;
 
   beforeEach(() => {
+    appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
     jest
       .spyOn(testingUtils, 'getExternalSchematic')
       .mockReturnValue(testingUtils.emptyRule);
@@ -22,7 +27,8 @@ describe('moveCypressProject', () => {
       application,
       leafDomain,
       newLeafDomain,
-      CypressProject.E2E
+      CypressProject.E2E,
+      appTree
     );
     expect(testingUtils.getExternalSchematic).toHaveBeenCalledWith(
       '@nrwl/workspace',
@@ -40,7 +46,8 @@ describe('moveCypressProject', () => {
       application,
       parentDomain,
       newParentDomain,
-      CypressProject.E2E
+      CypressProject.E2E,
+      appTree
     );
     expect(testingUtils.getExternalSchematic).toHaveBeenCalledWith(
       '@nrwl/workspace',

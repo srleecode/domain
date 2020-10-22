@@ -28,5 +28,5 @@ const addIndexFile = (
 ): void =>
   tree.create(
     `${librarySourceRoot}/testing.ts`,
-    `export * from './${mockFilePath}`
+    `export * from './${mockFilePath}';`
   );

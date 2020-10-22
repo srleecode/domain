@@ -1,47 +1,49 @@
 import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
 import { getCypressJsonPath } from '../../../utils/cypress-project';
-import { updateJsonInTree } from '@nrwl/workspace';
-import { deleteInTree, renameInTree } from '../../../utils/tree';
+import { ProjectType, updateJsonInTree } from '@nrwl/workspace';
+import { deleteInTree, getDirInTree, renameInTree } from '../../../utils/tree';
 import { isTwoLevelDomain } from '../../../utils/domain';
 
 export const moveStorybookFilesToDomain = (
   application: string,
   domain: string
-) => (tree: Tree, context: SchematicContext): Rule => {
-  const storybookFilesToMove = [
-    'integration/app.spec.ts',
+) => (tree: Tree, context: SchematicContext) => {
+  const storybookFilesToDelete = [
     'support/app.po.ts',
-    'support/commands.ts',
-    'support/index.ts',
+    'fixtures/example.json',
+    'plugins/index.js',
   ];
-  const storybookFilesToDelete = ['fixtures/example.json', 'plugins/index.js'];
-
-  storybookFilesToMove.forEach((filePath) =>
-    renameInTree(
-      tree,
-      `apps/${CypressProject.Storybook}/${application}/${domain}/src/${filePath}`,
-      `libs/${application}/${domain}/.${CypressProject.Storybook}/${filePath}`
-    )
+  renameInTree(
+    tree,
+    `apps/${CypressProject.Storybook}/${application}/${domain}/cypress.json`,
+    `libs/${application}/${domain}/.${CypressProject.Storybook}/cypress.json`
   );
-
   storybookFilesToDelete.forEach((filePath) =>
     deleteInTree(
       tree,
       `apps/${CypressProject.Storybook}/${application}/${domain}/src/${filePath}`
     )
   );
-  const libsRelativePath = isTwoLevelDomain(domain)
-    ? '../../../../../libs'
-    : '../../../../libs';
-  return updateJsonInTree(
-    getCypressJsonPath(application, domain, CypressProject.Storybook),
-    (json) => {
-      delete json.fixturesFolder;
-      delete json.pluginsFile;
-      json.integrationFolder = `${libsRelativePath}/${application}/${domain}/.${CypressProject.Storybook}/integration`;
-      json.supportFile = `${libsRelativePath}/${application}/${domain}/.${CypressProject.Storybook}/support/index.ts`;
-      return json;
-    }
+
+  const cypressFolder = getDirInTree(
+    tree,
+    `apps/${CypressProject.Storybook}/${application}/${domain}`
   );
+  cypressFolder.visit((file) => {
+    const newPath = file.replace(
+      cypressFolder.path,
+      `libs/${application}/${domain}/.cypress`
+    );
+
+    if (!tree.exists(newPath)) {
+      tree.create(newPath, tree.read(file));
+    }
+  });
+  renameInTree(
+    tree,
+    `libs/${application}/${domain}/.cypress/src/integration/app.spec.ts`,
+    `libs/${application}/${domain}/.cypress/src/integration/${CypressProject.Storybook}/app.spec.ts`
+  );
+  return tree;
 };

@@ -7,28 +7,28 @@ import { renameCypressProjectInWorkspaceJson } from './rename-cypress-project-in
 import { createCypressProject } from './create-cypress-project';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { moveE2EFilesToDomain } from './move-e2e-files-to-domain';
-import { updateCypressProjectIncludedFiles } from '../../shared/rule/update-cypress-project-included-files';
-import { addCypressSupportFiles } from './add-cypress-support-file';
-import { updateEslintrc } from './update-eslintrc';
+import { Linter } from '@nrwl/workspace';
+import { deleteCypressProjectFolder } from '../../shared/rule/delete-cypress-project-folder';
 
 export const addE2EProjectRules = (
   application: string,
   domain: string,
-  libraries: DomainLibraryName[],
-  projectType: CypressProject
-): Rule[] => [
-  createCypressProject(application, domain, projectType),
-  renameCypressProjectInNxJson(application, domain, projectType),
-  renameCypressProjectInWorkspaceJson(application, domain, projectType),
-  addImplicitDependenciesToCypressProject(
-    application,
-    domain,
-    libraries,
-    projectType
-  ),
-  updateAngularJson(application, domain, projectType),
-  moveE2EFilesToDomain(application, domain),
-  addCypressSupportFiles(application, domain, projectType),
-  ...updateCypressProjectIncludedFiles(application, domain, projectType),
-  updateEslintrc(application, domain, projectType),
-];
+  lint: Linter,
+  libraries: DomainLibraryName[]
+): Rule[] => {
+  const projectType = CypressProject.E2E;
+  return [
+    createCypressProject(application, domain, lint, projectType),
+    renameCypressProjectInNxJson(application, domain, projectType),
+    renameCypressProjectInWorkspaceJson(application, domain, projectType),
+    addImplicitDependenciesToCypressProject(
+      application,
+      domain,
+      libraries,
+      projectType
+    ),
+    updateAngularJson(application, domain, projectType),
+    moveE2EFilesToDomain(application, domain, lint),
+    deleteCypressProjectFolder(application, domain, projectType),
+  ];
+};

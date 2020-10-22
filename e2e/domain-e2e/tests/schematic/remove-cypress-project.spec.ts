@@ -20,11 +20,11 @@ describe('domain', () => {
       expect(workspaceJson.projects[projectName]).not.toBeDefined();
       expect(() =>
         checkFilesExist(
-          `libs/${application}/${domain}/.cypress/support/index.ts`
+          `libs/${application}/${domain}/.cypress/src/support/index.ts`
         )
       ).not.toThrow();
       done();
-    }, 30000);
+    }, 90000);
 
     it('should remove storybook project and cypress folder for domain when only storybook cypress project', async (done) => {
       const application = 'test-application';
@@ -39,7 +39,7 @@ describe('domain', () => {
       expect(nxJson.projects[projectName]).not.toBeDefined();
       expect(workspaceJson.projects[projectName]).not.toBeDefined();
       expect(() =>
-        checkFilesExist(`libs/${application}/${domain}/.storybook/config.js`)
+        checkFilesExist(`libs/${application}/${domain}/.cypress/config.js`)
       ).toThrow();
       expect(() =>
         checkFilesExist(
@@ -47,6 +47,6 @@ describe('domain', () => {
         )
       ).toThrow();
       done();
-    }, 30000);
+    }, 90000);
   });
 });

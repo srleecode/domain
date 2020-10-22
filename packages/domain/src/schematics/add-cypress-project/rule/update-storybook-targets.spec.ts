@@ -5,7 +5,7 @@ import { testRunner } from '../../../utils/testing';
 import { readJsonInTree } from '@nrwl/workspace';
 import { getCypressProjectName } from '../../../utils/cypress-project';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
-import { getParsedDomain } from 'packages/domain/src/utils/domain';
+import { getParsedDomain } from '../../../utils/domain';
 import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
 import { updateStorybookTargets } from './update-storybook-targets';
 
@@ -21,6 +21,7 @@ describe('updateStorybookTargets', () => {
     domain,
     CypressProject.Storybook
   );
+  const uiFramework = '@storybook/angular';
   let processedWorkspaceJson;
 
   beforeAll(async () => {
@@ -48,7 +49,8 @@ describe('updateStorybookTargets', () => {
         updateStorybookTargets(
           application,
           domain,
-          originalStorybookLibraryName
+          originalStorybookLibraryName,
+          uiFramework
         ),
         appTree
       )
@@ -88,11 +90,11 @@ describe('updateStorybookTargets', () => {
         },
       },
       options: {
-        cypressConfig: `apps/storybook/${application}/${domain}/cypress.json`,
+        cypressConfig: `libs/${application}/${domain}/.storybook/cypress.json`,
         devServerTarget: `storybook-${application}-${getParsedDomain(
           domain
         )}:storybook`,
-        tsConfig: `apps/storybook/${application}/${domain}/tsconfig.e2e.json`,
+        tsConfig: `libs/${application}/${domain}/.cypress/tsconfig.e2e.json`,
       },
     });
   });
@@ -110,7 +112,7 @@ describe('updateStorybookTargets', () => {
         config: {
           configFolder: `libs/${application}/${domain}/.storybook`,
         },
-        uiFramework: '@storybook/angular',
+        uiFramework,
         port: 4400,
       },
     });

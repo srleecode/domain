@@ -22,7 +22,7 @@ describe('create schematic', () => {
       appTree
         .read(`libs/${application}/${domain}/util/src/testing.ts`)
         .toString()
-    ).toBe(`export * from './lib/model/${domain}.mock`);
+    ).toBe(`export * from './lib/model/${domain}.mock';`);
   });
 
   it('should add mock file', async () => {

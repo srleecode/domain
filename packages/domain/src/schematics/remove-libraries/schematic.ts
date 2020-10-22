@@ -19,6 +19,7 @@ import { isDomainEmptyAfterLibraryRemoval } from '../../utils/domain';
 import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { ProjectType } from '@nrwl/workspace';
+import { updatePathInStorybookConfig } from '../shared/rule/update-path-in-storybook-config';
 
 export default function (options: RemoveLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
@@ -69,10 +70,15 @@ const getCypressProjectsUpdateRules = (
         )
       ) {
         rules = rules.concat(
-          removeCypressProject(application, domain, projectType)
+          removeCypressProject(application, domain, projectType, tree)
         );
       }
     }
   });
+  if (
+    isHavingCypressProject(application, domain, CypressProject.Storybook, tree)
+  ) {
+    rules.push(updatePathInStorybookConfig(application, domain));
+  }
   return rules;
 };

@@ -6,7 +6,7 @@ import {
 } from '@angular-devkit/schematics';
 import { AddCypressProjectSchematicSchema } from './schema';
 import { addE2EProjectRules } from './rule/add-e2e-project-rules';
-import { getProjects } from '../../utils/domain';
+import { getLibraryTypes, getProjects } from '../../utils/domain';
 import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
 import { CypressProject } from '../shared/model/cypress-project.enum';
@@ -14,38 +14,32 @@ import { addStorybookProjectRules } from './rule/add-storybook-project-rules';
 
 export default function (options: AddCypressProjectSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
-    const { application, domain, projectType } = options;
+    const { application, domain, lint, projectType, uiFramework } = options;
     checkDomainExists(application, domain, tree);
-    const existingProjectLibraryTypes = getExistingProjectsLibraryTypes(
+    const existingProjectLibraryTypes = getLibraryTypes(
       application,
       domain,
       tree
     );
     const rules =
-      options.projectType === CypressProject.E2E
+      projectType === CypressProject.E2E
         ? [
             ...addE2EProjectRules(
               application,
               domain,
-              existingProjectLibraryTypes,
-              projectType
+              lint,
+              existingProjectLibraryTypes
             ),
           ]
         : [
             ...addStorybookProjectRules(
               application,
               domain,
+              lint,
               existingProjectLibraryTypes,
-              projectType
+              uiFramework
             ),
           ];
     return chain(rules);
   };
 }
-
-const getExistingProjectsLibraryTypes = (
-  application: string,
-  domain: string,
-  tree: Tree
-): DomainLibraryName[] =>
-  getProjects(application, domain, tree).map((project) => project.type);

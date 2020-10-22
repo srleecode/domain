@@ -13,6 +13,7 @@ import { isHavingCypressProject } from '../../utils/cypress-project';
 import { removeCypressProject } from '../shared/rule/remove-cypress-project';
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
 import { CypressProject } from '../shared/model/cypress-project.enum';
+import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';
 
 export default function (options: RemoveSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
@@ -21,7 +22,7 @@ export default function (options: RemoveSchematicSchema): Rule {
     let rules: Rule[] = [];
     if (isHavingCypressProject(application, domain, CypressProject.E2E, tree)) {
       rules = rules.concat(
-        removeCypressProject(application, domain, CypressProject.E2E)
+        removeCypressProject(application, domain, CypressProject.E2E, tree)
       );
     }
     if (
@@ -33,7 +34,12 @@ export default function (options: RemoveSchematicSchema): Rule {
       )
     ) {
       rules = rules.concat(
-        removeCypressProject(application, domain, CypressProject.Storybook)
+        removeCypressProject(
+          application,
+          domain,
+          CypressProject.Storybook,
+          tree
+        )
       );
     }
     rules = rules.concat(removeDomain(application, domain, tree));
@@ -47,7 +53,7 @@ export default function (options: RemoveSchematicSchema): Rule {
     ) {
       rules.push(removeMockFileResolutionPath(application, domain));
     }
-
+    rules.push(deleteDomainFolder(application, domain));
     return chain(rules);
   };
 }

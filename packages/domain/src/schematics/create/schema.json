@@ -68,6 +68,12 @@
         ]
       }
     },
+    "lint": {
+      "description": "The tool to use for running lint checks.",
+      "type": "string",
+      "enum": ["eslint", "tslint"],
+      "default": "eslint"
+    },
     "style": {
       "description": "The file extension to be used for style files.",
       "type": "string",
@@ -106,6 +112,13 @@
       "type": "boolean",
       "default": false,
       "x-prompt": "Add a storybook app?"
+    },
+    "uiFramework": {
+      "type": "string",
+      "default": "@storybook/angular",
+      "description": "Storybook UI Framework to use",
+      "enum": ["@storybook/angular", "@storybook/react"],
+      "x-prompt": "What UI framework plugin should storybook use?"
     }
   },
   "required": ["application", "domain", "prefix", "libraries"]

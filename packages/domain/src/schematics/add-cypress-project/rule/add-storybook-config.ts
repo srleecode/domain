@@ -9,11 +9,18 @@ import { updateStorybookAddonsBasePath } from './update-storybook-addons-base-pa
 import { updateStorybookCypressBaseUrl } from './add-storybook-cypress-base-url';
 import { getTsConfigPath } from '../../../utils/tsconfig';
 import { updateStorybookWebpackBasePath } from './update-storybook-webpack-base-path';
+import { UiFrameworkType } from '../../shared/model/ui-framework.type';
+import { updatePathInStorybookConfig } from '../../shared/rule/update-path-in-storybook-config';
+import { getCypressJsonPath } from '../../../utils/cypress-project';
+import { CypressProject } from '../../shared/model/cypress-project.enum';
+import { addStoryFileExclusions } from '../../shared/rule/add-story-file-exclusions';
 
 export const addStorybookConfig = (
   application: string,
   domain: string,
-  libraries: DomainLibraryName[]
+  lint: Linter,
+  libraries: DomainLibraryName[],
+  uiFramework: UiFrameworkType
 ): Rule[] => {
   const libraryName = `${application}-${getParsedDomain(domain)}-${
     libraries[0]
@@ -21,17 +28,19 @@ export const addStorybookConfig = (
   return [
     getExternalSchematic('@nrwl/storybook', 'configuration', {
       name: libraryName,
-      uiFramework: '@storybook/angular',
+      uiFramework,
       configureCypress: false,
-      linter: Linter.EsLint,
+      linter: lint,
     }),
     moveStorybookConfig(application, domain, libraries[0]),
-    updatePathInConfigJs(application, domain),
+    updateCypressJsonReferencesFolders(application, domain),
+    updatePathInStorybookConfig(application, domain),
     updateTsConfig(application, domain),
-    updateStorybookTargets(application, domain, libraryName),
+    updateStorybookTargets(application, domain, libraryName, uiFramework),
     updateStorybookAddonsBasePath(application, domain),
     updateStorybookCypressBaseUrl(application, domain),
     removeAddedStoryFilesExclusions(application, domain, libraries[0]),
+    ...addStoryFileExclusions(application, domain, libraries),
     updateStorybookWebpackBasePath(application, domain),
   ];
 };
@@ -61,20 +70,23 @@ const moveStorybookConfig = (
   return tree;
 };
 
-const updatePathInConfigJs = (application: string, domain: string): Rule => (
-  tree: Tree,
-  _context: SchematicContext
-) => {
-  const configJsFilePath = `libs/${application}/${domain}/.storybook/config.js`;
-  const configJs = tree.read(configJsFilePath);
-  const configJsString = configJs.toString();
-  const updatedConfigJs = configJsString.replace(
-    /configure\(.*;/,
-    `configure([require.context('../feature/src/lib', true, /\.stories\.ts$/), require.context('../ui/src/lib', true, /\.stories\.ts$/)], module);`
+const updateCypressJsonReferencesFolders = (
+  application: string,
+  domain: string
+): Rule =>
+  updateJsonInTree(
+    getCypressJsonPath(application, domain, CypressProject.Storybook),
+    (json) => {
+      delete json.fixturesFolder;
+      delete json.pluginsFile;
+      const properties = ['integrationFolder', 'supportFile'];
+      properties.forEach(
+        (property) =>
+          (json[property] = json[property].replace('./src', '../.cypress/src'))
+      );
+      return json;
+    }
   );
-  tree.overwrite(configJsFilePath, updatedConfigJs);
-  return tree;
-};
 
 const updateTsConfig = (application: string, domain: string): Rule => (
   tree: Tree,
@@ -93,8 +105,8 @@ const updateTsConfig = (application: string, domain: string): Rule => (
       );
       json.compilerOptions = {
         ...json.compilerOptions,
-        types: [],
-        sourceMap: false,
+        types: ['node'],
+        sourceMap: true,
       };
       json.include = componentFolders.map((folder) => `../${folder}/src/**/*`);
       return json;
@@ -112,13 +124,6 @@ export const removeAddedStoryFilesExclusions = (
       json.exclude = (json.exclude || []).filter(
         (excludePath) => !excludePath.includes('stories')
       );
-      if (
-        libraryType === DomainLibraryName.Feature ||
-        libraryType === DomainLibraryName.Ui
-      ) {
-        json.exclude.push(['**/*.stories.ts', '**/*.stories.js']);
-      }
-
       return json;
     }
   );

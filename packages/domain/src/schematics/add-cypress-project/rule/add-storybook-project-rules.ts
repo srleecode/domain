@@ -6,20 +6,22 @@ import { renameCypressProjectInNxJson } from './rename-cypress-project-in-nx-jso
 import { renameCypressProjectInWorkspaceJson } from './rename-cypress-project-in-workspace-json';
 import { createCypressProject } from './create-cypress-project';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
-import { updateCypressProjectIncludedFiles } from '../../shared/rule/update-cypress-project-included-files';
-import { addCypressSupportFiles } from './add-cypress-support-file';
 import { moveStorybookFilesToDomain } from './move-storybook-files-to-domain';
-import { updateEslintrc } from './update-eslintrc';
 import { addStorybookConfig } from './add-storybook-config';
+import { Linter } from '@nrwl/workspace';
+import { UiFrameworkType } from '../../shared/model/ui-framework.type';
+import { deleteCypressProjectFolder } from '../../shared/rule/delete-cypress-project-folder';
 
 export const addStorybookProjectRules = (
   application: string,
   domain: string,
+  lint: Linter,
   libraries: DomainLibraryName[],
-  projectType: CypressProject
+  uiFramework: UiFrameworkType
 ): Rule[] => {
+  const projectType = CypressProject.Storybook;
   return [
-    createCypressProject(application, domain, projectType),
+    createCypressProject(application, domain, lint, projectType),
     renameCypressProjectInNxJson(application, domain, projectType),
     renameCypressProjectInWorkspaceJson(application, domain, projectType),
     addImplicitDependenciesToCypressProject(
@@ -28,11 +30,9 @@ export const addStorybookProjectRules = (
       libraries,
       projectType
     ),
-    updateAngularJson(application, domain, projectType),
     moveStorybookFilesToDomain(application, domain),
-    addCypressSupportFiles(application, domain, projectType),
-    ...updateCypressProjectIncludedFiles(application, domain, projectType),
-    updateEslintrc(application, domain, projectType),
-    ...addStorybookConfig(application, domain, libraries),
+    ...addStorybookConfig(application, domain, lint, libraries, uiFramework),
+    updateAngularJson(application, domain, projectType),
+    deleteCypressProjectFolder(application, domain, projectType),
   ];
 };

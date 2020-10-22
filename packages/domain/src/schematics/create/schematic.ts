@@ -31,13 +31,15 @@ export default function (options: CreateSchematicSchema): Rule {
     const {
       application,
       domain,
+      lint,
       libraries,
       addStorybookProject,
       addE2EProject,
+      uiFramework,
     } = options;
     const normalizedOptions = normalizeOptions(options);
     let rules = addLibrariesRules(normalizedOptions.libraryDefinitions);
-    rules.concat(addStoryFileExclusions(application, application, libraries));
+
     if (isChildDomain(options.domain)) {
       const parentDomain = getTopLevelDomain(domain);
       const parsedDomain = getParsedDomain(domain).replace('-shared', '');
@@ -50,25 +52,27 @@ export default function (options: CreateSchematicSchema): Rule {
       rules.push(addMockFile(application, domain));
       rules.push(addMockFileResolutionPath(application, domain));
     }
-    if (!!options.addJestJunitReporter) {
+    if (options.addJestJunitReporter) {
       libraries.forEach((libraryType) =>
         rules.push(addJestJunitReporter(application, domain, libraryType))
       );
     }
-    if (!!addE2EProject) {
+    if (addE2EProject) {
       rules = rules.concat(
-        addE2EProjectRules(application, domain, libraries, CypressProject.E2E)
+        addE2EProjectRules(application, domain, lint, libraries)
       );
     }
-    if (!!addStorybookProject) {
+    if (addStorybookProject) {
       rules = rules.concat(
         addStorybookProjectRules(
           application,
           domain,
+          lint,
           libraries,
-          CypressProject.Storybook
+          uiFramework
         )
       );
+      rules.concat(addStoryFileExclusions(application, application, libraries));
     }
     return chain(rules);
   };

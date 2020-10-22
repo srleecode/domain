@@ -17,7 +17,10 @@ export const addStoryFileExclusions = (
       updateJsonInTree(
         `libs/${application}/${domain}/${libraryType}/tsconfig.lib.json`,
         (json) => {
-          json.exclude.push(['**/*.stories.ts', '**/*.stories.js']);
+          json.exclude = json.exclude.concat([
+            '**/*.stories.ts',
+            '**/*.stories.js',
+          ]);
           return json;
         }
       )

@@ -7,17 +7,19 @@ import { CypressProject } from '../../shared/model/cypress-project.enum';
 export const createCypressProject = (
   application: string,
   domain: string,
+  lint: Linter,
   projectType: CypressProject
 ): Rule =>
   getExternalSchematic(
     '@nrwl/cypress',
     'cypress-project',
-    getNrwlCypressSchematicSchema(application, domain, projectType)
+    getNrwlCypressSchematicSchema(application, domain, lint, projectType)
   );
 
 const getNrwlCypressSchematicSchema = (
   application: string,
   domain: string,
+  lint: Linter,
   projectType: CypressProject
 ): NrwlCypressSchematicSchema => {
   let name = '';
@@ -34,6 +36,6 @@ const getNrwlCypressSchematicSchema = (
     directory,
     project: '',
     js: false,
-    linter: Linter.EsLint,
+    linter: lint,
   };
 };

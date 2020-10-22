@@ -14,6 +14,6 @@ export default function (options: RemoveCypressProjectSchematicSchema): Rule {
     const { application, domain, projectType } = options;
     const nxJson: NxJson = readJsonInTree(tree, 'nx.json');
     checkCypressProjectExists(application, domain, projectType, nxJson);
-    return chain(removeCypressProject(application, domain, projectType));
+    return chain(removeCypressProject(application, domain, projectType, tree));
   };
 }

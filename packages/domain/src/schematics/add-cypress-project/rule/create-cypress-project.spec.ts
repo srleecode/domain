@@ -23,7 +23,12 @@ describe('createCypressProject', () => {
   });
 
   it('should generate cypress project with correct directory and name for leaf domain', () => {
-    createCypressProject(application, leafDomain, CypressProject.E2E);
+    createCypressProject(
+      application,
+      leafDomain,
+      Linter.EsLint,
+      CypressProject.E2E
+    );
     expect(testingUtils.getExternalSchematic).toHaveBeenCalledWith(
       '@nrwl/cypress',
       'cypress-project',
@@ -37,7 +42,12 @@ describe('createCypressProject', () => {
     );
   });
   it('should generate cypress project with correct directory and name for parent domain', () => {
-    createCypressProject(application, parentDomain, CypressProject.E2E);
+    createCypressProject(
+      application,
+      parentDomain,
+      Linter.EsLint,
+      CypressProject.E2E
+    );
     expect(testingUtils.getExternalSchematic).toHaveBeenCalledWith(
       '@nrwl/cypress',
       'cypress-project',
@@ -51,7 +61,12 @@ describe('createCypressProject', () => {
     );
   });
   it('should generate cypress project with correct directory and name for child domain', () => {
-    createCypressProject(application, childDomain, CypressProject.E2E);
+    createCypressProject(
+      application,
+      childDomain,
+      Linter.EsLint,
+      CypressProject.E2E
+    );
     expect(testingUtils.getExternalSchematic).toHaveBeenCalledWith(
       '@nrwl/cypress',
       'cypress-project',

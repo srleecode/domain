@@ -78,7 +78,6 @@ export const getProjects = (
   const nxJson = getNxJson(tree);
   const parsedDomainName = getParsedDomain(domain).replace('-shared', '');
   const applicationDomain = `${application}-${parsedDomainName}`;
-  const projectSecondLevelDomain = domain.split('-')[1];
   return Object.keys(nxJson.projects)
     .map(
       (projectName): Project => {
@@ -143,3 +142,10 @@ const getProjectsSecondLevelDomain = (
 
 export const isTwoLevelDomain = (domain: string): boolean =>
   domain.includes('/');
+
+export const getLibraryTypes = (
+  application: string,
+  domain: string,
+  tree: Tree
+): DomainLibraryName[] =>
+  getProjects(application, domain, tree).map((project) => project.type);

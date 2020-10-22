@@ -16,11 +16,24 @@
       "alias": "d",
       "x-prompt": "What is the domain you are creating the cypress project for?"
     },
+    "lint": {
+      "description": "The tool to use for running lint checks.",
+      "type": "string",
+      "enum": ["eslint", "tslint"],
+      "default": "eslint"
+    },
     "projectType": {
       "description": "The type of project",
       "type": "string",
       "enum": ["e2e", "storybook"],
       "default": "e2e"
+    },
+    "uiFramework": {
+      "type": "string",
+      "default": "@storybook/angular",
+      "description": "Storybook UI Framework to use",
+      "enum": ["@storybook/angular", "@storybook/react"],
+      "x-prompt": "What UI framework plugin should storybook use?"
     }
   },
   "required": ["application", "domain"]

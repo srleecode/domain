@@ -6,6 +6,7 @@ import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { UnitTestTree } from '@angular-devkit/schematics/testing';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { Tree } from '@angular-devkit/schematics';
+import { Linter } from '@nrwl/workspace';
 jest.mock('@nrwl/workspace', () => ({
   updateJsonInTree: jest.fn(),
 }));
@@ -17,48 +18,29 @@ describe('moveE2EFilesToDomain', () => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
     jest.spyOn(workspaceUtils, 'updateJsonInTree').mockReturnValue(emptyRule);
     jest.spyOn(treeUtils, 'renameInTree').mockImplementation(() => {});
+    jest.spyOn(treeUtils, 'deleteInTree').mockImplementation(() => {});
   });
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('should move files in tree', () => {
-    moveE2EFilesToDomain(application, domain)(appTree, undefined);
+    moveE2EFilesToDomain(
+      application,
+      domain,
+      Linter.TsLint
+    )(appTree, undefined);
     expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
       1,
       appTree,
-      `apps/${CypressProject.E2E}/${application}/${domain}/src/fixtures/example.json`,
-      `libs/${application}/${domain}/.${CypressProject.E2E}/fixtures/example.json`
+      `apps/${CypressProject.E2E}/${application}/${domain}/cypress.json`,
+      `libs/${application}/${domain}/.cypress/cypress.${CypressProject.E2E}.json`
     );
     expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
       2,
       appTree,
-      `apps/${CypressProject.E2E}/${application}/${domain}/src/integration/app.spec.ts`,
-      `libs/${application}/${domain}/.${CypressProject.E2E}/integration/app.spec.ts`
-    );
-    expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
-      3,
-      appTree,
-      `apps/${CypressProject.E2E}/${application}/${domain}/src/plugins/index.js`,
-      `libs/${application}/${domain}/.${CypressProject.E2E}/plugins/index.js`
-    );
-    expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
-      4,
-      appTree,
-      `apps/${CypressProject.E2E}/${application}/${domain}/src/support/app.po.ts`,
-      `libs/${application}/${domain}/.${CypressProject.E2E}/support/app.po.ts`
-    );
-    expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
-      5,
-      appTree,
-      `apps/${CypressProject.E2E}/${application}/${domain}/src/support/commands.ts`,
-      `libs/${application}/${domain}/.${CypressProject.E2E}/support/commands.ts`
-    );
-    expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
-      6,
-      appTree,
-      `apps/${CypressProject.E2E}/${application}/${domain}/src/support/index.ts`,
-      `libs/${application}/${domain}/.${CypressProject.E2E}/support/index.ts`
+      `libs/${application}/${domain}/.cypress/src/integration/app.spec.ts`,
+      `libs/${application}/${domain}/.cypress/src/integration/${CypressProject.E2E}/app.spec.ts`
     );
   });
 });

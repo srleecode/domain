@@ -2,11 +2,13 @@ import { Rule, SchematicsException } from '@angular-devkit/schematics';
 import { updateWorkspaceInTree } from '@nrwl/workspace';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { getCypressProjectName } from '../../../utils/cypress-project';
+import { UiFrameworkType } from '../../shared/model/ui-framework.type';
 
 export const updateStorybookTargets = (
   application: string,
   domain: string,
-  originalStorybookLibraryName: string
+  originalStorybookLibraryName: string,
+  uiFramework: UiFrameworkType
 ): Rule =>
   updateWorkspaceInTree((json) => {
     const projectName = getCypressProjectName(
@@ -22,8 +24,8 @@ export const updateStorybookTargets = (
     json.projects[projectName].architect['storybook-e2e'] = {
       builder: '@nrwl/cypress:cypress',
       options: {
-        cypressConfig: `apps/${CypressProject.Storybook}/${application}/${domain}/cypress.json`,
-        tsConfig: `apps/${CypressProject.Storybook}/${application}/${domain}/tsconfig.e2e.json`,
+        cypressConfig: `libs/${application}/${domain}/.storybook/cypress.json`,
+        tsConfig: `libs/${application}/${domain}/.cypress/tsconfig.e2e.json`,
         devServerTarget: `${projectName}:storybook`,
       },
       configurations: {
@@ -35,10 +37,10 @@ export const updateStorybookTargets = (
     json.projects[projectName].architect.storybook = {
       builder: '@nrwl/storybook:storybook',
       options: {
-        uiFramework: '@storybook/angular',
+        uiFramework,
         port: 4400,
         config: {
-          configFolder: `libs/${application}/${domain}/.${CypressProject.Storybook}`,
+          configFolder: `libs/${application}/${domain}/.storybook`,
         },
       },
       configurations: {
@@ -52,7 +54,7 @@ export const updateStorybookTargets = (
       options: {
         outputPath: `dist/${CypressProject.Storybook}/${projectName}`,
         config: {
-          configFolder: `libs/${application}/${domain}/.${CypressProject.Storybook}`,
+          configFolder: `libs/${application}/${domain}/.storybook`,
         },
       },
       configurations: {

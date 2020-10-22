@@ -41,8 +41,6 @@ const getMoveRules = (
         })
       );
   });
-  rules.push(moveCypressFiles(application, domain, newDomain));
-  rules.push(deleteDomainFolder(application, domain));
 
   return rules;
 };

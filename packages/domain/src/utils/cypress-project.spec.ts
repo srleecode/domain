@@ -7,9 +7,12 @@ import {
   isHavingImplicitDependenciesAfterRemoval,
   getUnprocessedCypressProjectName,
   getCypressJsonPath,
+  getCypressProjectLinter,
+  getStorybookProjectUiFramework,
 } from './cypress-project';
 import * as nxJsonUtils from './nx-json';
-import { NxJson } from '@nrwl/workspace';
+import * as treeUtils from './tree';
+import { Linter, NxJson } from '@nrwl/workspace';
 import { DomainLibraryName } from '../schematics/shared/model/domain-library-name.enum';
 import { getParsedDomain } from './domain';
 import { CypressProject } from '../schematics/shared/model/cypress-project.enum';
@@ -120,10 +123,18 @@ describe('Cypress project', () => {
     });
   });
   describe('getCypressJsonPath', () => {
-    it('should get cypress json path string', () => {
+    it('should get e2e cypress json path string', () => {
       const domain = 'parent-domain/child-domain';
       expect(getCypressJsonPath(application, domain, CypressProject.E2E)).toBe(
-        `apps/${CypressProject.E2E}/${application}/${domain}/cypress.json`
+        `libs/${application}/${domain}/.cypress/cypress.json`
+      );
+    });
+    it('should get storybook cypress json path string', () => {
+      const domain = 'parent-domain/child-domain';
+      expect(
+        getCypressJsonPath(application, domain, CypressProject.Storybook)
+      ).toBe(
+        `libs/${application}/${domain}/.${CypressProject.Storybook}/cypress.json`
       );
     });
   });
@@ -158,6 +169,119 @@ describe('Cypress project', () => {
           CypressProject.E2E
         )
       ).toBe(`${CypressProject.E2E}/${application}-${domain}`);
+    });
+  });
+  describe('getCypressProjectLinter', () => {
+    const mockWorkspaceJson = {
+      projects: {
+        [`${CypressProject.Storybook}-${application}-${leafDomain}`]: {
+          root: 'libs/test-application/jest-junit-reporter/.cypress',
+          sourceRoot: 'libs/test-application/jest-junit-reporter/.cypress/src',
+          projectType: 'application',
+          architect: {
+            lint: {
+              builder: '@nrwl/linter:lint',
+              options: {
+                linter: 'eslint',
+                tsConfig: [
+                  'libs/test-application/jest-junit-reporter/.cypress/tsconfig.e2e.json',
+                ],
+                exclude: [
+                  '**/node_modules/**',
+                  '!libs/test-application/jest-junit-reporter/.*/**',
+                ],
+              },
+            },
+          },
+        },
+        [`${CypressProject.Storybook}-${application}-${leafDomain}-tslint`]: {
+          root: 'libs/test-application/jest-junit-reporter/.cypress',
+          sourceRoot: 'libs/test-application/jest-junit-reporter/.cypress/src',
+          projectType: 'application',
+          architect: {
+            lint: {
+              builder: '@angular-devkit/build-angular:tslint',
+              options: {
+                tsConfig: [],
+                exclude: [
+                  '**/node_modules/**',
+                  '!libs/test-application/storybook-domain/data-access/**/*',
+                ],
+              },
+            },
+          },
+        },
+      },
+    };
+    beforeEach(() => {
+      jest
+        .spyOn(treeUtils, 'readWorkspaceInTree')
+        .mockReturnValue(mockWorkspaceJson);
+    });
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    it('should return configured Linter when project has lint builder @nrwl/linter:lint', () => {
+      expect(
+        getCypressProjectLinter(
+          application,
+          leafDomain,
+          CypressProject.Storybook,
+          appTree
+        )
+      ).toBe(Linter.EsLint);
+    });
+    it('should return Linter as TsLint when project has lint builder @angular-devkit/build-angular:tslint', () => {
+      expect(
+        getCypressProjectLinter(
+          application,
+          `${leafDomain}-tslint`,
+          CypressProject.Storybook,
+          appTree
+        )
+      ).toBe(Linter.TsLint);
+    });
+  });
+  describe('getStorybookProjectUiFramework', () => {
+    const mockWorkspaceJson = {
+      projects: {
+        [`${CypressProject.Storybook}-${application}-${leafDomain}`]: {
+          root: 'libs/test-application/jest-junit-reporter/.cypress',
+          sourceRoot: 'libs/test-application/jest-junit-reporter/.cypress/src',
+          projectType: 'application',
+          architect: {
+            storybook: {
+              builder: '@nrwl/storybook:storybook',
+              options: {
+                uiFramework: '@storybook/angular',
+                port: 4400,
+                config: {
+                  configFolder:
+                    'libs/test-application/jest-junit-reporter/.cypress',
+                },
+              },
+              configurations: {
+                ci: {
+                  quiet: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+    beforeEach(() => {
+      jest
+        .spyOn(treeUtils, 'readWorkspaceInTree')
+        .mockReturnValue(mockWorkspaceJson);
+    });
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    it('should return ui framework for given project', () => {
+      expect(
+        getStorybookProjectUiFramework(application, leafDomain, appTree)
+      ).toBe('@storybook/angular');
     });
   });
 });

@@ -1,9 +1,12 @@
-import { Tree } from '@angular-devkit/schematics';
+import { Tree, SchematicsException } from '@angular-devkit/schematics';
 import { getParsedDomain, isTwoLevelDomain } from './domain';
 import { getNxJson } from './nx-json';
 import { NxJson } from '@nrwl/workspace/src/core/shared-interfaces';
 import { DomainLibraryName } from '../schematics/shared/model/domain-library-name.enum';
 import { CypressProject } from '../schematics/shared/model/cypress-project.enum';
+import { readWorkspaceInTree } from './tree';
+import { Linter } from '@nrwl/workspace';
+import { UiFrameworkType } from '../schematics/shared/model/ui-framework.type';
 
 export const getCypressProjectName = (
   application: string,
@@ -15,7 +18,12 @@ export const getCypressJsonPath = (
   application: string,
   domain: string,
   projectType: CypressProject
-): string => `apps/${projectType}/${application}/${domain}/cypress.json`;
+): string => {
+  if (projectType === CypressProject.E2E) {
+    return `libs/${application}/${domain}/.cypress/cypress.json`;
+  }
+  return `libs/${application}/${domain}/.${CypressProject.Storybook}/cypress.json`;
+};
 
 export const getUnprocessedCypressProjectName = (
   application: string,
@@ -53,8 +61,50 @@ export const isHavingCypressProject = (
   tree: Tree
 ): boolean => {
   const projectName = getCypressProjectName(application, domain, projectType);
+
   const nxJson = getNxJson(tree);
   return !!nxJson.projects[projectName];
+};
+
+export const getCypressProjectLinter = (
+  application: string,
+  domain: string,
+  projectType: CypressProject,
+  tree: Tree
+): Linter => {
+  const projectName = getCypressProjectName(application, domain, projectType);
+  const workspaceJson = readWorkspaceInTree(tree);
+  const lintBuilder: string =
+    workspaceJson.projects[projectName]?.architect?.lint.builder;
+  if (
+    lintBuilder !== '@angular-devkit/build-angular:tslint' &&
+    lintBuilder !== '@nrwl/linter:lint'
+  ) {
+    throw new SchematicsException(
+      projectName + JSON.stringify(workspaceJson.projects[projectName])
+    );
+  }
+  if (lintBuilder === '@angular-devkit/build-angular:tslint') {
+    return Linter.TsLint;
+  } else if (lintBuilder === '@nrwl/linter:lint') {
+    return workspaceJson.projects[projectName]?.architect?.lint.options.linter;
+  }
+  return Linter.None;
+};
+
+export const getStorybookProjectUiFramework = (
+  application: string,
+  domain: string,
+  tree: Tree
+): UiFrameworkType => {
+  const projectName = getCypressProjectName(
+    application,
+    domain,
+    CypressProject.Storybook
+  );
+  const workspaceJson = readWorkspaceInTree(tree);
+  return workspaceJson.projects[projectName]?.architect.storybook?.options
+    .uiFramework;
 };
 
 export const getDependenciesWithLibrariesRemoved = (

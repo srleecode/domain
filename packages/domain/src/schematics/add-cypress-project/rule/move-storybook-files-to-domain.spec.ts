@@ -29,39 +29,33 @@ describe('moveStorybookFilesToDomain', () => {
     expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
       1,
       appTree,
-      `apps/${CypressProject.Storybook}/${application}/${domain}/src/integration/app.spec.ts`,
-      `libs/${application}/${domain}/.${CypressProject.Storybook}/integration/app.spec.ts`
+      `apps/${CypressProject.Storybook}/${application}/${domain}/cypress.json`,
+      `libs/${application}/${domain}/.${CypressProject.Storybook}/cypress.json`
     );
     expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
       2,
       appTree,
-      `apps/${CypressProject.Storybook}/${application}/${domain}/src/support/app.po.ts`,
-      `libs/${application}/${domain}/.${CypressProject.Storybook}/support/app.po.ts`
-    );
-    expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
-      3,
-      appTree,
-      `apps/${CypressProject.Storybook}/${application}/${domain}/src/support/commands.ts`,
-      `libs/${application}/${domain}/.${CypressProject.Storybook}/support/commands.ts`
-    );
-    expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
-      4,
-      appTree,
-      `apps/${CypressProject.Storybook}/${application}/${domain}/src/support/index.ts`,
-      `libs/${application}/${domain}/.${CypressProject.Storybook}/support/index.ts`
+      `libs/${application}/${domain}/.cypress/src/integration/app.spec.ts`,
+      `libs/${application}/${domain}/.cypress/src/integration/${CypressProject.Storybook}/app.spec.ts`
     );
   });
   it('should delete files that are not required', () => {
     moveStorybookFilesToDomain(application, domain)(appTree, undefined);
+    const basePath = `apps/${CypressProject.Storybook}/${application}/${domain}/src`;
     expect(treeUtils.deleteInTree).toHaveBeenNthCalledWith(
       1,
       appTree,
-      `apps/${CypressProject.Storybook}/${application}/${domain}/src/fixtures/example.json`
+      `${basePath}/support/app.po.ts`
     );
     expect(treeUtils.deleteInTree).toHaveBeenNthCalledWith(
       2,
       appTree,
-      `apps/${CypressProject.Storybook}/${application}/${domain}/src/plugins/index.js`
+      `${basePath}/fixtures/example.json`
+    );
+    expect(treeUtils.deleteInTree).toHaveBeenNthCalledWith(
+      3,
+      appTree,
+      `${basePath}/plugins/index.js`
     );
   });
 });
