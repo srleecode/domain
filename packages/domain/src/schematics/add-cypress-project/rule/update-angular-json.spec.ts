@@ -172,7 +172,7 @@ describe('updateAngularJson', () => {
       `libs/test-application/leaf-domain/.cypress/tsconfig.e2e.json`
     );
     expect(projectJson.architect.e2e.options.cypressConfig).toBe(
-      `libs/test-application/leaf-domain/.cypress/cypress.e2e.json`
+      `libs/test-application/leaf-domain/.cypress/cypress.json`
     );
     expect(projectJson.architect.e2e.options.tsConfig).toBe(
       `libs/test-application/leaf-domain/.cypress/tsconfig.e2e.json`

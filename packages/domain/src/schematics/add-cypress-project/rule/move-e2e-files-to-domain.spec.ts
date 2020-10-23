@@ -34,7 +34,7 @@ describe('moveE2EFilesToDomain', () => {
       1,
       appTree,
       `apps/${CypressProject.E2E}/${application}/${domain}/cypress.json`,
-      `libs/${application}/${domain}/.cypress/cypress.${CypressProject.E2E}.json`
+      `libs/${application}/${domain}/.cypress/cypress.json`
     );
     expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
       2,

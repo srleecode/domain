@@ -17,7 +17,7 @@ export const moveE2EFilesToDomain = (
   renameInTree(
     tree,
     `apps/${CypressProject.E2E}/${application}/${domain}/cypress.json`,
-    `libs/${application}/${domain}/.cypress/cypress.${CypressProject.E2E}.json`
+    `libs/${application}/${domain}/.cypress/cypress.json`
   );
   const cypressFolder = getDirInTree(
     tree,

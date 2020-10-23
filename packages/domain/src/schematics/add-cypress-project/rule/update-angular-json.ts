@@ -27,7 +27,7 @@ export const updateAngularJson = (
       delete e2eConfig.configurations;
       json.projects[
         projectName
-      ].architect.e2e.options.cypressConfig = `${basePath}/cypress.e2e.json`;
+      ].architect.e2e.options.cypressConfig = `${basePath}/cypress.json`;
       json.projects[
         projectName
       ].architect.e2e.options.tsConfig = `${basePath}/tsconfig.e2e.json`;

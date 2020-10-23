@@ -3,22 +3,15 @@ import {
   getCypressProjectName,
   isHavingCypressProject,
 } from '../../../utils/cypress-project';
-import {
-  Rule,
-  Tree,
-  SchematicContext,
-  chain,
-} from '@angular-devkit/schematics';
+import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
 import { CypressProject } from '../model/cypress-project.enum';
 import {
-  getWorkspace,
-  readJsonInTree,
   NxJson,
-  serializeJson,
   updateWorkspaceInTree,
   getWorkspacePath,
   updateJsonInTree,
 } from '@nrwl/workspace';
+import { getDirInTree } from '../../../utils/tree';
 
 export const removeCypressProject = (
   application: string,
@@ -27,10 +20,16 @@ export const removeCypressProject = (
   tree: Tree
 ): Rule[] => {
   const projectName = getCypressProjectName(application, domain, projectType);
+  const isHavingStorybookProject = isHavingCypressProject(
+    application,
+    domain,
+    CypressProject.Storybook,
+    tree
+  );
   let rules: Rule[] = [];
   if (
     isHavingCypressProject(application, domain, CypressProject.E2E, tree) &&
-    isHavingCypressProject(application, domain, CypressProject.Storybook, tree)
+    isHavingStorybookProject
   ) {
     // if having both cypress project types update config files but dont remove the folder as the other cypress project uses it
     rules = rules.concat([
@@ -44,15 +43,13 @@ export const removeCypressProject = (
       }),
     ]);
   }
+  if (isHavingStorybookProject) {
+    rules.push(deleteStorybookFolder(application, domain));
+  }
   return rules;
 };
 
-/**
- * Updates the nx.json file to remove the project
- *
- * @param schema The options provided to the schematic
- */
-function updateNxJson(projectName: string) {
+const updateNxJson = (projectName: string) => {
   return updateJsonInTree<NxJson>('nx.json', (json) => {
     delete json.projects[projectName];
 
@@ -66,14 +63,9 @@ function updateNxJson(projectName: string) {
 
     return json;
   });
-}
+};
 
-/**
- * Deletes the project from the workspace file
- *
- * @param schema The options provided to the schematic
- */
-function updateWorkspace(projectName: string) {
+const updateWorkspace = (projectName: string) => {
   return updateWorkspaceInTree(
     (workspace, context: SchematicContext, host: Tree) => {
       delete workspace.projects[projectName];
@@ -90,4 +82,16 @@ function updateWorkspace(projectName: string) {
       return workspace;
     }
   );
-}
+};
+
+const deleteStorybookFolder = (application: string, domain: string): Rule => (
+  tree: Tree,
+  context: SchematicContext
+) => {
+  const cypressProjectFolder = `libs/${application}/${domain}/.storybook`;
+  const cypressFolder = getDirInTree(tree, cypressProjectFolder);
+  if (cypressFolder.subfiles.length > 0 || cypressFolder.subdirs.length > 0)
+    cypressFolder.visit((file) => tree.delete(file));
+  tree.delete(cypressProjectFolder);
+  return tree;
+};
