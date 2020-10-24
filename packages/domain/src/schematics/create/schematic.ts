@@ -24,6 +24,7 @@ import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { addStorybookProjectRules } from '../add-cypress-project/rule/add-storybook-project-rules';
 import { addStoryFileExclusions } from '../shared/rule/add-story-file-exclusions';
+import { Linter } from '@nrwl/workspace';
 
 export default function (options: CreateSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -31,12 +32,12 @@ export default function (options: CreateSchematicSchema): Rule {
     const {
       application,
       domain,
-      lint,
       libraries,
       addStorybookProject,
       addE2EProject,
       uiFramework,
     } = options;
+    const lint = Linter.EsLint;
     const normalizedOptions = normalizeOptions(options);
     let rules = addLibrariesRules(normalizedOptions.libraryDefinitions);
 

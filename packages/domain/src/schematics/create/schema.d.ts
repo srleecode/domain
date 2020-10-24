@@ -8,7 +8,6 @@ export interface CreateSchematicSchema {
   domain: string;
   prefix: string;
   libraries?: DomainLibraryName[];
-  lint: Linter;
   style?: StyleType;
   tsConfigPath?: string;
   addJestJunitReporter?: boolean;

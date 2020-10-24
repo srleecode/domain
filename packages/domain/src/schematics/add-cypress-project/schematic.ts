@@ -11,10 +11,12 @@ import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { addStorybookProjectRules } from './rule/add-storybook-project-rules';
+import { Linter } from '@nrwl/workspace';
 
 export default function (options: AddCypressProjectSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
-    const { application, domain, lint, projectType, uiFramework } = options;
+    const { application, domain, projectType, uiFramework } = options;
+    const lint = Linter.EsLint;
     checkDomainExists(application, domain, tree);
     const existingProjectLibraryTypes = getLibraryTypes(
       application,

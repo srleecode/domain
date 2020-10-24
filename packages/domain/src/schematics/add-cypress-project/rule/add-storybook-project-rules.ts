@@ -11,6 +11,7 @@ import { addStorybookConfig } from './add-storybook-config';
 import { Linter } from '@nrwl/workspace';
 import { UiFrameworkType } from '../../shared/model/ui-framework.type';
 import { deleteCypressProjectFolder } from '../../shared/rule/delete-cypress-project-folder';
+import { addSourceMapFalse } from './add-source-map-false';
 
 export const addStorybookProjectRules = (
   application: string,
@@ -34,5 +35,6 @@ export const addStorybookProjectRules = (
     ...addStorybookConfig(application, domain, lint, libraries, uiFramework),
     updateAngularJson(application, domain, projectType),
     deleteCypressProjectFolder(application, domain, projectType),
+    addSourceMapFalse(application, domain),
   ];
 };
