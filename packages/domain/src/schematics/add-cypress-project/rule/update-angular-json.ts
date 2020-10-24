@@ -21,10 +21,10 @@ export const updateAngularJson = (
     json.projects[
       projectName
     ].architect.lint.options.tsConfig[0] = `${basePath}/tsconfig.e2e.json`;
-    if (json.projects[projectName].architect.lint.config) {
+    if (json.projects[projectName].architect.lint.options.config) {
       json.projects[
         projectName
-      ].architect.lint.config = `${basePath}/.eslintrc`;
+      ].architect.lint.options.config = `${basePath}/.eslintrc`;
     }
     if (projectType === CypressProject.E2E) {
       const e2eConfig = json.projects[projectName].architect.e2e;
