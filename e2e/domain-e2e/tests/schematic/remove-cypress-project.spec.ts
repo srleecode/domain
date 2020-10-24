@@ -10,7 +10,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
-        `generate @srleecode/domain:removeCypressProject --application ${application} --domain ${domain}`
+        `generate @srleecode/domain:removeCypressProject --application ${application} --domain ${domain} --projectType=e2e`
       );
 
       const nxJson = readJson('nx.json');

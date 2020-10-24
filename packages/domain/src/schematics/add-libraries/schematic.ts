@@ -19,6 +19,7 @@ import { checkDomainExists } from '../shared/validation/check-domain-exists';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { addStoryFileExclusions } from '../shared/rule/add-story-file-exclusions';
 import { updatePathInStorybookConfig } from '../shared/rule/update-path-in-storybook-config';
+import { sortProjects } from '../shared/rule/sort-projects';
 
 export default function (options: AddLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -68,6 +69,7 @@ export default function (options: AddLibrariesSchematicSchema): Rule {
         addStoryFileExclusions(application, domain, libraries)
       );
     }
+    rules = rules.concat(sortProjects());
     return chain(rules);
   };
 }

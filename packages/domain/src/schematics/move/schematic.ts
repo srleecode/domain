@@ -30,6 +30,7 @@ import { Linter } from '@nrwl/workspace';
 import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-rules';
 import { addStorybookProjectRules } from '../add-cypress-project/rule/add-storybook-project-rules';
 import { UiFrameworkType } from '../shared/model/ui-framework.type';
+import { sortProjects } from '../shared/rule/sort-projects';
 
 export default function (options: MoveSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
@@ -117,6 +118,7 @@ export default function (options: MoveSchematicSchema): Rule {
       );
     }
     rules.push(deleteDomainFolder(application, domain));
+    rules = rules.concat(sortProjects());
     return chain(rules);
   };
 }

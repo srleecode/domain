@@ -20,16 +20,10 @@ export const removeCypressProject = (
   tree: Tree
 ): Rule[] => {
   const projectName = getCypressProjectName(application, domain, projectType);
-  const isHavingStorybookProject = isHavingCypressProject(
-    application,
-    domain,
-    CypressProject.Storybook,
-    tree
-  );
   let rules: Rule[] = [];
   if (
     isHavingCypressProject(application, domain, CypressProject.E2E, tree) &&
-    isHavingStorybookProject
+    isHavingCypressProject(application, domain, CypressProject.Storybook, tree)
   ) {
     // if having both cypress project types update config files but dont remove the folder as the other cypress project uses it
     rules = rules.concat([
@@ -43,7 +37,7 @@ export const removeCypressProject = (
       }),
     ]);
   }
-  if (isHavingStorybookProject) {
+  if (projectType === CypressProject.Storybook) {
     rules.push(deleteStorybookFolder(application, domain));
   }
   return rules;

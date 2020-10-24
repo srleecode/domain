@@ -12,6 +12,7 @@ import { checkDomainExists } from '../shared/validation/check-domain-exists';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { addStorybookProjectRules } from './rule/add-storybook-project-rules';
 import { Linter } from '@nrwl/workspace';
+import { sortProjects } from '../shared/rule/sort-projects';
 
 export default function (options: AddCypressProjectSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
@@ -23,7 +24,7 @@ export default function (options: AddCypressProjectSchematicSchema): Rule {
       domain,
       tree
     );
-    const rules =
+    let rules =
       projectType === CypressProject.E2E
         ? [
             ...addE2EProjectRules(
@@ -42,6 +43,7 @@ export default function (options: AddCypressProjectSchematicSchema): Rule {
               uiFramework
             ),
           ];
+    rules = rules.concat(sortProjects());
     return chain(rules);
   };
 }
