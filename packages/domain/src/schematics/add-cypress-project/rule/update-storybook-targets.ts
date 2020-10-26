@@ -52,6 +52,7 @@ export const updateStorybookTargets = (
     json.projects[projectName].architect['build-storybook'] = {
       builder: '@nrwl/storybook:build',
       options: {
+        uiFramework,
         outputPath: `dist/${CypressProject.Storybook}/${projectName}`,
         config: {
           configFolder: `libs/${application}/${domain}/.storybook`,

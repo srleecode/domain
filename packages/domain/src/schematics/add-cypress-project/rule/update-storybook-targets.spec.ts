@@ -130,6 +130,7 @@ describe('updateStorybookTargets', () => {
         },
       },
       options: {
+        uiFramework,
         config: {
           configFolder: `libs/${application}/${domain}/.storybook`,
         },
