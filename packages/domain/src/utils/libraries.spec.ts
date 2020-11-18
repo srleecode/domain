@@ -1,4 +1,8 @@
-import { getDomainLibraryDefinitions, isLibraryExisting } from './libraries';
+import {
+  getDomainLibraryDefinitions,
+  getParsedLibraries,
+  isLibraryExisting,
+} from './libraries';
 import { DomainLibraryName } from '../schematics/shared/model/domain-library-name.enum';
 import { StyleType } from '../schematics/shared/model/style-type.enum';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
@@ -151,6 +155,15 @@ describe('libraries', () => {
       expect(isLibraryExisting(application, domain, libraryType, appTree)).toBe(
         false
       );
+    });
+  });
+  describe('getParsedLibraries', () => {
+    it('should get DomainLibraryNames from libraries string', () => {
+      expect(getParsedLibraries('data-access, ui, util')).toEqual([
+        DomainLibraryName.DataAccess,
+        DomainLibraryName.Ui,
+        DomainLibraryName.Util,
+      ]);
     });
   });
 });

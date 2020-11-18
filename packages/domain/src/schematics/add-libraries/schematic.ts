@@ -1,13 +1,17 @@
 import {
   chain,
   Rule,
+  SchematicsException,
   SchematicContext,
   Tree,
 } from '@angular-devkit/schematics';
 import { AddLibrariesSchematicSchema } from './schema';
 import { NormalizedSchema } from './model/normalized-schema.model';
 import { addLibrariesRules } from '../shared/rule/add-libraries';
-import { getDomainLibraryDefinitions } from '../../utils/libraries';
+import {
+  getDomainLibraryDefinitions,
+  getParsedLibraries,
+} from '../../utils/libraries';
 import { checkLibrariesDontExist } from './validation/check-libraries-dont-exist';
 import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
 import { addMockFile } from '../shared/rule/add-mock-file';
@@ -24,7 +28,11 @@ import { sortProjects } from '../shared/rule/sort-projects';
 export default function (options: AddLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     const normalizedOptions = normalizeOptions(options);
-    const { application, domain, libraries } = options;
+    const { application, domain } = options;
+    const libraries = getParsedLibraries(options.libraries);
+    if (libraries.length === 0) {
+      throw new SchematicsException('At least one library should be provided');
+    }
     checkDomainExists(application, domain, tree);
     checkLibrariesDontExist(application, domain, libraries, tree);
     let rules = addLibrariesRules(normalizedOptions.libraryDefinitions);
@@ -33,7 +41,7 @@ export default function (options: AddLibrariesSchematicSchema): Rule {
       rules.push(addMockFile(application, domain));
       rules.push(addMockFileResolutionPath(application, domain));
     }
-    if (!!options.addJestJunitReporter) {
+    if (options.addJestJunitReporter) {
       libraries.forEach((libraryType) =>
         rules.push(addJestJunitReporter(application, domain, libraryType))
       );

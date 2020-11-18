@@ -33,17 +33,13 @@
     },
     "libraries": {
       "description": "The library types that will be generated",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "uniqueItems": true,
       "alias": "l",
-      "default": ["data-access", "feature", "shell", "ui", "util"],
+      "type": "string",
+      "default": "data-access,feature,shell,ui,util",
       "x-prompt": {
         "message": "Which library types do you want to generate?",
         "type": "list",
-        "multi-select": true,
+        "multiselect": true,
         "items": [
           {
             "value": "data-access",

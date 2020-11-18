@@ -13,8 +13,8 @@ export const getDomainLibraryDefinitions = (
   style: StyleType
 ): LibraryDefinition[] => {
   const parsedDomain = getParsedDomain(domain);
-  let directory = `${application}/${domain}`;
-  let scope = `${application}-${parsedDomain}`;
+  const directory = `${application}/${domain}`;
+  const scope = `${application}-${parsedDomain}`;
   return DOMAIN_LIBRARY_TYPES.filter((type) => libraries.includes(type)).map(
     (type) => ({
       projectName: `${type}`,
@@ -41,3 +41,15 @@ export const getProjectNames = (
   libraries: DomainLibraryName[]
 ): string[] =>
   libraries.map((type) => `${application}-${getParsedDomain(domain)}-${type}`);
+
+export const getParsedLibraries = (
+  libraries: DomainLibraryName[] | string
+): DomainLibraryName[] => {
+  if (typeof libraries === 'string') {
+    const splitLibrariesString = (libraries as string).split(',');
+    return splitLibrariesString.map(
+      (library): DomainLibraryName => library.trim() as DomainLibraryName
+    );
+  }
+  return libraries;
+};

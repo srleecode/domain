@@ -1,6 +1,7 @@
 import {
   chain,
   Rule,
+  SchematicsException,
   SchematicContext,
   Tree,
 } from '@angular-devkit/schematics';
@@ -20,10 +21,15 @@ import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { ProjectType } from '@nrwl/workspace';
 import { updatePathInStorybookConfig } from '../shared/rule/update-path-in-storybook-config';
+import { getParsedLibraries } from '../../utils/libraries';
 
 export default function (options: RemoveLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
-    const { application, domain, libraries } = options;
+    const { application, domain } = options;
+    const libraries = getParsedLibraries(options.libraries);
+    if (libraries.length === 0) {
+      throw new SchematicsException('At least one library should be provided');
+    }
     checkLibrariesExist(application, domain, libraries, tree);
     let rules: Rule[] = [
       ...getCypressProjectsUpdateRules(application, domain, libraries, tree),

@@ -1,6 +1,7 @@
 import {
   chain,
   Rule,
+  SchematicsException,
   SchematicContext,
   Tree,
 } from '@angular-devkit/schematics';
@@ -17,7 +18,10 @@ import { checkParentDomainExists } from '../shared/validation/check-parent-domai
 import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
 import { addMockFileResolutionPath } from '../shared/rule/add-mock-file-resolution-path';
 import { addMockFile } from '../shared/rule/add-mock-file';
-import { getDomainLibraryDefinitions } from '../../utils/libraries';
+import {
+  getDomainLibraryDefinitions,
+  getParsedLibraries,
+} from '../../utils/libraries';
 import { checkDomainLevels } from './validation/check-domain-levels';
 import { addJestJunitReporter } from '../shared/rule/add-jest-junit-reporter';
 import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-rules';
@@ -30,15 +34,18 @@ import { sortProjects } from '../shared/rule/sort-projects';
 export default function (options: CreateSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     checkDomainLevels(options.domain);
+    const libraries = getParsedLibraries(options.libraries);
     const {
       application,
       domain,
-      libraries,
       addStorybookProject,
       addE2EProject,
       uiFramework,
     } = options;
     const lint = Linter.EsLint;
+    if (libraries.length === 0) {
+      throw new SchematicsException('At least one library should be provided');
+    }
     const normalizedOptions = normalizeOptions(options);
     let rules = addLibrariesRules(normalizedOptions.libraryDefinitions);
 
