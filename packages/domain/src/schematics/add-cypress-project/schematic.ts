@@ -6,13 +6,13 @@ import {
 } from '@angular-devkit/schematics';
 import { AddCypressProjectSchematicSchema } from './schema';
 import { addE2EProjectRules } from './rule/add-e2e-project-rules';
-import { getLibraryTypes, getProjects } from '../../utils/domain';
-import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
+import { getLibraryTypes } from '../../utils/domain';
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { addStorybookProjectRules } from './rule/add-storybook-project-rules';
 import { Linter } from '@nrwl/workspace';
 import { sortProjects } from '../shared/rule/sort-projects';
+import { createComponentCommand } from './rule/create-command-component';
 
 export default function (options: AddCypressProjectSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
@@ -43,7 +43,9 @@ export default function (options: AddCypressProjectSchematicSchema): Rule {
               uiFramework
             ),
           ];
+
     rules = rules.concat(sortProjects());
+    rules = rules.concat(createComponentCommand(application, domain));
     return chain(rules);
   };
 }
