@@ -1,6 +1,6 @@
 import * as testingUtils from '../../../utils/testing';
 import { removeCypressProject } from './remove-cypress-project';
-import { CypressProject } from '../model/cypress-project.enum';
+import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { UnitTestTree } from '@angular-devkit/schematics/testing';
 import { Tree } from '@angular-devkit/schematics';

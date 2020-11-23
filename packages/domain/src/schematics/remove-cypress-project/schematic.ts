@@ -5,7 +5,7 @@ import {
   SchematicContext,
 } from '@angular-devkit/schematics';
 import { RemoveCypressProjectSchematicSchema } from './schema';
-import { removeCypressProject } from '../shared/rule/remove-cypress-project';
+import { removeCypressProject } from './rule/remove-cypress-project';
 import { checkCypressProjectExists } from '../shared/validation/check-cypress-project-exists';
 import { readJsonInTree, NxJson } from '@nrwl/workspace';
 

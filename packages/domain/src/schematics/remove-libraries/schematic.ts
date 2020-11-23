@@ -14,7 +14,7 @@ import {
   isHavingImplicitDependenciesAfterRemoval,
   isHavingCypressProject,
 } from '../../utils/cypress-project';
-import { removeCypressProject } from '../shared/rule/remove-cypress-project';
+import { removeCypressProject } from '../remove-cypress-project/rule/remove-cypress-project';
 import { removeCypressProjectImplicitDependencies } from '../shared/rule/remove-cypress-project-implicit-dependencies';
 import { isDomainEmptyAfterLibraryRemoval } from '../../utils/domain';
 import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';

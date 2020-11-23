@@ -3,8 +3,13 @@ import {
   getCypressProjectName,
   isHavingCypressProject,
 } from '../../../utils/cypress-project';
-import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
-import { CypressProject } from '../model/cypress-project.enum';
+import {
+  Rule,
+  Tree,
+  SchematicContext,
+  SchematicsException,
+} from '@angular-devkit/schematics';
+import { CypressProject } from '../../shared/model/cypress-project.enum';
 import {
   NxJson,
   updateWorkspaceInTree,
@@ -12,6 +17,7 @@ import {
   updateJsonInTree,
 } from '@nrwl/workspace';
 import { getDirInTree } from '../../../utils/tree';
+import { removeCypressTsConfigPath } from './remove-cypress-ts-config-path';
 
 export const removeCypressProject = (
   application: string,
@@ -20,6 +26,10 @@ export const removeCypressProject = (
   tree: Tree
 ): Rule[] => {
   const projectName = getCypressProjectName(application, domain, projectType);
+  const otherCypressProjectType =
+    projectType === CypressProject.E2E
+      ? CypressProject.Storybook
+      : CypressProject.E2E;
   let rules: Rule[] = [];
   if (
     isHavingCypressProject(application, domain, CypressProject.E2E, tree) &&
@@ -39,6 +49,11 @@ export const removeCypressProject = (
   }
   if (projectType === CypressProject.Storybook) {
     rules.push(deleteStorybookFolder(application, domain));
+  }
+  if (
+    !isHavingCypressProject(application, domain, otherCypressProjectType, tree)
+  ) {
+    rules.push(removeCypressTsConfigPath(application, domain));
   }
   return rules;
 };

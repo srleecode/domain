@@ -1,7 +1,7 @@
 declare global {
   namespace Cypress {
     interface Chainable<Subject> {
-      <%= camelize(name) %>: Chainable<<%= classify(name) %>>
+      <%= camelize(name) %>(): Chainable<<%= classify(name) %>>
     }
   }
 }

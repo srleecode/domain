@@ -10,7 +10,7 @@ import { isDomainHavingLibraryType } from '../../utils/domain';
 import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
 import { removeMockFileResolutionPath } from '../shared/rule/remove-mock-file-resolution-path';
 import { isHavingCypressProject } from '../../utils/cypress-project';
-import { removeCypressProject } from '../shared/rule/remove-cypress-project';
+import { removeCypressProject } from '../remove-cypress-project/rule/remove-cypress-project';
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';
