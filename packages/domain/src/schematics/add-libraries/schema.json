@@ -39,7 +39,6 @@
         "enum": ["data-access", "feature", "shell", "ui", "util"],
         "type": "string"
       },
-      "type": "array",
       "default": ["data-access", "feature", "shell", "ui", "util"],
       "x-prompt": {
         "message": "Which library types do you want to generate?",

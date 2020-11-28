@@ -40,7 +40,6 @@
         "type": "string"
       },
       "default": ["data-access", "feature", "shell", "ui", "util"],
-      "type": "array",
       "x-prompt": {
         "message": "Which library types do you want to generate?",
         "type": "list",
