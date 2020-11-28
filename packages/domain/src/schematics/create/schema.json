@@ -114,6 +114,5 @@
       "enum": ["@storybook/angular", "@storybook/react"],
       "x-prompt": "What UI framework plugin should storybook use?"
     }
-  },
-  "required": ["application", "domain", "prefix", "libraries"]
+  }
 }

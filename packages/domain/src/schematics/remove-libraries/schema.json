@@ -53,6 +53,5 @@
         ]
       }
     }
-  },
-  "required": ["application", "domain"]
+  }
 }

@@ -22,6 +22,5 @@
       "alias": "nd",
       "x-prompt": "What is the name of the new domain? Use parent-domain/child-domain format for a child domain. Use domain/shared format for parent domains."
     }
-  },
-  "required": ["application", "domain", "newDomain"]
+  }
 }

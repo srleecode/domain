@@ -95,6 +95,5 @@
       "default": false,
       "x-prompt": "Configure jest junit reporter?"
     }
-  },
-  "required": ["application", "domain", "prefix"]
+  }
 }

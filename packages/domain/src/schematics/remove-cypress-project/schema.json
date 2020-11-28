@@ -22,6 +22,5 @@
       "enum": ["e2e", "storybook"],
       "default": "e2e"
     }
-  },
-  "required": ["application", "domain"]
+  }
 }
