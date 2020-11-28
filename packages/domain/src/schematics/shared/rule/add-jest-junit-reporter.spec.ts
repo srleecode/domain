@@ -15,7 +15,7 @@ describe('addJestJunitReporter', () => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
     appTree.create(
       jestConfigPath,
-      `module.exports = {preset: '../../jest.config.js',};`
+      `module.exports = {preset: '../../jest.config.js'};`
     );
     jest.spyOn(prettierUtils, 'formatFile');
   });

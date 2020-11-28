@@ -34,8 +34,12 @@
     "libraries": {
       "description": "The library types that will be generated",
       "alias": "l",
-      "type": "string",
-      "default": "data-access,feature,shell,ui,util",
+      "minItems": 1,
+      "items": {
+        "enum": ["data-access", "feature", "shell", "ui", "util"],
+        "type": "string"
+      },
+      "default": ["data-access", "feature", "shell", "ui", "util"],
       "x-prompt": {
         "message": "Which library types do you want to generate?",
         "type": "list",

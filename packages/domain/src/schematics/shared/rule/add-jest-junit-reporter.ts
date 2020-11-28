@@ -2,6 +2,7 @@ import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { DomainLibraryName } from '../model/domain-library-name.enum';
 import { getParsedDomain } from '../../../utils/domain';
 import { formatFile } from '../../../utils/prettier';
+
 export const addJestJunitReporter = (
   application: string,
   domain: string,
@@ -13,12 +14,13 @@ export const addJestJunitReporter = (
   const jestConfigPath = `libs/${application}/${domain}/${libraryType}/jest.config.js`;
   const jestConfig = tree.read(jestConfigPath);
 
-  let jestConfigString = jestConfig.toString('utf8');
+  let jestConfigString = jestConfig.toString('utf8').replace(/\s/g, '');
   const lastBracketIndex = jestConfigString.lastIndexOf('}');
-  jestConfigString = `${jestConfigString.slice(
-    0,
-    lastBracketIndex
-  )}reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports',  outputName: "${projectName}.xml" } ] ]${jestConfigString.slice(
+  const includesLastLineCommaPrefix =
+    jestConfigString[lastBracketIndex - 1] === ',';
+  jestConfigString = `${jestConfigString.slice(0, lastBracketIndex)}${
+    includesLastLineCommaPrefix ? '' : ','
+  } reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "${projectName}.xml" } ] ]${jestConfigString.slice(
     lastBracketIndex
   )}`;
   tree.overwrite(jestConfigPath, jestConfigString);
