@@ -1,6 +1,5 @@
 import { Tree } from '@angular-devkit/schematics';
 import { UnitTestTree } from '@angular-devkit/schematics/testing';
-import * as jestUtils from '../../../utils/jest-config';
 import * as prettierUtils from '../../../utils/prettier';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { DomainLibraryName } from '../model/domain-library-name.enum';
@@ -15,11 +14,10 @@ describe('addJestJunitReporter', () => {
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
     appTree.create(
-      `libs/${application}/${domain}/${libraryType}/jest.config.js`,
-      `module.exports = {preset: '../../ jest.config.js',};`
+      jestConfigPath,
+      `module.exports = {preset: '../../jest.config.js',};`
     );
     jest.spyOn(prettierUtils, 'formatFile');
-    jest.spyOn(jestUtils, 'addPropertyToJestConfig');
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -27,20 +25,21 @@ describe('addJestJunitReporter', () => {
 
   it('should add reporter to jest config', () => {
     addJestJunitReporter(application, domain, libraryType)(appTree, undefined);
-    expect(jestUtils.addPropertyToJestConfig).toHaveBeenCalledWith(
-      expect.anything(),
-      jestConfigPath,
-      'reporters',
-      [
-        'default',
-        [
-          'jest-junit',
-          {
-            outputDirectory: './test-reports',
-            outputName: `${application}-${domain}-${libraryType}.xml`,
-          },
-        ],
-      ]
+    expect(appTree.read(jestConfigPath).toString()).toBe(
+      `module.exports = {
+  preset: "../../jest.config.js",
+  reporters: [
+    "default",
+    [
+      "jest-junit",
+      {
+        outputDirectory: "./test-reports",
+        outputName: "test-application-test-domain-ui.xml",
+      },
+    ],
+  ],
+};
+`
     );
   });
   it('should format jest config after updating it', () => {
