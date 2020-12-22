@@ -6,7 +6,7 @@ import {
 } from '@angular-devkit/schematics';
 import { RemoveSchematicSchema } from './schema';
 import { removeDomain } from './rule/remove-domain';
-import { isDomainHavingLibraryType } from '../../utils/domain';
+import { getParsedDomain, isDomainHavingLibraryType } from '../../utils/domain';
 import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
 import { removeMockFileResolutionPath } from '../shared/rule/remove-mock-file-resolution-path';
 import { isHavingCypressProject } from '../../utils/cypress-project';
@@ -19,6 +19,7 @@ export default function (options: RemoveSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
     const { application, domain } = options;
     checkDomainExists(application, domain, tree);
+    _context.logger.info(`Removing ${application}-${getParsedDomain(domain)}`);
     let rules: Rule[] = [];
     if (isHavingCypressProject(application, domain, CypressProject.E2E, tree)) {
       rules = rules.concat(

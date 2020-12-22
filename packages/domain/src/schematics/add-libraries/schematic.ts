@@ -24,6 +24,7 @@ import { CypressProject } from '../shared/model/cypress-project.enum';
 import { addStoryFileExclusions } from '../shared/rule/add-story-file-exclusions';
 import { updatePathInStorybookConfig } from '../shared/rule/update-path-in-storybook-config';
 import { sortProjects } from '../shared/rule/sort-projects';
+import { getParsedDomain } from '../../utils/domain';
 
 export default function (options: AddLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -33,6 +34,9 @@ export default function (options: AddLibrariesSchematicSchema): Rule {
     if (libraries.length === 0) {
       throw new SchematicsException('At least one library should be provided');
     }
+    _context.logger.info(
+      `Adding ${libraries} to ${application}-${getParsedDomain(domain)}`
+    );
     checkDomainExists(application, domain, tree);
     checkLibrariesDontExist(application, domain, libraries, tree);
     let rules = addLibrariesRules(normalizedOptions.libraryDefinitions);

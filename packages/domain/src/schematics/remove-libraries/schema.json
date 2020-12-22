@@ -19,6 +19,8 @@
     "libraries": {
       "description": "The library types that will be generated",
       "alias": "l",
+      "type": "string",
+      "uniqueItems": true,
       "minItems": 1,
       "items": {
         "enum": ["data-access", "feature", "shell", "ui", "util"],

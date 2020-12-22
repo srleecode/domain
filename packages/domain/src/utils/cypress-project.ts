@@ -78,15 +78,17 @@ export const getCypressProjectLinter = (
     workspaceJson.projects[projectName]?.architect?.lint.builder;
   if (
     lintBuilder !== '@angular-devkit/build-angular:tslint' &&
-    lintBuilder !== '@nrwl/linter:lint'
+    !lintBuilder.includes('@nrwl/linter')
   ) {
     throw new SchematicsException(
-      projectName + JSON.stringify(workspaceJson.projects[projectName])
+      `Invalid lint builder ${lintBuilder} for ${projectName} ${JSON.stringify(
+        workspaceJson.projects[projectName]
+      )}`
     );
   }
   if (lintBuilder === '@angular-devkit/build-angular:tslint') {
     return Linter.TsLint;
-  } else if (lintBuilder === '@nrwl/linter:lint') {
+  } else if (lintBuilder.includes('@nrwl/linter')) {
     return workspaceJson.projects[projectName]?.architect?.lint.options.linter;
   }
   return Linter.None;
@@ -125,3 +127,14 @@ export const getDependenciesWithLibrariesRemoved = (
     (dependency) => !removedDependenciesSet.has(dependency)
   );
 };
+
+export const isHavingComponentCommand = (
+  application: string,
+  domain: string,
+  tree: Tree
+): boolean =>
+  tree.exists(
+    `libs/${application}/${getParsedDomain(
+      domain
+    )}/.cypress/src/support/component-command.ts`
+  );

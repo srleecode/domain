@@ -1,7 +1,9 @@
+import { SelectorOptions, get } from '@srleecode/component-command-utils';
+
 declare global {
   namespace Cypress {
     interface Chainable<Subject> {
-      <%= camelize(name) %>(): Chainable<<%= classify(name) %>>
+      <%= camelize(name) %>(selector?: SelectorOptions): Chainable<<%= classify(name) %>>
     }
   }
 }
@@ -10,4 +12,4 @@ export class <%= classify(name) %> {
     constructor(public element: JQuery) {}
 }
 
-Cypress.Commands.add('<%= camelize(name) %>', () => Cypress.get('write selector here').then(e => new <%= classify(name) %>(e)));
+Cypress.Commands.add('<%= camelize(name) %>', (selector?: SelectorOptions) => get(selector, <%= classify(name) %>, 'write component tag selector here'));

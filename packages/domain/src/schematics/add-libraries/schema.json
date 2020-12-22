@@ -20,20 +20,13 @@
       "type": "string",
       "description": "The prefix to apply to generated selectors.",
       "alias": "p",
-      "oneOf": [
-        {
-          "maxLength": 0
-        },
-        {
-          "minLength": 1,
-          "format": "html-selector"
-        }
-      ],
       "x-prompt": "What is the prefix to apply to generated selectors?"
     },
     "libraries": {
       "description": "The library types that will be generated",
       "alias": "l",
+      "type": "string",
+      "uniqueItems": true,
       "minItems": 1,
       "items": {
         "enum": ["data-access", "feature", "shell", "ui", "util"],

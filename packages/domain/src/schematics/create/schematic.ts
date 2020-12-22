@@ -25,11 +25,11 @@ import {
 import { checkDomainLevels } from './validation/check-domain-levels';
 import { addJestJunitReporter } from '../shared/rule/add-jest-junit-reporter';
 import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-rules';
-import { CypressProject } from '../shared/model/cypress-project.enum';
 import { addStorybookProjectRules } from '../add-cypress-project/rule/add-storybook-project-rules';
 import { addStoryFileExclusions } from '../shared/rule/add-story-file-exclusions';
 import { Linter } from '@nrwl/workspace';
 import { sortProjects } from '../shared/rule/sort-projects';
+import { createComponentCommand } from '../add-cypress-project/rule/create-command-component';
 
 export default function (options: CreateSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -41,11 +41,15 @@ export default function (options: CreateSchematicSchema): Rule {
       addStorybookProject,
       addE2EProject,
       uiFramework,
+      addComponentCommand,
     } = options;
     const lint = Linter.EsLint;
     if (libraries.length === 0) {
       throw new SchematicsException('At least one library should be provided');
     }
+    _context.logger.info(
+      `Creating domain ${application}-${getParsedDomain(domain)}`
+    );
     const normalizedOptions = normalizeOptions(options);
     let rules = addLibrariesRules(normalizedOptions.libraryDefinitions);
 
@@ -84,6 +88,15 @@ export default function (options: CreateSchematicSchema): Rule {
       rules.concat(addStoryFileExclusions(application, application, libraries));
     }
     rules = rules.concat(sortProjects());
+    if (addComponentCommand && (addE2EProject || addStorybookProject)) {
+      rules = rules.concat(
+        createComponentCommand(
+          application,
+          domain,
+          '../add-cypress-project/files'
+        )
+      );
+    }
     return chain(rules);
   };
 }

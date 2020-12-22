@@ -23,7 +23,7 @@ export const addStorybookConfig = (
   uiFramework: UiFrameworkType
 ): Rule[] => {
   const libraryName = `${application}-${getParsedDomain(domain)}-${
-    libraries[0]
+    (libraries || [])[0]
   }`;
   return [
     getExternalSchematic('@nrwl/storybook', 'configuration', {
@@ -32,14 +32,14 @@ export const addStorybookConfig = (
       configureCypress: false,
       linter: lint,
     }),
-    moveStorybookConfig(application, domain, libraries[0]),
+    moveStorybookConfig(application, domain, (libraries || [])[0]),
     updateCypressJsonReferencesFolders(application, domain),
-    updatePathInStorybookConfig(application, domain),
+    //updatePathInStorybookConfig(application, domain),
     updateTsConfig(application, domain),
     updateStorybookTargets(application, domain, libraryName, uiFramework),
-    updateStorybookAddonsBasePath(application, domain),
+    // updateStorybookAddonsBasePath(application, domain),
     updateStorybookCypressBaseUrl(application, domain),
-    removeAddedStoryFilesExclusions(application, domain, libraries[0]),
+    removeAddedStoryFilesExclusions(application, domain, (libraries || [])[0]),
     ...addStoryFileExclusions(application, domain, libraries),
     updateStorybookWebpackBasePath(application, domain),
   ];
@@ -83,6 +83,10 @@ const updateCypressJsonReferencesFolders = (
       properties.forEach(
         (property) =>
           (json[property] = json[property].replace('./src', '../.cypress/src'))
+      );
+      json['integrationFolder'] = json['integrationFolder'].replace(
+        '/integration',
+        '/integration/storybook'
       );
       return json;
     }

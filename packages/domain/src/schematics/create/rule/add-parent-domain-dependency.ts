@@ -7,12 +7,10 @@ export const addParentDomainDependencyRule = (
   parsedDomain: string
 ): Rule =>
   updateJsonInTree('tslint.json', (json) => {
-    let depConstraints =
+    const depConstraints = [];
+    if (json.rules['nx-enforce-module-boundaries']) {
       json.rules['nx-enforce-module-boundaries'][1].depConstraints;
-    if (!depConstraints) {
-      depConstraints = [];
     }
-
     const parentScope = `scope:${application}-${parentDomain}-shared`;
     const childScope = `scope:${application}-${parsedDomain}`;
     depConstraints.push({

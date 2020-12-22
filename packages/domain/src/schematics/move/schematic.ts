@@ -8,7 +8,7 @@ import { MoveSchematicSchema } from './schema';
 import { moveDomain } from './rule/move-domain';
 import {
   getLibraryTypes,
-  getProjects,
+  getParsedDomain,
   isDomainHavingLibraryType,
 } from '../../utils/domain';
 import { checkDomainDoesntExist } from '../shared/validation/check-domain-doesnt-exist';
@@ -20,13 +20,10 @@ import {
   getStorybookProjectUiFramework,
   isHavingCypressProject,
 } from '../../utils/cypress-project';
-import { moveCypressProject } from './rule/move-cypress-project';
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';
 import { removeCypressProject } from '../remove-cypress-project/rule/remove-cypress-project';
-import { createCypressProject } from '../add-cypress-project/rule/create-cypress-project';
-import { Linter } from '@nrwl/workspace';
 import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-rules';
 import { addStorybookProjectRules } from '../add-cypress-project/rule/add-storybook-project-rules';
 import { UiFrameworkType } from '../shared/model/ui-framework.type';
@@ -37,7 +34,11 @@ export default function (options: MoveSchematicSchema): Rule {
     const { application, domain, newDomain } = options;
     checkDomainExists(application, domain, tree);
     checkDomainDoesntExist(application, newDomain, tree);
-
+    _context.logger.info(
+      `Moving ${application}-${getParsedDomain(
+        domain
+      )} to ${application}-${getParsedDomain(newDomain)}`
+    );
     let rules = moveDomain(application, domain, newDomain, tree);
 
     if (

@@ -16,10 +16,12 @@ import {
 } from '../../utils/cypress-project';
 import { removeCypressProject } from '../remove-cypress-project/rule/remove-cypress-project';
 import { removeCypressProjectImplicitDependencies } from '../shared/rule/remove-cypress-project-implicit-dependencies';
-import { isDomainEmptyAfterLibraryRemoval } from '../../utils/domain';
+import {
+  getParsedDomain,
+  isDomainEmptyAfterLibraryRemoval,
+} from '../../utils/domain';
 import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';
 import { CypressProject } from '../shared/model/cypress-project.enum';
-import { ProjectType } from '@nrwl/workspace';
 import { updatePathInStorybookConfig } from '../shared/rule/update-path-in-storybook-config';
 import { getParsedLibraries } from '../../utils/libraries';
 
@@ -30,6 +32,9 @@ export default function (options: RemoveLibrariesSchematicSchema): Rule {
     if (libraries.length === 0) {
       throw new SchematicsException('At least one library should be provided');
     }
+    _context.logger.info(
+      `Removing ${libraries} from ${application}-${getParsedDomain(domain)}`
+    );
     checkLibrariesExist(application, domain, libraries, tree);
     let rules: Rule[] = [
       ...getCypressProjectsUpdateRules(application, domain, libraries, tree),

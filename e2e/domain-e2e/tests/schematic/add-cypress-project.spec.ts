@@ -11,7 +11,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
-        `generate @srleecode/domain:addCypressProject --application ${application} --domain ${domain}`
+        `generate @srleecode/domain:addCypressProject --application ${application} --domain ${domain} --addComponentCommand true`
       );
 
       const nxJson = readJson('nx.json');
@@ -30,7 +30,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
-        `generate @srleecode/domain:addCypressProject --application ${application} --domain ${domain} --projectType=storybook`
+        `generate @srleecode/domain:addCypressProject --application ${application} --domain ${domain} --projectType=storybook --addComponentCommand true`
       );
       expect(() =>
         checkFilesExist(
@@ -45,7 +45,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:addCypressProject --application ${application} --domain ${domain}`
+        `generate @srleecode/domain:addCypressProject --application ${application} --domain ${domain} --addComponentCommand true`
       );
 
       const nxJson = readJson('nx.json');

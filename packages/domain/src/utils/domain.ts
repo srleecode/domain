@@ -131,7 +131,7 @@ const getProjectsSecondLevelDomain = (
   parentDomainPrefix: string,
   libraryType: DomainLibraryName
 ): string => {
-  if (!!libraryType) {
+  if (libraryType) {
     return projectName
       .replace(`${parentDomainPrefix}`, '')
       .replace(`${libraryType.toString()}`, '')

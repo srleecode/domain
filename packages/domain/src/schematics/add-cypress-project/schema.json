@@ -28,6 +28,12 @@
       "description": "Storybook UI Framework to use",
       "enum": ["@storybook/angular", "@storybook/react"],
       "x-prompt": "What UI framework plugin should storybook use?"
+    },
+    "addComponentCommand": {
+      "description": "Add component command",
+      "type": "boolean",
+      "default": false,
+      "x-prompt": "Add a component command?"
     }
   }
 }

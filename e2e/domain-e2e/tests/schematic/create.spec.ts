@@ -73,7 +73,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'extra-options-test-domain/shared';
       await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries feature,ui --addE2EProject true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries feature,ui --addE2EProject true --addComponentCommand true`
       );
       const nxJson = readJson('nx.json');
       const workspaceJson = readJson('workspace.json');
@@ -139,10 +139,26 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'storybook-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,feature,ui --addStorybookProject`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,feature,ui --addStorybookProject --addComponentCommand true`
       );
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/.cypress/tsconfig.json`)
+      ).not.toThrow();
+      done();
+    }, 90000);
+  });
+  describe('create with both e2e and storybook project', () => {
+    it('should create domain with storybook project', async (done) => {
+      const application = 'test-application';
+      const domain = 'both-cypress-projects-domain';
+      await runNxCommandAsync(
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,feature,ui --addStorybookProject true --addE2EProject true --addComponentCommand true`
+      );
+      expect(() =>
+        checkFilesExist(`libs/${application}/${domain}/.cypress/cypress.json`)
+      ).not.toThrow();
+      expect(() =>
+        checkFilesExist(`libs/${application}/${domain}/.storybook/cypress.json`)
       ).not.toThrow();
       done();
     }, 90000);

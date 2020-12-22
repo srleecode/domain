@@ -12,15 +12,19 @@ export const updateAngularJson = (
   updateWorkspaceInTree((json) => {
     checkCypressProjectExists(application, domain, projectType, json);
     const projectName = getCypressProjectName(application, domain, projectType);
-    json.projects[
-      projectName
-    ].architect.lint.options.exclude[1] = `!libs/${application}/${domain}/.*/**`;
+    if (json.projects[projectName].architect.lint.options.exclude) {
+      json.projects[
+        projectName
+      ].architect.lint.options.exclude[1] = `!libs/${application}/${domain}/.*/**`;
+    }
     const basePath = `libs/${application}/${domain}/.cypress`;
     json.projects[projectName].root = basePath;
     json.projects[projectName].sourceRoot = `${basePath}/src`;
-    json.projects[
-      projectName
-    ].architect.lint.options.tsConfig[0] = `${basePath}/tsconfig.e2e.json`;
+    if (json.projects[projectName].architect.lint.options.tsConfig) {
+      json.projects[
+        projectName
+      ].architect.lint.options.tsConfig[0] = `${basePath}/tsconfig.e2e.json`;
+    }
     if (json.projects[projectName].architect.lint.options.config) {
       json.projects[
         projectName

@@ -7,7 +7,7 @@ import { renameCypressProjectInWorkspaceJson } from './rename-cypress-project-in
 import { createCypressProject } from './create-cypress-project';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { moveE2EFilesToDomain } from './move-e2e-files-to-domain';
-import { Linter } from '@nrwl/workspace';
+import { Linter, updateJsonInTree } from '@nrwl/workspace';
 import { deleteCypressProjectFolder } from '../../shared/rule/delete-cypress-project-folder';
 import { addSourceMapFalse } from './add-source-map-false';
 
@@ -32,5 +32,18 @@ export const addE2EProjectRules = (
     moveE2EFilesToDomain(application, domain, lint),
     deleteCypressProjectFolder(application, domain, projectType),
     addSourceMapFalse(application, domain),
+    changeIntegrationFolder(application, domain),
   ];
 };
+
+const changeIntegrationFolder = (application: string, domain: string): Rule =>
+  updateJsonInTree(
+    `libs/${application}/${domain}/.cypress/cypress.json`,
+    (json) => {
+      json['integrationFolder'] = json['integrationFolder'].replace(
+        '/integration',
+        '/integration/e2e'
+      );
+      return json;
+    }
+  );

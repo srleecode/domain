@@ -13,5 +13,6 @@ export interface CreateSchematicSchema {
   addJestJunitReporter?: boolean;
   addE2EProject?: boolean;
   addStorybookProject?: boolean;
+  addComponentCommand?: boolean;
   uiFramework?: UiFrameworkType;
 }
