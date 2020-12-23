@@ -2,6 +2,8 @@ import { Tree } from '@angular-devkit/schematics';
 import { DomainLibraryName } from '../schematics/shared/model/domain-library-name.enum';
 import { getNxJson } from './nx-json';
 import { Project } from '../schematics/shared/model/project.model';
+import { sep } from 'path';
+import { existsInTree } from './tree';
 
 export const isChildDomain = (domain: string): boolean =>
   domain.includes('/') && !domain.endsWith('shared');
@@ -25,8 +27,12 @@ export const isDomainExisting = (
   tree: Tree
 ): boolean =>
   Object.keys(DomainLibraryName).some((key) =>
-    tree.exists(
-      `/libs/${application}/${domain}/${DomainLibraryName[key]}/src/index.ts`
+    existsInTree(
+      tree,
+      `libs/${application}/${domain}/${DomainLibraryName[key]}/src/index.ts`.replace(
+        '/',
+        sep
+      )
     )
   );
 

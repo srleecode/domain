@@ -15,7 +15,12 @@ import { toPascalCase } from '../../../../src/utils/text';
 import { getParsedDomain } from '../../../../src/utils/domain';
 import { updateJsonInTree } from '@nrwl/workspace';
 import { getTsConfigPath } from '../../../../src/utils/tsconfig';
-import { deleteInTree, overwriteInTree } from '../../../utils/tree';
+import {
+  createInTree,
+  deleteInTree,
+  existsInTree,
+  overwriteInTree,
+} from '../../../utils/tree';
 
 export const createComponentCommand = (
   application: string,
@@ -50,8 +55,8 @@ export const createComponentCommandFile = (
           '.template',
           ''
         );
-        if (!tree.exists(pathWithoutTemplateSuffix)) {
-          tree.create(pathWithoutTemplateSuffix, fileEntry.content);
+        if (!existsInTree(tree, pathWithoutTemplateSuffix)) {
+          createInTree(tree, pathWithoutTemplateSuffix, fileEntry.content);
         }
         return null;
       }),
@@ -66,8 +71,9 @@ export const createPublicApiTs = (
   domain: string
 ): Rule => (tree: Tree, _context: SchematicContext): Tree => {
   const publicApiFilePath = `libs/${application}/${domain}/.cypress/src/public-api.ts`;
-  if (!tree.exists(publicApiFilePath))
-    tree.create(
+  if (!existsInTree(tree, publicApiFilePath))
+    createInTree(
+      tree,
       publicApiFilePath,
       `import './support/component-command';
 export * from './support/component-command';`

@@ -16,7 +16,7 @@ import {
   getWorkspacePath,
   updateJsonInTree,
 } from '@nrwl/workspace';
-import { getDirInTree } from '../../../utils/tree';
+import { deleteInTree, getDirInTree } from '../../../utils/tree';
 import { removeCypressTsConfigPath } from './remove-cypress-ts-config-path';
 
 export const removeCypressProject = (
@@ -100,7 +100,7 @@ const deleteStorybookFolder = (application: string, domain: string): Rule => (
   const cypressProjectFolder = `libs/${application}/${domain}/.storybook`;
   const cypressFolder = getDirInTree(tree, cypressProjectFolder);
   if (cypressFolder.subfiles.length > 0 || cypressFolder.subdirs.length > 0)
-    cypressFolder.visit((file) => tree.delete(file));
-  tree.delete(cypressProjectFolder);
+    cypressFolder.visit((file) => deleteInTree(tree, file));
+  deleteInTree(tree, cypressProjectFolder);
   return tree;
 };

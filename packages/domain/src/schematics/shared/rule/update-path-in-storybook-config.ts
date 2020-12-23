@@ -4,7 +4,7 @@ import {
   Rule,
   SchematicsException,
 } from '@angular-devkit/schematics';
-import { overwriteInTree } from '../../../utils/tree';
+import { overwriteInTree, readInTree } from '../../../utils/tree';
 import { getLibraryTypes } from '../../../utils/domain';
 import { DomainLibraryName } from '../model/domain-library-name.enum';
 
@@ -13,7 +13,7 @@ export const updatePathInStorybookConfig = (
   domain: string
 ): Rule => (tree: Tree, _context: SchematicContext) => {
   const configJsFilePath = `libs/${application}/${domain}/.storybook/config.js`;
-  const configJs = tree.read(configJsFilePath);
+  const configJs = readInTree(tree, configJsFilePath);
   if (configJs) {
     const configJsString = configJs.toString();
     const importPaths = getImportPaths(application, domain, tree, true);
@@ -24,7 +24,7 @@ export const updatePathInStorybookConfig = (
     overwriteInTree(tree, configJsFilePath, updatedConfigJs);
   } else {
     const mainJsFilePath = `libs/${application}/${domain}/.storybook/main.js`;
-    const mainJs = tree.read(mainJsFilePath);
+    const mainJs = readInTree(tree, mainJsFilePath);
     const mainJsString = mainJs.toString();
     const importPaths = getImportPaths(application, domain, tree, false);
     const updatedMainJs = mainJsString.replace(

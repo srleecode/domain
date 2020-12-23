@@ -1,4 +1,5 @@
 import { Tree, SchematicsException } from '@angular-devkit/schematics';
+import { sep } from 'path';
 import { isParentDomain, getTopLevelDomain } from '../../../utils/domain';
 
 export const checkNoChildDomains = (
@@ -20,5 +21,5 @@ const isHavingChildDomains = (
   tree: Tree
 ): boolean =>
   tree
-    .getDir(`/libs/${application}/${domain}`)
+    .getDir(`libs/${application}/${domain}`.replace('/', sep))
     .subdirs.filter((path) => path !== 'shared').length > 0;

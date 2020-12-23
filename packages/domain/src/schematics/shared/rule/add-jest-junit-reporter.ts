@@ -2,6 +2,7 @@ import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { DomainLibraryName } from '../model/domain-library-name.enum';
 import { getParsedDomain } from '../../../utils/domain';
 import { formatFile } from '../../../utils/prettier';
+import { readInTree } from '../../../utils/tree';
 
 export const addJestJunitReporter = (
   application: string,
@@ -12,7 +13,7 @@ export const addJestJunitReporter = (
     domain
   )}-${libraryType}`;
   const jestConfigPath = `libs/${application}/${domain}/${libraryType}/jest.config.js`;
-  const jestConfig = tree.read(jestConfigPath);
+  const jestConfig = readInTree(tree, jestConfigPath);
 
   let jestConfigString = jestConfig.toString('utf8').replace(/\s/g, '');
   const lastBracketIndex = jestConfigString.lastIndexOf('}');

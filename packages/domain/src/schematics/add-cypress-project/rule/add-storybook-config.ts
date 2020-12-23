@@ -1,7 +1,12 @@
 import { getExternalSchematic } from '../../../utils/testing';
 import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
 import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
-import { getDirInTree } from '../../../utils/tree';
+import {
+  createInTree,
+  deleteInTree,
+  getDirInTree,
+  readInTree,
+} from '../../../utils/tree';
 import { getParsedDomain, isTwoLevelDomain } from '../../../utils/domain';
 import { Linter, updateJsonInTree } from '@nrwl/workspace';
 import { updateStorybookTargets } from './update-storybook-targets';
@@ -59,13 +64,13 @@ const moveStorybookConfig = (
       cypressFolder.path,
       `libs/${application}/${domain}/.storybook`
     );
-    tree.create(newPath, tree.read(file));
+    createInTree(tree, newPath, readInTree(tree, file));
   });
   const originalStorybookPath = `libs/${application}/${domain}/${libraryType}/.storybook`;
   tree
     .getDir(originalStorybookPath)
     .subfiles.forEach((file) =>
-      tree.delete(`${originalStorybookPath}/${file}`)
+      deleteInTree(tree, `${originalStorybookPath}/${file}`)
     );
   return tree;
 };

@@ -2,7 +2,14 @@ import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
 import { getCypressJsonPath } from '../../../utils/cypress-project';
 import { ProjectType, updateJsonInTree } from '@nrwl/workspace';
-import { deleteInTree, getDirInTree, renameInTree } from '../../../utils/tree';
+import {
+  createInTree,
+  deleteInTree,
+  existsInTree,
+  getDirInTree,
+  readInTree,
+  renameInTree,
+} from '../../../utils/tree';
 import { isTwoLevelDomain } from '../../../utils/domain';
 
 export const moveStorybookFilesToDomain = (
@@ -36,8 +43,8 @@ export const moveStorybookFilesToDomain = (
       `libs/${application}/${domain}/.cypress`
     );
 
-    if (!tree.exists(newPath)) {
-      tree.create(newPath, tree.read(file));
+    if (!existsInTree(tree, newPath)) {
+      createInTree(tree, newPath, readInTree(tree, file));
     }
   });
   renameInTree(

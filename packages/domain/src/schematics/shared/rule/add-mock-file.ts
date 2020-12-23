@@ -1,4 +1,5 @@
 import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
+import { createInTree } from '../../../utils/tree';
 import { getParsedDomain } from '../../../utils/domain';
 
 export const addMockFile = (application: string, domain: string): Rule => {
@@ -16,7 +17,8 @@ const addEmptyMockFile = (
   librarySourceRoot: string,
   mockFilePath: string
 ): void =>
-  tree.create(
+  createInTree(
+    tree,
     `${librarySourceRoot}/${mockFilePath}.ts`,
     'export const mock = {};'
   );
@@ -26,7 +28,8 @@ const addIndexFile = (
   librarySourceRoot: string,
   mockFilePath: string
 ): void =>
-  tree.create(
+  createInTree(
+    tree,
     `${librarySourceRoot}/testing.ts`,
     `export * from './${mockFilePath}';`
   );

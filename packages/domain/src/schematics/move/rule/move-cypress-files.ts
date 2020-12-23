@@ -4,7 +4,7 @@ import {
   SchematicContext,
   SchematicsException,
 } from '@angular-devkit/schematics';
-import { getDirInTree } from '../../../utils/tree';
+import { createInTree, getDirInTree, readInTree } from '../../../utils/tree';
 
 export const moveCypressFiles = (
   application: string,
@@ -20,7 +20,7 @@ export const moveCypressFiles = (
       cypressFolder.path,
       `libs/${application}/${newDomain}/.cypress`
     );
-    tree.create(newPath, tree.read(file));
+    createInTree(tree, newPath, readInTree(tree, file));
   });
 
   return tree;

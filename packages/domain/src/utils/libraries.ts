@@ -4,6 +4,8 @@ import { LibraryDefinition } from '../schematics/shared/model/library-definition
 import { DomainLibraryName } from '../schematics/shared/model/domain-library-name.enum';
 import { StyleType } from '../schematics/shared/model/style-type.enum';
 import { Tree } from '@angular-devkit/schematics';
+import { sep } from 'path';
+import { getDirInTree } from './tree';
 
 export const getDomainLibraryDefinitions = (
   application: string,
@@ -32,7 +34,7 @@ export const isLibraryExisting = (
   libraryType: DomainLibraryName,
   tree: Tree
 ): boolean =>
-  tree.getDir(`/libs/${application}/${domain}/${libraryType.toString()}`)
+  getDirInTree(tree, `libs/${application}/${domain}/${libraryType.toString()}`)
     .subdirs.length > 0;
 
 export const getProjectNames = (

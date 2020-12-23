@@ -1,4 +1,5 @@
 import { Tree, SchematicsException } from '@angular-devkit/schematics';
+import { overwriteInTree, readInTree } from './tree';
 let prettier;
 try {
   prettier = require('prettier');
@@ -16,9 +17,10 @@ export const formatFile = (tree: Tree, filePath: string) => {
     };
   }
   try {
-    tree.overwrite(
+    overwriteInTree(
+      tree,
       filePath,
-      prettier.format(tree.read(filePath).toString(), options)
+      prettier.format(readInTree(tree, filePath).toString(), options)
     );
   } catch (e) {
     throw new SchematicsException(

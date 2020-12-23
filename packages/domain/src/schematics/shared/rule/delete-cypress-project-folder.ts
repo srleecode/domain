@@ -12,7 +12,7 @@ export const deleteCypressProjectFolder = (
   const cypressFolder = getDirInTree(tree, cypressProjectFolder);
   if (cypressFolder.subfiles.length > 0 || cypressFolder.subdirs.length > 0)
     cypressFolder.visit((file) => {
-      tree.delete(file);
+      deleteInTree(tree, file);
     });
 
   return tree;
