@@ -21,5 +21,5 @@ const isHavingChildDomains = (
   tree: Tree
 ): boolean =>
   tree
-    .getDir(`libs/${application}/${domain}`.replace('/', sep))
+    .getDir(`libs/${application}/${domain}`)
     .subdirs.filter((path) => path !== 'shared').length > 0;

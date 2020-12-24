@@ -7,7 +7,6 @@ import { CypressProject } from '../schematics/shared/model/cypress-project.enum'
 import { existsInTree, readWorkspaceInTree } from './tree';
 import { Linter } from '@nrwl/workspace';
 import { UiFrameworkType } from '../schematics/shared/model/ui-framework.type';
-import { sep } from 'path';
 
 export const getCypressProjectName = (
   application: string,
@@ -138,5 +137,5 @@ export const isHavingComponentCommand = (
     tree,
     `libs/${application}/${getParsedDomain(
       domain
-    )}/.cypress/src/support/component-command.ts`.replace('/', sep)
+    )}/.cypress/src/support/component-command.ts`
   );

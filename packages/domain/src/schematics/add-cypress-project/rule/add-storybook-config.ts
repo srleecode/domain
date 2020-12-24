@@ -39,10 +39,11 @@ export const addStorybookConfig = (
     }),
     moveStorybookConfig(application, domain, (libraries || [])[0]),
     updateCypressJsonReferencesFolders(application, domain),
-    //updatePathInStorybookConfig(application, domain),
+    updatePathInStorybookConfig(application, domain),
     updateTsConfig(application, domain),
+    removeLibraryTsConfigPath(application, domain, (libraries || [])[0]),
     updateStorybookTargets(application, domain, libraryName, uiFramework),
-    // updateStorybookAddonsBasePath(application, domain),
+    updateStorybookAddonsBasePath(application, domain),
     updateStorybookCypressBaseUrl(application, domain),
     removeAddedStoryFilesExclusions(application, domain, (libraries || [])[0]),
     ...addStoryFileExclusions(application, domain, libraries),
@@ -74,6 +75,23 @@ const moveStorybookConfig = (
     );
   return tree;
 };
+
+const removeLibraryTsConfigPath = (
+  application: string,
+  domain: string,
+  libraryType: DomainLibraryName
+): Rule =>
+  updateJsonInTree(
+    `libs/${application}/${domain}/${libraryType}/tsconfig.json`,
+    (json) => {
+      if (json.references) {
+        json.references = (json.references || []).filter(
+          (ref) => ref.path !== './.storybook/tsconfig.json'
+        );
+      }
+      return json;
+    }
+  );
 
 const updateCypressJsonReferencesFolders = (
   application: string,

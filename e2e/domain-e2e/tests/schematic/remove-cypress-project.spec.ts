@@ -23,6 +23,9 @@ describe('domain', () => {
           `libs/${application}/${domain}/.cypress/src/support/index.ts`
         )
       ).not.toThrow();
+      expect(() =>
+        checkFilesExist(`libs/${application}/${domain}/.cypress/cypress.json`)
+      ).toThrow();
       done();
     }, 90000);
 

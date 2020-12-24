@@ -3,12 +3,7 @@ import {
   getCypressProjectName,
   isHavingCypressProject,
 } from '../../../utils/cypress-project';
-import {
-  Rule,
-  Tree,
-  SchematicContext,
-  SchematicsException,
-} from '@angular-devkit/schematics';
+import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
 import {
   NxJson,
@@ -40,6 +35,9 @@ export const removeCypressProject = (
       updateNxJson(projectName),
       updateWorkspace(projectName),
     ]);
+    if (projectType === CypressProject.E2E) {
+      rules.push(deleteE2EFiles(application, domain));
+    }
   } else {
     rules = rules.concat([
       getExternalSchematic('@nrwl/workspace', 'remove', {
@@ -102,5 +100,22 @@ const deleteStorybookFolder = (application: string, domain: string): Rule => (
   if (cypressFolder.subfiles.length > 0 || cypressFolder.subdirs.length > 0)
     cypressFolder.visit((file) => deleteInTree(tree, file));
   deleteInTree(tree, cypressProjectFolder);
+  return tree;
+};
+
+const deleteE2EFiles = (application: string, domain: string): Rule => (
+  tree: Tree,
+  context: SchematicContext
+) => {
+  const cypressProjectFolder = `libs/${application}/${domain}/.cypress`;
+  const cypressFolders = ['plugins', 'fixtures'];
+  cypressFolders.forEach((folder) => {
+    const folderPath = `${cypressProjectFolder}/src/${folder}`;
+    const cypressFolder = getDirInTree(tree, folderPath);
+    if (cypressFolder.subfiles.length > 0 || cypressFolder.subdirs.length > 0)
+      cypressFolder.visit((file) => deleteInTree(tree, file));
+    deleteInTree(tree, folderPath);
+  });
+  deleteInTree(tree, `${cypressProjectFolder}/cypress.json`);
   return tree;
 };

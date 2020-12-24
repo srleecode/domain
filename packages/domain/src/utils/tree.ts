@@ -9,7 +9,10 @@ export const createInTree = (
 ): void => tree.create(path.replace(/\//g, sep), content);
 
 export const deleteInTree = (tree: Tree, path: string): void => {
-  tree.delete(path.replace(/\//g, sep));
+  const updatedPath = path.replace(/\//g, sep);
+  if (existsInTree(tree, updatedPath)) {
+    tree.delete(updatedPath);
+  }
 };
 
 export const readInTree = (tree: Tree, path: string): Buffer =>
