@@ -30,7 +30,7 @@ describe('moveStorybookFilesToDomain', () => {
       1,
       appTree,
       `apps/${CypressProject.Storybook}/${application}/${domain}/cypress.json`,
-      `libs/${application}/${domain}/.${CypressProject.Storybook}/cypress.json`
+      `libs/${application}/${domain}/.cypress/storybook-cypress.json`
     );
     expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
       2,

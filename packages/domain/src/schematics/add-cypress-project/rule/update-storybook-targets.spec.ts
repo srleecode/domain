@@ -90,7 +90,7 @@ describe('updateStorybookTargets', () => {
         },
       },
       options: {
-        cypressConfig: `libs/${application}/${domain}/.storybook/cypress.json`,
+        cypressConfig: `libs/${application}/${domain}/.cypress/storybook-cypress.json`,
         devServerTarget: `storybook-${application}-${getParsedDomain(
           domain
         )}:storybook`,

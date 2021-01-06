@@ -5,7 +5,7 @@ import {
   SchematicsException,
 } from '@angular-devkit/schematics';
 import { overwriteInTree, readInTree } from '../../../utils/tree';
-import { getLibraryTypes } from '../../../utils/domain';
+import { getLibraryTypes, isTwoLevelDomain } from '../../../utils/domain';
 import { DomainLibraryName } from '../model/domain-library-name.enum';
 
 export const updatePathInStorybookConfig = (
@@ -27,10 +27,16 @@ export const updatePathInStorybookConfig = (
     const mainJs = readInTree(tree, mainJsFilePath);
     const mainJsString = mainJs.toString();
     const importPaths = getImportPaths(application, domain, tree, false);
-    const updatedMainJs = mainJsString.replace(
+    let updatedMainJs = mainJsString.replace(
       /rootMain.stories.push\(.*\)/,
       `rootMain.stories.push(...[${importPaths}])`
     );
+    if (!isTwoLevelDomain(domain)) {
+      updatedMainJs = updatedMainJs.replace(
+        '../../../../../.storybook/main',
+        '../../../../.storybook/main'
+      );
+    }
     overwriteInTree(tree, mainJsFilePath, updatedMainJs);
   }
   return tree;

@@ -24,7 +24,7 @@ export const updateStorybookTargets = (
     json.projects[projectName].architect['storybook-e2e'] = {
       builder: '@nrwl/cypress:cypress',
       options: {
-        cypressConfig: `libs/${application}/${domain}/.storybook/cypress.json`,
+        cypressConfig: `libs/${application}/${domain}/.cypress/storybook-cypress.json`,
         tsConfig: `libs/${application}/${domain}/.cypress/tsconfig.e2e.json`,
         devServerTarget: `${projectName}:storybook`,
       },

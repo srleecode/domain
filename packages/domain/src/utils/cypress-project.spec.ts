@@ -133,9 +133,7 @@ describe('Cypress project', () => {
       const domain = 'parent-domain/child-domain';
       expect(
         getCypressJsonPath(application, domain, CypressProject.Storybook)
-      ).toBe(
-        `libs/${application}/${domain}/.${CypressProject.Storybook}/cypress.json`
-      );
+      ).toBe(`libs/${application}/${domain}/.cypress/storybook-cypress.json`);
     });
   });
   describe('getUnprocessedCypressProjectName', () => {

@@ -77,7 +77,7 @@ describe('updatePathInStorybookConfig', () => {
 
   describe('mainJs', () => {
     const mainJsPath = `libs/${application}/${domain}/.${CypressProject.Storybook}/main.js`;
-    const mainJs = `const rootMain = require('../../../../../.storybook/main');
+    const mainJs = `const rootMain = require('../../../../.storybook/main');
 rootMain.stories.push(...['../src/lib/**/*.stories.mdx', '../src/lib/**/*.stories.@(js|jsx|ts|tsx)'])
 module.exports = rootMain;
     `;

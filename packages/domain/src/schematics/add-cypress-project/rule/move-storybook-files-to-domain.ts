@@ -24,7 +24,7 @@ export const moveStorybookFilesToDomain = (
   renameInTree(
     tree,
     `apps/${CypressProject.Storybook}/${application}/${domain}/cypress.json`,
-    `libs/${application}/${domain}/.${CypressProject.Storybook}/cypress.json`
+    `libs/${application}/${domain}/.cypress/storybook-cypress.json`
   );
   storybookFilesToDelete.forEach((filePath) =>
     deleteInTree(

@@ -22,7 +22,7 @@ export const getCypressJsonPath = (
   if (projectType === CypressProject.E2E) {
     return `libs/${application}/${domain}/.cypress/cypress.json`;
   }
-  return `libs/${application}/${domain}/.${CypressProject.Storybook}/cypress.json`;
+  return `libs/${application}/${domain}/.cypress/storybook-cypress.json`;
 };
 
 export const getUnprocessedCypressProjectName = (
