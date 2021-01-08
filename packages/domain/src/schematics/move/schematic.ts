@@ -118,8 +118,10 @@ export default function (options: MoveSchematicSchema): Rule {
         )
       );
     }
-    rules.push(deleteDomainFolder(application, domain));
-    rules = rules.concat(sortProjects());
+    rules = rules.concat([
+      deleteDomainFolder(application, domain),
+      ...sortProjects(),
+    ]);
     return chain(rules);
   };
 }

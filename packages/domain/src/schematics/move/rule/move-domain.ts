@@ -6,8 +6,6 @@ import {
 } from '../../../utils/domain';
 import { getExternalSchematic } from '../../../utils/testing';
 import { Project } from '../../shared/model/project.model';
-import { deleteDomainFolder } from '../../shared/rule/delete-domain-folder';
-import { moveCypressFiles } from './move-cypress-files';
 
 export const moveDomain = (
   application: string,

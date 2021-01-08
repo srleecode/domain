@@ -12,6 +12,11 @@ export const deleteInTree = (tree: Tree, path: string): void => {
   const updatedPath = path.replace(/\//g, sep);
   if (existsInTree(tree, updatedPath)) {
     tree.delete(updatedPath);
+  } else {
+    const dir = getDirInTree(tree, updatedPath);
+    if (dir.subfiles.length === 0 && dir.subdirs.length > 0) {
+      tree.delete(updatedPath);
+    }
   }
 };
 
