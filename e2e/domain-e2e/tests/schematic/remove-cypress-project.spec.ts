@@ -27,7 +27,7 @@ describe('domain', () => {
         checkFilesExist(`libs/${application}/${domain}/.cypress/cypress.json`)
       ).toThrow();
       done();
-    }, 90000);
+    }, 120000);
 
     it('should remove storybook project and cypress folder for domain when only storybook cypress project', async (done) => {
       const application = 'test-application';
@@ -50,7 +50,7 @@ describe('domain', () => {
         )
       ).toThrow();
       done();
-    }, 90000);
+    }, 120000);
   });
 
   it('should remove cypress when last cypress project type is being removed', async (done) => {
@@ -75,5 +75,5 @@ describe('domain', () => {
       tsConfig.compilerOptions.paths[`@cypress/${application}/${domain}`]
     ).not.toBeDefined();
     done();
-  }, 90000);
+  }, 120000);
 });

@@ -13,7 +13,7 @@ import {
 } from '@nrwl/workspace';
 import { deleteInTree, getDirInTree } from '../../../utils/tree';
 import { removeCypressTsConfigPath } from './remove-cypress-ts-config-path';
-
+import { SchematicsException } from '@angular-devkit/schematics';
 export const removeCypressProject = (
   application: string,
   domain: string,
@@ -26,6 +26,10 @@ export const removeCypressProject = (
       ? CypressProject.Storybook
       : CypressProject.E2E;
   let rules: Rule[] = [];
+  if (projectType === CypressProject.Storybook) {
+    rules.push(deleteStorybookFiles(application, domain));
+    rules.push(deleteStorybookFolder(application, domain));
+  }
   if (
     isHavingCypressProject(application, domain, CypressProject.E2E, tree) &&
     isHavingCypressProject(application, domain, CypressProject.Storybook, tree)
@@ -45,9 +49,7 @@ export const removeCypressProject = (
       }),
     ]);
   }
-  if (projectType === CypressProject.Storybook) {
-    rules.push(deleteStorybookFolder(application, domain));
-  }
+
   if (
     !isHavingCypressProject(application, domain, otherCypressProjectType, tree)
   ) {
@@ -91,7 +93,7 @@ const updateWorkspace = (projectName: string) => {
   );
 };
 
-const deleteStorybookFolder = (application: string, domain: string): Rule => (
+const deleteStorybookFiles = (application: string, domain: string): Rule => (
   tree: Tree,
   context: SchematicContext
 ) => {
@@ -99,6 +101,18 @@ const deleteStorybookFolder = (application: string, domain: string): Rule => (
   const cypressFolder = getDirInTree(tree, cypressProjectFolder);
   if (cypressFolder.subfiles.length > 0 || cypressFolder.subdirs.length > 0)
     cypressFolder.visit((file) => deleteInTree(tree, file));
+  deleteInTree(
+    tree,
+    `libs/${application}/${domain}/.cypress/storybook-cypress.json`
+  );
+  return tree;
+};
+
+const deleteStorybookFolder = (application: string, domain: string): Rule => (
+  tree: Tree,
+  context: SchematicContext
+) => {
+  const cypressProjectFolder = `libs/${application}/${domain}/.storybook`;
   deleteInTree(tree, cypressProjectFolder);
   return tree;
 };

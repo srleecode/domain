@@ -23,7 +23,7 @@ describe('domain', () => {
     it('should remove leaf domain', async (done) => {
       await removeDomain('leaf-domain');
       done();
-    }, 90000);
+    }, 120000);
     it('should remove mock file resolution path when removing domain with util folder', async (done) => {
       const domain = 'leaf-domain-with-util';
       await removeDomain(domain);
@@ -34,7 +34,7 @@ describe('domain', () => {
         ]
       ).toBeUndefined();
       done();
-    }, 90000);
+    }, 120000);
     it('should remove parent domain with children', async (done) => {
       await removeDomain('new-parent-domain-with-child/shared');
       expect(() =>
@@ -43,7 +43,7 @@ describe('domain', () => {
         )
       ).toThrow();
       done();
-    }, 90000);
+    }, 120000);
     it('should remove parent domain with no children', async (done) => {
       await removeDomain('new-parent-domain/shared');
       expect(() =>
@@ -52,7 +52,7 @@ describe('domain', () => {
         )
       ).toThrow();
       done();
-    }, 90000);
+    }, 120000);
     it('should remove domain and e2e project when it contains multiple libraries and e2e project', async (done) => {
       const domain = 'new-extra-options-test-domain/shared';
       await removeDomain(domain);
@@ -60,6 +60,6 @@ describe('domain', () => {
         checkFilesExist(`libs/${application}/${domain}/feature/src/index.ts`)
       ).toThrow();
       done();
-    }, 90000);
+    }, 120000);
   });
 });

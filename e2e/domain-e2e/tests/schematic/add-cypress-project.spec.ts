@@ -25,7 +25,7 @@ describe('domain', () => {
         )
       ).not.toThrow();
       done();
-    }, 90000);
+    }, 120000);
     it('should add storybook project using existing domain', async (done) => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
@@ -39,7 +39,7 @@ describe('domain', () => {
       ).not.toThrow();
 
       done();
-    }, 90000);
+    }, 120000);
 
     it('should add implicit dependencies for all libraries in domain', async (done) => {
       const application = 'test-application';
@@ -58,6 +58,6 @@ describe('domain', () => {
         `${application}-${domain}-util`,
       ]);
       done();
-    }, 90000);
+    }, 120000);
   });
 });
