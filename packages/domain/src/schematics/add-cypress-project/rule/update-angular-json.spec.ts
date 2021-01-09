@@ -48,14 +48,11 @@ describe('updateAngularJson', () => {
               },
             },
             lint: {
-              builder: '@angular-devkit/build-angular:tslint',
+              builder: '@nrwl/linter:lint',
               options: {
-                tsConfig: [
-                  'apps/cypress/test-application/leaf-domain/tsconfig.e2e.json',
-                ],
-                exclude: [
-                  '**/node_modules/**',
-                  '!apps/cypress/test-application/leaf-domain/**/*',
+                linter: 'eslint',
+                lintFilePatterns: [
+                  'apps/storybook/test-application/storybook-domain/tsconfig.e2e.json',
                 ],
               },
             },
@@ -70,12 +67,8 @@ describe('updateAngularJson', () => {
               builder: '@nrwl/linter:lint',
               options: {
                 linter: 'eslint',
-                tsConfig: [
+                lintFilePatterns: [
                   'apps/storybook/test-application/storybook-domain/tsconfig.e2e.json',
-                ],
-                exclude: [
-                  '**/node_modules/**',
-                  '!libs/test-application/storybook-domain/.*/**',
                 ],
               },
             },
@@ -150,9 +143,10 @@ describe('updateAngularJson', () => {
     const projectJson = workspaceJson.projects[e2eProjectName];
     expect(projectJson.architect.e2e.options.devServerTarget).toBeUndefined();
     expect(projectJson.architect.e2e.configurations).toBeUndefined();
-    expect(projectJson.architect.lint.options.exclude[1]).toBe(
-      '!libs/test-application/leaf-domain/.*/**'
-    );
+    expect(projectJson.architect.lint.options.lintFilePatterns).toEqual([
+      'libs/test-application/leaf-domain/.cypress/**/*.{js,ts}',
+      '!libs/test-application/leaf-domain/.cypress/src/integration/.storybook/**/*.{js,ts}',
+    ]);
   });
   it('should uppdate root path for e2e project', async () => {
     appTree = (await testRunner
@@ -167,9 +161,6 @@ describe('updateAngularJson', () => {
     expect(projectJson.root).toBe('libs/test-application/leaf-domain/.cypress');
     expect(projectJson.sourceRoot).toBe(
       'libs/test-application/leaf-domain/.cypress/src'
-    );
-    expect(projectJson.architect.lint.options.tsConfig[0]).toBe(
-      `libs/test-application/leaf-domain/.cypress/tsconfig.e2e.json`
     );
     expect(projectJson.architect.e2e.options.cypressConfig).toBe(
       `libs/test-application/leaf-domain/.cypress/cypress.json`
@@ -192,8 +183,9 @@ describe('updateAngularJson', () => {
     expect(projectJson.sourceRoot).toBe(
       'libs/test-application/leaf-domain/.cypress/src'
     );
-    expect(projectJson.architect.lint.options.tsConfig[0]).toBe(
-      `libs/test-application/leaf-domain/.cypress/tsconfig.e2e.json`
-    );
+    expect(projectJson.architect.lint.options.lintFilePatterns).toEqual([
+      'libs/test-application/leaf-domain/.storybook/**/*.{js,ts}',
+      'libs/test-application/leaf-domain/.cypress/src/integration/storybook/**/*.{js,ts}',
+    ]);
   });
 });

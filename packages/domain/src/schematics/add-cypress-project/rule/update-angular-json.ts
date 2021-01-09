@@ -34,12 +34,15 @@ export const updateAngularJson = (
       const cypressFolder =
         projectType === CypressProject.E2E ? 'cypress' : 'storybook';
       const lintFilePatterns = [
-        `libs/${application}/${domain}/.cypress/integration/${cypressFolder}/**/*.{js,ts}`,
-        `libs/${application}/${domain}/${projectType}/**/*.{js,ts}`,
+        `libs/${application}/${domain}/.${cypressFolder}/**/*.{js,ts}`,
       ];
       if (projectType === CypressProject.E2E) {
         lintFilePatterns.push(
-          `!libs/${application}/${domain}/.cypress/integration/.storybook/**/*.{js,ts}`
+          `!libs/${application}/${domain}/.cypress/src/integration/.storybook/**/*.{js,ts}`
+        );
+      } else {
+        lintFilePatterns.push(
+          `libs/${application}/${domain}/.cypress/src/integration/${cypressFolder}/**/*.{js,ts}`
         );
       }
       json.projects[
