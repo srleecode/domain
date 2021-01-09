@@ -30,6 +30,7 @@ describe('addLibrariesRules', () => {
       'lib',
       {
         directory,
+        linter: 'eslint',
         name: projectName,
         prefix,
         style,

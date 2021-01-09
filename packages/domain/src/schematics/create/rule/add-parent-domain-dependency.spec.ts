@@ -13,6 +13,29 @@ describe('checkParentDomain', () => {
 
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
+    const json = {
+      root: true,
+      ignorePatterns: ['**/*'],
+      plugins: ['@nrwl/nx'],
+      overrides: [
+        {
+          files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
+          rules: {
+            '@nrwl/nx/enforce-module-boundaries': [
+              'error',
+              {
+                enforceBuildableLibDependency: true,
+                allow: [],
+                depConstraints: [
+                  { sourceTag: '*', onlyDependOnLibsWithTags: ['*'] },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    };
+    appTree.create('.eslintrc.json', JSON.stringify(json));
   });
 
   it('should add parent domain dependency to new child domain', async () => {
@@ -23,16 +46,13 @@ describe('checkParentDomain', () => {
       )
       .toPromise()) as UnitTestTree;
 
-    const tsLint = readJsonInTree(appTree, 'tslint.json');
+    const eslint = readJsonInTree(appTree, '.eslintrc.json');
     expect(
-      tsLint.rules['nx-enforce-module-boundaries'][1].depConstraints
-    ).toEqual([
-      {
-        onlyDependOnLibsWithTags: [
-          'scope:test-application-parent-domain-shared',
-        ],
-        sourceTag: 'scope:test-application-parent-domain-child-domain',
-      },
-    ]);
+      eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+        .depConstraints[1]
+    ).toEqual({
+      onlyDependOnLibsWithTags: ['scope:test-application-parent-domain-shared'],
+      sourceTag: 'scope:test-application-parent-domain-child-domain',
+    });
   });
 });

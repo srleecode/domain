@@ -2,7 +2,7 @@
   "name": "@srleecode/domain",
   "description": "Nrwl nx plugin to allow operations at the domain level",
   "author": "Scott Lee",
-  "version": "4.0.7",
+  "version": "4.0.8",
   "license": "MIT",
   "scripts": {
     "nx": "nx",

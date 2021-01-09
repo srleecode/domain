@@ -10,6 +10,7 @@ export const addLibrariesRules = (
       name: definition.projectName,
       directory: definition.directory,
       tags: definition.tags.join(','),
+      linter: 'eslint',
       style: definition.style,
       prefix: definition.prefix,
     })
