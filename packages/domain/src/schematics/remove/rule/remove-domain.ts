@@ -1,8 +1,9 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
-import { getProjects } from '../../../utils/domain';
+import { getProjects, isChildDomain } from '../../../utils/domain';
 import { getExternalSchematic } from '../../../utils/testing';
 import { Project } from '../../shared/model/project.model';
 import { deleteDomainFolder } from '../../shared/rule/delete-domain-folder';
+import { removeParentDomainDependencyRule } from './remove-parent-domain-dependency';
 
 export const removeDomain = (
   application: string,
@@ -26,6 +27,9 @@ const getRemoveRules = (
       })
     )
   );
+  if (isChildDomain(domain)) {
+    rules.push(removeParentDomainDependencyRule(application, domain));
+  }
   rules.push(deleteDomainFolder(application, domain));
   return rules;
 };

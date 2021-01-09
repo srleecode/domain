@@ -76,12 +76,14 @@ Adding a e2e project for the domain shared/table would create a project e2e-shar
 ## Installation and required schematic libraries
 
 ```
-yarn add -D @srleecode/domain @nrwl/cypress @nrwl/storybook @nrwl/workspace @nrwl/angular
+yarn add -D @srleecode/domain @nrwl/cypress @nrwl/storybook @nrwl/workspace @nrwl/angular jest-junit
 
 # or 
  
-npm install -D @srleecode/domain @nrwl/cypress @nrwl/storybook @nrwl/workspace @nrwl/angular
+npm install -D @srleecode/domain @nrwl/cypress @nrwl/storybook @nrwl/workspace @nrwl/angular jest-junit
 ```
+
+jest-junit is required when the option addJestJunitReporter is true when creating domains.
 
 To more easily use these schematics install the vscode extension comain shematics: https://marketplace.visualstudio.com/items?itemName=srleecode.domain-schematics
 
