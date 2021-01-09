@@ -85,6 +85,8 @@ npm install -D @srleecode/domain @nrwl/cypress @nrwl/storybook @nrwl/workspace @
 
 jest-junit is required when the option addJestJunitReporter is true when creating domains.
 
+The nx console extension is required as all schematics open up in this before they are run.
+
 To more easily use these schematics install the vscode extension comain shematics: https://marketplace.visualstudio.com/items?itemName=srleecode.domain-schematics
 
 This extension laucnhes the nx console and adds appropriate default valeus based on the command trigger context.

@@ -1,7 +1,6 @@
 import { CypressProject } from '../../shared/model/cypress-project.enum';
-import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
-import { getCypressJsonPath } from '../../../utils/cypress-project';
-import { Linter, updateJsonInTree } from '@nrwl/workspace';
+import { Tree, SchematicContext } from '@angular-devkit/schematics';
+import { Linter } from '@nrwl/workspace';
 import {
   createInTree,
   deleteInTree,
@@ -10,7 +9,8 @@ import {
   readInTree,
   renameInTree,
 } from '../../../utils/tree';
-import { isTwoLevelDomain } from '../../../utils/domain';
+import { parse } from 'path';
+import { isHavingCypressProject } from '../../../utils/cypress-project';
 
 export const moveE2EFilesToDomain = (
   application: string,
@@ -35,7 +35,17 @@ export const moveE2EFilesToDomain = (
       cypressFolder.path,
       `libs/${application}/${domain}/.cypress`
     );
-    if (!existsInTree(tree, `${newPath}/${file}`)) {
+    const fileName = parse(file).base;
+    // hidden files like .eslintrc.json don't return true for existsInTree, so excluding it manually if storybook project exists
+    const isExistingHiddenFile =
+      fileName.startsWith('.') &&
+      isHavingCypressProject(
+        application,
+        domain,
+        CypressProject.Storybook,
+        tree
+      );
+    if (!isExistingHiddenFile && !existsInTree(tree, `${newPath}/${file}`)) {
       createInTree(tree, newPath, readInTree(tree, file));
     }
   });

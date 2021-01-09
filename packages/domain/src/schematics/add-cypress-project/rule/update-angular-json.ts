@@ -30,6 +30,22 @@ export const updateAngularJson = (
         projectName
       ].architect.lint.options.config = `${basePath}/.eslintrc`;
     }
+    if (json.projects[projectName].architect.lint.options.lintFilePatterns) {
+      const cypressFolder =
+        projectType === CypressProject.E2E ? 'cypress' : 'storybook';
+      const lintFilePatterns = [
+        `libs/${application}/${domain}/.cypress/integration/${cypressFolder}/**/*.{js,ts}`,
+        `libs/${application}/${domain}/${projectType}/**/*.{js,ts}`,
+      ];
+      if (projectType === CypressProject.E2E) {
+        lintFilePatterns.push(
+          `!libs/${application}/${domain}/.cypress/integration/.storybook/**/*.{js,ts}`
+        );
+      }
+      json.projects[
+        projectName
+      ].architect.lint.options.lintFilePatterns = lintFilePatterns;
+    }
     if (projectType === CypressProject.E2E) {
       const e2eConfig = json.projects[projectName].architect.e2e;
       delete e2eConfig.options.devServerTarget;
