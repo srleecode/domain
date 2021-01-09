@@ -83,7 +83,11 @@ yarn add -D @srleecode/domain @nrwl/cypress @nrwl/storybook @nrwl/workspace @nrw
 npm install -D @srleecode/domain @nrwl/cypress @nrwl/storybook @nrwl/workspace @nrwl/angular
 ```
 
-The following schematics are used internally by this schematic library.
+To more easily use these schematics install the vscode extension comain shematics: https://marketplace.visualstudio.com/items?itemName=srleecode.domain-schematics
+
+This extension laucnhes the nx console and adds appropriate default valeus based on the command trigger context.
+
+The following schematics are used internally by this schematics library.
 
 @nrwl/cypress 
  - cypress-project - used for creating cypress project
