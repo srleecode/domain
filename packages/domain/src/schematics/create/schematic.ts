@@ -30,6 +30,7 @@ import { addStoryFileExclusions } from '../shared/rule/add-story-file-exclusions
 import { Linter } from '@nrwl/workspace';
 import { sortProjects } from '../shared/rule/sort-projects';
 import { createComponentCommand } from '../add-cypress-project/rule/create-command-component';
+import { addCypressLintFiles } from '../add-cypress-project/rule/add-cypress-lint-files';
 
 export default function (options: CreateSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -74,6 +75,9 @@ export default function (options: CreateSchematicSchema): Rule {
       rules = rules.concat(
         addE2EProjectRules(application, domain, lint, libraries)
       );
+      if (!addStorybookProjectRules) {
+        rules.push(addCypressLintFiles(application, domain));
+      }
     }
     if (addStorybookProject) {
       rules = rules.concat(
@@ -86,6 +90,7 @@ export default function (options: CreateSchematicSchema): Rule {
         )
       );
       rules.concat(addStoryFileExclusions(application, application, libraries));
+      rules.push(addCypressLintFiles(application, domain));
     }
     rules = rules.concat(sortProjects());
     if (addComponentCommand && (addE2EProject || addStorybookProject)) {

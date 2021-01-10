@@ -31,23 +31,9 @@ export const updateAngularJson = (
       ].architect.lint.options.config = `${basePath}/.eslintrc`;
     }
     if (json.projects[projectName].architect.lint.options.lintFilePatterns) {
-      const cypressFolder =
-        projectType === CypressProject.E2E ? 'cypress' : 'storybook';
-      const lintFilePatterns = [
-        `libs/${application}/${domain}/.${cypressFolder}/**/*.{js,ts}`,
+      json.projects[projectName].architect.lint.options.lintFilePatterns = [
+        `libs/${application}/${domain}/.cypress/**/*.{js,ts}`,
       ];
-      if (projectType === CypressProject.E2E) {
-        lintFilePatterns.push(
-          `!libs/${application}/${domain}/.cypress/src/integration/.storybook/**/*.{js,ts}`
-        );
-      } else {
-        lintFilePatterns.push(
-          `libs/${application}/${domain}/.cypress/src/integration/${cypressFolder}/**/*.{js,ts}`
-        );
-      }
-      json.projects[
-        projectName
-      ].architect.lint.options.lintFilePatterns = lintFilePatterns;
     }
     if (projectType === CypressProject.E2E) {
       const e2eConfig = json.projects[projectName].architect.e2e;
@@ -59,6 +45,8 @@ export const updateAngularJson = (
       json.projects[
         projectName
       ].architect.e2e.options.tsConfig = `${basePath}/tsconfig.e2e.json`;
+    } else if (projectType === CypressProject.Storybook) {
+      delete json.projects[projectName].architect.lint;
     }
     return json;
   });
