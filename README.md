@@ -1,5 +1,7 @@
 # Domain schematics
 
+[![Join the chat at https://gitter.im/srleecode/domain](https://badges.gitter.im/srleecode/domain.svg)](https://gitter.im/srleecode/domain?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Why you should use the domain schematics
 
 ### Nrwl nx already implicitly uses domains
