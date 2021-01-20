@@ -4,6 +4,7 @@ import { getNxJson } from './nx-json';
 import { Project } from '../schematics/shared/model/project.model';
 import { sep } from 'path';
 import { existsInTree } from './tree';
+import { isLibraryExisting } from './libraries';
 
 export const isChildDomain = (domain: string): boolean =>
   domain.includes('/') && !domain.endsWith('shared');
@@ -27,13 +28,7 @@ export const isDomainExisting = (
   tree: Tree
 ): boolean =>
   Object.keys(DomainLibraryName).some((key) =>
-    existsInTree(
-      tree,
-      `libs/${application}/${domain}/${DomainLibraryName[key]}/src/index.ts`.replace(
-        '/',
-        sep
-      )
-    )
+    isLibraryExisting(application, domain, DomainLibraryName[key], tree)
   );
 
 export const isDomainHavingLibraryType = (

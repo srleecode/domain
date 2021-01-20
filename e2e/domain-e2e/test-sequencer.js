@@ -4,12 +4,13 @@ const path = require('path');
 class CustomSequencer extends Sequencer {
   testsOrder = {
     'create.spec.ts': 0,
-    'add-libraries.spec.ts': 1,
-    'add-cypress-project.spec.ts': 2,
-    'remove-libraries.spec.ts': 3,
-    'move.spec.ts': 4,
-    'remove.spec.ts': 5,
-    'remove-cypress-project.spec.ts': 6,
+    'add-component.spec.ts': 1,
+    'add-libraries.spec.ts': 2,
+    'add-cypress-project.spec.ts': 3,
+    'remove-libraries.spec.ts': 4,
+    'move.spec.ts': 5,
+    'remove.spec.ts': 6,
+    'remove-cypress-project.spec.ts': 7
   };
   sort(tests) {
     const orderedTests = [];

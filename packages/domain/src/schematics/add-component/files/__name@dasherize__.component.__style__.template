@@ -1,0 +1,4 @@
+<% if(displayBlock) { %>:host {
+  display: block;
+}
+<% } %>

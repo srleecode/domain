@@ -1,14 +1,33 @@
 import { updateJsonInTree } from '@nrwl/workspace';
-import { Rule } from '@angular-devkit/schematics';
+import { Rule, Tree, SchematicContext } from '@angular-devkit/schematics';
+import { existsInTree } from '../../../utils/tree';
 
 export const addParentDomainDependencyRule = (
   application: string,
   parentDomain: string,
   parsedDomain: string
-): Rule =>
-  updateJsonInTree('.eslintrc.json', (json) => {
-    const parentScope = `scope:${application}-${parentDomain}-shared`;
-    const childScope = `scope:${application}-${parsedDomain}`;
+): Rule => (tree: Tree, context: SchematicContext) => {
+  const parentScope = `scope:${application}-${parentDomain}-shared`;
+  const childScope = `scope:${application}-${parsedDomain}`;
+  if (existsInTree(tree, 'tslint.json')) {
+    return updateJsonInTree('tslint.json', (json) => {
+      let depConstraints = [];
+      if (json.rules['nx-enforce-module-boundaries']) {
+        depConstraints =
+          json.rules['nx-enforce-module-boundaries'][1].depConstraints;
+      }
+
+      depConstraints.push({
+        sourceTag: childScope,
+        onlyDependOnLibsWithTags: [parentScope],
+      });
+      json.rules[
+        'nx-enforce-module-boundaries'
+      ][1].depConstraints = depConstraints;
+      return json;
+    });
+  }
+  return updateJsonInTree('.eslintrc.json', (json) => {
     const nxModuleRulesIndex = json.overrides.findIndex(
       (override) => !!override.rules['@nrwl/nx/enforce-module-boundaries']
     );
@@ -21,3 +40,4 @@ export const addParentDomainDependencyRule = (
     });
     return json;
   });
+};
