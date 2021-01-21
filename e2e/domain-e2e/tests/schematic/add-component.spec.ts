@@ -10,7 +10,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'storybook-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:addComponent --application ${application} --domain ${domain} --prefix srlee --name TestExample --displayBlock true --viewEncapsulation ShadowDom --changeDetection OnPush --style scss --testType testBed --export true`
+        `generate @srleecode/domain:addComponent --application ${application} --domain ${domain} --prefix srlee --name TestExample --displayBlock true --viewEncapsulation ShadowDom --changeDetection OnPush --style scss --testType testBed --isExported true`
       );
       const expectedFileTypes = ['ts', 'spec.ts', 'scss', 'html'];
       const dasherizedName = 'test-example';

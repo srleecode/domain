@@ -1,6 +1,6 @@
 {
   "name": "@srleecode/domain",
-  "version": "4.0.15",
+  "version": "4.0.16",
   "main": "src/index.js",
   "schematics": "./collection.json",
   "builders": "./builders.json"

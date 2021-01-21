@@ -26,7 +26,7 @@
       "x-prompt": "What is the prefix to apply to generated selectors?"
     },
     "displayBlock": {
-      "description": "Specifies if the style will contain `:host { display: block; }`.",
+      "description": "Specifies if the style will contain `:host { display: block; }`",
       "type": "boolean",
       "default": false
     },
