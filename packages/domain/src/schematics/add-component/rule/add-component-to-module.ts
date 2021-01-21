@@ -1,9 +1,4 @@
-import {
-  SchematicContext,
-  Rule,
-  Tree,
-  SchematicsException,
-} from '@angular-devkit/schematics';
+import { SchematicContext, Rule, Tree } from '@angular-devkit/schematics';
 import { readInTree } from '../../../utils/tree';
 import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
 import { getModuleFilePath } from './get-module-file-path';
@@ -16,7 +11,6 @@ import {
 } from '../../../utils/ast';
 import { DecoratorProperty } from '../../shared/model/decorator-property.model';
 import { DecoratorMetadata } from '../../shared/model/decorator-metadata.model';
-import { insertImport } from '@schematics/angular/utility/ast-utils';
 
 export const addComponentToModule = (
   application: string,
@@ -98,6 +92,7 @@ const getAddToDecoratorPropertyChanges = (
     );
   }
 };
+
 const isPropertyHavingClass = (
   property: DecoratorProperty,
   className: string

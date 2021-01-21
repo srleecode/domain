@@ -15,5 +15,5 @@ export interface AddComponentSchema {
   prefix: string;
   style: StyleType;
   testType: TestType;
-  export: boolean;
+  isExported: boolean;
 }

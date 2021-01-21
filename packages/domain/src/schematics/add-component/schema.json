@@ -119,7 +119,7 @@
         ]
       }
     },
-    "export": {
+    "isExported": {
       "type": "boolean",
       "default": false,
       "description": "The declaring NgModule exports this component"

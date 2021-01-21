@@ -35,13 +35,7 @@ import { ViewEncapsulation } from './model/view-encapsulation.enum';
 
 export default function (options: AddComponentSchema): Rule {
   return async (tree: Tree, _context: SchematicContext) => {
-    const {
-      application,
-      domain,
-      name,
-      changeDetection,
-      export: isExported,
-    } = options;
+    const { application, domain, name, changeDetection, isExported } = options;
     checkDomainExists(application, domain, tree);
     let library: DomainLibraryName;
     if (changeDetection === ChangeDetection.Default) {
