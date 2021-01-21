@@ -31,6 +31,7 @@ import { ChangeDetection } from './model/change-detection-type.enum';
 import { addComponentToModule } from './rule/add-component-to-module';
 import { formatFiles } from '@nrwl/workspace';
 import { TestType } from './model/test-type.enum';
+import { ViewEncapsulation } from './model/view-encapsulation.enum';
 
 export default function (options: AddComponentSchema): Rule {
   return async (tree: Tree, _context: SchematicContext) => {
@@ -65,6 +66,8 @@ export default function (options: AddComponentSchema): Rule {
       applyTemplates({
         ...strings,
         ...options,
+        isUsingNonDefaultViewEncapsulation:
+          options.viewEncapsulation !== ViewEncapsulation.Emulated,
         isTestUsingTestBed: options.testType === TestType.testBed,
       }),
       move(

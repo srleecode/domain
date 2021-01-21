@@ -7,24 +7,20 @@
     "application": {
       "type": "string",
       "description": "Application that the new domain libraries will belong to",
-      "alias": "a",
       "x-prompt": "What application will the new domain libraries be under?"
     },
     "domain": {
       "type": "string",
       "description": "Name of the domain. Format is parent-domain/child-domain for child domains and domain/shared for parent domains.",
-      "alias": "d",
       "x-prompt": "What is the name of the domain? Use parent-domain/child-domain format for a child domain. Use domain/shared format for parent domains."
     },
     "prefix": {
       "type": "string",
       "description": "The prefix to apply to generated selectors.",
-      "alias": "p",
       "x-prompt": "What is the prefix to apply to generated selectors?"
     },
     "libraries": {
       "description": "The library types that will be generated",
-      "alias": "l",
       "type": "string",
       "uniqueItems": true,
       "minItems": 1,
@@ -64,8 +60,8 @@
     "style": {
       "description": "The file extension to be used for style files.",
       "type": "string",
+      "enum": ["css", "scss", "less"],
       "default": "scss",
-      "alias": "s",
       "x-prompt": {
         "message": "Which stylesheet format would you like to use?",
         "type": "list",

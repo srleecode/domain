@@ -3,7 +3,7 @@ import { Component, OnInit<% if(!!viewEncapsulation) { %>, ViewEncapsulation<% }
 @Component({
   selector: '<%= prefix %><% if(!!prefix) { %>-<% }%><%= dasherize(name) %>',
   templateUrl: './<%= dasherize(name) %>.component.html',
-  styleUrls: ['./<%= dasherize(name) %>.component.<%= style %>']<% if(!!viewEncapsulation) { %>,
+  styleUrls: ['./<%= dasherize(name) %>.component.<%= style %>']<% if(isUsingNonDefaultViewEncapsulation) { %>,
   encapsulation: ViewEncapsulation.<%= viewEncapsulation %><% } if (changeDetection !== 'Default') { %>,
   changeDetection: ChangeDetectionStrategy.<%= changeDetection %><% } %>
 })

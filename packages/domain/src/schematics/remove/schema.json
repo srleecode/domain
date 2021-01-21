@@ -7,13 +7,11 @@
     "application": {
       "type": "string",
       "description": "Application that the new domain libraries will belong to",
-      "alias": "a",
       "x-prompt": "What application will the new domain libraries be under?"
     },
     "domain": {
       "type": "string",
       "description": "Name of the domain",
-      "alias": "d",
       "x-prompt": "What is the name of the domain? Use parent-domain/child-domain format for a child domain. Use domain/shared format for parent domains."
     }
   }
