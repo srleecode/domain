@@ -17,10 +17,10 @@ export const addStorybookProjectRules = (
   application: string,
   domain: string,
   lint: Linter,
-  libraries: DomainLibraryName[],
-  uiFramework: UiFrameworkType
+  libraries: DomainLibraryName[]
 ): Rule[] => {
   const projectType = CypressProject.Storybook;
+  const uiFramework: UiFrameworkType = '@storybook/angular';
   return [
     createCypressProject(application, domain, lint, projectType),
     renameCypressProjectInNxJson(application, domain, projectType),

@@ -20,13 +20,6 @@
       "enum": ["e2e", "storybook"],
       "default": "e2e"
     },
-    "uiFramework": {
-      "type": "string",
-      "default": "@storybook/angular",
-      "description": "Storybook UI Framework to use",
-      "enum": ["@storybook/angular", "@storybook/react"],
-      "x-prompt": "What UI framework plugin should storybook use?"
-    },
     "addComponentCommand": {
       "description": "Add component command",
       "type": "boolean",

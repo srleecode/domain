@@ -17,7 +17,6 @@ import { addMockFileResolutionPath } from '../shared/rule/add-mock-file-resoluti
 import { removeMockFileResolutionPath } from '../shared/rule/remove-mock-file-resolution-path';
 import {
   getCypressProjectLinter,
-  getStorybookProjectUiFramework,
   isHavingCypressProject,
 } from '../../utils/cypress-project';
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
@@ -26,7 +25,6 @@ import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';
 import { removeCypressProject } from '../remove-cypress-project/rule/remove-cypress-project';
 import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-rules';
 import { addStorybookProjectRules } from '../add-cypress-project/rule/add-storybook-project-rules';
-import { UiFrameworkType } from '../shared/model/ui-framework.type';
 import { sortProjects } from '../shared/rule/sort-projects';
 
 export default function (options: MoveSchematicSchema): Rule {
@@ -95,11 +93,6 @@ export default function (options: MoveSchematicSchema): Rule {
         CypressProject.Storybook,
         tree
       );
-      const uiFramework: UiFrameworkType = getStorybookProjectUiFramework(
-        application,
-        domain,
-        tree
-      );
       rules = rules.concat(
         removeCypressProject(
           application,
@@ -113,8 +106,7 @@ export default function (options: MoveSchematicSchema): Rule {
           application,
           newDomain,
           linter,
-          existingProjectLibraryTypes,
-          uiFramework
+          existingProjectLibraryTypes
         )
       );
     }

@@ -41,7 +41,6 @@ export default function (options: CreateSchematicSchema): Rule {
       domain,
       addStorybookProject,
       addE2EProject,
-      uiFramework,
       addComponentCommand,
     } = options;
     const lint = Linter.EsLint;
@@ -81,13 +80,7 @@ export default function (options: CreateSchematicSchema): Rule {
     }
     if (addStorybookProject) {
       rules = rules.concat(
-        addStorybookProjectRules(
-          application,
-          domain,
-          lint,
-          libraries,
-          uiFramework
-        )
+        addStorybookProjectRules(application, domain, lint, libraries)
       );
       rules.concat(addStoryFileExclusions(application, application, libraries));
       rules.push(addCypressLintFiles(application, domain));

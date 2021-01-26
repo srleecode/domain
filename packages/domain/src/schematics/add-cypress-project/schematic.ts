@@ -18,13 +18,7 @@ import { addCypressLintFiles } from './rule/add-cypress-lint-files';
 
 export default function (options: AddCypressProjectSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
-    const {
-      application,
-      domain,
-      projectType,
-      uiFramework,
-      addComponentCommand,
-    } = options;
+    const { application, domain, projectType, addComponentCommand } = options;
     const lint = Linter.EsLint;
     checkDomainExists(application, domain, tree);
     _context.logger.info(
@@ -52,8 +46,7 @@ export default function (options: AddCypressProjectSchematicSchema): Rule {
               application,
               domain,
               lint,
-              existingProjectLibraryTypes,
-              uiFramework
+              existingProjectLibraryTypes
             ),
           ];
 

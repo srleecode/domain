@@ -6,7 +6,6 @@ import { DomainLibraryName } from '../schematics/shared/model/domain-library-nam
 import { CypressProject } from '../schematics/shared/model/cypress-project.enum';
 import { existsInTree, readWorkspaceInTree } from './tree';
 import { Linter } from '@nrwl/workspace';
-import { UiFrameworkType } from '../schematics/shared/model/ui-framework.type';
 
 export const getCypressProjectName = (
   application: string,
@@ -92,21 +91,6 @@ export const getCypressProjectLinter = (
     return workspaceJson.projects[projectName]?.architect?.lint.options.linter;
   }
   return Linter.None;
-};
-
-export const getStorybookProjectUiFramework = (
-  application: string,
-  domain: string,
-  tree: Tree
-): UiFrameworkType => {
-  const projectName = getCypressProjectName(
-    application,
-    domain,
-    CypressProject.Storybook
-  );
-  const workspaceJson = readWorkspaceInTree(tree);
-  return workspaceJson.projects[projectName]?.architect.storybook?.options
-    .uiFramework;
 };
 
 export const getDependenciesWithLibrariesRemoved = (
