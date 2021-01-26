@@ -101,6 +101,26 @@
       "type": "boolean",
       "default": false,
       "x-prompt": "Add a component command?"
+    },
+    "buildable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Makes the domain libraries buildable"
+    },
+    "strict": {
+      "type": "boolean",
+      "description": "Makes the domain libraries have stricter type checking and build optimization options",
+      "default": false
+    },
+    "enableIvy": {
+      "description": "Makes the domain libraries have ivy enabled in tsconfig.lib.prod.json. Should not be used with publishable libraries.",
+      "type": "boolean",
+      "default": false
+    },
+    "routing": {
+      "type": "boolean",
+      "default": false,
+      "description": "Adds RouterModule.forChild to the shell library"
     }
   },
   "required": ["domain"]

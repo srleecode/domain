@@ -6,9 +6,12 @@ export interface CreateSchematicSchema {
   prefix: string;
   libraries?: DomainLibraryName[];
   style?: StyleType;
-  tsConfigPath?: string;
   addJestJunitReporter?: boolean;
   addE2EProject?: boolean;
   addStorybookProject?: boolean;
   addComponentCommand?: boolean;
+  buildable?: boolean;
+  strict?: boolean;
+  enableIvy?: boolean;
+  routing?: boolean;
 }

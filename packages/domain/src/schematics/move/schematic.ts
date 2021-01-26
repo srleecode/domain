@@ -26,6 +26,7 @@ import { removeCypressProject } from '../remove-cypress-project/rule/remove-cypr
 import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-rules';
 import { addStorybookProjectRules } from '../add-cypress-project/rule/add-storybook-project-rules';
 import { sortProjects } from '../shared/rule/sort-projects';
+import { moveDomainConfigProject } from './rule/move-domain-config-project';
 
 export default function (options: MoveSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
@@ -114,6 +115,7 @@ export default function (options: MoveSchematicSchema): Rule {
       deleteDomainFolder(application, domain),
       ...sortProjects(),
     ]);
+    rules.push(moveDomainConfigProject(application, domain, newDomain));
     return chain(rules);
   };
 }

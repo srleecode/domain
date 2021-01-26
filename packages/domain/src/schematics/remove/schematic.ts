@@ -14,6 +14,7 @@ import { removeCypressProject } from '../remove-cypress-project/rule/remove-cypr
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';
+import { deleteDomainConfigProject } from '../shared/rule/delete-domain-config-project';
 
 export default function (options: RemoveSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
@@ -55,6 +56,7 @@ export default function (options: RemoveSchematicSchema): Rule {
       rules.push(removeMockFileResolutionPath(application, domain));
     }
     rules.push(deleteDomainFolder(application, domain));
+    rules.push(deleteDomainConfigProject(application, domain));
     return chain(rules);
   };
 }

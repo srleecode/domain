@@ -24,6 +24,7 @@ import { deleteDomainFolder } from '../shared/rule/delete-domain-folder';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { updatePathInStorybookConfig } from '../shared/rule/update-path-in-storybook-config';
 import { getParsedLibraries } from '../../utils/libraries';
+import { deleteDomainConfigProject } from '../shared/rule/delete-domain-config-project';
 
 export default function (options: RemoveLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
@@ -48,6 +49,7 @@ export default function (options: RemoveLibrariesSchematicSchema): Rule {
       isDomainEmptyAfterLibraryRemoval(application, domain, libraries, tree)
     ) {
       rules.push(deleteDomainFolder(application, domain));
+      rules.push(deleteDomainConfigProject(application, domain));
     }
 
     return chain(rules);

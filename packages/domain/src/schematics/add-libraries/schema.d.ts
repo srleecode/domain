@@ -9,4 +9,5 @@ export interface AddLibrariesSchematicSchema {
   style?: StyleType;
   tsConfigPath?: string;
   addJestJunitReporter?: boolean;
+  routing?: boolean;
 }

@@ -6,7 +6,7 @@ import {
   Tree,
 } from '@angular-devkit/schematics';
 import { CreateSchematicSchema } from './schema';
-import { NormalizedSchema } from './model/normalized-schema.model';
+import { CreateNormalizedSchema } from './model/normalized-schema.model';
 import { addParentDomainDependencyRule } from './rule/add-parent-domain-dependency';
 import { addLibrariesRules } from '../shared/rule/add-libraries';
 import {
@@ -31,6 +31,7 @@ import { Linter } from '@nrwl/workspace';
 import { sortProjects } from '../shared/rule/sort-projects';
 import { createComponentCommand } from '../add-cypress-project/rule/create-command-component';
 import { addCypressLintFiles } from '../add-cypress-project/rule/add-cypress-lint-files';
+import { addDomainConfigProject } from './rule/add-domain-config-project';
 
 export default function (options: CreateSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -42,16 +43,22 @@ export default function (options: CreateSchematicSchema): Rule {
       addStorybookProject,
       addE2EProject,
       addComponentCommand,
+      routing,
     } = options;
     const lint = Linter.EsLint;
     if (libraries.length === 0) {
       throw new SchematicsException('At least one library should be provided');
     }
+    if (routing && !libraries.includes(DomainLibraryName.Shell)) {
+      throw new SchematicsException(
+        'A shell library should be included if you are using the routing option'
+      );
+    }
     _context.logger.info(
       `Creating domain ${application}-${getParsedDomain(domain)}`
     );
     const normalizedOptions = normalizeOptions(options);
-    let rules = addLibrariesRules(normalizedOptions.libraryDefinitions);
+    let rules = addLibrariesRules(tree, normalizedOptions, true);
 
     if (isChildDomain(options.domain)) {
       const parentDomain = getTopLevelDomain(domain);
@@ -95,19 +102,20 @@ export default function (options: CreateSchematicSchema): Rule {
         )
       );
     }
+    rules.push(addDomainConfigProject(application, domain, normalizedOptions));
     return chain(rules);
   };
 }
 
-const normalizeOptions = (options: CreateSchematicSchema): NormalizedSchema => {
+const normalizeOptions = (
+  options: CreateSchematicSchema
+): CreateNormalizedSchema => {
   return {
     ...options,
     libraryDefinitions: getDomainLibraryDefinitions(
       options.application,
       options.domain,
-      options.prefix,
-      options.libraries,
-      options.style
+      options.libraries
     ),
   };
 };

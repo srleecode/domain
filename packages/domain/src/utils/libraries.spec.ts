@@ -25,21 +25,17 @@ describe('libraries', () => {
       const libraryDefinitions = getDomainLibraryDefinitions(
         application,
         domain,
-        prefix,
         [
           DomainLibraryName.DataAccess,
           DomainLibraryName.Feature,
           DomainLibraryName.Ui,
           DomainLibraryName.Util,
-        ],
-        StyleType.Scss
+        ]
       );
       expect(libraryDefinitions).toEqual([
         {
           directory,
-          prefix,
           projectName: DomainLibraryName.DataAccess,
-          style,
           tags: [
             applicationTag,
             scopeTag,
@@ -48,23 +44,17 @@ describe('libraries', () => {
         },
         {
           directory,
-          prefix,
           projectName: DomainLibraryName.Feature,
-          style,
           tags: [applicationTag, scopeTag, `type:${DomainLibraryName.Feature}`],
         },
         {
           directory,
-          prefix,
           projectName: DomainLibraryName.Ui,
-          style,
           tags: [applicationTag, scopeTag, `type:${DomainLibraryName.Ui}`],
         },
         {
           directory,
-          prefix,
           projectName: DomainLibraryName.Util,
-          style,
           tags: [applicationTag, scopeTag, `type:${DomainLibraryName.Util}`],
         },
       ]);
@@ -75,16 +65,13 @@ describe('libraries', () => {
       const libraryDefinitions = getDomainLibraryDefinitions(
         application,
         parentDomain,
-        prefix,
-        [DomainLibraryName.DataAccess],
-        StyleType.Scss
+        [DomainLibraryName.DataAccess]
       );
       expect(libraryDefinitions).toEqual([
         {
           directory,
-          prefix,
+
           projectName: DomainLibraryName.DataAccess,
-          style,
           tags: [
             applicationTag,
             scopeTag,
@@ -102,16 +89,15 @@ describe('libraries', () => {
       const libraryDefinitions = getDomainLibraryDefinitions(
         application,
         parentChildDomain,
-        prefix,
-        [DomainLibraryName.DataAccess],
-        StyleType.Scss
+
+        [DomainLibraryName.DataAccess]
       );
       expect(libraryDefinitions).toEqual([
         {
           directory,
-          prefix,
+
           projectName: DomainLibraryName.DataAccess,
-          style,
+
           tags: [
             applicationTag,
             scopeTag,

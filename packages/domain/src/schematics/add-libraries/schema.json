@@ -83,6 +83,11 @@
       "type": "boolean",
       "default": false,
       "x-prompt": "Configure jest junit reporter?"
+    },
+    "routing": {
+      "type": "boolean",
+      "default": false,
+      "description": "Adds RouterModule.forChild. This should only be true when adding a shell library"
     }
   }
 }

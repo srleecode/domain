@@ -6,7 +6,7 @@ import {
   Tree,
 } from '@angular-devkit/schematics';
 import { AddLibrariesSchematicSchema } from './schema';
-import { NormalizedSchema } from './model/normalized-schema.model';
+import { AddLibrariesNormalizedSchema } from './model/normalized-schema.model';
 import { addLibrariesRules } from '../shared/rule/add-libraries';
 import {
   getDomainLibraryDefinitions,
@@ -29,17 +29,22 @@ import { getParsedDomain } from '../../utils/domain';
 export default function (options: AddLibrariesSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     const normalizedOptions = normalizeOptions(options);
-    const { application, domain } = options;
+    const { application, domain, routing } = options;
     const libraries = getParsedLibraries(options.libraries);
     if (libraries.length === 0) {
       throw new SchematicsException('At least one library should be provided');
+    }
+    if (routing && !libraries.includes(DomainLibraryName.Shell)) {
+      throw new SchematicsException(
+        'A shell library should be included if you are using the routing option'
+      );
     }
     _context.logger.info(
       `Adding ${libraries} to ${application}-${getParsedDomain(domain)}`
     );
     checkDomainExists(application, domain, tree);
     checkLibrariesDontExist(application, domain, libraries, tree);
-    let rules = addLibrariesRules(normalizedOptions.libraryDefinitions);
+    let rules = addLibrariesRules(tree, normalizedOptions, false);
     rules.concat(addStoryFileExclusions(application, domain, libraries));
     if (libraries.includes(DomainLibraryName.Util)) {
       rules.push(addMockFile(application, domain));
@@ -88,15 +93,13 @@ export default function (options: AddLibrariesSchematicSchema): Rule {
 
 const normalizeOptions = (
   options: AddLibrariesSchematicSchema
-): NormalizedSchema => {
+): AddLibrariesNormalizedSchema => {
   return {
     ...options,
     libraryDefinitions: getDomainLibraryDefinitions(
       options.application,
       options.domain,
-      options.prefix,
-      options.libraries,
-      options.style
+      options.libraries
     ),
   };
 };

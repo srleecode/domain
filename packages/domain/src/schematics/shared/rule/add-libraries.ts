@@ -1,17 +1,50 @@
-import { LibraryDefinition } from '../model/library-definition.model';
-import { Rule } from '@angular-devkit/schematics';
+import { Rule, Tree, SchematicsException } from '@angular-devkit/schematics';
 import { getExternalSchematic } from '../../../utils/testing';
+import { AddLibrariesNormalizedSchema } from '../../add-libraries/model/normalized-schema.model';
+import { CreateNormalizedSchema } from '../../create/model/normalized-schema.model';
+import { Linter } from '@nrwl/workspace';
+import { NxLibraryParamters } from '../model/nx-library-parameters.model';
+import { getDomainProjectConfig } from '../../../utils/domain-config';
 
 export const addLibrariesRules = (
-  libraryDefinitions: LibraryDefinition[]
+  tree: Tree,
+  schema: AddLibrariesNormalizedSchema | CreateNormalizedSchema,
+  isForNewDomain: boolean
 ): Rule[] =>
-  libraryDefinitions.map((definition) =>
-    getExternalSchematic('@nrwl/angular', 'lib', {
+  schema.libraryDefinitions.map((definition) => {
+    const parameters: NxLibraryParamters = {
       name: definition.projectName,
       directory: definition.directory,
       tags: definition.tags.join(','),
-      linter: 'eslint',
-      style: definition.style,
-      prefix: definition.prefix,
-    })
-  );
+      linter: Linter.EsLint,
+      style: schema.style,
+      prefix: schema.prefix,
+    };
+    if (schema.routing !== undefined) {
+      parameters.routing = schema.routing;
+      parameters.lazy = schema.routing;
+    }
+    if (isForNewDomain) {
+      const createSchema = schema as CreateNormalizedSchema;
+      if (createSchema.buildable !== undefined) {
+        parameters.buildable = createSchema.buildable;
+      }
+      if (createSchema.strict !== undefined) {
+        parameters.strict = createSchema.strict;
+      }
+      if (createSchema.enableIvy !== undefined) {
+        parameters.enableIvy = createSchema.enableIvy;
+      }
+    } else {
+      const projectConfig = getDomainProjectConfig(
+        tree,
+        schema.application,
+        schema.domain
+      );
+      parameters.buildable = projectConfig.buildable;
+      parameters.strict = projectConfig.strict;
+      parameters.enableIvy = projectConfig.enableIvy;
+    }
+
+    return getExternalSchematic('@nrwl/angular', 'lib', parameters);
+  });

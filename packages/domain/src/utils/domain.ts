@@ -2,8 +2,6 @@ import { Tree } from '@angular-devkit/schematics';
 import { DomainLibraryName } from '../schematics/shared/model/domain-library-name.enum';
 import { getNxJson } from './nx-json';
 import { Project } from '../schematics/shared/model/project.model';
-import { sep } from 'path';
-import { existsInTree } from './tree';
 import { isLibraryExisting } from './libraries';
 
 export const isChildDomain = (domain: string): boolean =>

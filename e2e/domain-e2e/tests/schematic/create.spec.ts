@@ -15,13 +15,16 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,shell --routing true --strict true --enableIvy true --buildable true`
       );
 
       expect(() =>
         checkFilesExist(
           `libs/${application}/${domain}/data-access/src/index.ts`
         )
+      ).not.toThrow();
+      expect(() =>
+        checkFilesExist(`libs/${application}/${domain}/shell/src/index.ts`)
       ).not.toThrow();
       done();
     }, 120000);

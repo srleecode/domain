@@ -1,28 +1,22 @@
-import { getParsedDomain, isParentDomain } from './domain';
+import { getParsedDomain } from './domain';
 import { DOMAIN_LIBRARY_TYPES } from '../schematics/shared/model/domain-library-types.constant';
 import { LibraryDefinition } from '../schematics/shared/model/library-definition.model';
 import { DomainLibraryName } from '../schematics/shared/model/domain-library-name.enum';
-import { StyleType } from '../schematics/shared/model/style-type.enum';
 import { Tree } from '@angular-devkit/schematics';
-import { sep } from 'path';
 import { getDirInTree } from './tree';
 
 export const getDomainLibraryDefinitions = (
   application: string,
   domain: string,
-  prefix: string,
-  libraries: DomainLibraryName[],
-  style: StyleType
+  libraries: DomainLibraryName[]
 ): LibraryDefinition[] => {
   const parsedDomain = getParsedDomain(domain);
   const directory = `${application}/${domain}`;
   const scope = `${application}-${parsedDomain}`;
   return DOMAIN_LIBRARY_TYPES.filter((type) => libraries.includes(type)).map(
-    (type) => ({
+    (type): LibraryDefinition => ({
       projectName: `${type}`,
       tags: [`app:${application}`, `scope:${scope}`, `type:${type}`],
-      prefix,
-      style,
       directory,
     })
   );
