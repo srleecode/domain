@@ -6,6 +6,7 @@ import { readJsonInTree } from '@nrwl/workspace';
 import { addDomainConfigProject } from './add-domain-config-project';
 import { CreateNormalizedSchema } from '../model/normalized-schema.model';
 import { StyleType } from '../../shared/model/style-type.enum';
+import { DomainConfig } from '../../shared/model/domain-config.model';
 
 describe('addDomainConfigProject', () => {
   let appTree: UnitTestTree;
@@ -19,6 +20,7 @@ describe('addDomainConfigProject', () => {
     routing: true,
     buildable: true,
     enableIvy: true,
+    publishable: false,
     strict: false,
     libraryDefinitions: [],
   };
@@ -33,12 +35,14 @@ describe('addDomainConfigProject', () => {
       .toPromise()) as UnitTestTree;
 
     const json = readJsonInTree(appTree, 'domain.config.json');
-    expect(json).toEqual({
+    const expected: DomainConfig = {
       [`${application}-${domain}`]: {
         buildable: true,
         enableIvy: true,
         strict: false,
+        publishable: false,
       },
-    });
+    };
+    expect(json).toEqual(expected);
   });
 });

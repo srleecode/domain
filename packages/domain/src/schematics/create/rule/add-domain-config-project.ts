@@ -15,6 +15,7 @@ export const addDomainConfigProject = (
         buildable: !!options.buildable,
         strict: !!options.strict,
         enableIvy: !!options.enableIvy,
+        publishable: !!options.publishable,
       },
     };
     return {

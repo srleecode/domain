@@ -44,6 +44,8 @@ export default function (options: CreateSchematicSchema): Rule {
       addE2EProject,
       addComponentCommand,
       routing,
+      enableIvy,
+      publishable,
     } = options;
     const lint = Linter.EsLint;
     if (libraries.length === 0) {
@@ -52,6 +54,11 @@ export default function (options: CreateSchematicSchema): Rule {
     if (routing && !libraries.includes(DomainLibraryName.Shell)) {
       throw new SchematicsException(
         'A shell library should be included if you are using the routing option'
+      );
+    }
+    if (enableIvy && publishable) {
+      _context.logger.warn(
+        'It is not recommended to make libraries publishable when ivy is enabled'
       );
     }
     _context.logger.info(

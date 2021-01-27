@@ -15,16 +15,13 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,shell --routing true --strict true --enableIvy true --buildable true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access`
       );
 
       expect(() =>
         checkFilesExist(
           `libs/${application}/${domain}/data-access/src/index.ts`
         )
-      ).not.toThrow();
-      expect(() =>
-        checkFilesExist(`libs/${application}/${domain}/shell/src/index.ts`)
       ).not.toThrow();
       done();
     }, 120000);
@@ -63,7 +60,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access --addJestJunitReporter true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,shell --addJestJunitReporter true --routing true --strict true --enableIvy true --buildable true`
       );
       const jestConfig = readFile(
         `libs/${application}/${domain}/data-access/jest.config.js`

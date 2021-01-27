@@ -121,6 +121,11 @@
       "type": "boolean",
       "default": false,
       "description": "Adds RouterModule.forChild to the shell library"
+    },
+    "publishable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Makes the domain libraries publishable."
     }
   },
   "required": ["domain"]

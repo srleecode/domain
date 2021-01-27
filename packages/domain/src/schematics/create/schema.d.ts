@@ -14,4 +14,5 @@ export interface CreateSchematicSchema {
   strict?: boolean;
   enableIvy?: boolean;
   routing?: boolean;
+  publishable?: boolean;
 }

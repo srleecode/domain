@@ -6,4 +6,5 @@ export interface DomainConfigProject {
   buildable: boolean;
   strict: boolean;
   enableIvy: boolean;
+  publishable: boolean;
 }

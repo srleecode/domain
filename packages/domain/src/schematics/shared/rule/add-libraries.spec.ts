@@ -7,6 +7,7 @@ import { Linter } from '@nrwl/workspace';
 import { Tree } from '@angular-devkit/schematics';
 import { UnitTestTree } from '@angular-devkit/schematics/testing';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
+import { DomainConfig } from '../model/domain-config.model';
 
 describe('addLibrariesRules', () => {
   let appTree: UnitTestTree;
@@ -20,11 +21,12 @@ describe('addLibrariesRules', () => {
 
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
-    const json = {
+    const json: DomainConfig = {
       [`${application}-${domain}`]: {
         buildable: true,
         enableIvy: true,
         strict: false,
+        publishable: false,
       },
     };
     appTree.create('domain.config.json', JSON.stringify(json));
@@ -65,6 +67,7 @@ describe('addLibrariesRules', () => {
         buildable: true,
         enableIvy: true,
         strict: false,
+        publishable: false,
       }
     );
   });
@@ -78,6 +81,7 @@ describe('addLibrariesRules', () => {
       buildable: true,
       enableIvy: true,
       strict: false,
+      publishable: false,
       libraryDefinitions: [
         {
           projectName,
@@ -106,6 +110,7 @@ describe('addLibrariesRules', () => {
         buildable: true,
         enableIvy: true,
         strict: false,
+        publishable: false,
         tags: `${tags[0]},${tags[1]}`,
       }
     );

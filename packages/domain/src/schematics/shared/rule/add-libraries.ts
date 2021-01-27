@@ -35,6 +35,9 @@ export const addLibrariesRules = (
       if (createSchema.enableIvy !== undefined) {
         parameters.enableIvy = createSchema.enableIvy;
       }
+      if (createSchema.publishable !== undefined) {
+        parameters.publishable = createSchema.publishable;
+      }
     } else {
       const projectConfig = getDomainProjectConfig(
         tree,
@@ -44,6 +47,7 @@ export const addLibrariesRules = (
       parameters.buildable = projectConfig.buildable;
       parameters.strict = projectConfig.strict;
       parameters.enableIvy = projectConfig.enableIvy;
+      parameters.publishable = projectConfig.publishable;
     }
 
     return getExternalSchematic('@nrwl/angular', 'lib', parameters);
