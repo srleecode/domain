@@ -41,21 +41,25 @@ describe('libraries', () => {
             scopeTag,
             `type:${DomainLibraryName.DataAccess}`,
           ],
+          type: DomainLibraryName.DataAccess,
         },
         {
           directory,
           projectName: DomainLibraryName.Feature,
           tags: [applicationTag, scopeTag, `type:${DomainLibraryName.Feature}`],
+          type: DomainLibraryName.Feature,
         },
         {
           directory,
           projectName: DomainLibraryName.Ui,
           tags: [applicationTag, scopeTag, `type:${DomainLibraryName.Ui}`],
+          type: DomainLibraryName.Ui,
         },
         {
           directory,
           projectName: DomainLibraryName.Util,
           tags: [applicationTag, scopeTag, `type:${DomainLibraryName.Util}`],
+          type: DomainLibraryName.Util,
         },
       ]);
     });
@@ -70,13 +74,13 @@ describe('libraries', () => {
       expect(libraryDefinitions).toEqual([
         {
           directory,
-
           projectName: DomainLibraryName.DataAccess,
           tags: [
             applicationTag,
             scopeTag,
             `type:${DomainLibraryName.DataAccess}`,
           ],
+          type: DomainLibraryName.DataAccess,
         },
       ]);
     });
@@ -103,6 +107,7 @@ describe('libraries', () => {
             scopeTag,
             `type:${DomainLibraryName.DataAccess}`,
           ],
+          type: DomainLibraryName.DataAccess,
         },
       ]);
     });

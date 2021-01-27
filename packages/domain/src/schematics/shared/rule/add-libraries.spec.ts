@@ -8,6 +8,8 @@ import { Tree } from '@angular-devkit/schematics';
 import { UnitTestTree } from '@angular-devkit/schematics/testing';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { DomainConfig } from '../model/domain-config.model';
+import * as nxJsonUtils from '../../../utils/nx-json';
+import { DomainLibraryName } from '../model/domain-library-name.enum';
 
 describe('addLibrariesRules', () => {
   let appTree: UnitTestTree;
@@ -18,6 +20,8 @@ describe('addLibrariesRules', () => {
   const directory = 'testDirectory';
   const prefix = 'testPrefix';
   const style = StyleType.Scss;
+  const npmScope = 'project';
+  jest.spyOn(nxJsonUtils, 'getNpmScope').mockReturnValue(npmScope);
 
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
@@ -43,6 +47,7 @@ describe('addLibrariesRules', () => {
           projectName,
           tags,
           directory,
+          type: DomainLibraryName.DataAccess,
         },
       ],
     };
@@ -79,14 +84,15 @@ describe('addLibrariesRules', () => {
       style,
       routing: true,
       buildable: true,
-      enableIvy: true,
+      enableIvy: false,
       strict: false,
-      publishable: false,
+      publishable: true,
       libraryDefinitions: [
         {
           projectName,
           tags,
           directory,
+          type: DomainLibraryName.DataAccess,
         },
       ],
     };
@@ -108,10 +114,11 @@ describe('addLibrariesRules', () => {
         routing: true,
         lazy: true,
         buildable: true,
-        enableIvy: true,
+        enableIvy: false,
         strict: false,
-        publishable: false,
+        publishable: true,
         tags: `${tags[0]},${tags[1]}`,
+        importPath: '@project/test-application/test-domain/data-access',
       }
     );
   });

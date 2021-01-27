@@ -14,4 +14,5 @@ export interface NxLibraryParamters {
   strict?: boolean;
   enableIvy?: boolean;
   publishable?: boolean;
+  importPath?: string;
 }

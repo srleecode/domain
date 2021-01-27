@@ -18,6 +18,7 @@ export const getDomainLibraryDefinitions = (
       projectName: `${type}`,
       tags: [`app:${application}`, `scope:${scope}`, `type:${type}`],
       directory,
+      type,
     })
   );
 };

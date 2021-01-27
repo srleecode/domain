@@ -5,6 +5,7 @@ import { CreateNormalizedSchema } from '../../create/model/normalized-schema.mod
 import { Linter } from '@nrwl/workspace';
 import { NxLibraryParamters } from '../model/nx-library-parameters.model';
 import { getDomainProjectConfig } from '../../../utils/domain-config';
+import { getNpmScope } from '../../../utils/nx-json';
 
 export const addLibrariesRules = (
   tree: Tree,
@@ -48,6 +49,11 @@ export const addLibrariesRules = (
       parameters.strict = projectConfig.strict;
       parameters.enableIvy = projectConfig.enableIvy;
       parameters.publishable = projectConfig.publishable;
+    }
+    if (parameters.publishable) {
+      parameters.importPath = `@${getNpmScope(tree)}/${schema.application}/${
+        schema.domain
+      }/${definition.type}`;
     }
 
     return getExternalSchematic('@nrwl/angular', 'lib', parameters);
