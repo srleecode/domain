@@ -21,7 +21,7 @@ Even though nx recommends using domains, by default all operations must happen a
 ## Installation and required schematic libraries
 
 ```
-yarn add -D @srleecode/domain @nrwl/cypress @nrwl/storybook @nrwl/workspace @nrwl/angular jest-junit
+yarn add -D @srleecode/domain @nrwl/cypress @nrwl/storybook @nrwl/workspace @nrwl/angular @ngrx/schematics jest-junit
 
 # or 
  

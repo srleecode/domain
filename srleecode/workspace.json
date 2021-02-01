@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "projects": {
+    "domain": {
+      "root": "packages/domain",
+      "sourceRoot": "packages/domain/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "packages/domain/tsconfig.lib.json",
+              "packages/domain/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!packages/domain/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "packages/domain/jest.config.js",
+            "tsConfig": "packages/domain/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/packages/domain",
+            "tsConfig": "packages/domain/tsconfig.lib.json",
+            "packageJson": "packages/domain/package.json",
+            "main": "packages/domain/src/index.ts",
+            "assets": [
+              "packages/domain/*.md",
+              {
+                "input": "./packages/domain/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/domain",
+                "glob": "collection.json",
+                "output": "."
+              },
+              {
+                "input": "./packages/domain",
+                "glob": "builders.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "domain-e2e": {
+      "projectType": "application",
+      "root": "e2e\\domain-e2e",
+      "sourceRoot": "e2e\\domain-e2e/src",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "domain:build",
+            "npmPackageName": "@srleecode/domain",
+            "pluginOutputPath": "dist/packages/domain",
+            "jestConfig": "e2e/domain-e2e/jest.config.js",
+            "tsSpecConfig": "e2e/domain-e2e/tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/react": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/web": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nx-plugin": {
+      "plugin": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    }
+  }
+}

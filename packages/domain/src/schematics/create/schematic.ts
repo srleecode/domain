@@ -32,6 +32,7 @@ import { sortProjects } from '../shared/rule/sort-projects';
 import { createComponentCommand } from '../add-cypress-project/rule/create-command-component';
 import { addCypressLintFiles } from '../add-cypress-project/rule/add-cypress-lint-files';
 import { addDomainConfigProject } from './rule/add-domain-config-project';
+import { isHavingEsLintRcJson } from '../../utils/cypress-project';
 
 export default function (options: CreateSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -88,7 +89,10 @@ export default function (options: CreateSchematicSchema): Rule {
       rules = rules.concat(
         addE2EProjectRules(application, domain, lint, libraries)
       );
-      if (!addStorybookProjectRules) {
+      if (
+        !addStorybookProjectRules &&
+        isHavingEsLintRcJson(application, domain, tree)
+      ) {
         rules.push(addCypressLintFiles(application, domain));
       }
     }
@@ -97,7 +101,9 @@ export default function (options: CreateSchematicSchema): Rule {
         addStorybookProjectRules(application, domain, lint, libraries)
       );
       rules.concat(addStoryFileExclusions(application, application, libraries));
-      rules.push(addCypressLintFiles(application, domain));
+      if (isHavingEsLintRcJson(application, domain, tree)) {
+        rules.push(addCypressLintFiles(application, domain));
+      }
     }
     rules = rules.concat(sortProjects());
     if (addComponentCommand && (addE2EProject || addStorybookProject)) {

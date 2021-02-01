@@ -123,3 +123,10 @@ export const isHavingComponentCommand = (
       domain
     )}/.cypress/src/support/component-command.ts`
   );
+
+export const isHavingEsLintRcJson = (
+  application: string,
+  domain: string,
+  tree: Tree
+): boolean =>
+  existsInTree(tree, `libs/${application}/${domain}/.cypress/.eslintrc.json`);

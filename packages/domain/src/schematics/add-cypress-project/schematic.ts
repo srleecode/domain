@@ -13,7 +13,10 @@ import { addStorybookProjectRules } from './rule/add-storybook-project-rules';
 import { Linter } from '@nrwl/workspace';
 import { sortProjects } from '../shared/rule/sort-projects';
 import { createComponentCommand } from './rule/create-command-component';
-import { isHavingComponentCommand } from '../../utils/cypress-project';
+import {
+  isHavingComponentCommand,
+  isHavingEsLintRcJson,
+} from '../../utils/cypress-project';
 import { addCypressLintFiles } from './rule/add-cypress-lint-files';
 
 export default function (options: AddCypressProjectSchematicSchema): Rule {
@@ -59,7 +62,9 @@ export default function (options: AddCypressProjectSchematicSchema): Rule {
         createComponentCommand(application, domain, './files')
       );
     }
-    rules.push(addCypressLintFiles(application, domain));
+    if (isHavingEsLintRcJson(application, domain, tree)) {
+      rules.push(addCypressLintFiles(application, domain));
+    }
     return chain(rules);
   };
 }
