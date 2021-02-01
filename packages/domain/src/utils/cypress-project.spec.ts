@@ -8,6 +8,7 @@ import {
   getUnprocessedCypressProjectName,
   getCypressJsonPath,
   getCypressProjectLinter,
+  isHavingEsLintRcJson,
 } from './cypress-project';
 import * as nxJsonUtils from './nx-json';
 import * as treeUtils from './tree';
@@ -237,6 +238,21 @@ describe('Cypress project', () => {
           appTree
         )
       ).toBe(Linter.TsLint);
+    });
+  });
+  describe('isHavingEsLintRcJson', () => {
+    beforeEach(() => {
+      jest.spyOn(treeUtils, 'existsInTree').mockReturnValue(true);
+    });
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    it('should check if cypress project eslintrc.json exists', () => {
+      isHavingEsLintRcJson(application, leafDomain, appTree);
+      expect(treeUtils.existsInTree).toHaveBeenCalledWith(
+        appTree,
+        `libs/${application}/${leafDomain}/.cypress/.eslintrc.json`
+      );
     });
   });
 });

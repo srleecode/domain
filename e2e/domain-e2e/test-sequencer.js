@@ -10,7 +10,8 @@ class CustomSequencer extends Sequencer {
     'remove-libraries.spec.ts': 4,
     'move.spec.ts': 5,
     'remove.spec.ts': 6,
-    'remove-cypress-project.spec.ts': 7
+    'remove-cypress-project.spec.ts': 7,
+    'add-private-api.spec.ts': 8,
   };
   sort(tests) {
     const orderedTests = [];

@@ -3,7 +3,6 @@ import { deleteDomainFolder } from './delete-domain-folder';
 import { UnitTestTree } from '@angular-devkit/schematics/testing';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { Tree } from '@angular-devkit/schematics';
-import { create } from 'domain';
 import { testRunner } from '../../../utils/testing';
 
 describe('deleteDomainFolder', () => {
@@ -26,12 +25,9 @@ describe('deleteDomainFolder', () => {
 
   it('should delete leaf domain root folder', async () => {
     createDomainFolder(application, leafDomain);
-     (await testRunner
-      .callRule(
-         deleteDomainFolder(application, leafDomain),
-        tree
-      )
-      .toPromise())
+    await testRunner
+      .callRule(deleteDomainFolder(application, leafDomain), tree)
+      .toPromise();
     expect(treeUtils.deleteInTree).toHaveBeenNthCalledWith(
       1,
       tree,
@@ -40,12 +36,9 @@ describe('deleteDomainFolder', () => {
   });
   it('should delete child domain root folder', async () => {
     createDomainFolder(application, childDomain);
-    (await testRunner
-      .callRule(
-         deleteDomainFolder(application, childDomain),
-        tree
-      )
-      .toPromise())
+    await testRunner
+      .callRule(deleteDomainFolder(application, childDomain), tree)
+      .toPromise();
     expect(treeUtils.deleteInTree).toHaveBeenNthCalledWith(
       1,
       tree,
@@ -59,12 +52,9 @@ describe('deleteDomainFolder', () => {
   });
   it('should delete parent domain root folder', async () => {
     createDomainFolder(application, parentDomain);
-     (await testRunner
-      .callRule(
-         deleteDomainFolder(application, parentDomain),
-        tree
-      )
-      .toPromise())
+    await testRunner
+      .callRule(deleteDomainFolder(application, parentDomain), tree)
+      .toPromise();
     expect(treeUtils.deleteInTree).toHaveBeenNthCalledWith(
       1,
       tree,
@@ -79,12 +69,9 @@ describe('deleteDomainFolder', () => {
   it('should not delete top level domain folder when other second level domains still exist', async () => {
     createDomainFolder(application, parentDomain);
     createDomainFolder(application, childDomain);
-     (await testRunner
-      .callRule(
-         deleteDomainFolder(application, childDomain),
-        tree
-      )
-      .toPromise())
+    await testRunner
+      .callRule(deleteDomainFolder(application, childDomain), tree)
+      .toPromise();
     expect(treeUtils.deleteInTree).toHaveBeenCalledTimes(1);
   });
 });

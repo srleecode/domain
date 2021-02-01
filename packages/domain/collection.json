@@ -42,6 +42,11 @@
       "factory": "./src/schematics/add-component/schematic",
       "schema": "./src/schematics/add-component/schema.json",
       "description": "Add component to domain"
+    },
+    "addPrivateApi": {
+      "factory": "./src/schematics/add-private-api/schematic",
+      "schema": "./src/schematics/add-private-api/schema.json",
+      "description": "Add private api, i.e. exports that can only be used inside a domain and not outside of it"
     }
   }
 }
