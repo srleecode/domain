@@ -6,6 +6,7 @@ import * as testingUtils from '../../../utils/testing';
 import * as domainUtils from '../../../utils/domain';
 import { Project } from '../../shared/model/project.model';
 import { removeDomain } from './remove-domain';
+import * as workspaceImport from '@nrwl/workspace/src/generators/remove/remove';
 
 describe('removeDomainRules', () => {
   let appTree: UnitTestTree;
@@ -23,8 +24,8 @@ describe('removeDomainRules', () => {
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
     jest
-      .spyOn(testingUtils, 'getExternalSchematic')
-      .mockReturnValue(testingUtils.emptyRule);
+      .spyOn(workspaceImport, 'removeSchematic')
+      .mockReturnValue(testingUtils.emptyRule as any);
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -45,22 +46,16 @@ describe('removeDomainRules', () => {
     ];
     jest.spyOn(domainUtils, 'getProjects').mockReturnValue(projects);
     removeDomain(application, leafDomain, appTree);
-    expect(testingUtils.getExternalSchematic).toHaveBeenNthCalledWith(
-      1,
-      '@nrwl/workspace',
-      'remove',
-      {
-        projectName: leafDomainDataAccessProjectName,
-      }
-    );
-    expect(testingUtils.getExternalSchematic).toHaveBeenNthCalledWith(
-      2,
-      '@nrwl/workspace',
-      'remove',
-      {
-        projectName: leafDomainUtilProjectName,
-      }
-    );
+    expect(workspaceImport.removeSchematic).toHaveBeenNthCalledWith(1, {
+      projectName: leafDomainDataAccessProjectName,
+      skipFormat: false,
+      forceRemove: false,
+    });
+    expect(workspaceImport.removeSchematic).toHaveBeenNthCalledWith(2, {
+      projectName: leafDomainUtilProjectName,
+      skipFormat: false,
+      forceRemove: false,
+    });
   });
   it('should generate remove rules for all libraries in parent domain and all children domains when parent domain is moving to new parent domain', () => {
     const projects: Project[] = [
@@ -77,22 +72,16 @@ describe('removeDomainRules', () => {
     ];
     jest.spyOn(domainUtils, 'getProjects').mockReturnValue(projects);
     removeDomain(application, `${parentDomain}/shared`, appTree);
-    expect(testingUtils.getExternalSchematic).toHaveBeenNthCalledWith(
-      1,
-      '@nrwl/workspace',
-      'remove',
-      {
-        projectName: childDomainUtilProjectName,
-      }
-    );
-    expect(testingUtils.getExternalSchematic).toHaveBeenNthCalledWith(
-      2,
-      '@nrwl/workspace',
-      'remove',
-      {
-        projectName: parentDomainUtilProjectName,
-      }
-    );
+    expect(workspaceImport.removeSchematic).toHaveBeenNthCalledWith(1, {
+      projectName: childDomainUtilProjectName,
+      skipFormat: false,
+      forceRemove: false,
+    });
+    expect(workspaceImport.removeSchematic).toHaveBeenNthCalledWith(2, {
+      projectName: parentDomainUtilProjectName,
+      skipFormat: false,
+      forceRemove: false,
+    });
   });
 
   it('should generate remove rules child domain when moving to new child domain', () => {
@@ -105,13 +94,10 @@ describe('removeDomainRules', () => {
     ];
     jest.spyOn(domainUtils, 'getProjects').mockReturnValue(projects);
     removeDomain(application, `${parentDomain}/${childDomain}`, appTree);
-    expect(testingUtils.getExternalSchematic).toHaveBeenNthCalledWith(
-      1,
-      '@nrwl/workspace',
-      'remove',
-      {
-        projectName: childDomainUtilProjectName,
-      }
-    );
+    expect(workspaceImport.removeSchematic).toHaveBeenNthCalledWith(1, {
+      projectName: childDomainUtilProjectName,
+      skipFormat: false,
+      forceRemove: false,
+    });
   });
 });

@@ -4,6 +4,7 @@ import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { UnitTestTree } from '@angular-devkit/schematics/testing';
 import { Tree } from '@angular-devkit/schematics';
+import * as workspaceImport from '@nrwl/workspace/src/generators/remove/remove';
 
 describe('removeCypressProject', () => {
   const application = 'test-application';
@@ -13,8 +14,8 @@ describe('removeCypressProject', () => {
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
     jest
-      .spyOn(testingUtils, 'getExternalSchematic')
-      .mockReturnValue(testingUtils.emptyRule);
+      .spyOn(workspaceImport, 'removeSchematic')
+      .mockReturnValue(testingUtils.emptyRule as any);
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -22,12 +23,10 @@ describe('removeCypressProject', () => {
 
   it('should remove e2e project', () => {
     removeCypressProject(application, leafDomain, CypressProject.E2E, appTree);
-    expect(testingUtils.getExternalSchematic).toHaveBeenCalledWith(
-      '@nrwl/workspace',
-      'remove',
-      {
-        projectName: `${CypressProject.E2E}-${application}-${leafDomain}`,
-      }
-    );
+    expect(workspaceImport.removeSchematic).toHaveBeenCalledWith({
+      projectName: `${CypressProject.E2E}-${application}-${leafDomain}`,
+      skipFormat: false,
+      forceRemove: false,
+    });
   });
 });

@@ -27,12 +27,12 @@ import { addJestJunitReporter } from '../shared/rule/add-jest-junit-reporter';
 import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-rules';
 import { addStorybookProjectRules } from '../add-cypress-project/rule/add-storybook-project-rules';
 import { addStoryFileExclusions } from '../shared/rule/add-story-file-exclusions';
-import { Linter } from '@nrwl/workspace';
 import { sortProjects } from '../shared/rule/sort-projects';
 import { createComponentCommand } from '../add-cypress-project/rule/create-command-component';
 import { addCypressLintFiles } from '../add-cypress-project/rule/add-cypress-lint-files';
 import { addDomainConfigProject } from './rule/add-domain-config-project';
 import { isHavingEsLintRcJson } from '../../utils/cypress-project';
+import { Linter } from '../shared/model/linter.enum';
 
 export default function (options: CreateSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {

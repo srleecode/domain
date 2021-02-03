@@ -5,6 +5,7 @@ import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
 import { moveDomain } from './move-domain';
 import * as testingUtils from '../../../utils/testing';
 import * as domainUtils from '../../../utils/domain';
+import * as workspaceImport from '@nrwl/workspace/src/generators/move/move';
 import { Project } from '../../shared/model/project.model';
 
 describe('moveDomainRules', () => {
@@ -25,8 +26,8 @@ describe('moveDomainRules', () => {
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
     jest
-      .spyOn(testingUtils, 'getExternalSchematic')
-      .mockReturnValue(testingUtils.emptyRule);
+      .spyOn(workspaceImport, 'moveSchematic')
+      .mockReturnValue(testingUtils.emptyRule as any);
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -47,24 +48,16 @@ describe('moveDomainRules', () => {
     ];
     jest.spyOn(domainUtils, 'getProjects').mockReturnValue(projects);
     moveDomain(application, leafDomain, newLeafDomain, appTree);
-    expect(testingUtils.getExternalSchematic).toHaveBeenNthCalledWith(
-      1,
-      '@nrwl/workspace',
-      'move',
-      {
-        destination: `${application}/${newLeafDomain}/${dataAccesslibraryType}`,
-        projectName: leafDomainDataAccessProjectName,
-      }
-    );
-    expect(testingUtils.getExternalSchematic).toHaveBeenNthCalledWith(
-      2,
-      '@nrwl/workspace',
-      'move',
-      {
-        destination: `${application}/${newLeafDomain}/${utilLibraryType}`,
-        projectName: leafDomainUtilProjectName,
-      }
-    );
+    expect(workspaceImport.moveSchematic).toHaveBeenNthCalledWith(1, {
+      destination: `${application}/${newLeafDomain}/${dataAccesslibraryType}`,
+      projectName: leafDomainDataAccessProjectName,
+      updateImportPath: true,
+    });
+    expect(workspaceImport.moveSchematic).toHaveBeenNthCalledWith(2, {
+      destination: `${application}/${newLeafDomain}/${utilLibraryType}`,
+      projectName: leafDomainUtilProjectName,
+      updateImportPath: true,
+    });
   });
   it('should generate move rules for all libraries in parent domain', () => {
     const projects: Project[] = [
@@ -86,15 +79,11 @@ describe('moveDomainRules', () => {
       `${newParentDomain}/shared`,
       appTree
     );
-    expect(testingUtils.getExternalSchematic).toHaveBeenNthCalledWith(
-      1,
-      '@nrwl/workspace',
-      'move',
-      {
-        destination: `${application}/${newParentDomain}/shared/${utilLibraryType}`,
-        projectName: parentDomainUtilProjectName,
-      }
-    );
+    expect(workspaceImport.moveSchematic).toHaveBeenNthCalledWith(1, {
+      destination: `${application}/${newParentDomain}/shared/${utilLibraryType}`,
+      projectName: parentDomainUtilProjectName,
+      updateImportPath: true,
+    });
   });
 
   it('should generate move rules child domain when moving to new child domain', () => {
@@ -112,14 +101,10 @@ describe('moveDomainRules', () => {
       `${newParentDomain}/${childDomain}`,
       appTree
     );
-    expect(testingUtils.getExternalSchematic).toHaveBeenNthCalledWith(
-      1,
-      '@nrwl/workspace',
-      'move',
-      {
-        destination: `${application}/${newParentDomain}/${childDomain}/${utilLibraryType}`,
-        projectName: childDomainUtilProjectName,
-      }
-    );
+    expect(workspaceImport.moveSchematic).toHaveBeenNthCalledWith(1, {
+      destination: `${application}/${newParentDomain}/${childDomain}/${utilLibraryType}`,
+      projectName: childDomainUtilProjectName,
+      updateImportPath: true,
+    });
   });
 });

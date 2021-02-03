@@ -1,6 +1,6 @@
 import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { Tree, SchematicContext } from '@angular-devkit/schematics';
-import { Linter } from '@nrwl/workspace';
+
 import {
   createInTree,
   deleteInTree,
@@ -12,11 +12,10 @@ import {
 import { parse } from 'path';
 import { isHavingCypressProject } from '../../../utils/cypress-project';
 
-export const moveE2EFilesToDomain = (
-  application: string,
-  domain: string,
-  lint: Linter
-) => (tree: Tree, context: SchematicContext) => {
+export const moveE2EFilesToDomain = (application: string, domain: string) => (
+  tree: Tree,
+  context: SchematicContext
+) => {
   deleteInTree(
     tree,
     `apps/${CypressProject.E2E}/${application}/${domain}/src/support/app.po.ts`

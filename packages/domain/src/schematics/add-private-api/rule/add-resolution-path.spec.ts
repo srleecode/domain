@@ -27,7 +27,7 @@ describe('addResolutionPath', () => {
     const tsConfig = readJsonInTree(appTree, 'tsconfig.base.json');
     expect(
       tsConfig.compilerOptions.paths[
-        `@${npmScope}/${application}/${domain}/private/${library}`
+        `@${npmScope}-${application}/${domain}/private/${library}`
       ]
     ).toEqual([`libs/${application}/${domain}/${library}/src/private-api.ts`]);
   });

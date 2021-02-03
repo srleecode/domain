@@ -9,6 +9,7 @@ import { moveDomain } from './rule/move-domain';
 import {
   getLibraryTypes,
   getParsedDomain,
+  getProjects,
   isDomainHavingLibraryType,
 } from '../../utils/domain';
 import { checkDomainDoesntExist } from '../shared/validation/check-domain-doesnt-exist';
@@ -27,6 +28,7 @@ import { addE2EProjectRules } from '../add-cypress-project/rule/add-e2e-project-
 import { addStorybookProjectRules } from '../add-cypress-project/rule/add-storybook-project-rules';
 import { sortProjects } from '../shared/rule/sort-projects';
 import { moveDomainConfigProject } from './rule/move-domain-config-project';
+import { addProjectToJestConfig } from '../shared/rule/add-project-to-jest-config';
 
 export default function (options: MoveSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {
@@ -116,6 +118,11 @@ export default function (options: MoveSchematicSchema): Rule {
       ...sortProjects(),
     ]);
     rules.push(moveDomainConfigProject(application, domain, newDomain));
+    const projects = getProjects(application, domain, tree);
+    projects.forEach((project) =>
+      rules.push(addProjectToJestConfig(application, newDomain, project.type))
+    );
+
     return chain(rules);
   };
 }

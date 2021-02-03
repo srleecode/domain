@@ -1,8 +1,8 @@
-import { Linter } from '@nrwl/workspace';
-import { getExternalSchematic } from '../../../utils/testing';
 import { NrwlCypressSchematicSchema } from '../model/nrwl-cypress-schematic-schema.model';
 import { Rule } from '@angular-devkit/schematics';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
+import { Linter } from '../../shared/model/linter.enum';
+import { cypressProjectSchematic } from '@nrwl/cypress/src/generators/cypress-project/cypress-project';
 
 export const createCypressProject = (
   application: string,
@@ -10,9 +10,7 @@ export const createCypressProject = (
   lint: Linter,
   projectType: CypressProject
 ): Rule =>
-  getExternalSchematic(
-    '@nrwl/cypress',
-    'cypress-project',
+  cypressProjectSchematic(
     getNrwlCypressSchematicSchema(application, domain, lint, projectType)
   );
 

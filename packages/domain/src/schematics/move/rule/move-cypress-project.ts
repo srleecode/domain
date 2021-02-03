@@ -1,11 +1,11 @@
 import { Rule, Tree, SchematicsException } from '@angular-devkit/schematics';
 import { NxJson, updateJsonInTree } from '@nrwl/workspace';
+import { moveSchematic } from '@nrwl/workspace/src/generators/move/move';
 import {
   getCypressProjectName,
   isHavingCypressProject,
 } from '../../../utils/cypress-project';
 import { getParsedDomain } from '../../../utils/domain';
-import { getExternalSchematic } from '../../../utils/testing';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
 
 export const moveCypressProject = (
@@ -23,9 +23,10 @@ export const moveCypressProject = (
     return [updateNxJson(application, domain, newDomain, projectType)];
   } else {
     return [
-      getExternalSchematic('@nrwl/workspace', 'move', {
+      moveSchematic({
         projectName: `${projectType}-${application}-${getParsedDomain(domain)}`,
         destination: `${projectType}/${application}/${newDomain}`,
+        updateImportPath: true,
       }),
     ];
   }

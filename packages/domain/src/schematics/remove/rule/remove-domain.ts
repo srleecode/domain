@@ -1,6 +1,6 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
+import { removeSchematic } from '@nrwl/workspace/src/generators/remove/remove';
 import { getProjects, isChildDomain } from '../../../utils/domain';
-import { getExternalSchematic } from '../../../utils/testing';
 import { Project } from '../../shared/model/project.model';
 import { deleteDomainFolder } from '../../shared/rule/delete-domain-folder';
 import { removeParentDomainDependencyRule } from './remove-parent-domain-dependency';
@@ -22,8 +22,10 @@ const getRemoveRules = (
   const rules = [];
   projects.forEach((project) =>
     rules.push(
-      getExternalSchematic('@nrwl/workspace', 'remove', {
+      removeSchematic({
         projectName: project.name,
+        skipFormat: false,
+        forceRemove: false,
       })
     )
   );

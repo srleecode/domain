@@ -1,10 +1,10 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
+import { moveSchematic } from '@nrwl/workspace/src/generators/move/move';
 import {
   getProjects,
   getParsedDomain,
   getTopLevelDomain,
 } from '../../../utils/domain';
-import { getExternalSchematic } from '../../../utils/testing';
 import { Project } from '../../shared/model/project.model';
 
 export const moveDomain = (
@@ -14,15 +14,14 @@ export const moveDomain = (
   tree: Tree
 ): Rule[] => {
   const projects = getProjects(application, domain, tree);
-  return getMoveRules(application, domain, newDomain, projects, tree);
+  return getMoveRules(application, domain, newDomain, projects);
 };
 
 const getMoveRules = (
   application: string,
   domain: string,
   newDomain: string,
-  projects: Project[],
-  tree: Tree
+  projects: Project[]
 ): Rule[] => {
   const rules = [];
   projects.forEach((project) => {
@@ -33,9 +32,10 @@ const getMoveRules = (
         domain.endsWith(`${topLevelDomain}/${project.secondLevelDomain}`))
     )
       rules.push(
-        getExternalSchematic('@nrwl/workspace', 'move', {
+        moveSchematic({
           projectName: project.name,
           destination: `${application}/${newDomain}/${project.type}`,
+          updateImportPath: true,
         })
       );
   });

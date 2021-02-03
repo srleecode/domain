@@ -12,6 +12,7 @@ describe('Domain config', () => {
     buildable: true,
     enableIvy: true,
     strict: false,
+    publishable: false,
   };
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;

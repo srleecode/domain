@@ -5,6 +5,7 @@ import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { UnitTestTree } from '@angular-devkit/schematics/testing';
 import { Tree } from '@angular-devkit/schematics';
+import * as workspaceImport from '@nrwl/workspace/src/generators/move/move';
 
 describe('moveCypressProject', () => {
   const application = 'test-application';
@@ -13,8 +14,8 @@ describe('moveCypressProject', () => {
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
     jest
-      .spyOn(testingUtils, 'getExternalSchematic')
-      .mockReturnValue(testingUtils.emptyRule);
+      .spyOn(workspaceImport, 'moveSchematic')
+      .mockReturnValue(testingUtils.emptyRule as any);
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -30,14 +31,11 @@ describe('moveCypressProject', () => {
       CypressProject.E2E,
       appTree
     );
-    expect(testingUtils.getExternalSchematic).toHaveBeenCalledWith(
-      '@nrwl/workspace',
-      'move',
-      {
-        destination: `${CypressProject.E2E}/${application}/${newLeafDomain}`,
-        projectName: `${CypressProject.E2E}-${application}-${leafDomain}`,
-      }
-    );
+    expect(workspaceImport.moveSchematic).toHaveBeenCalledWith({
+      destination: `${CypressProject.E2E}/${application}/${newLeafDomain}`,
+      projectName: `${CypressProject.E2E}-${application}-${leafDomain}`,
+      updateImportPath: true,
+    });
   });
   it('should generate move rules for cypress project when given parent domain', () => {
     const parentDomain = 'parent-domain/shared';
@@ -49,15 +47,12 @@ describe('moveCypressProject', () => {
       CypressProject.E2E,
       appTree
     );
-    expect(testingUtils.getExternalSchematic).toHaveBeenCalledWith(
-      '@nrwl/workspace',
-      'move',
-      {
-        destination: `${CypressProject.E2E}/${application}/${newParentDomain}`,
-        projectName: `${CypressProject.E2E}-${application}-${getParsedDomain(
-          parentDomain
-        )}`,
-      }
-    );
+    expect(workspaceImport.moveSchematic).toHaveBeenCalledWith({
+      destination: `${CypressProject.E2E}/${application}/${newParentDomain}`,
+      projectName: `${CypressProject.E2E}-${application}-${getParsedDomain(
+        parentDomain
+      )}`,
+      updateImportPath: true,
+    });
   });
 });

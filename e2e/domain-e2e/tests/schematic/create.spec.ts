@@ -60,7 +60,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,shell --addJestJunitReporter true --routing true --strict true --enableIvy true --buildable true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,shell,util --addJestJunitReporter true --routing true --strict true --enableIvy true --buildable true`
       );
       const jestConfig = readFile(
         `libs/${application}/${domain}/data-access/jest.config.js`

@@ -8,10 +8,11 @@ import { createCypressProject } from './create-cypress-project';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { moveStorybookFilesToDomain } from './move-storybook-files-to-domain';
 import { addStorybookConfig } from './add-storybook-config';
-import { Linter } from '@nrwl/workspace';
 import { UiFrameworkType } from '../../shared/model/ui-framework.type';
 import { deleteCypressProjectFolder } from '../../shared/rule/delete-cypress-project-folder';
 import { addSourceMapFalse } from './add-source-map-false';
+import { Linter } from '../../shared/model/linter.enum';
+import { addProjectToJestConfig } from '../../shared/rule/add-project-to-jest-config';
 
 export const addStorybookProjectRules = (
   application: string,
@@ -36,5 +37,6 @@ export const addStorybookProjectRules = (
     updateAngularJson(application, domain, projectType),
     deleteCypressProjectFolder(application, domain, projectType),
     addSourceMapFalse(application, domain),
+    addProjectToJestConfig(application, domain, '.cypress'),
   ];
 };

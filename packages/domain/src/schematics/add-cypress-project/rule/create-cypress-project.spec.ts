@@ -4,7 +4,8 @@ import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { Tree } from '@angular-devkit/schematics';
 import { createCypressProject } from './create-cypress-project';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
-import { Linter } from '@nrwl/workspace';
+import { Linter } from '../../shared/model/linter.enum';
+import * as nrwlImport from '@nrwl/cypress/src/generators/cypress-project/cypress-project';
 
 describe('createCypressProject', () => {
   let appTree: UnitTestTree;
@@ -15,8 +16,8 @@ describe('createCypressProject', () => {
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty()) as UnitTestTree;
     jest
-      .spyOn(testingUtils, 'getExternalSchematic')
-      .mockReturnValue(testingUtils.emptyRule);
+      .spyOn(nrwlImport, 'cypressProjectSchematic')
+      .mockReturnValue(testingUtils.emptyRule as any);
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -29,17 +30,13 @@ describe('createCypressProject', () => {
       Linter.EsLint,
       CypressProject.E2E
     );
-    expect(testingUtils.getExternalSchematic).toHaveBeenCalledWith(
-      '@nrwl/cypress',
-      'cypress-project',
-      {
-        directory: `${CypressProject.E2E}/${application}`,
-        js: false,
-        linter: Linter.EsLint,
-        name: 'leaf-domain',
-        project: '',
-      }
-    );
+    expect(nrwlImport.cypressProjectSchematic).toHaveBeenCalledWith({
+      directory: `${CypressProject.E2E}/${application}`,
+      js: false,
+      linter: Linter.EsLint,
+      name: 'leaf-domain',
+      project: '',
+    });
   });
   it('should generate cypress project with correct directory and name for parent domain', () => {
     createCypressProject(
@@ -48,17 +45,13 @@ describe('createCypressProject', () => {
       Linter.EsLint,
       CypressProject.E2E
     );
-    expect(testingUtils.getExternalSchematic).toHaveBeenCalledWith(
-      '@nrwl/cypress',
-      'cypress-project',
-      {
-        directory: `${CypressProject.E2E}/${application}/parent-domain`,
-        js: false,
-        linter: Linter.EsLint,
-        name: 'shared',
-        project: '',
-      }
-    );
+    expect(nrwlImport.cypressProjectSchematic).toHaveBeenCalledWith({
+      directory: `${CypressProject.E2E}/${application}/parent-domain`,
+      js: false,
+      linter: Linter.EsLint,
+      name: 'shared',
+      project: '',
+    });
   });
   it('should generate cypress project with correct directory and name for child domain', () => {
     createCypressProject(
@@ -67,16 +60,12 @@ describe('createCypressProject', () => {
       Linter.EsLint,
       CypressProject.E2E
     );
-    expect(testingUtils.getExternalSchematic).toHaveBeenCalledWith(
-      '@nrwl/cypress',
-      'cypress-project',
-      {
-        directory: `${CypressProject.E2E}/${application}/parent-domain`,
-        js: false,
-        linter: Linter.EsLint,
-        name: 'child-domain',
-        project: '',
-      }
-    );
+    expect(nrwlImport.cypressProjectSchematic).toHaveBeenCalledWith({
+      directory: `${CypressProject.E2E}/${application}/parent-domain`,
+      js: false,
+      linter: Linter.EsLint,
+      name: 'child-domain',
+      project: '',
+    });
   });
 });

@@ -1,4 +1,3 @@
-import { getExternalSchematic } from '../../../utils/testing';
 import {
   getCypressProjectName,
   isHavingCypressProject,
@@ -13,7 +12,7 @@ import {
 } from '@nrwl/workspace';
 import { deleteInTree, getDirInTree } from '../../../utils/tree';
 import { removeCypressTsConfigPath } from './remove-cypress-ts-config-path';
-import { SchematicsException } from '@angular-devkit/schematics';
+import { removeSchematic } from '@nrwl/workspace/src/generators/remove/remove';
 export const removeCypressProject = (
   application: string,
   domain: string,
@@ -44,8 +43,10 @@ export const removeCypressProject = (
     }
   } else {
     rules = rules.concat([
-      getExternalSchematic('@nrwl/workspace', 'remove', {
+      removeSchematic({
         projectName: projectName,
+        skipFormat: false,
+        forceRemove: false,
       }),
     ]);
   }

@@ -10,7 +10,6 @@ import { getLibraryTypes, getParsedDomain } from '../../utils/domain';
 import { checkDomainExists } from '../shared/validation/check-domain-exists';
 import { CypressProject } from '../shared/model/cypress-project.enum';
 import { addStorybookProjectRules } from './rule/add-storybook-project-rules';
-import { Linter } from '@nrwl/workspace';
 import { sortProjects } from '../shared/rule/sort-projects';
 import { createComponentCommand } from './rule/create-command-component';
 import {
@@ -18,6 +17,7 @@ import {
   isHavingEsLintRcJson,
 } from '../../utils/cypress-project';
 import { addCypressLintFiles } from './rule/add-cypress-lint-files';
+import { Linter } from '../shared/model/linter.enum';
 
 export default function (options: AddCypressProjectSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {

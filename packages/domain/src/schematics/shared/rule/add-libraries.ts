@@ -2,10 +2,10 @@ import { Rule, Tree, SchematicsException } from '@angular-devkit/schematics';
 import { getExternalSchematic } from '../../../utils/testing';
 import { AddLibrariesNormalizedSchema } from '../../add-libraries/model/normalized-schema.model';
 import { CreateNormalizedSchema } from '../../create/model/normalized-schema.model';
-import { Linter } from '@nrwl/workspace';
 import { NxLibraryParamters } from '../model/nx-library-parameters.model';
 import { getDomainProjectConfig } from '../../../utils/domain-config';
 import { getNpmScope } from '../../../utils/nx-json';
+import { Linter } from '../model/linter.enum';
 
 export const addLibrariesRules = (
   tree: Tree,

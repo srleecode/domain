@@ -12,10 +12,11 @@ import {
 } from './cypress-project';
 import * as nxJsonUtils from './nx-json';
 import * as treeUtils from './tree';
-import { Linter, NxJson } from '@nrwl/workspace';
+import { NxJson } from '@nrwl/workspace';
 import { DomainLibraryName } from '../schematics/shared/model/domain-library-name.enum';
 import { getParsedDomain } from './domain';
 import { CypressProject } from '../schematics/shared/model/cypress-project.enum';
+import { Linter } from '../schematics/shared/model/linter.enum';
 
 describe('Cypress project', () => {
   let appTree: UnitTestTree;

@@ -1,4 +1,4 @@
-import { Linter } from '@nrwl/workspace';
+import { Linter } from './linter.enum';
 import { StyleType } from './style-type.enum';
 
 export interface NxLibraryParamters {

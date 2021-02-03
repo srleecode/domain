@@ -27,6 +27,6 @@ describe('addMockFileResolutionPath', () => {
       tsConfig.compilerOptions.paths[
         `@${npmScope}-${application}/${domain}/testing`
       ]
-    ).toEqual([`libs/${application}/${domain}/src/testing.ts`]);
+    ).toEqual([`libs/${application}/${domain}/util/src/testing.ts`]);
   });
 });

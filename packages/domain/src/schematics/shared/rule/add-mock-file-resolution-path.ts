@@ -17,6 +17,6 @@ export const addMockFileResolutionPath = (
     // Due to https://github.com/nrwl/nx/issues/2817, dash needs to be used instead of / in the path for the application
     json.compilerOptions.paths[
       `@${getNpmScope(tree)}-${application}/${domain}/testing`
-    ] = [`libs/${application}/${domain}/src/testing.ts`];
+    ] = [`libs/${application}/${domain}/util/src/testing.ts`];
     return json;
   });

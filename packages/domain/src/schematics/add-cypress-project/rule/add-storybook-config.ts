@@ -8,7 +8,7 @@ import {
   readInTree,
 } from '../../../utils/tree';
 import { getParsedDomain, isTwoLevelDomain } from '../../../utils/domain';
-import { Linter, updateJsonInTree } from '@nrwl/workspace';
+import { updateJsonInTree } from '@nrwl/workspace';
 import { updateStorybookTargets } from './update-storybook-targets';
 import { updateStorybookAddonsBasePath } from './update-storybook-addons-base-path';
 import { updateStorybookCypressBaseUrl } from './add-storybook-cypress-base-url';
@@ -19,6 +19,7 @@ import { updatePathInStorybookConfig } from '../../shared/rule/update-path-in-st
 import { getCypressJsonPath } from '../../../utils/cypress-project';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { addStoryFileExclusions } from '../../shared/rule/add-story-file-exclusions';
+import { Linter } from '../../shared/model/linter.enum';
 
 export const addStorybookConfig = (
   application: string,

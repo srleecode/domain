@@ -1,4 +1,4 @@
-import { Linter } from '@nrwl/workspace';
+import { Linter } from '../../shared/model/linter.enum';
 
 export interface NrwlCypressSchematicSchema {
   project: string;

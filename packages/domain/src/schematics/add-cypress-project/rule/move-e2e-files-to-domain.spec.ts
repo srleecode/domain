@@ -6,7 +6,8 @@ import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { UnitTestTree } from '@angular-devkit/schematics/testing';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { Tree } from '@angular-devkit/schematics';
-import { Linter } from '@nrwl/workspace';
+import { Linter } from '../../shared/model/linter.enum';
+
 jest.mock('@nrwl/workspace', () => ({
   updateJsonInTree: jest.fn(),
 }));
@@ -25,11 +26,7 @@ describe('moveE2EFilesToDomain', () => {
   });
 
   it('should move files in tree', () => {
-    moveE2EFilesToDomain(
-      application,
-      domain,
-      Linter.TsLint
-    )(appTree, undefined);
+    moveE2EFilesToDomain(application, domain)(appTree, undefined);
     expect(treeUtils.renameInTree).toHaveBeenNthCalledWith(
       1,
       appTree,

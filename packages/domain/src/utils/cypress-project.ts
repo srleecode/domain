@@ -5,7 +5,7 @@ import { NxJson } from '@nrwl/workspace/src/core/shared-interfaces';
 import { DomainLibraryName } from '../schematics/shared/model/domain-library-name.enum';
 import { CypressProject } from '../schematics/shared/model/cypress-project.enum';
 import { existsInTree, readWorkspaceInTree } from './tree';
-import { Linter } from '@nrwl/workspace';
+import { Linter } from '../schematics/shared/model/linter.enum';
 
 export const getCypressProjectName = (
   application: string,
