@@ -14,7 +14,6 @@ import {
   getParsedDomain,
   getTopLevelDomain,
 } from '../../utils/domain';
-import { checkParentDomainExists } from '../shared/validation/check-parent-domain-exists';
 import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
 import { addMockFileResolutionPath } from '../shared/rule/add-mock-file-resolution-path';
 import { addMockFile } from '../shared/rule/add-mock-file';
@@ -33,6 +32,7 @@ import { addCypressLintFiles } from '../add-cypress-project/rule/add-cypress-lin
 import { addDomainConfigProject } from './rule/add-domain-config-project';
 import { isHavingEsLintRcJson } from '../../utils/cypress-project';
 import { Linter } from '../shared/model/linter.enum';
+import { checkDomainFolderIsEmpty } from './validation/check-domain-folder-is-empty';
 
 export default function (options: CreateSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext) => {
@@ -71,10 +71,11 @@ export default function (options: CreateSchematicSchema): Rule {
     if (isChildDomain(options.domain)) {
       const parentDomain = getTopLevelDomain(domain);
       const parsedDomain = getParsedDomain(domain).replace('-shared', '');
-      checkParentDomainExists(application, parentDomain, tree);
       rules.push(
         addParentDomainDependencyRule(application, parentDomain, parsedDomain)
       );
+    } else {
+      checkDomainFolderIsEmpty(application, domain, tree);
     }
     if (libraries.includes(DomainLibraryName.Util)) {
       rules.push(addMockFile(application, domain));
