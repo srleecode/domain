@@ -18,6 +18,7 @@ import {
 } from '../../utils/cypress-project';
 import { addCypressLintFiles } from './rule/add-cypress-lint-files';
 import { Linter } from '../shared/model/linter.enum';
+import { removeLibraryStorybookLintReference } from './rule/remove-library-storybook-lint-reference';
 
 export default function (options: AddCypressProjectSchematicSchema): Rule {
   return (tree: Tree, _context: SchematicContext): Rule => {

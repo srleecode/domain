@@ -13,6 +13,7 @@ import { deleteCypressProjectFolder } from '../../shared/rule/delete-cypress-pro
 import { addSourceMapFalse } from './add-source-map-false';
 import { Linter } from '../../shared/model/linter.enum';
 import { addProjectToJestConfig } from '../../shared/rule/add-project-to-jest-config';
+import { removeLibraryStorybookLintReference } from './remove-library-storybook-lint-reference';
 
 export const addStorybookProjectRules = (
   application: string,
@@ -38,5 +39,6 @@ export const addStorybookProjectRules = (
     deleteCypressProjectFolder(application, domain, projectType),
     addSourceMapFalse(application, domain),
     addProjectToJestConfig(application, domain, '.cypress'),
+    removeLibraryStorybookLintReference(application, domain, libraries[0]),
   ];
 };
