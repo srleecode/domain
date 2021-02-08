@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "name": "domain",
+  "version": "0.0.1",
+  "schematics": {
+    "domain": {
+      "factory": "./src/schematics/domain/schematic",
+      "schema": "./src/schematics/domain/schema.json",
+      "description": "domain schematic"
+    }
+  }
+}
