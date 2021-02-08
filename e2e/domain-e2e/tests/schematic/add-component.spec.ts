@@ -5,12 +5,12 @@ import {
 } from '@nrwl/nx-plugin/testing';
 
 describe('domain', () => {
-  describe('addComponent', () => {
+  describe('component', () => {
     it('should create component with all options', async (done) => {
       const application = 'test-application';
       const domain = 'storybook-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:addComponent --application ${application} --domain ${domain} --prefix srlee --name TestExample --displayBlock true --viewEncapsulation ShadowDom --changeDetection OnPush --style scss --testType testBed --isExported true`
+        `generate @srleecode/domain:component --application ${application} --domain ${domain} --prefix srlee --name TestExample --displayBlock true --viewEncapsulation ShadowDom --changeDetection OnPush --style scss --testType testBed --isExported true`
       );
       const expectedFileTypes = ['ts', 'spec.ts', 'scss', 'html'];
       const dasherizedName = 'test-example';
@@ -50,13 +50,14 @@ describe('domain', () => {
       );
       expect(moduleFile).toMatch(/declarations: \[TestExampleComponent\]/);
       expect(moduleFile).toMatch(/exports: \[TestExampleComponent\]/);
+
       done();
     }, 120000);
-    it('should create component with all options', async (done) => {
+    it('should create component with minimal options', async (done) => {
       const application = 'test-application';
       const domain = 'storybook-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:addComponent --application ${application} --domain ${domain} --name TestExample`
+        `generate @srleecode/domain:component --application ${application} --domain ${domain} --name TestExample --prefix srlee`
       );
       const expectedFileTypes = ['ts', 'scss', 'spec.ts', 'html'];
       const dasherizedName = 'test-example';

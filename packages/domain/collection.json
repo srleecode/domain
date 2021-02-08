@@ -47,6 +47,63 @@
       "factory": "./src/schematics/add-private-api/schematic",
       "schema": "./src/schematics/add-private-api/schema.json",
       "description": "Add private api, i.e. exports that can only be used inside a domain and not outside of it"
+    },
+    "component": {
+      "factory": "./src/generators/component/generator#componentSchematic",
+      "schema": "./src/generators/component/schema.json",
+      "description": "component generator"
+    }
+  },
+  "generators": {
+    "create": {
+      "factory": "./src/schematics/create/schematic",
+      "schema": "./src/schematics/create/schema.json",
+      "description": "create domain schematic"
+    },
+    "addCypressProject": {
+      "factory": "./src/schematics/add-cypress-project/schematic",
+      "schema": "./src/schematics/add-cypress-project/schema.json",
+      "description": "Add cypress project schematic"
+    },
+    "addLibraries": {
+      "factory": "./src/schematics/add-libraries/schematic",
+      "schema": "./src/schematics/add-libraries/schema.json",
+      "description": "Add libraries to domain"
+    },
+    "removeCypressProject": {
+      "factory": "./src/schematics/remove-cypress-project/schematic",
+      "schema": "./src/schematics/remove-cypress-project/schema.json",
+      "description": "Remove cypress project schematic"
+    },
+    "removeLibraries": {
+      "factory": "./src/schematics/remove-libraries/schematic",
+      "schema": "./src/schematics/remove-libraries/schema.json",
+      "description": "Remove libraries from domain"
+    },
+    "move": {
+      "factory": "./src/schematics/move/schematic",
+      "schema": "./src/schematics/move/schema.json",
+      "description": "Move domain"
+    },
+    "remove": {
+      "factory": "./src/schematics/remove/schematic",
+      "schema": "./src/schematics/remove/schema.json",
+      "description": "Remove domain"
+    },
+    "addComponent": {
+      "factory": "./src/schematics/add-component/schematic",
+      "schema": "./src/schematics/add-component/schema.json",
+      "description": "Add component to domain"
+    },
+    "addPrivateApi": {
+      "factory": "./src/schematics/add-private-api/schematic",
+      "schema": "./src/schematics/add-private-api/schema.json",
+      "description": "Add private api, i.e. exports that can only be used inside a domain and not outside of it"
+    },
+    "component": {
+      "factory": "./src/generators/component/generator",
+      "schema": "./src/generators/component/schema.json",
+      "description": "component generator"
     }
   }
 }

@@ -3,7 +3,7 @@ import { ChangeDetection } from './change-detection-type.enum';
 import { TestType } from './test-type.enum';
 import { ViewEncapsulation } from './view-encapsulation.enum';
 
-export interface AddComponentSchema {
+export interface ComponentGeneratorSchema {
   application: string;
   domain: string;
   name: string;

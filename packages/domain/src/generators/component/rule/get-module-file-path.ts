@@ -1,15 +1,13 @@
-import { Tree } from '@angular-devkit/schematics';
-import { getParsedDomain } from '../../../utils/domain';
-import { existsInTree, getDirInTree } from '../../../utils/tree';
+import { Tree, logger } from '@nrwl/devkit';
 import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
-import { logging } from '@angular-devkit/core';
+import { getParsedDomain } from '../../shared/utils/domain';
+import { existsInTree } from '../../shared/utils/tree';
 
 export const getModuleFilePath = (
   application: string,
   domain: string,
   libraryType: DomainLibraryName,
-  tree: Tree,
-  logger: logging.LoggerApi
+  tree: Tree
 ): string => {
   const defaultModuleFileName = `${application}-${getParsedDomain(
     domain
@@ -19,10 +17,9 @@ export const getModuleFilePath = (
   if (existsInTree(tree, defaultModuleFilePath)) {
     return defaultModuleFilePath;
   }
-  const moduleFolder = getDirInTree(tree, moduleFolderPath);
-  const moduleFiles = moduleFolder.subfiles.filter(
-    (file) => !file.includes('routing') && file.includes('.module')
-  );
+  const moduleFiles = tree
+    .children(moduleFolderPath)
+    .filter((file) => !file.includes('routing') && file.includes('.module'));
   if (moduleFiles.length === 0) {
     logger.error(`Unable to find ${defaultModuleFileName} or any .module file`);
   } else if (moduleFiles.length > 1) {
