@@ -75,7 +75,7 @@ describe('getDecoratorMetadata', () => {
     appTree.write(moduleFilePath, moduleContent);
   });
 
-  it('should generate metadata from ast tree', async () => {
+  it('should generate metadata from ast tree', () => {
     const moduleFile = appTree.read(moduleFilePath);
     const source = createSourceFile(
       moduleFilePath,

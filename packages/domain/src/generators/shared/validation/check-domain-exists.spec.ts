@@ -15,7 +15,9 @@ describe('checkDomainExists', () => {
   it('should throw SchematicException when domain does not exist', () => {
     jest.spyOn(domainUtils, 'isDomainExisting').mockReturnValue(false);
     expect(() => checkDomainExists(application, domain, appTree)).toThrowError(
-      new Error(`${application}/${domain} does not exist`)
+      new Error(
+        `${application}/${domain} does not exist or it is a parent domain`
+      )
     );
   });
   it('should not throw SchematicException when domain exists', () => {

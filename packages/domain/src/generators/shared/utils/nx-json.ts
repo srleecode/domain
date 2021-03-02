@@ -1,7 +1,6 @@
-import { Tree, readJson } from '@nrwl/devkit';
-import { NxJson } from '@nrwl/workspace';
+import { Tree, getWorkspaceLayout } from '@nrwl/devkit';
 
-export const getNxJson = (tree: Tree): NxJson =>
-  readJson<NxJson>(tree, 'nx.json');
-
-export const getNpmScope = (tree: Tree): string => getNxJson(tree).npmScope;
+export const getNpmScope = (tree: Tree): string => {
+  const { npmScope } = getWorkspaceLayout(tree);
+  return npmScope;
+};

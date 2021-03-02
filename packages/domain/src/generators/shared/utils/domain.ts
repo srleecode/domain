@@ -1,8 +1,7 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree, getProjects as devKitGetProjects } from '@nrwl/devkit';
 import { DomainLibraryName } from '../model/domain-library-name.enum';
 import { Project } from '../model/project.model';
 import { isLibraryExisting } from './libraries';
-import { getNxJson } from './nx-json';
 
 export const isChildDomain = (domain: string): boolean =>
   domain.includes('/') && !domain.endsWith('shared');
@@ -35,10 +34,10 @@ export const isDomainHavingLibraryType = (
   tree: Tree,
   libraryType: DomainLibraryName
 ): boolean => {
-  const nxJson = getNxJson(tree);
   const parsedDomainName = getParsedDomain(domain);
   const applicationDomainName = `${application}-${parsedDomainName}`;
-  return Object.keys(nxJson.projects).some(
+  const projects = devKitGetProjects(tree);
+  return [...projects.keys()].some(
     (projectName) =>
       projectName.replace(`-${libraryType}`, '') === applicationDomainName
   );
@@ -50,21 +49,16 @@ export const isDomainEmptyAfterLibraryRemoval = (
   removedLibraryTypes: DomainLibraryName[],
   tree: Tree
 ): boolean => {
-  const nxJson = getNxJson(tree);
   const parsedDomainName = getParsedDomain(domain);
   const applicationDomainName = `${application}-${parsedDomainName}`;
-
-  const isDomainHavingLibrary = Object.keys(nxJson.projects).some(
-    (projectName) => {
-      const libraryType = getLibraryType(projectName.split('-'));
-      if (removedLibraryTypes.includes(libraryType)) {
-        return false;
-      }
-      return (
-        projectName.replace(`-${libraryType}`, '') === applicationDomainName
-      );
+  const projects = devKitGetProjects(tree);
+  const isDomainHavingLibrary = [...projects.keys()].some((projectName) => {
+    const libraryType = getLibraryType(projectName.split('-'));
+    if (removedLibraryTypes.includes(libraryType)) {
+      return false;
     }
-  );
+    return projectName.replace(`-${libraryType}`, '') === applicationDomainName;
+  });
 
   return !isDomainHavingLibrary;
 };
@@ -74,10 +68,10 @@ export const getProjects = (
   domain: string,
   tree: Tree
 ): Project[] => {
-  const nxJson = getNxJson(tree);
   const parsedDomainName = getParsedDomain(domain).replace('-shared', '');
   const applicationDomain = `${application}-${parsedDomainName}`;
-  return Object.keys(nxJson.projects)
+  const projects = devKitGetProjects(tree);
+  return [...projects.keys()]
     .map(
       (projectName): Project => {
         const splitProjectName = projectName.split('-');

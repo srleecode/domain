@@ -6,7 +6,7 @@ import {
 import { getParsedDomain } from './domain';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { DomainLibraryName } from '../model/domain-library-name.enum';
-import { Tree } from '@nrwl/devkit';
+import { Tree, addProjectConfiguration } from '@nrwl/devkit';
 
 describe('libraries', () => {
   const application = 'test-application';
@@ -115,33 +115,39 @@ describe('libraries', () => {
     const libraryType = DomainLibraryName.DataAccess;
     beforeEach(() => {
       appTree = createTreeWithEmptyWorkspace();
+      addProjectConfiguration(
+        appTree,
+        `${application}-${getParsedDomain(
+          parentDomain
+        )}-${libraryType.toString()}`,
+        { targets: {}, root: '' }
+      );
+      addProjectConfiguration(
+        appTree,
+        `${application}-${getParsedDomain(domain)}-${libraryType.toString()}`,
+        { targets: {}, root: '' }
+      );
     });
-    const createParentDomainLibraryFolder = () =>
-      appTree.write(
-        `/libs/${application}/${parentDomain}/${libraryType}/src/index.ts`,
-        ''
-      );
-    const createChildDomainLibraryFolder = () =>
-      appTree.write(
-        `/libs/${application}/${domain}/${libraryType}/src/index.ts`,
-        ''
-      );
+
     it('should return true when leaf domain library exists', () => {
-      createChildDomainLibraryFolder();
       expect(isLibraryExisting(application, domain, libraryType, appTree)).toBe(
         true
       );
     });
     it('should return true when parent domain library exists', () => {
-      createParentDomainLibraryFolder();
       expect(
         isLibraryExisting(application, parentDomain, libraryType, appTree)
       ).toBe(true);
     });
     it('should return false when library does not exist', () => {
-      expect(isLibraryExisting(application, domain, libraryType, appTree)).toBe(
-        false
-      );
+      expect(
+        isLibraryExisting(
+          application,
+          'not-existing-domain',
+          libraryType,
+          appTree
+        )
+      ).toBe(false);
     });
   });
   describe('getParsedLibraries', () => {

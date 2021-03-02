@@ -31,7 +31,7 @@ describe('domain', () => {
 
     it('should remove storybook project and cypress folder for domain when only storybook cypress project', async (done) => {
       const application = 'test-application';
-      const domain = 'storybook-domain';
+      const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
         `generate @srleecode/domain:removeCypressProject --application ${application} --domain ${domain} --projectType=storybook`
       );
@@ -52,28 +52,4 @@ describe('domain', () => {
       done();
     }, 120000);
   });
-
-  it('should remove cypress when last cypress project type is being removed', async (done) => {
-    const application = 'test-application';
-    const domain = 'jest-junit-reporter';
-    await runNxCommandAsync(
-      `generate @srleecode/domain:removeCypressProject --application ${application} --domain ${domain} --projectType=storybook`
-    );
-
-    const nxJson = readJson('nx.json');
-    const tsConfig = readJson('tsconfig.base.json');
-    const workspaceJson = readJson('workspace.json');
-    const projectName = `e2e-${application}-${domain}`;
-    expect(nxJson.projects[projectName]).not.toBeDefined();
-    expect(workspaceJson.projects[projectName]).not.toBeDefined();
-    expect(() =>
-      checkFilesExist(
-        `libs/${application}/${domain}/.cypress/src/support/index.ts`
-      )
-    ).toThrow();
-    expect(
-      tsConfig.compilerOptions.paths[`@cypress/${application}/${domain}`]
-    ).not.toBeDefined();
-    done();
-  }, 120000);
 });

@@ -5,12 +5,12 @@ import {
 } from '@nrwl/nx-plugin/testing';
 
 describe('domain', () => {
-  describe('addLibraries', () => {
+  describe('libraries', () => {
     it('should add new library to domain', async (done) => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --libraries ui`
+        `generate @srleecode/domain:libraries --application ${application} --domain ${domain} --prefix srlee --libraries ui`
       );
 
       expect(() =>
@@ -22,7 +22,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --libraries shell,ui,util`
+        `generate @srleecode/domain:libraries --application ${application} --domain ${domain} --prefix srlee --libraries shell,ui,util`
       );
 
       expect(() =>
@@ -40,7 +40,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --libraries util`
+        `generate @srleecode/domain:libraries --application ${application} --domain ${domain} --prefix srlee --libraries util`
       );
 
       expect(() =>
@@ -52,7 +52,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'extra-options-test-domain/shared';
       await runNxCommandAsync(
-        `generate @srleecode/domain:addLibraries --application ${application} --domain ${domain} --prefix srlee --libraries util --addJestJunitReporter true`
+        `generate @srleecode/domain:libraries --application ${application} --domain ${domain} --prefix srlee --libraries util --addJestJunitReporter true`
       );
       const jestConfig = readFile(
         `libs/${application}/${domain}/util/jest.config.js`

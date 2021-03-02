@@ -7,12 +7,10 @@ export interface ComponentGeneratorSchema {
   application: string;
   domain: string;
   name: string;
+  prefix: string;
   displayBlock: boolean;
-  inlineStyle: boolean;
-  inlineTemplate: boolean;
   viewEncapsulation: ViewEncapsulation;
   changeDetection: ChangeDetection;
-  prefix: string;
   style: StyleType;
   testType: TestType;
   isExported: boolean;

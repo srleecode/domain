@@ -12,11 +12,10 @@ import {
 } from './domain';
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { NxJson } from '@nrwl/workspace';
-import * as nxJsonUtils from './nx-json';
 import * as tsConfigUtils from './tsconfig';
 import { DomainLibraryName } from '../model/domain-library-name.enum';
 import { Project } from '../model/project.model';
+import { addProjectConfiguration } from './project-configuration';
 
 describe('isChildDomain', () => {
   it('should return true when child domain', () => {
@@ -80,52 +79,54 @@ describe('domain tests with tree', () => {
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
   });
-  const createParentDomainFolder = (
-    application: string,
-    parentDomain: string
-  ) =>
-    appTree.write(
-      `/libs/${application}/${parentDomain}/data-access/src/index.ts`,
-      ''
-    );
-
-  const createLeafDomainFolder = (application: string, domain: string) =>
-    appTree.write(
-      `/libs/${application}/${domain}/data-access/src/index.ts`,
-      ''
-    );
 
   describe('isDomainExisting', () => {
+    beforeEach(() => {
+      appTree = createTreeWithEmptyWorkspace();
+      addProjectConfiguration(
+        appTree,
+        `${application}-${getParsedDomain(parentDomain)}-data-access`,
+        { targets: {}, root: '' }
+      );
+      addProjectConfiguration(
+        appTree,
+        `${application}-${getParsedDomain(leafDomain)}-data-access`,
+        { targets: {}, root: '' }
+      );
+    });
     it('should return true when domain is a parent domain and domain exists', () => {
-      createParentDomainFolder(application, parentDomain);
       expect(isDomainExisting(application, parentDomain, appTree)).toBe(true);
     });
     it('should return true when domain is a leaf domain and domain exists', () => {
-      createLeafDomainFolder(application, leafDomain);
       expect(isDomainExisting(application, leafDomain, appTree)).toBe(true);
     });
     it('should return false when domain is a leaf domain and parent domain with same name exists', () => {
-      createParentDomainFolder(application, parentDomain);
-      expect(isDomainExisting(application, 'parent-domain', appTree)).toBe(
-        false
-      );
+      expect(
+        isDomainExisting(application, 'not-existing-domain', appTree)
+      ).toBe(false);
     });
   });
 
   describe('isDomainHavingLibraryType', () => {
-    const mockNxJson: NxJson = {
-      npmScope: 'project',
-      projects: {
-        [`${application}-${getParsedDomain(parentDomain)}-${
-          DomainLibraryName.DataAccess
-        }`]: {},
-        [`${application}-${leafDomain}-with-util-${DomainLibraryName.Util}`]: {},
-        [`${application}-${leafDomain}-${DomainLibraryName.DataAccess}`]: {},
-      },
-    };
-
     beforeEach(() => {
-      appTree.write('nx.json', JSON.stringify(mockNxJson));
+      const emptyProject = { targets: {}, root: '' };
+      addProjectConfiguration(
+        appTree,
+        `${application}-${getParsedDomain(parentDomain)}-${
+          DomainLibraryName.DataAccess
+        }`,
+        emptyProject
+      );
+      addProjectConfiguration(
+        appTree,
+        `${application}-${leafDomain}-with-util-${DomainLibraryName.Util}`,
+        emptyProject
+      );
+      addProjectConfiguration(
+        appTree,
+        `${application}-${leafDomain}-${DomainLibraryName.DataAccess}`,
+        emptyProject
+      );
     });
     it('should return true when domain has given library', () => {
       expect(
@@ -160,15 +161,12 @@ describe('domain tests with tree', () => {
   });
 
   describe('isDomainEmptyAfterLibraryRemoval', () => {
-    const mockNxJson: NxJson = {
-      npmScope: 'project',
-      projects: {
-        [`${application}-${leafDomain}-${DomainLibraryName.DataAccess}`]: {},
-      },
-    };
-
     beforeEach(() => {
-      appTree.write('nx.json', JSON.stringify(mockNxJson));
+      addProjectConfiguration(
+        appTree,
+        `${application}-${leafDomain}-${DomainLibraryName.DataAccess}`,
+        { targets: {}, root: '' }
+      );
     });
     it('should return true when domain has no library projects', () => {
       expect(
@@ -203,16 +201,7 @@ describe('domain tests with tree', () => {
     const leafDomainUtilProjectName = `${application}-${leafDomain}-${utilLibraryType}`;
     const parentDomainUtilProjectName = `${application}-${parentDomain}-shared-${utilLibraryType}`;
     const childDomainUtilProjectName = `${application}-${parentDomain}-${childDomain}-${utilLibraryType}`;
-    const mockNxJson: NxJson = {
-      npmScope: 'project',
-      projects: {
-        [leafDomainDataAccessProjectName]: {},
-        [leafDomainUtilProjectName]: {},
-        [parentDomainUtilProjectName]: {},
-        [childDomainUtilProjectName]: {},
-      },
-    };
-    const tsConfigPrefix = `${mockNxJson.npmScope}/${application}`;
+    const tsConfigPrefix = `project/${application}`;
     const tsConfig = {
       compilerOptions: {
         paths: {
@@ -229,7 +218,23 @@ describe('domain tests with tree', () => {
       },
     };
     beforeEach(() => {
-      jest.spyOn(nxJsonUtils, 'getNxJson').mockReturnValue(mockNxJson);
+      const emptyProject = { targets: {}, root: '' };
+      addProjectConfiguration(
+        appTree,
+        leafDomainDataAccessProjectName,
+        emptyProject
+      );
+      addProjectConfiguration(appTree, leafDomainUtilProjectName, emptyProject);
+      addProjectConfiguration(
+        appTree,
+        parentDomainUtilProjectName,
+        emptyProject
+      );
+      addProjectConfiguration(
+        appTree,
+        childDomainUtilProjectName,
+        emptyProject
+      );
       jest.spyOn(tsConfigUtils, 'getTsConfig').mockReturnValue(tsConfig);
     });
 

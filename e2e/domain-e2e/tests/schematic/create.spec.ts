@@ -11,13 +11,18 @@ describe('domain', () => {
     ensureNxProject('@srleecode/domain', 'dist/packages/domain');
   });
   describe('create', () => {
-    it('should create leaf domain', async (done) => {
+    it('should create domains used in other tests', async (done) => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
         `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access`
       );
-
+      await runNxCommandAsync(
+        `generate @srleecode/domain:create --application ${application} --domain storybook-domain --prefix srlee --libraries data-access,feature,ui`
+      );
+      await runNxCommandAsync(
+        `generate @srleecode/domain:create --application ${application} --domain extra-options-test-domain/shared --prefix srlee --libraries feature,ui`
+      );
       expect(() =>
         checkFilesExist(
           `libs/${application}/${domain}/data-access/src/index.ts`
@@ -29,7 +34,7 @@ describe('domain', () => {
       const application = 'test-application';
       const domain = 'single-library-domain';
       await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access --addE2EProject true`
+        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access`
       );
 
       expect(() =>
@@ -67,19 +72,6 @@ describe('domain', () => {
       );
       expect(jestConfig.includes('reporters')).toBe(true);
       expect(jestConfig.includes('jest-junit')).toBe(true);
-      done();
-    }, 120000);
-    it('should add E2E cypress project when it is true', async (done) => {
-      const application = 'test-application';
-      const domain = 'extra-options-test-domain/shared';
-      await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries feature,ui --addE2EProject true --addComponentCommand true`
-      );
-      const nxJson = readJson('nx.json');
-      const workspaceJson = readJson('workspace.json');
-      const projectName = `e2e-${application}-extra-options-test-domain-shared`;
-      expect(nxJson.projects[projectName]).toBeDefined();
-      expect(workspaceJson.projects[projectName]).toBeDefined();
       done();
     }, 120000);
     it('should create mock file and resolution path when domain includes util library', async (done) => {
@@ -129,37 +121,6 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(
           `libs/${application}/${domain}/data-access/src/index.ts`
-        )
-      ).not.toThrow();
-      done();
-    }, 120000);
-  });
-  describe('create with storybook project', () => {
-    it('should create domain with storybook project', async (done) => {
-      const application = 'test-application';
-      const domain = 'storybook-domain';
-      await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,feature,ui --addStorybookProject --addComponentCommand true`
-      );
-      expect(() =>
-        checkFilesExist(`libs/${application}/${domain}/.cypress/tsconfig.json`)
-      ).not.toThrow();
-      done();
-    }, 120000);
-  });
-  describe('create with both e2e and storybook project', () => {
-    it('should create domain with storybook project', async (done) => {
-      const application = 'test-application';
-      const domain = 'both-cypress-projects-domain';
-      await runNxCommandAsync(
-        `generate @srleecode/domain:create --application ${application} --domain ${domain} --prefix srlee --libraries data-access,feature,ui --addStorybookProject true --addE2EProject true --addComponentCommand true`
-      );
-      expect(() =>
-        checkFilesExist(`libs/${application}/${domain}/.cypress/cypress.json`)
-      ).not.toThrow();
-      expect(() =>
-        checkFilesExist(
-          `libs/${application}/${domain}/.cypress/storybook-cypress.json`
         )
       ).not.toThrow();
       done();

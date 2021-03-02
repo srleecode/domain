@@ -7,5 +7,6 @@ export const getTsConfigPath = (tree: Tree): string => {
     .toString();
 };
 
-export const getTsConfig = (tree: Tree) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getTsConfig = (tree: Tree): any =>
   readJson(tree, getTsConfigPath(tree));

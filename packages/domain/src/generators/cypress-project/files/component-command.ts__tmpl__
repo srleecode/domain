@@ -1,0 +1,15 @@
+import { SelectorOptions, get } from '@srleecode/component-command-utils';
+
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      <%= propertyName %>(selector?: SelectorOptions): Chainable<<%= className %>>
+    }
+  }
+}
+
+export class <%= className %> {
+    constructor(public element: JQuery) {}
+}
+
+Cypress.Commands.add('<%= propertyName %>', (selector?: SelectorOptions) => get(selector, <%= className %>, 'write component tag selector here'));

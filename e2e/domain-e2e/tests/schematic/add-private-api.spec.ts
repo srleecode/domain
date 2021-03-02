@@ -1,13 +1,13 @@
 import { runNxCommandAsync, checkFilesExist } from '@nrwl/nx-plugin/testing';
 
 describe('domain', () => {
-  describe('addPrivateApi', () => {
+  describe('privateApi', () => {
     it('should create index file', async (done) => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       const library = 'data-access';
       await runNxCommandAsync(
-        `generate @srleecode/domain:addPrivateApi --application ${application} --domain ${domain} --library ${library}`
+        `generate @srleecode/domain:privateApi --application ${application} --domain ${domain} --library ${library}`
       );
 
       expect(() =>

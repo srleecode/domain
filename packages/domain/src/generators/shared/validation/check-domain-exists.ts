@@ -7,6 +7,8 @@ export const checkDomainExists = (
   tree: Tree
 ): void => {
   if (!isDomainExisting(application, domain, tree)) {
-    throw new Error(`${application}/${domain} does not exist`);
+    throw new Error(
+      `${application}/${domain} does not exist or it is a parent domain`
+    );
   }
 };

@@ -1,5 +1,7 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree, logger } from '@nrwl/devkit';
 import { sep } from 'path';
+import { DomainLibraryName } from '../model/domain-library-name.enum';
+import { getParsedDomain } from './domain';
 
 export const createInTree = (
   tree: Tree,
@@ -9,7 +11,14 @@ export const createInTree = (
 
 export const deleteInTree = (tree: Tree, path: string): void => {
   const updatedPath = path.replace(/\//g, sep);
-  tree.delete(updatedPath);
+  if (tree.isFile(updatedPath)) {
+    tree.delete(updatedPath);
+  } else {
+    // if files are open in the directory when it is deleted using tree.delete it throws an error
+    // Deleting the files first before directory so that an error is not thrown
+    deleteDirectoryFiles(tree, updatedPath);
+    tree.delete(updatedPath);
+  }
 };
 
 export const readInTree = (tree: Tree, path: string): Buffer =>
@@ -34,3 +43,52 @@ export const overwriteInTree = (
   path: string,
   content: string
 ): void => tree.write(path.replace(/\//g, sep), content);
+
+export const moveDirectory = (
+  tree: Tree,
+  fromFolder: string,
+  toFolder: string
+): void => {
+  tree.children(fromFolder).forEach((pathSegment) => {
+    const fullPath = `${fromFolder}/${pathSegment}`;
+    if (tree.isFile(fullPath)) {
+      if (!tree.isFile(`${toFolder}/${pathSegment}`)) {
+        tree.rename(fullPath, fullPath.replace(fromFolder, toFolder));
+      }
+    } else {
+      moveDirectory(tree, fullPath, `${toFolder}/${pathSegment}`);
+    }
+  });
+};
+
+export const deleteDirectoryFiles = (tree: Tree, folder: string): void => {
+  tree.children(folder).forEach((pathSegment) => {
+    const fullPath = `${folder}/${pathSegment}`;
+    if (tree.isFile(fullPath)) {
+      tree.delete(fullPath);
+    } else {
+      deleteDirectoryFiles(tree, fullPath);
+    }
+  });
+};
+
+export const printTreeChanges = (tree: Tree): void =>
+  logger.info(
+    JSON.stringify(
+      tree
+        .listChanges()
+        .map((change) => ({ path: change.path, type: change.type }))
+    )
+  );
+
+export const getModuleFilePath = (
+  application: string,
+  domain: string,
+  library: DomainLibraryName
+): string => {
+  const defaultModuleFileName = `${application}-${getParsedDomain(
+    domain
+  )}-${library}.module.ts`;
+  const moduleFolderPath = `libs/${application}/${domain}/${library}/src/lib`;
+  return `${moduleFolderPath}/${defaultModuleFileName}`;
+};

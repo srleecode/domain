@@ -3,7 +3,7 @@ import { Tree } from '@nrwl/devkit';
 import { DomainLibraryName } from '../model/domain-library-name.enum';
 import { LibraryDefinition } from '../model/library-definition.model';
 import { DOMAIN_LIBRARY_TYPES } from '../model/domain-library-types.constant';
-import { getFolderChildren } from './tree';
+import { readProjectConfiguration } from './project-configuration';
 
 export const getDomainLibraryDefinitions = (
   application: string,
@@ -28,11 +28,17 @@ export const isLibraryExisting = (
   domain: string,
   libraryType: DomainLibraryName,
   tree: Tree
-): boolean =>
-  getFolderChildren(
-    tree,
-    `libs/${application}/${domain}/${libraryType.toString()}`
-  ).length > 0;
+): boolean => {
+  const projectName = `${application}-${getParsedDomain(
+    domain
+  )}-${libraryType.toString()}`;
+  try {
+    readProjectConfiguration(tree, projectName);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
 
 export const getProjectNames = (
   application: string,

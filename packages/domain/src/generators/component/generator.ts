@@ -1,14 +1,12 @@
 import {
   formatFiles,
   generateFiles,
-  offsetFromRoot,
   Tree,
   logger,
   convertNxGenerator,
   names,
 } from '@nrwl/devkit';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
-import { strings } from '@angular-devkit/core';
 import * as path from 'path';
 import { join, normalize } from 'path';
 import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
@@ -19,7 +17,7 @@ import { TestType } from './model/test-type.enum';
 import { ViewEncapsulation } from './model/view-encapsulation.enum';
 import { ComponentGeneratorSchema } from './schema';
 import { getParsedDomain } from '../shared/utils/domain';
-import { addComponentToModule } from './rule/add-component-to-module';
+import { addComponentToModule } from './lib/add-component-to-module';
 
 function addFiles(
   tree: Tree,
@@ -36,7 +34,6 @@ function addFiles(
     isUsingNonDefaultViewEncapsulation:
       options.viewEncapsulation !== ViewEncapsulation.Emulated,
     isTestUsingTestBed: options.testType === TestType.testBed,
-    offsetFromRoot: offsetFromRoot(target),
     tmpl: '',
   };
   generateFiles(tree, path.join(__dirname, 'files'), target, templateOptions);
@@ -67,7 +64,10 @@ export async function componentGenerator(
   );
   addComponentToModule(application, domain, name, library, isExported, tree);
   addFiles(tree, options, library);
-  await formatFiles(tree);
+  await formatFiles(tree).catch((e) => {
+    logger.error(e.message);
+    throw e;
+  });
 }
 
 export default componentGenerator;

@@ -78,7 +78,7 @@ describe('domain', () => {
         /changeDetection: ChangeDetectionStrategy/
       );
       expect(componentFile).not.toMatch(/encapsulation: ViewEncapsulation/);
-      expect(componentFile).toMatch(/selector: 'test-example'/);
+      expect(componentFile).toMatch(/selector: 'srlee-test-example'/);
       expect(componentStyleFile).toBe('');
       expect(componentFile).toMatch(
         /styleUrls: \['.\/test-example.component.scss/

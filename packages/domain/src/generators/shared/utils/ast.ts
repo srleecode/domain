@@ -35,7 +35,7 @@ export const getDecoratorMetadata = (source: SourceFile): DecoratorMetadata => {
         if (!decoratorProperty.value) {
           decoratorProperty.value = [];
         }
-        decoratorProperty.value.push(element.getText());
+        (decoratorProperty.value as Array<unknown>).push(element.getText());
       });
     } else {
       decoratorProperty.value = node.initializer.getText();
@@ -59,9 +59,9 @@ export const getDecoratorInsertChanges = (
     (prop) => prop.name === property
   );
   if (metaDataProperty) {
-    const isClassInProperty = (metaDataProperty.value || []).some(
-      (item) => item === className
-    );
+    const isClassInProperty = (
+      (metaDataProperty.value as Array<unknown>) || []
+    ).some((item) => item === className);
     if (!isClassInProperty) {
       let textToAdd = className;
       if (metaDataProperty.value) {
