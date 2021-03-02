@@ -105,7 +105,7 @@ Adding a e2e project for the domain shared/table would create a project called: 
 ## Other things the schematics do
 
  - tsconfig paths for mock files in the library - by default when you create a domain with a util library or add a util lirbary to a domain it will create a mock file and a tsconfig path for that mock file. The naive approach of using mock files in your tests involves exporting them in the index.ts. This will cause the mock files to be included in the build output. As mock files are only used in the tests, this makes the build output larger than neccessary.
- - component command generation - if you select the addComponentCommand option when generating a cypress project it will generate a component command for you, see https://github.com/srlee309/component-command-utils for information on component commands
+ - component command generation - if you select the addComponentCommand option when generating a cypress project it will generate a component command for you, see https://github.com/srleecode/component-command-utils for information on component commands
  - jest-junit reporter config - if you select the addJestJunitReporter when you create a domain or add a library to a domain it will add the jest junit reporter config to the libraries jest file
 
 ## Internally used schematics

@@ -4,7 +4,7 @@
   "author": "Scott Lee",
   "version": "11.4.0",
   "license": "MIT",
-  "homepage": "https://github.com/srlee309/domain",
+  "homepage": "https://github.com/srleecode/domain",
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
