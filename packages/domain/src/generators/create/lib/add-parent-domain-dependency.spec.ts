@@ -5,8 +5,7 @@ import { addParentDomainDependency } from './add-parent-domain-dependency';
 describe('addParentDomainDependency', () => {
   let appTree: Tree;
   const application = 'test-application';
-  const parentDomain = 'parent-domain';
-  const parsedDomain = `${parentDomain}-child-domain`;
+  const domain = 'parent-domain/child-domain';
 
   describe('eslint', () => {
     beforeEach(() => {
@@ -38,12 +37,7 @@ describe('addParentDomainDependency', () => {
     });
 
     it('should add parent domain dependency to new child domain', () => {
-      addParentDomainDependency(
-        appTree,
-        application,
-        parentDomain,
-        parsedDomain
-      );
+      addParentDomainDependency(appTree, application, domain);
       const eslint = readJson(appTree, '.eslintrc.json');
       expect(
         eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
@@ -95,12 +89,7 @@ describe('addParentDomainDependency', () => {
     });
 
     it('should add parent domain dependency to new child domain', () => {
-      addParentDomainDependency(
-        appTree,
-        application,
-        parentDomain,
-        parsedDomain
-      );
+      addParentDomainDependency(appTree, application, domain);
       const tslint = readJson(appTree, 'tslint.json');
       expect(
         tslint.rules['nx-enforce-module-boundaries'][1].depConstraints[2]

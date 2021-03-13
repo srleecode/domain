@@ -37,9 +37,7 @@ export async function createGenerator(
   }
   logger.info(`Creating domain ${application}-${getParsedDomain(domain)}`);
   if (isChildDomain(options.domain)) {
-    const parentDomain = getTopLevelDomain(domain);
-    const parsedDomain = getParsedDomain(domain).replace('-shared', '');
-    addParentDomainDependency(host, application, parentDomain, parsedDomain);
+    addParentDomainDependency(host, application, options.domain);
   } else {
     checkDomainFolderIsEmpty(host, application, domain);
   }

@@ -17,7 +17,6 @@ import { AddCypressProjectGeneratorSchema } from './schema';
 import { renameCypressProjectInJson } from './lib/rename-cypress-project-in-json';
 import { addImplicitDependenciesToCypressProject } from '../shared/lib/add-implicit-dependencies-to-cypress-project';
 import { addSourceMapFalse } from './lib/add-source-map-false';
-import { addProjectToJestConfig } from './lib/add-project-to-jest-config';
 import { moveCypressFilesToDomain } from './lib/move-cypress-files-to-domain';
 import { moveStorybookConfigToDomain } from './lib/move-storybook-config-to-domain';
 import { configurationGenerator } from '@nrwl/storybook';
@@ -57,7 +56,6 @@ export async function cypressProjectGenerator(
     );
     moveE2EProjectToDomainFolder(tree, application, domain);
     addSourceMapFalse(tree, application, domain);
-    addProjectToJestConfig(tree, application, domain, '.cypress');
   } else {
     const schema = getNrwlCypressSchematicSchema(
       application,
@@ -79,7 +77,6 @@ export async function cypressProjectGenerator(
     );
     moveCypressFilesToDomain(tree, application, domain);
     addSourceMapFalse(tree, application, domain);
-    addProjectToJestConfig(tree, application, domain, '.cypress');
     const libraryName = `${application}-${getParsedDomain(domain)}-${
       (existingProjectLibraryTypes || [])[0]
     }`;

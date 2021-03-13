@@ -18,7 +18,7 @@ export const addImplicitDependenciesToCypressProject = (
   const projectName = getCypressProjectName(application, domain, projectType);
   const projectConfig = readProjectConfiguration(tree, projectName);
   const newDependencies = libraryTypes.map(
-    (type) => `${application}-${getParsedDomain(domain)}-${type}`
+    (type) => `scope:${application}-${getParsedDomain(domain)}-${type}`
   );
   const existingDependencies = (
     projectConfig.implicitDependencies || []

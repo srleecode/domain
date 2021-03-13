@@ -14,6 +14,7 @@ import {
   isDomainEmptyAfterLibraryRemoval,
 } from '../shared/utils/domain';
 import { getParsedLibraries } from '../shared/utils/libraries';
+import { removeDomainInEslintrc } from './lib/remove-domain-in-eslintrc';
 import { removeLibraries } from './lib/remove-libraries';
 import { RemoveLibrariesGeneratorSchema } from './schema';
 
@@ -68,6 +69,7 @@ export async function removeLibrariesGenerator(
   }
   if (isDomainEmptyAfterLibraryRemoval(application, domain, libraries, tree)) {
     deleteDomainFolder(tree, application, domain);
+    removeDomainInEslintrc(tree, application, domain);
   }
 }
 

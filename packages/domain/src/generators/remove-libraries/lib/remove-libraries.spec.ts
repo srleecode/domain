@@ -23,7 +23,7 @@ describe('removeLibraries', () => {
       {
         projectName: `${application}-${domain}-${libraryTypes[0]}`,
         skipFormat: false,
-        forceRemove: false,
+        forceRemove: true,
       }
     );
   });

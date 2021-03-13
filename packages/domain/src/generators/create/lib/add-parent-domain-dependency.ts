@@ -1,12 +1,14 @@
 import { updateJson, Tree } from '@nrwl/devkit';
+import { getParsedDomain, getTopLevelDomain } from '../../shared/utils/domain';
 import { existsInTree } from '../../shared/utils/tree';
 
 export const addParentDomainDependency = (
   tree: Tree,
   application: string,
-  parentDomain: string,
-  parsedDomain: string
+  domain: string
 ): void => {
+  const parentDomain = getTopLevelDomain(domain);
+  const parsedDomain = getParsedDomain(domain).replace('-shared', '');
   const parentScope = `scope:${application}-${parentDomain}-shared`;
   const childScope = `scope:${application}-${parsedDomain}`;
   if (existsInTree(tree, 'tslint.json')) {

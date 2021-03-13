@@ -1,10 +1,14 @@
 # Change Log
 
 All notable changes to the "domain" project will be documented in this file.
-Major and minor versions follow the Angular/nrwl dependency versions. 
+Major and minor versions follow the nrwl dependency versions. 
 Updates to this library will increment the patch version/
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+
+## [11.5.0] 
+### Changed
+- [#15 - Add reference updates when moving domains](https://github.com/srleecode/domain/issues/15)
 
 ## [11.4.0] 
 ### Changed

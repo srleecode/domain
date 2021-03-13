@@ -1,4 +1,5 @@
 import { Tree, updateJson } from '@nrwl/devkit';
+import { NxJson } from '@nrwl/workspace';
 import { getWorkspacePath } from '../utils/workspace';
 
 export const sortProjects = (tree: Tree): void => {
@@ -13,7 +14,7 @@ const sortWorkspaceJsonProjects = (tree: Tree) =>
   }));
 
 const sortNxJsonProjects = (tree: Tree) =>
-  updateJson(tree, 'nx.json', (json) => ({
+  updateJson(tree, 'nx.json', (json: NxJson) => ({
     ...json,
     projects: getSortedProjects(json.projects),
   }));

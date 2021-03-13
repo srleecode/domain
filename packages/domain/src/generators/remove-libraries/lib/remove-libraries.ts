@@ -14,7 +14,7 @@ export const removeLibraries = async (
     await removeGenerator(tree, {
       projectName,
       skipFormat: false,
-      forceRemove: false,
+      forceRemove: true,
     }).catch((e) => {
       logger.error(e.message);
       throw e;
