@@ -32,7 +32,13 @@ describe('domain', () => {
           `libs/${application}/${domain}/.cypress/src/support/index.ts`
         )
       ).not.toThrow();
-
+      const workspaceJson = readJson('workspace.json');
+      const projectName = `storybook-${application}-${domain}`;
+      expect(Object.keys(workspaceJson.projects[projectName].targets)).toEqual([
+        'storybook-e2e',
+        'storybook',
+        'build-storybook',
+      ]);
       done();
     }, 120000);
 

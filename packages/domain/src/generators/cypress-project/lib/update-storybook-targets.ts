@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { readJson, Tree, WorkspaceJsonConfiguration } from '@nrwl/devkit';
 import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { UiFrameworkType } from '../../shared/model/ui-framework.type';
 import { getCypressProjectName } from '../../shared/utils/cypress-project';
@@ -6,6 +6,7 @@ import {
   readProjectConfiguration,
   updateProjectConfiguration,
 } from '../../shared/utils/project-configuration';
+import { getWorkspacePath } from '../../shared/utils/workspace';
 
 export const updateStorybookTargets = (
   tree: Tree,
@@ -65,7 +66,15 @@ export const updateStorybookTargets = (
       },
     },
   };
-  updateProjectConfiguration(tree, projectName, projectConfig);
+
+  // for some reason the workspace json doesn't seem to updated with devkitUpdateProjectConfiguration
+  const workspaceJson = readJson<WorkspaceJsonConfiguration>(
+    tree,
+    getWorkspacePath(tree)
+  );
+
+  workspaceJson.projects[projectName] = projectConfig;
+  tree.write(getWorkspacePath(tree), JSON.stringify(workspaceJson));
 };
 
 const removeAddedStorybookTargets = (

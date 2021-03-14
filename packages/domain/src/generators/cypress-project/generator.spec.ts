@@ -131,6 +131,11 @@ export class TestApplicationMultipleLibraryDomainFeatureModule {}`;
       const projectName = `storybook-${application}-${domain}`;
       expect(nxJson.projects[projectName]).toBeDefined();
       expect(workspaceJson.projects[projectName]).toBeDefined();
+      expect(Object.keys(workspaceJson.projects[projectName].targets)).toEqual([
+        'storybook-e2e',
+        'storybook',
+        'build-storybook',
+      ]);
     });
   });
 });

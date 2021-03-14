@@ -6,6 +6,11 @@ Updates to this library will increment the patch version/
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [11.5.1] 
+### Fixed
+- issue with storybook project target updates not being applied
+- issue with E2E project not being removed
+
 ## [11.5.0] 
 ### Changed
 - [#15 - Add reference updates when moving domains](https://github.com/srleecode/domain/issues/15)

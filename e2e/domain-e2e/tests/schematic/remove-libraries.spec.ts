@@ -73,6 +73,9 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/util/src/testing.ts`)
       ).toThrow();
+      const nxJson = readJson('nx.json');
+      const projectName = `e2e-${application}-${domain}`;
+      expect(nxJson.projects[projectName]).toBeUndefined();
       done();
     });
   });

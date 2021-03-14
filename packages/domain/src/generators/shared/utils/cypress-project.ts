@@ -108,7 +108,7 @@ export const getDependenciesWithLibrariesRemoved = (
     return [];
   }
   const implicitDependencies = libraryTypes.map(
-    (type) => `${application}-${getParsedDomain(domain)}-${type}`
+    (type) => `scope:${application}-${getParsedDomain(domain)}-${type}`
   );
   const removedDependenciesSet = new Set(implicitDependencies);
   let existingDependencies = [];
