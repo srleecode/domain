@@ -34,21 +34,15 @@ describe('removeCypressProjectImplicitDependencies', () => {
       root: '',
       targets: {},
       implicitDependencies: [
-        `scope:${application}-${getParsedDomain(domain)}-${
+        `${application}-${getParsedDomain(domain)}-${
           DomainLibraryName.DataAccess
         }`,
-        `scope:${application}-${getParsedDomain(domain)}-${
+        `${application}-${getParsedDomain(domain)}-${
           DomainLibraryName.Feature
         }`,
-        `scope:${application}-${getParsedDomain(domain)}-${
-          DomainLibraryName.Shell
-        }`,
-        `scope:${application}-${getParsedDomain(domain)}-${
-          DomainLibraryName.Ui
-        }`,
-        `scope:${application}-${getParsedDomain(domain)}-${
-          DomainLibraryName.Util
-        }`,
+        `${application}-${getParsedDomain(domain)}-${DomainLibraryName.Shell}`,
+        `${application}-${getParsedDomain(domain)}-${DomainLibraryName.Ui}`,
+        `${application}-${getParsedDomain(domain)}-${DomainLibraryName.Util}`,
       ],
     });
   });

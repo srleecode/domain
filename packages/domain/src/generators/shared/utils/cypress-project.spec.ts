@@ -44,7 +44,7 @@ describe('Cypress project', () => {
           targets: {},
           root: '',
           implicitDependencies: [
-            `scope:${application}-${leafDomain}-${DomainLibraryName.DataAccess}`,
+            `${application}-${leafDomain}-${DomainLibraryName.DataAccess}`,
           ],
         }
       );

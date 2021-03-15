@@ -43,19 +43,13 @@ describe('addImplicitDependenciesToCypressProject', () => {
     );
     const projectConfig = readProjectConfiguration(appTree, projectName);
     expect(projectConfig.implicitDependencies).toEqual([
-      `scope:${application}-${getParsedDomain(domain)}-${
+      `${application}-${getParsedDomain(domain)}-${
         DomainLibraryName.DataAccess
       }`,
-      `scope:${application}-${getParsedDomain(domain)}-${
-        DomainLibraryName.Feature
-      }`,
-      `scope:${application}-${getParsedDomain(domain)}-${
-        DomainLibraryName.Shell
-      }`,
-      `scope:${application}-${getParsedDomain(domain)}-${DomainLibraryName.Ui}`,
-      `scope:${application}-${getParsedDomain(domain)}-${
-        DomainLibraryName.Util
-      }`,
+      `${application}-${getParsedDomain(domain)}-${DomainLibraryName.Feature}`,
+      `${application}-${getParsedDomain(domain)}-${DomainLibraryName.Shell}`,
+      `${application}-${getParsedDomain(domain)}-${DomainLibraryName.Ui}`,
+      `${application}-${getParsedDomain(domain)}-${DomainLibraryName.Util}`,
     ]);
   });
 });

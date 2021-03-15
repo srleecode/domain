@@ -109,7 +109,7 @@ export class TestApplicationMultipleLibraryDomainFeatureModule {}`;
         )
       ).toBe(true);
       expect(nxJson.projects[projectName].implicitDependencies).toEqual([
-        `scope:${application}-${domain}-${DomainLibraryName.DataAccess}`,
+        `${application}-${domain}-${DomainLibraryName.DataAccess}`,
       ]);
       expect(
         tree.exists(

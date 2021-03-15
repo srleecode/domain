@@ -52,11 +52,11 @@ describe('domain', () => {
       const nxJson = readJson('nx.json');
       const projectName = `e2e-${application}-${domain}`;
       expect(nxJson.projects[projectName].implicitDependencies).toEqual([
-        `scope:${application}-${domain}-data-access`,
-        `scope:${application}-${domain}-feature`,
-        `scope:${application}-${domain}-shell`,
-        `scope:${application}-${domain}-ui`,
-        `scope:${application}-${domain}-util`,
+        `${application}-${domain}-data-access`,
+        `${application}-${domain}-feature`,
+        `${application}-${domain}-shell`,
+        `${application}-${domain}-ui`,
+        `${application}-${domain}-util`,
       ]);
       done();
     }, 120000);
