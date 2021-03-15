@@ -10,7 +10,7 @@
     "start": "nx serve",
     "build": "nx build domain",
     "test": "nx test domain",
-    "lint": "nx workspace-lint && nx lint",
+    "lint": "nx lint domain",
     "e2e": "nx e2e",
     "e2e-plugin": "nx e2e domain-e2e",
     "affected:apps": "nx affected:apps",

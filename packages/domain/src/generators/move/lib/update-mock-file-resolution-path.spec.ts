@@ -1,6 +1,5 @@
 import { Tree, readJson } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import * as domainUtils from '../../shared/utils/domain';
 import * as nxJsonUtils from '../../shared/utils/nx-json';
 import { addProjectConfiguration } from '../../shared/utils/project-configuration';
 import { getTsConfigPath } from '../../shared/utils/tsconfig';

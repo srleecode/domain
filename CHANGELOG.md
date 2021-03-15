@@ -6,6 +6,10 @@ Updates to this library will increment the patch version/
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [11.5.2]
+### Fixed
+ - removed scope tag from implicitDependencies
+  
 ## [11.5.1] 
 ### Fixed
 - issue with storybook project target updates not being applied

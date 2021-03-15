@@ -2,11 +2,7 @@ import { logger, Tree, convertNxGenerator } from '@nrwl/devkit';
 import { librariesGenerator } from '../libraries/generator';
 import { sortProjects } from '../shared/lib/sort-projects';
 import { DomainLibraryName } from '../shared/model/domain-library-name.enum';
-import {
-  getParsedDomain,
-  getTopLevelDomain,
-  isChildDomain,
-} from '../shared/utils/domain';
+import { getParsedDomain, isChildDomain } from '../shared/utils/domain';
 import { getParsedLibraries } from '../shared/utils/libraries';
 import { addParentDomainDependency } from './lib/add-parent-domain-dependency';
 import { getLibrariesGneratorSchema } from './lib/get-libraries-generator-options';
