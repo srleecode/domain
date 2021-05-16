@@ -15,14 +15,16 @@
               "packages/domain/tsconfig.lib.json",
               "packages/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!packages/domain/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!packages/domain/**/*"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "packages/domain/jest.config.js",
-            "tsConfig": "packages/domain/tsconfig.spec.json",
             "passWithNoTests": true
           }
         },

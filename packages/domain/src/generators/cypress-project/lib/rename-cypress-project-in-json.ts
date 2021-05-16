@@ -23,6 +23,7 @@ export const renameCypressProjectInJson = (
     projectType
   );
   const projectConfig = readProjectConfiguration(tree, projectName);
+
   const parsedProjectName = projectName.replace(/\//g, '-');
   removeProjectConfiguration(tree, projectName);
   addProjectConfiguration(

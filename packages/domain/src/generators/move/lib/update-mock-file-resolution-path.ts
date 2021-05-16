@@ -11,12 +11,7 @@ export const updateMockFileResolutionPath = (
   newDomain: string
 ): void => {
   if (
-    isDomainHavingLibraryType(
-      application,
-      newDomain,
-      tree,
-      DomainLibraryName.Util
-    )
+    isDomainHavingLibraryType(application, domain, tree, DomainLibraryName.Util)
   ) {
     addMockFileResolutionPath(tree, application, newDomain);
     removeMockFileResolutionPath(tree, application, domain);

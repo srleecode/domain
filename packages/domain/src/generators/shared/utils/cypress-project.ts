@@ -33,9 +33,9 @@ export const getUnprocessedCypressProjectName = (
   projectType: CypressProject
 ): string => {
   if (isTwoLevelDomain(domain)) {
-    return `${projectType}/${application}/${getParsedDomain(domain)}`;
+    return `${projectType}-${application}-${getParsedDomain(domain)}`;
   }
-  return `${projectType}/${application}-${domain}`;
+  return `${projectType}-${application}-${domain}`;
 };
 export const isHavingImplicitDependenciesAfterRemoval = (
   tree: Tree,

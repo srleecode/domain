@@ -1,7 +1,7 @@
 import { Tree } from '@nrwl/devkit';
 import { isDomainExisting } from '../utils/domain';
 
-export const checkDomainDoesntExist = (
+export const checkDomainDoesNotExist = (
   application: string,
   domain: string,
   tree: Tree

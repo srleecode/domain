@@ -129,7 +129,7 @@ describe('Cypress project', () => {
     });
   });
   describe('getUnprocessedCypressProjectName', () => {
-    it('should return child domain with two slashes', () => {
+    it('should return child domain', () => {
       const domain = 'parent-domain/child-domain';
       expect(
         getUnprocessedCypressProjectName(
@@ -137,9 +137,9 @@ describe('Cypress project', () => {
           domain,
           CypressProject.E2E
         )
-      ).toBe(`${CypressProject.E2E}/${application}/${getParsedDomain(domain)}`);
+      ).toBe(`${CypressProject.E2E}-${application}-${getParsedDomain(domain)}`);
     });
-    it('should return parent domain with two slashes', () => {
+    it('should return parent domain', () => {
       const domain = 'parent-domain/shared';
       expect(
         getUnprocessedCypressProjectName(
@@ -147,10 +147,10 @@ describe('Cypress project', () => {
           domain,
           CypressProject.E2E
         )
-      ).toBe(`${CypressProject.E2E}/${application}/${getParsedDomain(domain)}`);
+      ).toBe(`${CypressProject.E2E}-${application}-${getParsedDomain(domain)}`);
     });
 
-    it('should return leaf domain with one slashes', () => {
+    it('should return leaf domain', () => {
       const domain = 'leaf-domain';
       expect(
         getUnprocessedCypressProjectName(
@@ -158,7 +158,7 @@ describe('Cypress project', () => {
           domain,
           CypressProject.E2E
         )
-      ).toBe(`${CypressProject.E2E}/${application}-${domain}`);
+      ).toBe(`${CypressProject.E2E}-${application}-${domain}`);
     });
   });
   describe('getCypressProjectLinter', () => {

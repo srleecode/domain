@@ -6,6 +6,10 @@ Updates to this library will increment the patch version/
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [12.3.0]
+### Changed
+ - updated to 12.3 nrwl dependencies
+
 ## [11.5.2]
 ### Fixed
  - removed scope tag from implicitDependencies

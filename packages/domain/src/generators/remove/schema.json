@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "RemoveGenerator",
+  "$id": "RemoveGenerator",
   "title": "Remove Generator Schema",
   "type": "object",
   "description": "removes domain including libraries and cypress projects",

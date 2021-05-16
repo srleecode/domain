@@ -21,7 +21,7 @@ describe('updateMockFileResolutionPath', () => {
         },
       },
     };
-    addProjectConfiguration(appTree, `${application}-${newDomain}-util`, {
+    addProjectConfiguration(appTree, `${application}-${domain}-util`, {
       targets: {},
       root: '',
     });

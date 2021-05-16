@@ -61,6 +61,23 @@ export const moveDirectory = (
   });
 };
 
+export const copyDirectory = (
+  tree: Tree,
+  fromFolder: string,
+  toFolder: string
+): void => {
+  tree.children(fromFolder).forEach((pathSegment) => {
+    const fullPath = `${fromFolder}/${pathSegment}`;
+    if (tree.isFile(fullPath)) {
+      if (!tree.isFile(`${toFolder}/${pathSegment}`)) {
+        tree.write(fullPath.replace(fromFolder, toFolder), tree.read(fullPath));
+      }
+    } else {
+      copyDirectory(tree, fullPath, `${toFolder}/${pathSegment}`);
+    }
+  });
+};
+
 export const deleteDirectoryFiles = (tree: Tree, folder: string): void => {
   tree.children(folder).forEach((pathSegment) => {
     const fullPath = `${folder}/${pathSegment}`;

@@ -1,13 +1,13 @@
 import { Tree } from '@nrwl/devkit';
-import { moveDirectory } from '../../shared/utils/tree';
+import { copyDirectory } from '../../shared/utils/tree';
 
-export const moveStorybookFiles = (
+export const copyStorybookFiles = (
   tree: Tree,
   application: string,
   domain: string,
   newDomain: string
 ): void =>
-  moveDirectory(
+  copyDirectory(
     tree,
     `libs/${application}/${domain}/.storybook`,
     `libs/${application}/${newDomain}/.storybook`

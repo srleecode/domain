@@ -1,12 +1,12 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
-import { moveLibraries } from './move-libraries';
+import { getMoveLibrarySchemas } from './get-move-library-schemas';
 import * as domainUtils from '../../shared/utils/domain';
 import * as workspaceImport from '@nrwl/workspace';
 import { Project } from '../../shared/model/project.model';
 
-describe('moveLibraries', () => {
+describe('getMoveLibrarySchemas', () => {
   let appTree: Tree;
   const application = 'test-application';
   const leafDomain = 'leaf-domain';
@@ -31,7 +31,7 @@ describe('moveLibraries', () => {
     jest.clearAllMocks();
   });
 
-  it('should generate move rules when there are multiple libraries in leaf domain', async () => {
+  it('should generate move rules when there are multiple libraries in leaf domain', () => {
     const projects: Project[] = [
       {
         name: leafDomainDataAccessProjectName,
@@ -45,19 +45,22 @@ describe('moveLibraries', () => {
       },
     ];
     jest.spyOn(domainUtils, 'getProjects').mockReturnValue(projects);
-    await moveLibraries(appTree, application, leafDomain, newLeafDomain);
-    expect(workspaceImport.moveGenerator).toHaveBeenNthCalledWith(1, appTree, {
-      destination: `${application}/${newLeafDomain}/${dataAccesslibraryType}`,
-      projectName: leafDomainDataAccessProjectName,
-      updateImportPath: true,
-    });
-    expect(workspaceImport.moveGenerator).toHaveBeenNthCalledWith(2, appTree, {
-      destination: `${application}/${newLeafDomain}/${utilLibraryType}`,
-      projectName: leafDomainUtilProjectName,
-      updateImportPath: true,
-    });
+    expect(
+      getMoveLibrarySchemas(appTree, application, leafDomain, newLeafDomain)
+    ).toEqual([
+      {
+        destination: `${application}/${newLeafDomain}/${dataAccesslibraryType}`,
+        projectName: leafDomainDataAccessProjectName,
+        updateImportPath: true,
+      },
+      {
+        destination: `${application}/${newLeafDomain}/${utilLibraryType}`,
+        projectName: leafDomainUtilProjectName,
+        updateImportPath: true,
+      },
+    ]);
   });
-  it('should generate move rules for all libraries in parent domain', async () => {
+  it('should generate move rules for all libraries in parent domain', () => {
     const projects: Project[] = [
       {
         name: childDomainUtilProjectName,
@@ -71,20 +74,23 @@ describe('moveLibraries', () => {
       },
     ];
     jest.spyOn(domainUtils, 'getProjects').mockReturnValue(projects);
-    await moveLibraries(
-      appTree,
-      application,
-      `${parentDomain}/shared`,
-      `${newParentDomain}/shared`
-    );
-    expect(workspaceImport.moveGenerator).toHaveBeenNthCalledWith(1, appTree, {
-      destination: `${application}/${newParentDomain}/shared/${utilLibraryType}`,
-      projectName: parentDomainUtilProjectName,
-      updateImportPath: true,
-    });
+    expect(
+      getMoveLibrarySchemas(
+        appTree,
+        application,
+        `${parentDomain}/shared`,
+        `${newParentDomain}/shared`
+      )
+    ).toEqual([
+      {
+        destination: `${application}/${newParentDomain}/shared/${utilLibraryType}`,
+        projectName: parentDomainUtilProjectName,
+        updateImportPath: true,
+      },
+    ]);
   });
 
-  it('should generate move rules child domain when moving to new child domain', async () => {
+  it('should generate move rules child domain when moving to new child domain', () => {
     const projects: Project[] = [
       {
         name: childDomainUtilProjectName,
@@ -93,16 +99,19 @@ describe('moveLibraries', () => {
       },
     ];
     jest.spyOn(domainUtils, 'getProjects').mockReturnValue(projects);
-    await moveLibraries(
-      appTree,
-      application,
-      `${parentDomain}/${childDomain}`,
-      `${newParentDomain}/${childDomain}`
-    );
-    expect(workspaceImport.moveGenerator).toHaveBeenNthCalledWith(1, appTree, {
-      destination: `${application}/${newParentDomain}/${childDomain}/${utilLibraryType}`,
-      projectName: childDomainUtilProjectName,
-      updateImportPath: true,
-    });
+    expect(
+      getMoveLibrarySchemas(
+        appTree,
+        application,
+        `${parentDomain}/${childDomain}`,
+        `${newParentDomain}/${childDomain}`
+      )
+    ).toEqual([
+      {
+        destination: `${application}/${newParentDomain}/${childDomain}/${utilLibraryType}`,
+        projectName: childDomainUtilProjectName,
+        updateImportPath: true,
+      },
+    ]);
   });
 });
