@@ -1,6 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "create",
+  "$schema": "http://json-schema.org/schema",
   "title": "Create",
   "type": "object",
   "properties": {
@@ -66,7 +65,10 @@
         "message": "Which stylesheet format would you like to use?",
         "type": "list",
         "items": [
-          { "value": "css", "label": "CSS" },
+          {
+            "value": "css",
+            "label": "CSS"
+          },
           {
             "value": "scss",
             "label": "SASS(.scss) [http://sass-lang.com]"

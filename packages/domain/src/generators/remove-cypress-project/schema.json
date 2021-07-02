@@ -1,6 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "remove-cypress-project",
+  "$schema": "http://json-schema.org/schema",
   "title": "Remove cypress project",
   "type": "object",
   "properties": {
