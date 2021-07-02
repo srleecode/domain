@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "RemoveGenerator",
   "title": "Remove Generator Schema",
+  "cli": "nx",
   "type": "object",
   "description": "removes domain including libraries and cypress projects",
   "properties": {

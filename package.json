@@ -32,15 +32,16 @@
     "publish": "npm run build && npm publish ./dist/packages/domain --access=public"
   },
   "private": true,
-  "dependencies": {},
   "devDependencies": {
     "@angular-devkit/build-angular": "^12.0.0",
+    "@angular-devkit/schematics": "^12.0.0",
+    "@angular-devkit/schematics-cli": "^12.0.0",
     "@angular-eslint/eslint-plugin": "^12.0.0",
     "@angular-eslint/eslint-plugin-template": "^12.0.0",
     "@angular-eslint/template-parser": "^12.0.0",
     "@nrwl/angular": "12.5.1",
     "@nrwl/cypress": "12.5.1",
-    "@nrwl/devkit": "12.5.1",
+    "@nrwl/devkit": "^12.5.1",
     "@nrwl/eslint-plugin-nx": "12.5.1",
     "@nrwl/jest": "12.5.1",
     "@nrwl/linter": "12.5.1",

@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
   "title": "Add cypress project",
+  "cli": "nx",
   "type": "object",
   "properties": {
     "application": {
