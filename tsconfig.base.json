@@ -17,7 +17,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@srleecode/domain": ["packages/domain/src/index.ts"]
+      "@srleecode/domain": ["./packages/domain/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

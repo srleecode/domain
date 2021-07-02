@@ -5,4 +5,12 @@ module.exports = {
   testSequencer: './test-sequencer.js',
   maxWorkers: 1,
   setupFilesAfterEnv: ['./jest.setup.ts'],
+  globals: {
+    'ts-jest': {
+      tsconfig: '<rootDir>/tsconfig.spec.json',
+    },
+  },
+  transform: {
+    '^.+\\.[tj]s$': 'ts-jest',
+  },
 };

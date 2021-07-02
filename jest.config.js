@@ -1,3 +1,4 @@
+// file can likely be deleted?
 module.exports = {
   testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
   transform: {
@@ -6,4 +7,5 @@ module.exports = {
   resolver: '@nrwl/jest/plugins/resolver',
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageReporters: ['html'],
+  projects: '<rootDir>/e2e/domain-e2e',
 };
