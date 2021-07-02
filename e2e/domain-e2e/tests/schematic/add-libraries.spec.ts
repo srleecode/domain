@@ -6,7 +6,7 @@ import {
 
 describe('domain', () => {
   describe('libraries', () => {
-    it('should add new library to domain', async (done) => {
+    it('should add new library to domain', async () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
@@ -16,9 +16,9 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/ui/src/index.ts`)
       ).not.toThrow();
-      done();
+
     }, 120000);
-    it('should add multiple libraries to domain', async (done) => {
+    it('should add multiple libraries to domain', async () => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
       await runNxCommandAsync(
@@ -34,9 +34,9 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/util/src/index.ts`)
       ).not.toThrow();
-      done();
+
     }, 120000);
-    it('should create mock file and resolution path when adding util library', async (done) => {
+    it('should create mock file and resolution path when adding util library', async () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
@@ -46,9 +46,9 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/util/src/testing.ts`)
       ).not.toThrow();
-      done();
+
     }, 120000);
-    it('should add jest junit reporter when it is true', async (done) => {
+    it('should add jest junit reporter when it is true', async () => {
       const application = 'test-application';
       const domain = 'extra-options-test-domain/shared';
       await runNxCommandAsync(
@@ -59,7 +59,7 @@ describe('domain', () => {
       );
       expect(jestConfig.includes('reporters')).toBe(true);
       expect(jestConfig.includes('jest-junit')).toBe(true);
-      done();
+
     }, 120000);
   });
 });

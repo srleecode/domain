@@ -6,7 +6,7 @@ import {
 
 describe('domain', () => {
   describe('component', () => {
-    it('should create component with all options', async (done) => {
+    it('should create component with all options', async () => {
       const application = 'test-application';
       const domain = 'storybook-domain';
       await runNxCommandAsync(
@@ -51,9 +51,9 @@ describe('domain', () => {
       expect(moduleFile).toMatch(/declarations: \[TestExampleComponent\]/);
       expect(moduleFile).toMatch(/exports: \[TestExampleComponent\]/);
 
-      done();
+
     }, 120000);
-    it('should create component with minimal options', async (done) => {
+    it('should create component with minimal options', async () => {
       const application = 'test-application';
       const domain = 'storybook-domain';
       await runNxCommandAsync(
@@ -84,7 +84,7 @@ describe('domain', () => {
         /styleUrls: \['.\/test-example.component.scss/
       );
       expect(componentFile).not.toMatch(/TestBed/);
-      done();
+
     }, 120000);
   });
 

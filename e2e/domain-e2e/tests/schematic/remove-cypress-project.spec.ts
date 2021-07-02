@@ -6,7 +6,7 @@ import {
 
 describe('domain', () => {
   describe('removeCypressProject', () => {
-    it('should remove e2e project for domain and keep cypress when storybook project also exists', async (done) => {
+    it('should remove e2e project for domain and keep cypress when storybook project also exists', async () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
@@ -26,10 +26,10 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/.cypress/cypress.json`)
       ).toThrow();
-      done();
+
     }, 120000);
 
-    it('should remove storybook project and cypress folder for domain when only storybook cypress project', async (done) => {
+    it('should remove storybook project and cypress folder for domain when only storybook cypress project', async () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
@@ -49,7 +49,7 @@ describe('domain', () => {
           `libs/${application}/${domain}/.cypress/support/index.ts`
         )
       ).toThrow();
-      done();
+
     }, 120000);
   });
 });

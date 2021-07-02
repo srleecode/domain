@@ -11,7 +11,7 @@ describe('domain', () => {
     ensureNxProject('@srleecode/domain', 'dist/packages/domain');
   });
   describe('create', () => {
-    it('should create domains used in other tests', async (done) => {
+    it('should create domains used in other tests', async () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
@@ -28,9 +28,8 @@ describe('domain', () => {
           `libs/${application}/${domain}/data-access/src/index.ts`
         )
       ).not.toThrow();
-      done();
     }, 120000);
-    it('should create single library domain', async (done) => {
+    it('should create single library domain', async () => {
       const application = 'test-application';
       const domain = 'single-library-domain';
       await runNxCommandAsync(
@@ -42,9 +41,8 @@ describe('domain', () => {
           `libs/${application}/${domain}/data-access/src/index.ts`
         )
       ).not.toThrow();
-      done();
     }, 120000);
-    it('should create multiple library domain', async (done) => {
+    it('should create multiple library domain', async () => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
       await runNxCommandAsync(
@@ -59,9 +57,8 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/feature/src/index.ts`)
       ).not.toThrow();
-      done();
     }, 120000);
-    it('should add jest junit reporter when it is true', async (done) => {
+    it('should add jest junit reporter when it is true', async () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
@@ -72,9 +69,8 @@ describe('domain', () => {
       );
       expect(jestConfig.includes('reporters')).toBe(true);
       expect(jestConfig.includes('jest-junit')).toBe(true);
-      done();
     }, 120000);
-    it('should create mock file and resolution path when domain includes util library', async (done) => {
+    it('should create mock file and resolution path when domain includes util library', async () => {
       const application = 'test-application';
       const domain = 'leaf-domain-with-util';
       await runNxCommandAsync(
@@ -84,9 +80,8 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/util/src/testing.ts`)
       ).not.toThrow();
-      done();
     }, 120000);
-    it('should create child domain', async (done) => {
+    it('should create child domain', async () => {
       const application = 'test-application';
       const parentDomain = 'parent-domain-with-child/shared';
       const childDomain = `parent-domain-with-child/child-domain`;
@@ -107,11 +102,10 @@ describe('domain', () => {
           `libs/${application}/${childDomain}/data-access/src/index.ts`
         )
       ).not.toThrow();
-      done();
     }, 120000);
   });
   describe('createParent', () => {
-    it('should create parent domain', async (done) => {
+    it('should create parent domain', async () => {
       const application = 'test-application';
       const domain = 'parent-domain/shared';
       await runNxCommandAsync(
@@ -123,7 +117,6 @@ describe('domain', () => {
           `libs/${application}/${domain}/data-access/src/index.ts`
         )
       ).not.toThrow();
-      done();
     }, 120000);
   });
 });
