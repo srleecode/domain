@@ -5,7 +5,6 @@ import {
   readJson,
 } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { NxJson } from '@nrwl/workspace';
 import { addProjectConfiguration } from './project-configuration';
 
 describe('addProjectConfiguration', () => {
@@ -22,12 +21,12 @@ describe('addProjectConfiguration', () => {
   describe('addProjectConfiguration', () => {
     it('should update nx.json', () => {
       addProjectConfiguration(tree, projectName, projectConfig);
-      const nxJson: NxJson = readJson(tree, 'nx.json');
+      const nxJson = readJson(tree, 'nx.json');
       expect(nxJson.projects[projectName]).toBeDefined();
     });
     it('should update workspace.json', () => {
       addProjectConfiguration(tree, projectName, projectConfig);
-      const nxJson: NxJson = readJson(tree, 'workspace.json');
+      const nxJson = readJson(tree, 'workspace.json');
       expect(nxJson.projects[projectName]).toBeDefined();
     });
   });

@@ -1,5 +1,6 @@
 import { Tree, updateJson } from '@nrwl/devkit';
-import { NxJson } from '@nrwl/workspace';
+// import { NxJson } from '@nrwl/workspace';
+// import {readWorkspaceJson, readNxJson, readWorkspaceConfig} from '@nrwl/workspace';
 import { getParsedDomain } from '../../shared/utils/domain';
 
 export const renameDomainInNxJson = (
@@ -8,7 +9,7 @@ export const renameDomainInNxJson = (
   domain: string,
   newDomain: string
 ): void =>
-  updateJson(tree, 'nx.json', (json: NxJson) => {
+  updateJson(tree, 'nx.json', (json) => {
     const domainProjects = Object.keys(json.projects).filter((project) =>
       project.startsWith(`${application}-${getParsedDomain(newDomain)}`)
     );
