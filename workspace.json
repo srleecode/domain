@@ -15,10 +15,7 @@
               "packages/domain/tsconfig.lib.json",
               "packages/domain/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!packages/domain/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!packages/domain/**/*"]
           }
         },
         "test": {
