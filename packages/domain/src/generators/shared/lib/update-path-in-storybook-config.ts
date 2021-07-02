@@ -24,8 +24,8 @@ export const updatePathInStorybookConfig = (
     const mainJsString = mainJs.toString();
     const importPaths = getImportPaths(application, domain, tree, false);
     let updatedMainJs = mainJsString.replace(
-      /rootMain.stories.push\(.*\)/,
-      `rootMain.stories.push(...[${importPaths}])`
+      `'../src/lib/**/*.stories.mdx', '../src/lib/**/*.stories.@(js|jsx|ts|tsx)'`,
+      importPaths
     );
     if (!isTwoLevelDomain(domain)) {
       updatedMainJs = updatedMainJs.replace(
