@@ -72,9 +72,17 @@ describe('updatePathInStorybookConfig', () => {
   describe('mainJs', () => {
     const mainJsPath = `libs/${application}/${domain}/.${CypressProject.Storybook}/main.js`;
     const mainJs = `const rootMain = require('../../../../.storybook/main');
-rootMain.stories.push(...['../src/lib/**/*.stories.mdx', '../src/lib/**/*.stories.@(js|jsx|ts|tsx)'])
-module.exports = rootMain;
-    `;
+
+rootMain.core = { ...rootMain.core, builder: 'webpack5' };
+
+// Use the following syntax to add addons!
+// rootMain.addons.push('../../../../.storybook/main.js');
+rootMain.stories.push(
+  ...['../src/lib/**/*.stories.mdx', '../src/lib/**/*.stories.@(js|jsx|ts|tsx)']
+);
+
+module.exports = rootMain;`;
+
     beforeEach(() => {
       jest.clearAllMocks();
       appTree = createTreeWithEmptyWorkspace();

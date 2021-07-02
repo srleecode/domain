@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "SchematicsAddPrivateApi",
   "title": "Add Private Api Options Schema",
+  "cli": "nx",
   "type": "object",
   "description": "Adds a index to allow a private api, i.e. api for things that can be used only in the domain",
   "properties": {

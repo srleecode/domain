@@ -12,7 +12,6 @@ import { CypressProject } from '../../shared/model/cypress-project.enum';
 import { getTsConfigPath } from '../../shared/utils/tsconfig';
 import { updatePathInStorybookConfig } from '../../shared/lib/update-path-in-storybook-config';
 import { addStoryFileExclusions } from '../../shared/lib/add-story-file-exclusions';
-import { removeLibraryStorybookLintReference } from './remove-library-storybook-lint-reference';
 
 export const moveStorybookConfigToDomain = (
   tree: Tree,
@@ -34,7 +33,6 @@ export const moveStorybookConfigToDomain = (
   removeAddedStoryFilesExclusions(tree, application, domain, firstLibrary);
   addStoryFileExclusions(tree, application, domain, libraries);
   updateStorybookWebpackBasePath(tree, application, domain);
-  removeLibraryStorybookLintReference(tree, application, domain, firstLibrary);
 };
 
 const moveStorybookConfig = (

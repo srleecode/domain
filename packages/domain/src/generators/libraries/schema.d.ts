@@ -7,7 +7,6 @@ export interface LibrariesGeneratorSchema {
   prefix: string;
   libraries?: DomainLibraryName[];
   style?: StyleType;
-  routing?: boolean;
   buildable?: boolean;
   strict?: boolean;
   enableIvy?: boolean;

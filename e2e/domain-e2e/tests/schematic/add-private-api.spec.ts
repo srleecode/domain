@@ -2,7 +2,7 @@ import { runNxCommandAsync, checkFilesExist } from '@nrwl/nx-plugin/testing';
 
 describe('domain', () => {
   describe('privateApi', () => {
-    it('should create index file', async (done) => {
+    it('should create index file', async () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       const library = 'data-access';
@@ -15,7 +15,6 @@ describe('domain', () => {
           `libs/${application}/${domain}/${library}/src/private-api.ts`
         )
       ).not.toThrow();
-      done();
     }, 120000);
   });
 });

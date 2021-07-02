@@ -5,24 +5,16 @@
       "root": "packages/domain",
       "sourceRoot": "packages/domain/src",
       "projectType": "library",
-      "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@nrwl/linter:lint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "packages/domain/tsconfig.lib.json",
-              "packages/domain/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!packages/domain/**/*"
-            ]
+            "lintFilePatterns": ["packages/domain/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/packages/domain"],
           "options": {
             "jestConfig": "packages/domain/jest.config.js",
             "passWithNoTests": true
@@ -30,6 +22,7 @@
         },
         "build": {
           "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/packages/domain",
             "tsConfig": "packages/domain/tsconfig.lib.json",
@@ -39,17 +32,22 @@
               "packages/domain/*.md",
               {
                 "input": "./packages/domain/src",
-                "glob": "**/*.!(ts)",
+                "glob": "**/!(*.ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/domain/src",
+                "glob": "**/*.d.ts",
                 "output": "./src"
               },
               {
                 "input": "./packages/domain",
-                "glob": "collection.json",
+                "glob": "generators.json",
                 "output": "."
               },
               {
                 "input": "./packages/domain",
-                "glob": "builders.json",
+                "glob": "executors.json",
                 "output": "."
               }
             ]
@@ -58,9 +56,9 @@
       }
     },
     "domain-e2e": {
+      "root": "e2e/domain-e2e",
       "projectType": "application",
-      "root": "e2e\\domain-e2e",
-      "sourceRoot": "e2e\\domain-e2e/src",
+      "sourceRoot": "e2e/domain-e2e/src",
       "architect": {
         "e2e": {
           "builder": "@nrwl/nx-plugin:e2e",
@@ -68,9 +66,7 @@
             "target": "domain:build",
             "npmPackageName": "@srleecode/domain",
             "pluginOutputPath": "dist/packages/domain",
-            "jestConfig": "e2e/domain-e2e/jest.config.js",
-            "tsSpecConfig": "e2e/domain-e2e/tsconfig.spec.json",
-            "runInBand": true
+            "jestConfig": "e2e/domain-e2e/jest.config.js"
           }
         }
       }

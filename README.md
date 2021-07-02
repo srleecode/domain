@@ -92,25 +92,27 @@ Adding a storybook project for the domain shared/table would create a project ca
 
 Adding a e2e project for the domain shared/table would create a project called: e2e-shared-table which would have the default e2e task.
 
-## What schematics are available
+## What generators are available
 
- - create - creates a domain
- - move - moves a domain, i.e. updates the scope tags, renames the domains grouping folder, moves all the libraries in the domain and moves any related cypress projects
- - remove - removes a domain, i.e. removes the domain grouping folder, all the domain libraries and any related cypress projects
- - addLibraries - adds one or more of the following library types (data-access, feature, shell, ui, util) to a domain. A library can only be added if it doesn't already exist in the domain
- - removeLibraries
- - addCypressProject - adds either an e2e or storybook cypress project to the domain
- - removeCypressProject - removes either an e2e or storybook cypress project from the domain
+  - component - creates a component
+  - create - creates a domain
+  - cypress-project - adds either an e2e or storybook cypress project to the domain
+  - libraries - adds one or more of the following library types (data-access, feature, shell, ui, util) to a domain. A library can only be added if it doesn't already exist in the domain
+  - move - moves a domain, i.e. updates the scope tags, renames the domains grouping folder, moves all the libraries in the domain and moves any related cypress projects
+  - private-api - adds an index file (private-api.ts) so that you can import content between libraries inside a domain and not outside of it
+  - remove - removes a domain, i.e. removes the domain grouping folder, all the domain libraries and any related cypress projects
+  - remove-cypress-project - removes either an e2e or storybook cypress project from the domain
+  - remove-libraries - removes a library from an existing domain. If this will remove the last library in the domain, the domain will be removed
 
-## Other things the schematics do
+## Other things the generators do
 
  - tsconfig paths for mock files in the library - by default when you create a domain with a util library or add a util lirbary to a domain it will create a mock file and a tsconfig path for that mock file. The naive approach of using mock files in your tests involves exporting them in the index.ts. This will cause the mock files to be included in the build output. As mock files are only used in the tests, this makes the build output larger than neccessary.
  - component command generation - if you select the addComponentCommand option when generating a cypress project it will generate a component command for you, see https://github.com/srleecode/component-command-utils for information on component commands
  - jest-junit reporter config - if you select the addJestJunitReporter when you create a domain or add a library to a domain it will add the jest junit reporter config to the libraries jest file
 
-## Internally used schematics
+## Internally used generators
 
-The following schematics are used internally by this schematics library.
+The following generators are used internally by this project.
 
 @nrwl/cypress 
 

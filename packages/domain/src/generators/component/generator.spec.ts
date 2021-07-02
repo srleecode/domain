@@ -46,7 +46,7 @@ export class TestApplicationMultipleLibraryDomainFeatureModule {}`;
     );
   });
 
-  it('should create component with all options', async (done) => {
+  it('should create component with all options', async () => {
     addProjectConfiguration(tree, `${application}-${domain}-ui`, {
       targets: {},
       root: '',
@@ -58,7 +58,7 @@ export class TestApplicationMultipleLibraryDomainFeatureModule {}`;
       prefix: 'srlee',
       name: 'TestExample',
       displayBlock: true,
-      viewEncapsulation: 'ShadowDom',
+      viewEncapsulation: ViewEncapsulation.ShadowDom,
       changeDetection: ChangeDetection.OnPush,
       style: StyleType.Scss,
       testType: TestType.testBed,
@@ -103,10 +103,8 @@ export class TestApplicationMultipleLibraryDomainFeatureModule {}`;
     );
     expect(moduleFile).toMatch(/declarations: \[TestExampleComponent\]/);
     expect(moduleFile).toMatch(/exports: \[TestExampleComponent\]/);
-
-    done();
   });
-  it('should create component with minimal options', async (done) => {
+  it('should create component with minimal options', async () => {
     addProjectConfiguration(tree, `${application}-${domain}-feature`, {
       targets: {},
       root: '',
@@ -143,6 +141,5 @@ export class TestApplicationMultipleLibraryDomainFeatureModule {}`;
       /styleUrls: \['.\/test-example.component.scss/
     );
     expect(componentFile).not.toMatch(/TestBed/);
-    done();
   });
 });

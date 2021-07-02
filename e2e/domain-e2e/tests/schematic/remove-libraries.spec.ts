@@ -6,7 +6,7 @@ import {
 
 describe('domain', () => {
   describe('removeLibraries', () => {
-    it('should remove library', async (done) => {
+    it('should remove library', async () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
@@ -16,9 +16,8 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/ui/src/index.ts`)
       ).toThrow();
-      done();
     }, 120000);
-    it('should remove mock file and resolution path when removing util library', async (done) => {
+    it('should remove mock file and resolution path when removing util library', async () => {
       const application = 'test-application';
       const domain = 'leaf-domain';
       await runNxCommandAsync(
@@ -28,9 +27,8 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/util/src/testing.ts`)
       ).toThrow();
-      done();
     }, 120000);
-    it('should remove domain and e2e project when removing last library in domain', async (done) => {
+    it('should remove domain and e2e project when removing last library in domain', async () => {
       const application = 'test-application';
       const domain = 'single-library-domain';
       await runNxCommandAsync(
@@ -47,9 +45,8 @@ describe('domain', () => {
       const projectName = `e2e-${application}-${domain}`;
       expect(nxJson.projects[projectName]).toBeUndefined();
       expect(workspaceJson.projects[projectName]).toBeUndefined();
-      done();
     }, 120000);
-    it('should remove multiple libraries in domain', async (done) => {
+    it('should remove multiple libraries in domain', async () => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
       await runNxCommandAsync(
@@ -76,7 +73,6 @@ describe('domain', () => {
       const nxJson = readJson('nx.json');
       const projectName = `e2e-${application}-${domain}`;
       expect(nxJson.projects[projectName]).toBeUndefined();
-      done();
     });
   });
 });

@@ -7,7 +7,7 @@ import {
 
 describe('domain', () => {
   describe('cypressProject', () => {
-    it('should add e2e project using existing domain', async (done) => {
+    it('should add e2e project using existing domain', async () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
@@ -19,9 +19,8 @@ describe('domain', () => {
           `libs/${application}/${domain}/.cypress/src/support/index.ts`
         )
       ).not.toThrow();
-      done();
     }, 120000);
-    it('should add storybook project using existing domain', async (done) => {
+    it('should add storybook project using existing domain', async () => {
       const application = 'test-application';
       const domain = 'jest-junit-reporter';
       await runNxCommandAsync(
@@ -39,10 +38,9 @@ describe('domain', () => {
         'storybook',
         'build-storybook',
       ]);
-      done();
     }, 120000);
 
-    it('should add implicit dependencies for all libraries in domain', async (done) => {
+    it('should add implicit dependencies for all libraries in domain', async () => {
       const application = 'test-application';
       const domain = 'multiple-library-domain';
       await runNxCommandAsync(
@@ -58,7 +56,6 @@ describe('domain', () => {
         `${application}-${domain}-ui`,
         `${application}-${domain}-util`,
       ]);
-      done();
     }, 120000);
   });
 });

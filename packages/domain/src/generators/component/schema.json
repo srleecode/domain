@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "SchematicsAngularComponent",
   "title": "Angular Component Options Schema",
+  "cli": "nx",
   "type": "object",
   "description": "Creates a new generic component definition in the given or default project",
   "properties": {
@@ -83,7 +84,10 @@
         "message": "Which stylesheet format would you like to use?",
         "type": "list",
         "items": [
-          { "value": "css", "label": "CSS" },
+          {
+            "value": "css",
+            "label": "CSS"
+          },
           {
             "value": "scss",
             "label": "SASS(.scss) [http://sass-lang.com]"
