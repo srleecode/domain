@@ -61,5 +61,10 @@
   },
   "peerDependencies": {
     "@srleecode/component-command-utils": "1.0.17"
+  },
+  "engines": {
+    "yarn": ">=1.22.0",
+    "npm": ">=7.0.0",
+    "node": ">=15.0.0"
   }
 }
