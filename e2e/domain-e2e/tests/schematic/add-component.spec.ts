@@ -50,8 +50,6 @@ describe('domain', () => {
       );
       expect(moduleFile).toMatch(/declarations: \[TestExampleComponent\]/);
       expect(moduleFile).toMatch(/exports: \[TestExampleComponent\]/);
-
-
     }, 120000);
     it('should create component with minimal options', async () => {
       const application = 'test-application';
@@ -84,7 +82,6 @@ describe('domain', () => {
         /styleUrls: \['.\/test-example.component.scss/
       );
       expect(componentFile).not.toMatch(/TestBed/);
-
     }, 120000);
   });
 

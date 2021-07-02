@@ -15,7 +15,6 @@ describe('domain', () => {
           `libs/${application}/${domain}/${library}/src/private-api.ts`
         )
       ).not.toThrow();
-
     }, 120000);
   });
 });

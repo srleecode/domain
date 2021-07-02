@@ -22,7 +22,6 @@ describe('domain', () => {
     };
     it('should remove leaf domain', async () => {
       await removeDomain('leaf-domain');
-
     }, 120000);
     it('should remove mock file resolution path when removing domain with util folder', async () => {
       const domain = 'leaf-domain-with-util';
@@ -33,7 +32,6 @@ describe('domain', () => {
           '@proj-test-application/new-leaf-domain/testing]'
         ]
       ).toBeUndefined();
-
     }, 120000);
     it('should remove parent domain with children', async () => {
       await removeDomain('new-parent-domain-with-child/shared');
@@ -42,7 +40,6 @@ describe('domain', () => {
           `libs/${application}/new-parent-domain-with-child/child-domain/data-access/src/index.ts`
         )
       ).toThrow();
-
     }, 120000);
     it('should remove parent domain with no children', async () => {
       await removeDomain('new-parent-domain/shared');
@@ -51,7 +48,6 @@ describe('domain', () => {
           `libs/${application}/new-parent-domain/shared/data-access/src/index.ts`
         )
       ).toThrow();
-
     }, 120000);
     it('should remove domain and e2e project when it contains multiple libraries and e2e project', async () => {
       const domain = 'new-extra-options-test-domain/shared';
@@ -59,7 +55,6 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/feature/src/index.ts`)
       ).toThrow();
-
     }, 120000);
   });
 });

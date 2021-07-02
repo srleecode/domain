@@ -26,7 +26,6 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/.cypress/cypress.json`)
       ).toThrow();
-
     }, 120000);
 
     it('should remove storybook project and cypress folder for domain when only storybook cypress project', async () => {
@@ -49,7 +48,6 @@ describe('domain', () => {
           `libs/${application}/${domain}/.cypress/support/index.ts`
         )
       ).toThrow();
-
     }, 120000);
   });
 });

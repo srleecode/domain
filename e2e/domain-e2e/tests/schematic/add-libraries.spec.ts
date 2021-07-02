@@ -16,7 +16,6 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/ui/src/index.ts`)
       ).not.toThrow();
-
     }, 120000);
     it('should add multiple libraries to domain', async () => {
       const application = 'test-application';
@@ -34,7 +33,6 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/util/src/index.ts`)
       ).not.toThrow();
-
     }, 120000);
     it('should create mock file and resolution path when adding util library', async () => {
       const application = 'test-application';
@@ -46,7 +44,6 @@ describe('domain', () => {
       expect(() =>
         checkFilesExist(`libs/${application}/${domain}/util/src/testing.ts`)
       ).not.toThrow();
-
     }, 120000);
     it('should add jest junit reporter when it is true', async () => {
       const application = 'test-application';
@@ -59,7 +56,6 @@ describe('domain', () => {
       );
       expect(jestConfig.includes('reporters')).toBe(true);
       expect(jestConfig.includes('jest-junit')).toBe(true);
-
     }, 120000);
   });
 });

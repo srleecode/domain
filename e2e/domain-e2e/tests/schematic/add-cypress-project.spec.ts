@@ -19,7 +19,6 @@ describe('domain', () => {
           `libs/${application}/${domain}/.cypress/src/support/index.ts`
         )
       ).not.toThrow();
-
     }, 120000);
     it('should add storybook project using existing domain', async () => {
       const application = 'test-application';
@@ -39,7 +38,6 @@ describe('domain', () => {
         'storybook',
         'build-storybook',
       ]);
-
     }, 120000);
 
     it('should add implicit dependencies for all libraries in domain', async () => {
@@ -58,7 +56,6 @@ describe('domain', () => {
         `${application}-${domain}-ui`,
         `${application}-${domain}-util`,
       ]);
-
     }, 120000);
   });
 });
