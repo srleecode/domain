@@ -1,12 +1,7 @@
 module.exports = {
   displayName: 'domain',
-  preset: '../../jest.preset.js',
+  preset: '../../jest.config.js',
   coverageDirectory: '../../coverage/packages/domain',
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-    },
-  },
   transform: {
     '^.+\\.[tj]s$': 'ts-jest',
   },

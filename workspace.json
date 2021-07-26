@@ -7,16 +7,21 @@
       "projectType": "library",
       "architect": {
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "builder": "@nrwl/linter:lint",
           "options": {
-            "lintFilePatterns": ["packages/domain/**/*.ts"]
+            "linter": "eslint",
+            "tsConfig": [
+              "packages/domain/tsconfig.lib.json",
+              "packages/domain/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!packages/domain/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/packages/domain"],
           "options": {
             "jestConfig": "packages/domain/jest.config.js",
+            "tsConfig": "packages/domain/tsconfig.spec.json",
             "passWithNoTests": true
           }
         },
@@ -62,10 +67,11 @@
       "architect": {
         "e2e": {
           "builder": "@nrwl/nx-plugin:e2e",
+          "npmPackageName": "@srleecode/domain",
+          "pluginOutputPath": "dist/packages/domain",
+          "tsconfig": "e2e/domain-e2e/tsconfig.spec.json",
           "options": {
             "target": "domain:build",
-            "npmPackageName": "@srleecode/domain",
-            "pluginOutputPath": "dist/packages/domain",
             "jestConfig": "e2e/domain-e2e/jest.config.js"
           }
         }
