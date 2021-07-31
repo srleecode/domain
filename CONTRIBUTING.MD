@@ -52,3 +52,8 @@ Please follow the following guidelines:
 - Make sure unit tests pass (`npm run test`)
 - Make sure lint passes (`npm run lint`)
 - Make sure the e2e tests pass (`npm run e2e`)
+
+### Notes
+
+This issue https://github.com/nrwl/nx/issues/4851 means that using tsconfig paths make e2e unable to be run. 
+Unit tests can be used instead of e2e for new generators that use tconfig paths.

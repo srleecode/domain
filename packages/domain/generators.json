@@ -1,5 +1,5 @@
 {
-  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "$schema": "http://json-schema.org/schema",
   "name": "domain",
   "version": "0.0.1",
   "schematics": {

@@ -10,11 +10,10 @@ import { CreateGeneratorSchema } from './schema';
 import { checkDomainFolderIsEmpty } from './validation/check-domain-folder-is-empty';
 import { checkDomainLevels } from './validation/check-domain-levels';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export async function createGenerator(
   host: Tree,
   options: CreateGeneratorSchema
-) {
+): Promise<void> {
   checkDomainLevels(options.domain);
   const libraries = getParsedLibraries(options.libraries);
   const { application, domain, routing, enableIvy, publishable } = options;

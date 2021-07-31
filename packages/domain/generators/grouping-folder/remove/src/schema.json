@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "RemoveGenerator",
+  "title": "Remove Generator Schema",
+  "cli": "nx",
+  "type": "object",
+  "description": "removes domain including libraries and cypress projects",
+  "properties": {
+    "folder": {
+      "type": "string",
+      "description": "Path to the grouping folder relative to the root of the workspace that will be deleted",
+      "x-prompt": "What is the path for the grouping folder relative to the root of the workspace that will be deleted?"
+    }
+  },
+  "required": ["folder"]
+}

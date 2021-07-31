@@ -1,0 +1,24 @@
+{
+  "root": "packages/domain/generators/grouping-folder/move",
+  "sourceRoot": "packages/domain/generators/grouping-folder/move/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/domain/generators/grouping-folder/move/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/domain/grouping-folder/move"],
+      "options": {
+        "jestConfig": "packages/domain/generators/grouping-folder/move/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:domain-grouping-folder-move"]
+}

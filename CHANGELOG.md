@@ -6,6 +6,15 @@ Updates to this library will increment the patch version/
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [12.6.3]
+### Changed
+ - updated to 12.6.3 nrwl dependencies
+ - moved to project json format to allow affected commands for each generator
+
+## [12.6.2]
+### Changed
+ - updated to 12.6.2 nrwl dependencies
+
 ## [12.5.1]
 ### Changed
  - updated to 12.5.1 nrwl dependencies

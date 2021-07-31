@@ -1,8 +1,8 @@
 {
-  "$schema": "../../node_modules/@angular-devkit/architect/src/builders-schema.json",
+  "$schema": "http://json-schema.org/schema",
   "executors": {
     "build": {
-      "implementation": "./src/executors/build/executors",
+      "implementation": "./src/executors/build/executor",
       "schema": "./src/executors/build/schema.json",
       "description": "build executor"
     }

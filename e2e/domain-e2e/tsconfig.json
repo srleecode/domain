@@ -3,5 +3,11 @@
   "compilerOptions": {
     "types": ["node", "jest"]
   },
-  "include": ["**/*.ts", "tests/environment.js"]
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

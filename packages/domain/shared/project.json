@@ -1,0 +1,22 @@
+{
+  "root": "packages/domain/shared",
+  "sourceRoot": "packages/domain/shared",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/domain/shared/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/domain/shared"],
+      "options": {
+        "jestConfig": "packages/domain/shared/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:domain-shared"]
+}
