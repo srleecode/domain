@@ -1,0 +1,22 @@
+{
+  "root": "packages/domain/generators/ng-add",
+  "sourceRoot": "packages/domain/generators/ng-add/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/domain/generators/ng-add/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/domain/ng-add"],
+      "options": {
+        "jestConfig": "packages/domain/generators/ng-add/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:domain-ng-add"]
+}

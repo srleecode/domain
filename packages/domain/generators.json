@@ -70,6 +70,13 @@
     }
   },
   "generators": {
+    "init": {
+      "factory": "./src/generators/init/init.compat#initSchematic",
+      "schema": "./src/generators/init/schema.json",
+      "description": "Initializes the @nrwl/angular plugin.",
+      "aliases": ["ng-add"],
+      "hidden": true
+    },
     "create": {
       "factory": "./src/generators/create/generator",
       "schema": "./src/generators/create/schema.json",

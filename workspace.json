@@ -3,8 +3,12 @@
   "projects": {
     "domain": "packages/domain",
     "domain-e2e": "e2e/domain-e2e",
+    "domain-grouping-folder-create-app": "packages/domain/generators/grouping-folder/create-app",
+    "domain-grouping-folder-create-domain": "packages/domain/generators/grouping-folder/create-domain",
     "domain-grouping-folder-move": "packages/domain/generators/grouping-folder/move",
     "domain-grouping-folder-remove": "packages/domain/generators/grouping-folder/remove",
+    "domain-ng-add": "packages/domain/generators/ng-add",
+    "domain-angular-shared": "packages/domain/generators/angular/shared",
     "domain-shared": "packages/domain/shared"
   },
   "cli": {
