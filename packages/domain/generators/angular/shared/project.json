@@ -20,5 +20,5 @@
       }
     }
   },
-  "tags": ["scope:domain-angular-shared"]
+  "tags": ["package:domain-angular", "scope:domain-angular-shared"]
 }

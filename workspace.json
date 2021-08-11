@@ -3,13 +3,18 @@
   "projects": {
     "domain": "packages/domain",
     "domain-e2e": "e2e/domain-e2e",
+    "domain-angular-component": "packages/domain/generators/angular/component",
+    "domain-angular-data-access": "packages/domain/generators/angular/data-access",
+    "domain-angular-domain": "packages/domain/generators/angular/domain",
+    "domain-angular-shared": "packages/domain/generators/angular/shared",
+    "domain-angular-util": "packages/domain/generators/angular/util",
     "domain-grouping-folder-create-app": "packages/domain/generators/grouping-folder/create-app",
     "domain-grouping-folder-create-domain": "packages/domain/generators/grouping-folder/create-domain",
     "domain-grouping-folder-move": "packages/domain/generators/grouping-folder/move",
     "domain-grouping-folder-remove": "packages/domain/generators/grouping-folder/remove",
     "domain-ng-add": "packages/domain/generators/ng-add",
-    "domain-angular-shared": "packages/domain/generators/angular/shared",
-    "domain-shared": "packages/domain/shared"
+    "domain-shared-utils": "packages/domain/generators/shared/utils",
+    "domain-shared-test-utils": "packages/domain/generators/shared/test-utils"
   },
   "cli": {
     "defaultCollection": "@nrwl/workspace"

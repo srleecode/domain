@@ -17,6 +17,21 @@
     "rootDir": ".",
     "paths": {
       "@srleecode/domain": ["packages/domain/src/index.ts"],
+      "@srleecode/domain/angular/component": [
+        "packages/domain/generators/angular/component/src/generator.ts"
+      ],
+      "@srleecode/domain/angular/data-access": [
+        "packages/domain/generators/angular/data-access/src/generator.ts"
+      ],
+      "@srleecode/domain/angular/domain": [
+        "packages/domain/generators/angular/domain/src/generator.ts"
+      ],
+      "@srleecode/domain/angular/shared": [
+        "packages/domain/generators/angular/shared/index.ts"
+      ],
+      "@srleecode/domain/angular/util": [
+        "packages/domain/generators/angular/util/src/generator.ts"
+      ],
       "@srleecode/domain/grouping-folder/create-app": [
         "packages/domain/generators/grouping-folder/create-app/src/generator.ts"
       ],
@@ -29,10 +44,12 @@
       "@srleecode/domain/grouping-folder/remove": [
         "packages/domain/generators/grouping-folder/remove/src/generator.ts"
       ],
-      "@srleecode/domain/angular/shared": [
-        "packages/domain/generators/angular/shared/index.ts"
+      "@srleecode/domain/shared/utils": [
+        "packages/domain/generators/shared/utils/index.ts"
       ],
-      "@srleecode/domain/shared": ["packages/domain/shared/index.ts"]
+      "@srleecode/domain/shared/test-utils": [
+        "packages/domain/generators/shared/test-utils/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

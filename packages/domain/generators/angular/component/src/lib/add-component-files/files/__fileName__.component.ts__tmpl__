@@ -1,0 +1,26 @@
+import { Component, OnInit<% if(!!isUsingNonDefaultViewEncapsulation) { %>, ViewEncapsulation<% }%><% if(changeDetection !== 'Default') { %>, ChangeDetectionStrategy<% }%> } from '@angular/core';
+
+@Component({
+  selector: '<%= selector %>',
+  templateUrl: './<%= fileName %>.component.html',
+  styleUrls: ['./<%= fileName %>.component.<%= style %>']<% if(isUsingNonDefaultViewEncapsulation) { %>,
+  encapsulation: ViewEncapsulation.<%= viewEncapsulation %><% } if (changeDetection !== 'Default') { %>,
+  changeDetection: ChangeDetectionStrategy.<%= changeDetection %><% } %>
+})
+export class <%= componentName %> implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+@NgModule({
+  declarations: [<%= componentName %>],
+  imports: [
+    CommonModule
+  ],
+  exports: [<%= componentName %>],
+})
+export class <%= moduleName %> {}

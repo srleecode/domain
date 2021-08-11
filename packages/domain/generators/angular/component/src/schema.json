@@ -1,0 +1,166 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "CreateComponentGenerator",
+  "title": "Create Component Generator Schema",
+  "cli": "nx",
+  "type": "object",
+  "description": "Creates a SCAM (Single Component Angular Module) library",
+  "properties": {
+    "groupingFolder": {
+      "description": "The grouping folder that the component will be created in",
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the component. This is optional if you only have one of the component types, e.g. shell or feature",
+      "x-prompt": "What name would you like to use for the component?"
+    },
+    "type": {
+      "description": "The type of component to create",
+      "enum": ["feature", "shell", "ui"],
+      "type": "string",
+      "default": "shell",
+      "x-prompt": {
+        "message": "Which type of component would you like to create?",
+        "type": "list",
+        "items": [
+          {
+            "value": "feature",
+            "label": "feature - for smart components (containers)"
+          },
+          {
+            "value": "shell",
+            "label": "shell - for the parent smart component, i.e. container for the page. It also includes routing for the domain and is the export point for the domain. The shell module will be lazy loaded in other domains and applications"
+          },
+          {
+            "value": "ui",
+            "label": "ui - for dumb components"
+          }
+        ]
+      }
+    },
+    "mountType": {
+      "description": "The mount type to use for the component test",
+      "enum": ["component", "story"],
+      "type": "string",
+      "default": "component",
+      "x-prompt": {
+        "message": "Which mount type would you like to use for the component test?",
+        "type": "list",
+        "items": [
+          {
+            "value": "component",
+            "label": "component - mount the component class directly"
+          },
+          {
+            "value": "story",
+            "label": "story - mounting the component using a storybook story"
+          }
+        ]
+      }
+    },
+    "prefix": {
+      "type": "string",
+      "description": "The prefix to apply to generated selectors.",
+      "x-prompt": "What is the prefix to apply to generated selectors?"
+    },
+    "displayBlock": {
+      "description": "Specifies if the style will contain `:host { display: block; }`",
+      "type": "boolean",
+      "default": false
+    },
+    "viewEncapsulation": {
+      "description": "The view encapsulation strategy to use in the new component.",
+      "enum": ["Emulated", "None", "ShadowDom"],
+      "default": "Emulated",
+      "type": "string",
+      "x-prompt": {
+        "message": "Which type of view encapsulation would you like to use?",
+        "type": "list",
+        "items": [
+          {
+            "value": "Emulated",
+            "label": "Emulate Native scoping of styles by adding an attribute containing surrogate id to the Host Element and pre-processing the style rules provided via styles or styleUrls, and adding the new Host Element attribute to all selectors. This is the default option"
+          },
+          {
+            "value": "None",
+            "label": "Don't provide any template or style encapsulation"
+          },
+          {
+            "value": "ShadowDom",
+            "label": "Use Shadow DOM to encapsulate styles"
+          }
+        ]
+      }
+    },
+    "style": {
+      "description": "The file extension to be used for style files.",
+      "type": "string",
+      "default": "scss",
+      "enum": ["css", "scss", "less"],
+      "x-prompt": {
+        "message": "Which stylesheet format would you like to use?",
+        "type": "list",
+        "items": [
+          {
+            "value": "css",
+            "label": "CSS"
+          },
+          {
+            "value": "scss",
+            "label": "SASS(.scss) [http://sass-lang.com]"
+          },
+          {
+            "value": "less",
+            "label": "LESS        [http://lesscss.org]"
+          }
+        ]
+      }
+    },
+    "unitTestType": {
+      "description": "The type of unit test file to create",
+      "type": "string",
+      "enum": ["noTest", "testBed", "noTestBed"],
+      "default": "noTest",
+      "x-prompt": {
+        "message": "What type of test file do you want to create?",
+        "type": "list",
+        "items": [
+          {
+            "value": "noTest",
+            "label": "Do not create \"spec.ts\" test files for the new component"
+          },
+          {
+            "value": "testBed",
+            "label": "create a \"spec.ts\" test file for the new component that uses TestbBed"
+          },
+          {
+            "value": "noTestBed",
+            "label": "create a \"spec.ts\" test file for the new component that does not use TestbBed"
+          }
+        ]
+      }
+    },
+    "buildable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Makes the domain libraries buildable"
+    },
+    "strict": {
+      "type": "boolean",
+      "description": "Makes the domain libraries have stricter type checking and build optimization options",
+      "default": false
+    },
+    "enableIvy": {
+      "description": "Makes the domain libraries have ivy enabled in tsconfig.lib.prod.json. Should not be used with publishable libraries.",
+      "type": "boolean",
+      "default": false
+    },
+    "publishable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Makes the domain libraries publishable."
+    }
+  },
+  "required": ["groupingFolder"]
+}

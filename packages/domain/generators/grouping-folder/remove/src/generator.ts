@@ -1,6 +1,6 @@
 import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
 import { RemoveGeneratorSchema } from './schema';
-import { getProjectNames } from '@srleecode/domain/shared';
+import { getProjectNames } from '@srleecode/domain/shared/utils';
 import { removeGenerator as nrwlRemoveGenerator } from '@nrwl/workspace';
 
 export async function removeGenerator(

@@ -1,0 +1,22 @@
+{
+  "root": "packages/domain/generators/shared/utils",
+  "sourceRoot": "packages/domain/generators/shared/utils",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/domain/generators/shared/utils/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/domain/generators/shared/utils"],
+      "options": {
+        "jestConfig": "packages/domain/generators/shared/utils/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:domain-shared-utils"]
+}

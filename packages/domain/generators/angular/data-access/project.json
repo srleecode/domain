@@ -1,0 +1,24 @@
+{
+  "root": "packages/domain/generators/angular/data-access",
+  "sourceRoot": "packages/domain/generators/angular/data-access/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/domain/generators/angular/data-access/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/domain/angular/data-access"],
+      "options": {
+        "jestConfig": "packages/domain/generators/angular/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["package:domain-angular", "scope:domain-angular-data-access"]
+}

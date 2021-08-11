@@ -1,0 +1,13 @@
+import { TestExampleComponent } from './test-example.component';
+
+describe('TestExampleComponent', () => {
+  let component: TestExampleComponent;
+
+  beforeEach(() => {
+    component = new TestExampleComponent();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

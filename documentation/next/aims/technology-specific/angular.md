@@ -9,7 +9,7 @@ To make component testing easy the generators will also make it easy to setup th
  - Component test harnesses - A component harness is a class that lets a test interact with a component via a supported API. Each harness's API interacts with a component the same way a user would. By using the harness API, a test insulates itself against updates to the internals of a component, such as changing its DOM structure. By utilising component testing and pairing it with component test harnesses. The more expensive E2E tests will be able to use component test harnesses tested in the component tests. This means it is unlikely for the E2E tests to be breaking due to selector issues.
 
 Resources for further reading:
- - [Nx 8.8: Now You Can Write UI Tests with Storybook and Cypress](https://blog.nrwl.io/ui-testing-with-storybook-and-nx-4b86975224c)
+ - [Nx 8.8: Now You Can Write UI Tests with Storybook and Cypress](https://blog.nrwl.io/ui-testing-with-storybook-and-nx-4b86975224c). Note that storybook component testing is now [deprecated](https://github.com/nrwl/nx/issues/6615). The cypress component test runner released in cypress 7.0.0 should be used.
  - For Angular, the best way to do component testing currently seems to be [jscutlery/test-utils](https://github.com/jscutlery/test-utils)
 
 ## Allow the E2E testing files to be created inside the domains grouping folder

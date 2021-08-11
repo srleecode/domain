@@ -20,5 +20,8 @@
       }
     }
   },
-  "tags": ["scope:domain-grouping-folder-create-domain"]
+  "tags": [
+    "package:domain-grouping-folder",
+    "scope:domain-grouping-folder-create-domain"
+  ]
 }

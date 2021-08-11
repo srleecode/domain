@@ -11,10 +11,15 @@ describe('createAppGroupingFolderGenerator', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
-    jest.spyOn(
-      addSharedApplicationEslintRuleMock,
-      'addSharedApplicationEslintRule'
-    );
+    jest
+      .spyOn(
+        addSharedApplicationEslintRuleMock,
+        'addSharedApplicationEslintRule'
+      )
+      .mockImplementation();
+    jest
+      .spyOn(initialiseAngularWorkspaceMock, 'initialiseAngularWorkspace')
+      .mockImplementation();
   });
 
   it('should create directory with language prefixed to name', async () => {
@@ -45,10 +50,6 @@ describe('createAppGroupingFolderGenerator', () => {
   });
 
   describe('initialiseAngularWorkspace', () => {
-    beforeEach(() => {
-      jest.clearAllMocks();
-      jest.spyOn(initialiseAngularWorkspaceMock, 'initialiseAngularWorkspace');
-    });
     it('should initialise angular workspace when language is angular and there is no existing angular app', async () => {
       await createAppGroupingFolderGenerator(tree, {
         baseFolder: 'libs',

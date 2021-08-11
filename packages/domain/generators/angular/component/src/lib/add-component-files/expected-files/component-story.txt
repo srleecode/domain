@@ -1,0 +1,18 @@
+import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { CommonModule } from '@angular/common';
+import { action } from '@storybook/addon-actions';
+import { TestExampleComponent, TestAppTestDomainFeatureTestExampleModule } from './test-example.component';
+
+export default {
+    component: TestExampleComponent,
+    title: 'TestApp/TestDomain/FeatureTestExample',
+} as Meta;
+
+const Template: Story<TestExampleComponent> = () => ({
+    component: TestExampleComponent,
+    moduleMetadata({
+    imports: [ ...GLOBAL_MOUNT_OPTIONS.imports, TestAppTestDomainFeatureTestExampleModule ]
+    })
+});
+
+export const Default = Template.bind({})

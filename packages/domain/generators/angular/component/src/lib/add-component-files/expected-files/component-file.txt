@@ -1,0 +1,21 @@
+import{ Component, OnInit } from '@angular/core';
+
+@Component({
+    selector:'srlee-test-app-test-domain-feature-test-example',
+    templateUrl:'./test-example.component.html',
+    styleUrls: ['./test-example.component.scss']
+}) export class TestExampleComponent implements OnInit {
+    constructor() {}
+
+    ngOnInit():void {
+    }
+}
+
+@NgModule({
+  declarations: [TestExampleComponent],
+  imports: [
+    CommonModule
+  ],
+  exports: [TestExampleComponent],
+})
+export class TestAppTestDomainFeatureTestExampleModule {}

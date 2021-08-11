@@ -1,5 +1,5 @@
 import { Tree } from '@nrwl/devkit';
-import { updateDepConstraint } from '@srleecode/domain/shared';
+import { updateDepConstraint } from '@srleecode/domain/shared/utils';
 import { Language } from '../model/language.enum';
 
 export const addSharedApplicationEslintRule = (

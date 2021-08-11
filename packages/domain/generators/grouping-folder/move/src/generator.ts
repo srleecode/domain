@@ -4,9 +4,13 @@ import {
   logger,
   getProjects,
   ProjectConfiguration,
+  getWorkspaceLayout,
 } from '@nrwl/devkit';
 import { MoveGeneratorSchema } from './schema';
-import { getNormalisedPath, getProjectNames } from '@srleecode/domain/shared';
+import {
+  getNormalisedPath,
+  getProjectNames,
+} from '@srleecode/domain/shared/utils';
 import { moveGenerator as nrwlmoveGenerator } from '@nrwl/workspace';
 
 export async function moveGenerator(
@@ -18,6 +22,7 @@ export async function moveGenerator(
   const projects = getProjects(tree);
   for (const projectName of projectNames) {
     const movedProjectRoot = getMovedProjectRoot(
+      tree,
       projects.get(projectName),
       folder,
       destination
@@ -34,14 +39,16 @@ export async function moveGenerator(
 }
 
 const getMovedProjectRoot = (
+  tree: Tree,
   project: ProjectConfiguration,
   folder: string,
   destination: string
 ): string => {
   const normalisedProjectRoot = getNormalisedPath(project.root);
+  const workspaceLayout = getWorkspaceLayout(tree);
   return normalisedProjectRoot
     .replace(folder, destination)
-    .replace('libs/', '');
+    .replace(`${workspaceLayout.libsDir}/`, '');
 };
 
 export default moveGenerator;

@@ -13,8 +13,19 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["scope:domain-shared"]
+                "sourceTag": "package:domain-angular",
+                "onlyDependOnLibsWithTags": [
+                  "scope:domain-angular-shared",
+                  "scope:domain-shared-utils",
+                  "scope:domain-shared-test-utils"
+                ]
+              },
+              {
+                "sourceTag": "package:domain-grouping-folder",
+                "onlyDependOnLibsWithTags": [
+                  "scope:domain-shared-utils",
+                  "scope:domain-shared-test-utils"
+                ]
               }
             ]
           }

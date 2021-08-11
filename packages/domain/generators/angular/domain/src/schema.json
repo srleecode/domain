@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "CreateDomainGenerator",
+  "title": "Create Domain Library Generator Schema",
+  "cli": "nx",
+  "type": "object",
+  "description": "Creates a domain library",
+  "properties": {
+    "groupingFolder": {
+      "description": "The grouping folder that the library will be created in",
+      "type": "string"
+    },
+    "buildable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Makes the domain libraries buildable"
+    },
+    "strict": {
+      "type": "boolean",
+      "description": "Makes the domain libraries have stricter type checking and build optimization options",
+      "default": false
+    },
+    "enableIvy": {
+      "description": "Makes the domain libraries have ivy enabled in tsconfig.lib.prod.json. Should not be used with publishable libraries.",
+      "type": "boolean",
+      "default": false
+    },
+    "publishable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Makes the domain libraries publishable."
+    }
+  },
+  "required": ["groupingFolder"]
+}

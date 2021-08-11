@@ -1,12 +1,15 @@
 import { Tree } from '@nrwl/devkit';
-import { updateDepConstraint } from '@srleecode/domain/shared';
+import {
+  getDasherizedGroupingFolder,
+  updateDepConstraint,
+} from '@srleecode/domain/shared/utils';
 
 export const addSharedDomainEslintRule = (
   tree: Tree,
   baseFolder: string
 ): void => {
   updateDepConstraint(tree, (depConstraints) => {
-    const base = baseFolder.replace('libs/', '').replace(/\//g, '-');
+    const base = getDasherizedGroupingFolder(tree, baseFolder);
     const constraintScopes = [];
     tree.children(baseFolder).forEach((folder) => {
       if (!folder.startsWith('.')) {

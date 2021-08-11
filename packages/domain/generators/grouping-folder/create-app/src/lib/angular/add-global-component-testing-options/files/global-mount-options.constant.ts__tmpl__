@@ -1,0 +1,25 @@
+import { NgModule, SchemaMetadata } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+interface StyleOptions {
+  stylesheets: string | string[];
+  stylesheet: string | string[];
+  style: string | string[];
+  styles: string | string[];
+  cssFiles: string | string[];
+  cssFile: string | string[];
+}
+
+interface BaseMountOptions extends Partial<StyleOptions> {
+  imports?: NgModule['imports'];
+  providers?: NgModule['providers'];
+  schemas?: SchemaMetadata[];
+}
+
+export const GLOBAL_MOUNT_STYLE_OPTIONS: Partial<StyleOptions> = {};
+
+export const GLOBAL_MOUNT_OPTIONS: BaseMountOptions = {
+  ...GLOBAL_MOUNT_STYLE_OPTIONS,
+  imports: [BrowserModule, BrowserAnimationsModule]
+};
