@@ -1,26 +1,26 @@
 import { Tree, convertNxGenerator } from '@nrwl/devkit';
 import { CreateAppGroupingFolderGeneratorSchema } from './schema';
-import { Language } from './lib/model/language.enum';
-import { isAngularAppFolderExisting } from './lib/angular/is-angular-app-folder-existing';
-import { initialiseAngularWorkspace } from './lib/angular/initialise-angular-workspace';
+import { FrontendFramework } from './lib/model/framework.enum';
+import { isFeAppFolderExisting } from './lib/fe-app/is-fe-app-folder-existing';
+import { initialiseFeAppWorkspace } from './lib/fe-app/initialise-fe-app-workspace';
 import { addSharedApplicationEslintRule } from './lib/shared/add-shared-application-eslint-rule';
 
 export async function createAppGroupingFolderGenerator(
   tree: Tree,
   options: CreateAppGroupingFolderGeneratorSchema
 ): Promise<void> {
-  const { language, name, baseFolder } = options;
-  if (language === Language.Angular) {
-    if (!isAngularAppFolderExisting(tree)) {
-      await initialiseAngularWorkspace(tree);
+  const { framework, name, baseFolder } = options;
+  if (framework === FrontendFramework.Angular) {
+    if (!isFeAppFolderExisting(framework, tree)) {
+      await initialiseFeAppWorkspace(framework, tree);
     }
   }
-  const directory = language
-    ? `${baseFolder}/${language}-${name}`
+  const directory = framework
+    ? `${baseFolder}/${framework}-${name}`
     : `${baseFolder}/${name}`;
   tree.write(directory, '');
   if (name === 'shared') {
-    addSharedApplicationEslintRule(tree, language);
+    addSharedApplicationEslintRule(tree, framework);
   }
 }
 

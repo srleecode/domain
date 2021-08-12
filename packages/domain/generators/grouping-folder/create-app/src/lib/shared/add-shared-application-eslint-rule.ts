@@ -1,10 +1,10 @@
 import { Tree } from '@nrwl/devkit';
 import { updateDepConstraint } from '@srleecode/domain/shared';
-import { Language } from '../model/language.enum';
+import { FrontendFramework } from '../model/framework.enum';
 
 export const addSharedApplicationEslintRule = (
   tree: Tree,
-  language?: Language
+  language?: FrontendFramework
 ): void => {
   updateDepConstraint(tree, (depConstraints) => {
     const scope = language ? `${language}-shared` : 'shared';

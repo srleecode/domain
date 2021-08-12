@@ -70,17 +70,15 @@
     }
   },
   "generators": {
-    "init": {
-      "factory": "./src/generators/init/init.compat#initSchematic",
-      "schema": "./src/generators/init/schema.json",
-      "description": "Initializes the @nrwl/angular plugin.",
-      "aliases": ["ng-add"],
-      "hidden": true
+    "ngProject": {
+      "factory": "./src/generators/create/angular/generator",
+      "schema": "./src/generators/create/angular/schema.json",
+      "description": "create angular project generator"
     },
-    "create": {
-      "factory": "./src/generators/create/generator",
-      "schema": "./src/generators/create/schema.json",
-      "description": "create generator"
+    "reactProject": {
+      "factory": "./src/generators/create/react/generator",
+      "schema": "./src/generators/create/react/schema.json",
+      "description": "create react project generator"
     },
     "cypressProject": {
       "factory": "./src/generators/cypress-project/generator",
@@ -112,10 +110,15 @@
       "schema": "./src/generators/component/schema.json",
       "description": "component generator"
     },
-    "component": {
-      "factory": "./src/generators/component/generator",
-      "schema": "./src/generators/component/schema.json",
-      "description": "component generator"
+    "ngComponent": {
+      "factory": "./src/generators/ng-component/generator",
+      "schema": "./src/generators/ng-component/schema.json",
+      "description": "angular component generator"
+    },
+    "reactComponent": {
+      "factory": "./src/generators/react-component/generator",
+      "schema": "./src/generators/react-component/schema.json",
+      "description": "react component generator"
     },
     "addPrivateApi": {
       "factory": "./src/generators/private-api/generator",

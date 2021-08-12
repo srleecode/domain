@@ -1,5 +1,5 @@
 export * from './generators/component/generator';
-export * from './generators/create/generator';
+export * from './generators/create/angular/generator';
 export * from './generators/cypress-project/generator';
 export * from './generators/libraries/generator';
 export * from './generators/move/generator';

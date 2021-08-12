@@ -1,5 +1,7 @@
+import { FrontendFramework } from './lib/model/framework.enum';
+
 export interface CreateAppGroupingFolderGeneratorSchema {
-  language?: Language;
+  framework?: FrontendFramework;
   name: string;
   baseFolder: string;
 }

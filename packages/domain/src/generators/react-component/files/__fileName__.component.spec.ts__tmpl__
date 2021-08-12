@@ -1,0 +1,26 @@
+import React from 'react';
+<% if(isTestUsingTestRenderer) {%>
+import renderer from 'react-test-renderer';
+<% } %>
+<% if(isTestUsingEnzyme) {%>
+import { shallow } from 'enzyme';
+<% } %>
+import <%= className %> from './<%= className %>';
+
+<% if(isTestUsingEnzyme) {%>
+describe('<%= className %> component', () => {
+  it('renders', () => {
+    const wrapper = shallow(<<%= className %> />);
+    expect(wrapper).toMatchSnapshot();
+  });
+});
+
+<% if(isTestUsingTestRenderer) {%>
+test('<%= className %> renders', () => {
+  const component = renderer.create(
+    <<%= className %> />
+  );
+  let tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+})
+<% } %>

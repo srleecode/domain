@@ -1,8 +1,8 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createAppGroupingFolderGenerator } from './generator';
-import { Language } from './lib/model/language.enum';
-import * as initialiseAngularWorkspaceMock from './lib/angular/initialise-angular-workspace';
+import { FrontendFramework } from './lib/model/framework.enum';
+import * as initialiseFeAppWorkspaceMock from './lib/fe-app/initialise-fe-app-workspace';
 import * as addSharedApplicationEslintRuleMock from './lib/shared/add-shared-application-eslint-rule';
 
 describe('createAppGroupingFolderGenerator', () => {
@@ -21,7 +21,7 @@ describe('createAppGroupingFolderGenerator', () => {
     await createAppGroupingFolderGenerator(tree, {
       baseFolder: 'libs',
       name: 'test',
-      language: Language.Angular,
+      framework: FrontendFramework.Angular,
     });
     const fileChanges = tree.listChanges();
     expect(fileChanges[fileChanges.length - 1].path).toBe('libs/ng-test');
@@ -44,30 +44,30 @@ describe('createAppGroupingFolderGenerator', () => {
     ).toHaveBeenCalled();
   });
 
-  describe('initialiseAngularWorkspace', () => {
+  describe('initialiseFeAppWorkspace', () => {
     beforeEach(() => {
       jest.clearAllMocks();
-      jest.spyOn(initialiseAngularWorkspaceMock, 'initialiseAngularWorkspace');
+      jest.spyOn(initialiseFeAppWorkspaceMock, 'initialiseFeAppWorkspace');
     });
     it('should initialise angular workspace when language is angular and there is no existing angular app', async () => {
       await createAppGroupingFolderGenerator(tree, {
         baseFolder: 'libs',
         name: 'test',
-        language: Language.Angular,
+        framework: FrontendFramework.Angular,
       });
       expect(
-        initialiseAngularWorkspaceMock.initialiseAngularWorkspace
+        initialiseFeAppWorkspaceMock.initialiseFeAppWorkspace
       ).toHaveBeenCalled();
     });
     it('should not initialise angular workspace when language is angular and there is an existing angular app', async () => {
-      tree.write(`libs/${Language.Angular}-app`, '');
+      tree.write(`libs/${FrontendFramework.Angular}-app`, '');
       await createAppGroupingFolderGenerator(tree, {
         baseFolder: 'libs',
         name: 'test',
-        language: Language.Angular,
+        framework: FrontendFramework.Angular,
       });
       expect(
-        initialiseAngularWorkspaceMock.initialiseAngularWorkspace
+        initialiseFeAppWorkspaceMock.initialiseFeAppWorkspace
       ).not.toHaveBeenCalled();
     });
   });

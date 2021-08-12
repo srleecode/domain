@@ -1,0 +1,22 @@
+{
+  "root": "packages/domain/generators/fe-app/shared",
+  "sourceRoot": "packages/domain/generators/fe-app/shared",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/domain/generators/fe-app/shared/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/domain/generators/fe-app/shared"],
+      "options": {
+        "jestConfig": "packages/domain/generators/fe-app/shared/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:domain-angular-shared"]
+}

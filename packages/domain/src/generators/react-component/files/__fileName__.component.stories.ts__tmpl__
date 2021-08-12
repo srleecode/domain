@@ -1,0 +1,13 @@
+import React from 'react';
+
+import <%= className %> from './<%= className %>';
+
+export default {
+  component: <%= className %>,
+  title: '<%= className %>',
+};
+
+const Template = args => <<%= className %> {...args} />;
+
+export const Default = Template.bind({});
+Default.args = {title: 'Test <%= className %>'};

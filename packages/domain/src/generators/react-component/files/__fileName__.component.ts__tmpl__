@@ -1,0 +1,10 @@
+import React from 'react';
+
+export default function <%= className %>({ title }) {
+  return (
+    <div className="<%= fileName %>">
+      <input type="text" value={title} />
+    </div>
+  );
+}
+
