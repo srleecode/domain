@@ -6,8 +6,8 @@
   "type": "object",
   "description": "Creates application grouping folder",
   "properties": {
-    "language": {
-      "description": "The type of project",
+    "applicationType": {
+      "description": "The type of application",
       "type": "string",
       "enum": ["angular"],
       "default": "angular"
@@ -15,11 +15,7 @@
     "name": {
       "description": "The name of the application",
       "type": "string"
-    },
-    "baseFolder": {
-      "description": "The folder that the grouping folder will be created in",
-      "type": "string"
     }
   },
-  "required": ["name", "baseFolder"]
+  "required": ["name"]
 }

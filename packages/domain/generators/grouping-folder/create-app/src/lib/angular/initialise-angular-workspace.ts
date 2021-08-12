@@ -5,13 +5,11 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import { addDependencies } from './add-dependencies';
-import { addEslintLayerConstraints } from './add-eslint-layer-constraints';
 import { addGlobalComponentTestingOptions } from './add-global-component-testing-options/add-global-component-testing-options';
 
 export const initialiseAngularWorkspace = (tree: Tree): GeneratorCallback => {
   checkNrwlAngularIsAdded(tree);
   checkNrwlCypressIsAdded(tree);
-  addEslintLayerConstraints(tree);
   if (!tree.exists(`.component-testing/global-mount-options.constant.ts`)) {
     addGlobalComponentTestingOptions(tree);
   }

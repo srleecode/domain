@@ -23,6 +23,7 @@
               {
                 "sourceTag": "package:domain-grouping-folder",
                 "onlyDependOnLibsWithTags": [
+                  "scope:domain-grouping-folder-shared",
                   "scope:domain-shared-utils",
                   "scope:domain-shared-test-utils"
                 ]

@@ -1,0 +1,24 @@
+{
+  "root": "packages/domain/generators/front-end/angular/component",
+  "sourceRoot": "packages/domain/generators/front-end/angular/component/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/domain/generators/front-end/angular/component/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/domain/angular/component"],
+      "options": {
+        "jestConfig": "packages/domain/generators/front-end/angular/component/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["package:domain-angular", "scope:domain-angular-component"]
+}

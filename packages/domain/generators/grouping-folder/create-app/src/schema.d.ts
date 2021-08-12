@@ -1,5 +1,6 @@
+import { ApplicationType } from '@srleecode/domain/grouping-folder/shared';
+
 export interface CreateAppGroupingFolderGeneratorSchema {
-  language?: Language;
+  applicationType?: ApplicationType;
   name: string;
-  baseFolder: string;
 }
