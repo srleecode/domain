@@ -2,7 +2,6 @@ import { DomainLibraryName } from '../../shared/model/domain-library-name.enum';
 import { updateStorybookTargets } from './update-storybook-targets';
 import { updateStorybookAddonsBasePath } from './update-storybook-addons-base-path';
 import { updateStorybookCypressBaseUrl } from './add-storybook-cypress-base-url';
-import { updateStorybookWebpackBasePath } from './update-storybook-webpack-base-path';
 import { UiFrameworkType } from '../../shared/model/ui-framework.type';
 import { Tree, updateJson } from '@nrwl/devkit';
 import { isTwoLevelDomain } from '../../shared/utils/domain';
@@ -32,7 +31,6 @@ export const moveStorybookConfigToDomain = (
   updateStorybookCypressBaseUrl(tree, application, domain);
   removeAddedStoryFilesExclusions(tree, application, domain, firstLibrary);
   addStoryFileExclusions(tree, application, domain, libraries);
-  updateStorybookWebpackBasePath(tree, application, domain);
 };
 
 const moveStorybookConfig = (

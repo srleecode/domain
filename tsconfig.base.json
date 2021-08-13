@@ -32,6 +32,12 @@
       "@srleecode/domain/angular/util": [
         "packages/domain/generators/front-end/angular/util/src/generator.ts"
       ],
+      "@srleecode/domain/init/ng-add": [
+        "packages/domain/generators/grouping-folder/init/ng-add/generator.ts"
+      ],
+      "@srleecode/domain/init/react-add": [
+        "packages/domain/generators/grouping-folder/init/react-add/generator.ts"
+      ],
       "@srleecode/domain/grouping-folder/create-app": [
         "packages/domain/generators/grouping-folder/create-app/src/generator.ts"
       ],

@@ -1,7 +1,7 @@
 module.exports = {
-  displayName: 'domain-ng-add',
-  preset: '../../../../jest.preset.js',
-  coverageDirectory: '../../../../coverage/packages/domain/generators/ngAdd',
+  displayName: 'domain-init-react-add',
+  preset: '../../../../../jest.preset.js',
+  coverageDirectory: '../../../../../coverage/packages/domain/generators/init/react-add',
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
