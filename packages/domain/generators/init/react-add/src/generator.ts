@@ -1,18 +1,11 @@
-import {
-  Tree,
-  convertNxGenerator,
-  addDependenciesToPackageJson,
-} from '@nrwl/devkit';
+import { Tree, convertNxGenerator } from '@nrwl/devkit';
+import { reactInitGenerator } from '@nrwl/react';
 
 export async function reactAddGenerator(tree: Tree) {
-  return addDependenciesToPackageJson(
-    tree,
-    {},
-    {
-      '@nrwl/react': 'latest',
-      '@nrwl/cypress': 'latest',
-    }
-  );
+  return reactInitGenerator(tree, {
+    unitTestRunner: 'jest',
+    e2eTestRunner: 'cypress',
+  });
 }
 
 export default reactAddGenerator;
