@@ -2,7 +2,7 @@ import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
 import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
 import { CreateComponentGeneratorSchema } from './schema';
 import { setupCtGenerator } from '@jscutlery/cypress-angular/src/generators/setup-ct/setup-ct';
-import { getDasherizedGroupingFolder } from '@srleecode/domain/shared/utils';
+import { getDasherizedFolderPath } from '@srleecode/domain/shared/utils';
 import { addComponentTestingTarget } from './lib/add-component-testing-target';
 import { getLibraryCommonOptions } from '@srleecode/domain/angular/shared';
 
@@ -26,7 +26,7 @@ export async function createComponentGenerator(
     logger.error(e.message);
     throw e;
   });
-  const domain = `${getDasherizedGroupingFolder(tree, groupingFolder)}`;
+  const domain = `${getDasherizedFolderPath(tree, groupingFolder)}`;
   const libraryName = libraryCommonOptions.name;
   const projectName = `${domain}-${libraryName}`;
   await setupCtGenerator(tree, {

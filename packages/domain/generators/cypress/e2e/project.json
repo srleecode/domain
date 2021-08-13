@@ -1,0 +1,22 @@
+{
+  "root": "packages/domain/generators/cypress/e2e",
+  "sourceRoot": "packages/domain/generators/cypress/e2e/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/domain/generators/cypress/e2e/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/domain/e2e"],
+      "options": {
+        "jestConfig": "packages/domain/generators/cypress/e2e/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["package:domain-cypress", "scope:domain-cypress-e2e"]
+}

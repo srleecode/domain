@@ -6,7 +6,10 @@ import { ComponentType } from '../../model/component-type.enum';
 import { UnitTestType } from '../../model/unit-test-type.enum';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
 import { CreateComponentGeneratorSchema } from '../../schema';
-import { getDasherizedGroupingFolder } from '@srleecode/domain/shared/utils';
+import {
+  getDasherizedFolderPath,
+  getDomainPath,
+} from '@srleecode/domain/shared/utils';
 import { MountType } from '../../model/mount-type.enum';
 
 export const addComponentFiles = (
@@ -16,7 +19,7 @@ export const addComponentFiles = (
   const { groupingFolder, name, type, prefix, mountType } = options;
   const target = normalize(groupingFolder);
   const libraryName = name ? `${type}-${dasherize(name)}` : type;
-  const dasherisedGroupingFolder = getDasherizedGroupingFolder(
+  const dasherisedGroupingFolder = getDasherizedFolderPath(
     tree,
     options.groupingFolder
   );
@@ -56,8 +59,7 @@ const getStorybookTitle = (
   groupingFolder: string,
   libraryName: string
 ): string => {
-  const { libsDir } = getWorkspaceLayout(tree);
-  const domainPath = groupingFolder.replace(`${libsDir}/`, '');
+  const domainPath = getDomainPath(tree, groupingFolder);
   return `${domainPath}/${libraryName}`
     .split('/')
     .map((folder) => classify(folder))

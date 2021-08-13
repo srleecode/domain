@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "CreateE2EGenerator",
+  "title": "Create e2e cypress project Generator Schema",
+  "cli": "nx",
+  "type": "object",
+  "description": "Creates e2e cypress project",
+  "properties": {
+    "groupingFolder": {
+      "description": "The grouping folder that the cyporess project will be created in",
+      "type": "string"
+    }
+  },
+  "required": ["groupingFolder"]
+}
