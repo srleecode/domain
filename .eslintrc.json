@@ -27,6 +27,13 @@
                   "scope:domain-shared-utils",
                   "scope:domain-shared-test-utils"
                 ]
+              },
+              {
+                "sourceTag": "package:domain-cypress",
+                "onlyDependOnLibsWithTags": [
+                  "scope:domain-shared-utils",
+                  "scope:domain-shared-test-utils"
+                ]
               }
             ]
           }

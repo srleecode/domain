@@ -1,4 +1,4 @@
-import { names, Tree, generateFiles, getWorkspaceLayout } from '@nrwl/devkit';
+import { names, Tree, generateFiles } from '@nrwl/devkit';
 import { dasherize, classify } from '@nrwl/workspace/src/utils/strings';
 import { join, normalize } from 'path';
 import { ChangeDetection } from '../../model/change-detection-type.enum';

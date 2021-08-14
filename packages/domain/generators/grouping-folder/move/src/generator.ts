@@ -30,7 +30,7 @@ export async function moveGenerator(
     await nrwlmoveGenerator(tree, {
       projectName,
       destination: movedProjectRoot,
-      updateImportPath: false,
+      updateImportPath: true,
     }).catch((e) => {
       logger.error(e.message);
       throw e;
