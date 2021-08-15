@@ -1,24 +1,24 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
-import { addComponentFiles } from './add-component-files';
-import { defaultOptions } from '../../default-options.constant';
+import { defaultOptions, LIB_PATH } from '../../default-options.constant';
 import { checkFileContentIsSame } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 import { ComponentType } from '../../model/component-type.enum';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
+import { createComponentGenerator } from '../../generator';
 
-describe('addComponentFiles - component file', () => {
+describe('component file', () => {
   let tree: Tree;
-  const testFilePath = `${defaultOptions.groupingFolder}/${dasherize(
+  const testFilePath = `${LIB_PATH}/${dasherize(
     defaultOptions.name
   )}.component.ts`;
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
   });
-  it('should create component file', () => {
-    addComponentFiles(tree, defaultOptions);
+  it('should create component file', async () => {
+    await createComponentGenerator(tree, defaultOptions);
     checkFileContentIsSame(
       tree,
       testFilePath,
@@ -26,37 +26,32 @@ describe('addComponentFiles - component file', () => {
     );
   });
 
-  it('should have OnPush change detection strategy when component type is ui', () => {
-    addComponentFiles(tree, { ...defaultOptions, type: ComponentType.Ui });
-    const styleFilePath = `${defaultOptions.groupingFolder}/${dasherize(
-      defaultOptions.name
-    )}.component.ts`;
-    const componentFile = tree.read(styleFilePath).toString();
+  it('should have OnPush change detection strategy when component type is ui', async () => {
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      type: ComponentType.Ui,
+    });
+    const uiTestFilePath = testFilePath.replace('feature', 'ui');
+    const componentFile = tree.read(uiTestFilePath).toString();
     expect(componentFile).toMatch(
       /changeDetection: ChangeDetectionStrategy.OnPush/
     );
   });
-  it('should have ViewEncapsulation.None when it is provided', () => {
-    addComponentFiles(tree, {
+  it('should have ViewEncapsulation.None when it is provided', async () => {
+    await createComponentGenerator(tree, {
       ...defaultOptions,
       viewEncapsulation: ViewEncapsulation.None,
     });
-    const styleFilePath = `${defaultOptions.groupingFolder}/${dasherize(
-      defaultOptions.name
-    )}.component.ts`;
-    const componentFile = tree.read(styleFilePath).toString();
+    const componentFile = tree.read(testFilePath).toString();
     expect(componentFile).toMatch(/encapsulation: ViewEncapsulation.None/);
   });
 
-  it('should have ViewEncapsulation.ShadowDom when it is provided', () => {
-    addComponentFiles(tree, {
+  it('should have ViewEncapsulation.ShadowDom when it is provided', async () => {
+    await createComponentGenerator(tree, {
       ...defaultOptions,
       viewEncapsulation: ViewEncapsulation.ShadowDom,
     });
-    const styleFilePath = `${defaultOptions.groupingFolder}/${dasherize(
-      defaultOptions.name
-    )}.component.ts`;
-    const componentFile = tree.read(styleFilePath).toString();
+    const componentFile = tree.read(testFilePath).toString();
     expect(componentFile).toMatch(/encapsulation: ViewEncapsulation.ShadowDom/);
   });
 });

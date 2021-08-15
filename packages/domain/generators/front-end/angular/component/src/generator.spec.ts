@@ -1,9 +1,10 @@
-import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import * as libraryGeneratorMock from '@nrwl/angular/src/generators/library/library';
-import * as setupCtGeneratorMock from '@jscutlery/cypress-angular/src/generators/setup-ct/setup-ct';
+import * as libraryGeneratorSpy from '@nrwl/angular/src/generators/library/library';
+import * as setupComponentTestSpy from '@srleecode/domain/cypress/component-test/angular';
 import { defaultOptions } from './default-options.constant';
 import { createComponentGenerator } from './generator';
+import { MountType } from '@srleecode/domain/shared/utils';
 
 describe('createComponentGenerator', () => {
   let tree: Tree;
@@ -11,8 +12,8 @@ describe('createComponentGenerator', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
-    jest.spyOn(libraryGeneratorMock, 'libraryGenerator');
-    jest.spyOn(setupCtGeneratorMock, 'setupCtGenerator');
+    jest.spyOn(libraryGeneratorSpy, 'libraryGenerator');
+    jest.spyOn(setupComponentTestSpy, 'setupComponentTestGenerator');
   });
 
   it('should throw an error if the project already exists', async () => {
@@ -24,7 +25,7 @@ describe('createComponentGenerator', () => {
 
   it('should pass correct parameters to @nrwl/angular generator', async () => {
     await createComponentGenerator(tree, defaultOptions);
-    expect(libraryGeneratorMock.libraryGenerator).toHaveBeenCalledWith(
+    expect(libraryGeneratorSpy.libraryGenerator).toHaveBeenCalledWith(
       expect.anything(),
       {
         buildable: defaultOptions.buildable,
@@ -41,32 +42,15 @@ describe('createComponentGenerator', () => {
     );
   });
 
-  it('should pass correct parameters to @jscutlery/cypress-angular generator', async () => {
+  it('should pass correct parameters to setupComponentTestGenerator', async () => {
     await createComponentGenerator(tree, defaultOptions);
-    expect(setupCtGeneratorMock.setupCtGenerator).toHaveBeenCalledWith(
-      expect.anything(),
-      {
-        project: 'test-app-test-domain-feature-test-example',
-      }
-    );
-  });
-
-  it('should add component testing target to project', async () => {
-    await createComponentGenerator(tree, defaultOptions);
-    const projectConfig = readProjectConfiguration(
-      tree,
-      'test-app-test-domain-feature-test-example'
-    );
-    expect(projectConfig.targets['ct']).toEqual({
-      executor: '@nrwl/cypress:cypress',
-      options: {
-        cypressConfig:
-          'libs/test-app/test-domain/feature-test-example/cypress.json',
-        devServerTarget: '',
-        testingType: 'component',
-        tsConfig:
-          'libs/test-app/test-domain/feature-test-example/tsconfig.cypress.json',
-      },
+    expect(
+      setupComponentTestSpy.setupComponentTestGenerator
+    ).toHaveBeenCalledWith(expect.anything(), {
+      componentName: 'TestExample',
+      mountType: MountType.Component,
+      projectName: 'test-app-test-domain-feature-test-example',
+      selector: 'srlee-test-app-test-domain-feature-test-example',
     });
   });
 });

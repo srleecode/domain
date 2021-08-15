@@ -6,26 +6,17 @@ import { ComponentType } from '../../model/component-type.enum';
 import { UnitTestType } from '../../model/unit-test-type.enum';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
 import { CreateComponentGeneratorSchema } from '../../schema';
-import {
-  getDasherizedFolderPath,
-  getDomainPath,
-} from '@srleecode/domain/shared/utils';
-import { MountType } from '../../model/mount-type.enum';
+import { getDomainPath, MountType } from '@srleecode/domain/shared/utils';
 
 export const addComponentFiles = (
   tree: Tree,
-  options: CreateComponentGeneratorSchema
+  options: CreateComponentGeneratorSchema,
+  dasherisedGroupingFolder: string,
+  libraryName: string,
+  selector: string
 ): void => {
-  const { groupingFolder, name, type, prefix, mountType } = options;
-  const target = normalize(groupingFolder);
-  const libraryName = name ? `${type}-${dasherize(name)}` : type;
-  const dasherisedGroupingFolder = getDasherizedFolderPath(
-    tree,
-    options.groupingFolder
-  );
-  const selector = prefix
-    ? `${prefix}-${dasherisedGroupingFolder}-${libraryName}`
-    : `${dasherisedGroupingFolder}-${libraryName}`;
+  const { groupingFolder, name, mountType } = options;
+  const target = `${normalize(groupingFolder)}/${libraryName}/src/lib`;
   const templateOptions = {
     ...options,
     ...names(options.name),

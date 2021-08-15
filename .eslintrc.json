@@ -17,7 +17,8 @@
                 "onlyDependOnLibsWithTags": [
                   "scope:domain-angular-shared",
                   "scope:domain-shared-utils",
-                  "scope:domain-shared-test-utils"
+                  "scope:domain-shared-test-utils",
+                  "scope:domain-cypress-component-test-angular"
                 ]
               },
               {

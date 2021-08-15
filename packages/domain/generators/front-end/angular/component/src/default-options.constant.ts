@@ -1,5 +1,5 @@
 import { ComponentType } from './model/component-type.enum';
-import { MountType } from './model/mount-type.enum';
+import { MountType } from '@srleecode/domain/shared/utils';
 import { StyleType } from './model/style-type.enum';
 import { UnitTestType } from './model/unit-test-type.enum';
 import { ViewEncapsulation } from './model/view-encapsulation.enum';
@@ -20,3 +20,5 @@ export const defaultOptions: CreateComponentGeneratorSchema = {
   enableIvy: true,
   publishable: false,
 };
+
+export const LIB_PATH = `${defaultOptions.groupingFolder}/feature-test-example/src/lib`;

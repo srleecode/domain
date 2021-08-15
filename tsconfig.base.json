@@ -35,6 +35,9 @@
       "@srleecode/domain/cypress/e2e": [
         "packages/domain/generators/cypress/e2e/src/generator.ts"
       ],
+      "@srleecode/domain/cypress/component-test/angular": [
+        "packages/domain/generators/cypress/component-test/angular/src/generator.ts"
+      ],
       "@srleecode/domain/init/ng-add": [
         "packages/domain/generators/grouping-folder/init/ng-add/generator.ts"
       ],

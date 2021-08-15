@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SetupComponentTestGenerator",
+  "title": "Setup Component Test Generator Schema",
+  "cli": "nx",
+  "type": "object",
+  "description": "Creates cypress component test files for a given project",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "description": "The name of the project the component test files will be added to",
+      "x-prompt": "What is the project anme that you want to add the component test files to?"
+    },
+    "componentName": {
+      "type": "string",
+      "description": "The name of the component, e.g. test-example.component.ts, would be TestExample or test-example",
+      "x-prompt": "What is the component anme that you want to add the component test files to?"
+    },
+    "selector": {
+      "type": "string",
+      "description": "The selector used by the component",
+      "x-prompt": "What is the selector used by the component?"
+    },
+    "mountType": {
+      "description": "The mount type to use for the component test",
+      "enum": ["component", "story"],
+      "type": "string",
+      "default": "component",
+      "x-prompt": {
+        "message": "Which mount type would you like to use for the component test?",
+        "type": "list",
+        "items": [
+          {
+            "value": "component",
+            "label": "component - mount the component class directly"
+          },
+          {
+            "value": "story",
+            "label": "story - mounting the component using a storybook story"
+          }
+        ]
+      }
+    }
+  },
+  "required": ["projectName", "componentName", "selector"]
+}
