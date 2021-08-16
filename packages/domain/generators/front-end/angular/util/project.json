@@ -13,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/domain/angular/util"],
+      "outputs": ["coverage/packages/domain/generators/front-end/angular/util"],
       "options": {
         "jestConfig": "packages/domain/generators/front-end/angular/util/jest.config.js",
         "passWithNoTests": true

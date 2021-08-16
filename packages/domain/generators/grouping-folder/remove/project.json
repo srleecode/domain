@@ -13,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/domain/grouping-folder/remove"],
+      "outputs": ["coverage/packages/domain/generators/grouping-folder/remove"],
       "options": {
         "jestConfig": "packages/domain/generators/grouping-folder/remove/jest.config.js",
         "passWithNoTests": true

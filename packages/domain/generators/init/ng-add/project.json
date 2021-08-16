@@ -11,7 +11,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/domain/ng-add"],
+      "outputs": ["coverage/packages/domain/generators/ng-add"],
       "options": {
         "jestConfig": "packages/domain/generators/init/ng-add/jest.config.js",
         "passWithNoTests": true

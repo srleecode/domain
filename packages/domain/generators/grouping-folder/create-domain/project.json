@@ -13,7 +13,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/domain/grouping-folder/create-domain"],
+      "outputs": [
+        "coverage/packages/domain/generators/grouping-folder/create-domain"
+      ],
       "options": {
         "jestConfig": "packages/domain/generators/grouping-folder/create-domain/jest.config.js",
         "passWithNoTests": true

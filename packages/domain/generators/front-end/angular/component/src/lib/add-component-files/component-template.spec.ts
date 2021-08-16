@@ -1,7 +1,6 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
-import { UnitTestType } from '../../model/unit-test-type.enum';
 import { createComponentGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
 import { checkFileContentIsSame } from '@srleecode/domain/shared/test-utils';

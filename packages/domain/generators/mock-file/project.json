@@ -1,0 +1,22 @@
+{
+  "root": "packages/domain/generators/mock-file",
+  "sourceRoot": "packages/domain/generators/mock-file/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/domain/generators/mock-file/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/domain/generators/mock-file"],
+      "options": {
+        "jestConfig": "packages/domain/generators/mock-file/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["package:domain-mock-file", "scope:domain-mock-file"]
+}

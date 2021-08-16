@@ -13,7 +13,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/domain/angular/data-access"],
+      "outputs": [
+        "coverage/packages/domain/generators/front-end/angular/data-access"
+      ],
       "options": {
         "jestConfig": "packages/domain/generators/front-end/angular/data-access/jest.config.js",
         "passWithNoTests": true

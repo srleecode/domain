@@ -17,6 +17,7 @@
     "domain-grouping-folder-remove": "packages/domain/generators/grouping-folder/remove",
     "domain-init-ng-add": "packages/domain/generators/init/ng-add",
     "domain-init-react-add": "packages/domain/generators/init/react-add",
+    "domain-mock-file": "packages/domain/generators/mock-file",
     "domain-shared-utils": "packages/domain/generators/shared/utils",
     "domain-shared-test-utils": "packages/domain/generators/shared/test-utils"
   },

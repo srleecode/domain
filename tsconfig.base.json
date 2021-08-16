@@ -39,10 +39,10 @@
         "packages/domain/generators/cypress/component-test/angular/src/generator.ts"
       ],
       "@srleecode/domain/init/ng-add": [
-        "packages/domain/generators/grouping-folder/init/ng-add/generator.ts"
+        "packages/domain/generators/grouping-folder/init/ng-add/src/generator.ts"
       ],
       "@srleecode/domain/init/react-add": [
-        "packages/domain/generators/grouping-folder/init/react-add/generator.ts"
+        "packages/domain/generators/grouping-folder/init/react-add/src/generator.ts"
       ],
       "@srleecode/domain/grouping-folder/create-app": [
         "packages/domain/generators/grouping-folder/create-app/src/generator.ts"
@@ -58,6 +58,9 @@
       ],
       "@srleecode/domain/grouping-folder/remove": [
         "packages/domain/generators/grouping-folder/remove/src/generator.ts"
+      ],
+      "@srleecode/domain/mock-file": [
+        "packages/domain/generators/mock-file/src/generator.ts"
       ],
       "@srleecode/domain/shared/utils": [
         "packages/domain/generators/shared/utils/index.ts"

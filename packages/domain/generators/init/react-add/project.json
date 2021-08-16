@@ -13,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/domain/react-add"],
+      "outputs": ["coverage/packages/domain/generators/react-add"],
       "options": {
         "jestConfig": "packages/domain/generators/init/react-add/jest.config.js",
         "passWithNoTests": true

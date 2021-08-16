@@ -11,7 +11,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/domain/e2e"],
+      "outputs": ["coverage/packages/domain/generators/cypress/e2e"],
       "options": {
         "jestConfig": "packages/domain/generators/cypress/e2e/jest.config.js",
         "passWithNoTests": true
