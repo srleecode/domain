@@ -1,0 +1,26 @@
+{
+  "root": "packages/domain/generators/front-end/angular/data-access-layer",
+  "sourceRoot": "packages/domain/generators/front-end/angular/data-access-layer/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/domain/generators/front-end/angular/data-access-layer/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/packages/domain/generators/front-end/angular/data-access-layer"
+      ],
+      "options": {
+        "jestConfig": "packages/domain/generators/front-end/angular/data-access-layer/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["package:domain-angular", "scope:domain-angular-data-access-layer"]
+}

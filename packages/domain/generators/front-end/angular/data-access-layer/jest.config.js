@@ -1,7 +1,7 @@
 module.exports = {
-  displayName: 'domain-angular-data-access',
+  displayName: 'domain-angular-data-access-layer',
   preset: '../../../../../../jest.preset.js',
-  coverageDirectory: '../../../../../../coverage/packages/domain/generators/front-end/angular/data-access',
+  coverageDirectory: '../../../../../../coverage/packages/domain/generators/front-end/angular/data-access-layer',
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },

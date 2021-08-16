@@ -1,10 +1,10 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { createDomainGenerator } from './generator';
+import { createApplicationLayerGenerator } from './generator';
 import { CreateLibrarySchema } from '@srleecode/domain/angular/shared';
 import * as libraryGeneratorMock from '@nrwl/angular/src/generators/library/library';
 
-describe('createDomainGenerator', () => {
+describe('createDomainLayerGenerator', () => {
   let tree: Tree;
 
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('createDomainGenerator', () => {
       enableIvy: true,
       publishable: false,
     };
-    await createDomainGenerator(tree, {
+    await createApplicationLayerGenerator(tree, {
       groupingFolder: 'libs/test-app/test-domain',
       ...commonLibraryOptions,
     });
@@ -28,10 +28,10 @@ describe('createDomainGenerator', () => {
       expect.anything(),
       {
         directory: 'test-app/test-domain',
-        importPath: '@proj/test-app/test-domain/domain',
-        name: 'domain',
+        importPath: '@proj/test-app/test-domain/application-layer',
+        name: 'application-layer',
         standaloneConfig: false,
-        tags: 'app:test-app,scope:test-app-test-domain,type:domain',
+        tags: 'app:test-app,scope:test-app-test-domain,type:application-layer',
         ...commonLibraryOptions,
       }
     );

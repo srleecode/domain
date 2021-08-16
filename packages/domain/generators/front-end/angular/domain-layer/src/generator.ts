@@ -1,17 +1,17 @@
 import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
-import { CreateDataAccessGeneratorSchema } from './schema';
+import { CreateDomainLayerGeneratorSchema } from './schema';
 import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
 import { getLibraryCommonOptions } from '@srleecode/domain/angular/shared';
 
-export async function createDataAccessGenerator(
+export async function createDomainLayerGenerator(
   tree: Tree,
-  options: CreateDataAccessGeneratorSchema
+  options: CreateDomainLayerGeneratorSchema
 ): Promise<void> {
   const { groupingFolder } = options;
   const libraryCommonOptions = getLibraryCommonOptions(
     tree,
     '',
-    'data-access',
+    'domain-layer',
     groupingFolder,
     options
   );
@@ -23,6 +23,8 @@ export async function createDataAccessGenerator(
   });
 }
 
-export default createDataAccessGenerator;
+export default createDomainLayerGenerator;
 
-export const removeSchematic = convertNxGenerator(createDataAccessGenerator);
+export const createDomainLayerSchematic = convertNxGenerator(
+  createDomainLayerGenerator
+);

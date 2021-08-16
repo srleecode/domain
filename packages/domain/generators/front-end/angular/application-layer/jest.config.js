@@ -1,7 +1,7 @@
 module.exports = {
-  displayName: 'domain-angular-domain',
+  displayName: 'domain-angular-application-layer',
   preset: '../../../../../../jest.preset.js',
-  coverageDirectory: '../../../../../../coverage/packages/domain/generators/front-end/angular/domain',
+  coverageDirectory: '../../../../../../coverage/packages/domain/generators/front-end/angular/application-layer',
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },

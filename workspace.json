@@ -3,9 +3,10 @@
   "projects": {
     "domain": "packages/domain",
     "domain-e2e": "e2e/domain-e2e",
+    "domain-angular-application-layer": "packages/domain/generators/front-end/angular/application-layer",
     "domain-angular-component": "packages/domain/generators/front-end/angular/component",
-    "domain-angular-data-access": "packages/domain/generators/front-end/angular/data-access",
-    "domain-angular-domain": "packages/domain/generators/front-end/angular/domain",
+    "domain-angular-data-access-layer": "packages/domain/generators/front-end/angular/data-access-layer",
+    "domain-angular-domain-layer": "packages/domain/generators/front-end/angular/domain-layer",
     "domain-angular-shared": "packages/domain/generators/front-end/angular/shared",
     "domain-angular-util": "packages/domain/generators/front-end/angular/util",
     "domain-cypress-component-test-angular": "packages/domain/generators/cypress/component-test/angular",

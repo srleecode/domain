@@ -1,17 +1,17 @@
 import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
-import { CreateDomainGeneratorSchema } from './schema';
+import { CreateApplicationLayerGeneratorSchema } from './schema';
 import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
 import { getLibraryCommonOptions } from '@srleecode/domain/angular/shared';
 
-export async function createDomainGenerator(
+export async function createApplicationLayerGenerator(
   tree: Tree,
-  options: CreateDomainGeneratorSchema
+  options: CreateApplicationLayerGeneratorSchema
 ): Promise<void> {
   const { groupingFolder } = options;
   const libraryCommonOptions = getLibraryCommonOptions(
     tree,
     '',
-    'domain',
+    'application-layer',
     groupingFolder,
     options
   );
@@ -23,6 +23,8 @@ export async function createDomainGenerator(
   });
 }
 
-export default createDomainGenerator;
+export default createApplicationLayerGenerator;
 
-export const removeSchematic = convertNxGenerator(createDomainGenerator);
+export const createDomainLayerSchematic = convertNxGenerator(
+  createApplicationLayerGenerator
+);

@@ -1,10 +1,10 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { createDataAccessGenerator } from './generator';
+import { createDomainLayerGenerator } from './generator';
 import { CreateLibrarySchema } from '@srleecode/domain/angular/shared';
 import * as libraryGeneratorMock from '@nrwl/angular/src/generators/library/library';
 
-describe('createDataAccessGenerator', () => {
+describe('createDomainLayerGenerator', () => {
   let tree: Tree;
 
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('createDataAccessGenerator', () => {
       enableIvy: true,
       publishable: false,
     };
-    await createDataAccessGenerator(tree, {
+    await createDomainLayerGenerator(tree, {
       groupingFolder: 'libs/test-app/test-domain',
       ...commonLibraryOptions,
     });
@@ -28,10 +28,10 @@ describe('createDataAccessGenerator', () => {
       expect.anything(),
       {
         directory: 'test-app/test-domain',
-        importPath: '@proj/test-app/test-domain/data-access',
-        name: 'data-access',
+        importPath: '@proj/test-app/test-domain/domain-layer',
+        name: 'domain-layer',
         standaloneConfig: false,
-        tags: 'app:test-app,scope:test-app-test-domain,type:data-access',
+        tags: 'app:test-app,scope:test-app-test-domain,type:domain-layer',
         ...commonLibraryOptions,
       }
     );
