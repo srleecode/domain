@@ -2,7 +2,8 @@ import { MountType } from '@srleecode/domain/shared/utils';
 
 export interface SetupComponentTestGeneratorSchema {
   projectName: string;
-  componentName: string;
-  mountType?: MountType;
+  name: string;
   selector: string;
+  type: ElementType;
+  mountType?: MountType;
 }

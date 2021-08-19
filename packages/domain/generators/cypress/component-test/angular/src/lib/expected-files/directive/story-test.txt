@@ -1,0 +1,13 @@
+import { mount } from '@jscutlery/cypress-angular/mount';
+import { getHarness } from '@jscutlery/cypress-harness';
+import { TestAppTestDomainDirectiveTestExampleHarness } from './test-example.harness';
+import { TestAppTestDomainDirectiveTestExampleModule } from './test-example.directive';
+import { GLOBAL_MOUNT_STYLE_OPTIONS } from '@cypress/component-testing';
+import { Default } from './test-example.stories.ts';
+
+describe('TestExampleDirective', () => {
+    const harness = getHarness(TestAppTestDomainDirectiveTestExampleHarness);
+    beforeEach(() => {
+        mountStory(Default, { ...GLOBAL_MOUNT_STYLE_OPTIONS })
+    });
+});

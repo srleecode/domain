@@ -1,24 +1,28 @@
 import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
+import { CreateDirectiveGeneratorSchema } from './schema';
 import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
-import { CreateComponentGeneratorSchema } from './schema';
 import { getLibraryCommonOptions } from '@srleecode/domain/angular/shared';
-import { setupComponentTestGenerator } from '@srleecode/domain/cypress/component-test/angular';
 import {
-  getDasherizedFolderPath,
   ElementType,
+  getDasherizedFolderPath,
 } from '@srleecode/domain/shared/utils';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
-import { addComponentFiles } from './lib/add-component-files/add-component-files';
+import {
+  camelize,
+  classify,
+  dasherize,
+} from '@nrwl/workspace/src/utils/strings';
+import { addDirectiveFiles } from './lib/add-directive-files/add-directive-files';
+import { setupComponentTestGenerator } from '@srleecode/domain/cypress/component-test/angular';
 
-export async function createComponentGenerator(
+export async function createDirectiveGenerator(
   tree: Tree,
-  options: CreateComponentGeneratorSchema
+  options: CreateDirectiveGeneratorSchema
 ): Promise<void> {
-  const { name, groupingFolder, type, prefix, mountType } = options;
+  const { name, groupingFolder, prefix, mountType } = options;
   const libraryCommonOptions = getLibraryCommonOptions(
     tree,
     name,
-    type,
+    'directive',
     groupingFolder,
     options
   );
@@ -26,10 +30,11 @@ export async function createComponentGenerator(
     tree,
     groupingFolder
   )}`;
-  const libraryName = name ? `${type}-${dasherize(name)}` : type;
-  const projectName = `${dasherisedGroupingFolder}-${libraryName}`;
-  const selector = prefix ? `${prefix}-${projectName}` : `${projectName}`;
-
+  const libraryName = `directive-${dasherize(name)}`;
+  const projectName = `${dasherisedGroupingFolder}-${dasherize(libraryName)}`;
+  const selector = prefix
+    ? `${prefix}${classify(projectName)}`
+    : `${camelize(projectName)}`;
   await libraryGenerator(tree, {
     prefix,
     ...libraryCommonOptions,
@@ -37,7 +42,7 @@ export async function createComponentGenerator(
     logger.error(e.message);
     throw e;
   });
-  addComponentFiles(
+  addDirectiveFiles(
     tree,
     options,
     dasherisedGroupingFolder,
@@ -56,8 +61,8 @@ export async function createComponentGenerator(
   });
 }
 
-export default createComponentGenerator;
+export default createDirectiveGenerator;
 
-export const createComponentSchematic = convertNxGenerator(
-  createComponentGenerator
+export const createDirectiveSchematic = convertNxGenerator(
+  createDirectiveGenerator
 );

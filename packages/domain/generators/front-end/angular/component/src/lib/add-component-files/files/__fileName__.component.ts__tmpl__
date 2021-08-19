@@ -18,9 +18,7 @@ export class <%= componentName %> implements OnInit {
 
 @NgModule({
   declarations: [<%= componentName %>],
-  imports: [
-    CommonModule
-  ],
-  exports: [<%= componentName %>],
+  imports: [CommonModule],
+  exports: [<%= componentName %>]
 })
 export class <%= moduleName %> {}

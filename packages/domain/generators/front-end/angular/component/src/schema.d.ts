@@ -15,8 +15,4 @@ export interface CreateComponentGeneratorSchema extends CreateLibrarySchema {
   viewEncapsulation?: ViewEncapsulation;
   style?: StyleType;
   unitTestType?: UnitTestType;
-  buildable?: boolean;
-  strict?: boolean;
-  enableIvy?: boolean;
-  publishable?: boolean;
 }

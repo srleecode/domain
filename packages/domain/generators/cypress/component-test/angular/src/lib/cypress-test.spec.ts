@@ -12,13 +12,15 @@ import { MountType } from '@srleecode/domain/shared/utils';
 import { setupComponentTestGenerator } from '../generator';
 import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
 
-describe('stories file', () => {
+describe('cypress test file', () => {
   let tree: Tree;
+
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
   });
-  describe('components', () => {
-    const testFilePath = `${LIB_PATH}/test-example.stories.ts`;
+
+  describe('component', () => {
+    const testFilePath = `${LIB_PATH}/test-example.cy-spec.ts`;
     beforeEach(async () => {
       await libraryGenerator(tree, {
         name: 'feature-test-example',
@@ -29,12 +31,16 @@ describe('stories file', () => {
       });
     });
 
-    it('should not create stories file when mount type is component', async () => {
+    it('should create cy-spec file with component mount type when mount type is component', async () => {
       await setupComponentTestGenerator(tree, defaultOptions);
-      expect(tree.exists(testFilePath)).toBe(false);
+      checkFileContentIsSame(
+        tree,
+        testFilePath,
+        join(__dirname, './expected-files/component/component-test.txt')
+      );
     });
 
-    it('should create stories file when mount type is story', async () => {
+    it('should create cy-spec file with story mount type when mount type is story', async () => {
       await setupComponentTestGenerator(tree, {
         ...defaultOptions,
         mountType: MountType.Story,
@@ -42,13 +48,13 @@ describe('stories file', () => {
       checkFileContentIsSame(
         tree,
         testFilePath,
-        join(__dirname, './expected-files/component/story.txt')
+        join(__dirname, './expected-files/component/story-test.txt')
       );
     });
   });
 
-  describe('directives', () => {
-    const testFilePath = `${DIRECTIVES_LIB_PATH}/test-example.stories.ts`;
+  describe('directive', () => {
+    const testFilePath = `${DIRECTIVES_LIB_PATH}/test-example.cy-spec.ts`;
     beforeEach(async () => {
       await libraryGenerator(tree, {
         name: 'directive-test-example',
@@ -59,7 +65,16 @@ describe('stories file', () => {
       });
     });
 
-    it('should use directives test component when element type is directive', async () => {
+    it('should use directives test component when element type is directive and mountType is component', async () => {
+      await setupComponentTestGenerator(tree, defaultDirectiveOptions);
+      checkFileContentIsSame(
+        tree,
+        testFilePath,
+        join(__dirname, './expected-files/directive/component-test.txt')
+      );
+    });
+
+    it('should use story when elementType is directive and mountType is story', async () => {
       await setupComponentTestGenerator(tree, {
         ...defaultDirectiveOptions,
         mountType: MountType.Story,
@@ -67,7 +82,7 @@ describe('stories file', () => {
       checkFileContentIsSame(
         tree,
         testFilePath,
-        join(__dirname, './expected-files/directive/story.txt')
+        join(__dirname, './expected-files/directive/story-test.txt')
       );
     });
   });

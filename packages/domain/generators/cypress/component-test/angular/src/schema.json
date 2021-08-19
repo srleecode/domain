@@ -11,15 +11,39 @@
       "description": "The name of the project the component test files will be added to",
       "x-prompt": "What is the project name that you want to add the component test files to?"
     },
-    "componentName": {
+    "type": {
+      "enum": ["component", "directive"],
       "type": "string",
-      "description": "The name of the component, e.g. test-example.component.ts, would be TestExample or test-example",
-      "x-prompt": "What is the component name that you want to add the component test files to?"
+      "default": "component",
+      "x-prompt": {
+        "message": "Which element type are you creating the tests for?",
+        "type": "list",
+        "items": [
+          {
+            "value": "component",
+            "label": "component"
+          },
+          {
+            "value": "directive",
+            "label": "directive"
+          }
+        ]
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the element, e.g. test-example.component.ts, would be TestExample or test-example",
+      "x-prompt": "What is the element name that you want to add the test files to?"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "The selector prefix used by the element",
+      "x-prompt": "What is the selector prefix used by the element?"
     },
     "selector": {
       "type": "string",
-      "description": "The selector used by the component",
-      "x-prompt": "What is the selector used by the component?"
+      "description": "The selector used by the element",
+      "x-prompt": "What is the selector used by the element?"
     },
     "mountType": {
       "description": "The mount type to use for the component test",
@@ -42,5 +66,5 @@
       }
     }
   },
-  "required": ["projectName", "componentName", "selector"]
+  "required": ["projectName", "name", "prefix"]
 }

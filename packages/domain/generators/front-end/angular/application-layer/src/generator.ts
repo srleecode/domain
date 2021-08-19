@@ -25,6 +25,6 @@ export async function createApplicationLayerGenerator(
 
 export default createApplicationLayerGenerator;
 
-export const createDomainLayerSchematic = convertNxGenerator(
+export const createApplicationLayerSchematic = convertNxGenerator(
   createApplicationLayerGenerator
 );

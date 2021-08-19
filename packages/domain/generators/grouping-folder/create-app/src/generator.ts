@@ -21,6 +21,6 @@ export async function createAppGroupingFolderGenerator(
 
 export default createAppGroupingFolderGenerator;
 
-export const removeSchematic = convertNxGenerator(
+export const createAppGroupingFolderSchematic = convertNxGenerator(
   createAppGroupingFolderGenerator
 );

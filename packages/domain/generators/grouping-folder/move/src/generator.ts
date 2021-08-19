@@ -53,4 +53,4 @@ const getMovedProjectRoot = (
 
 export default moveGenerator;
 
-export const removeSchematic = convertNxGenerator(moveGenerator);
+export const moveSchematic = convertNxGenerator(moveGenerator);

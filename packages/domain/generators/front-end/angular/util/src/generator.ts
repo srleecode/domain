@@ -25,4 +25,4 @@ export async function createUtilGenerator(
 
 export default createUtilGenerator;
 
-export const removeSchematic = convertNxGenerator(createUtilGenerator);
+export const createUtilSchematic = convertNxGenerator(createUtilGenerator);

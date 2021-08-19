@@ -1,17 +1,19 @@
 import { mount } from '@jscutlery/cypress-angular/mount';
 import { getHarness } from '@jscutlery/cypress-harness';
 import { <%= harnessName %> } from './<%= fileName %>.harness';
-import { <%= componentName %>, <%= moduleName %> } from './<%= fileName %>.component';
+import { <% if(!isDirective) { %><%= className %>,<% } %><%= moduleName %> } from './<%= fileName %>.<%= type %>';
 import { <% if(isUsingComponentMountType) { %>GLOBAL_MOUNT_OPTIONS<% } else { %>GLOBAL_MOUNT_STYLE_OPTIONS<% } %> } from '@cypress/component-testing';
 <% if(!isUsingComponentMountType) { %>import { Default } from './<%= fileName %>.stories.ts';<% } %>
+<% if(isDirective && isUsingComponentMountType) { %>import { <%= className %> } from './test.component';<% } %>
 
-describe('<%= componentName %>', () => {
+describe('<% if(isDirective) { %><%= directiveName %><% } else { %><%= className %><% } %>', () => {
   const harness = getHarness(<%= harnessName %>);
 
   beforeEach(() => {
     <% if(isUsingComponentMountType) { %>
-     mount(<%= componentName %>, {
+     mount(<%= className %>, {
       ...GLOBAL_MOUNT_OPTIONS,
+      <% if(isDirective) { %>declarations: [<%= className %>],<% } %>
       imports: [ ...GLOBAL_MOUNT_OPTIONS.imports, <%= moduleName %> ]
     });
     <% } else { %>

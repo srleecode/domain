@@ -14,4 +14,6 @@ export async function createMockFileGenerator(
 
 export default createMockFileGenerator;
 
-export const removeSchematic = convertNxGenerator(createMockFileGenerator);
+export const createMockFileSchematic = convertNxGenerator(
+  createMockFileGenerator
+);

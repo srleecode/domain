@@ -23,4 +23,6 @@ export async function setupComponentTestGenerator(
 
 export default setupComponentTestGenerator;
 
-export const removeSchematic = convertNxGenerator(setupComponentTestGenerator);
+export const setupComponentTestSchematic = convertNxGenerator(
+  setupComponentTestGenerator
+);

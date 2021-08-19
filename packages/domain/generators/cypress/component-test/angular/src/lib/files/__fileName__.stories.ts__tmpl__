@@ -1,16 +1,18 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
 import { action } from '@storybook/addon-actions';
-import { <%= componentName %>, <%= moduleName %> } from './<%= fileName %>.component';
+import { <% if(!isDirective) { %><%= className %>,<% } %> <%= moduleName %> } from './<%= fileName %>.<%= type %>';
+<% if(isDirective) { %>import { <%= className %> } from './test.component';<% } %>
 
 export default {
-  component: <%= componentName %>,
+  component: <%= className %>,
   title: '<%= storybookTitle %>',
 } as Meta;
 
-const Template: Story<<%= componentName %>> = () => ({
-  component: <%= componentName %>,
+const Template: Story<<%= className %>> = () => ({
+  component: <%= className %>,
   moduleMetadata({
+    <% if(isDirective) { %>declarations: [<%= className %>],<% } %>
     imports: [ ...GLOBAL_MOUNT_OPTIONS.imports, <%= moduleName %> ]
   })
 });

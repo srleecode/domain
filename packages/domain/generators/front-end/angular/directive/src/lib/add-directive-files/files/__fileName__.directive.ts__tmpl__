@@ -1,0 +1,14 @@
+import { Directive } from '@angular/core';
+
+@Directive({
+  selector: '[<%= selector %>]'
+})
+export class <%= directiveName %> {
+}
+
+@NgModule({
+  declarations: [<%= directiveName %>],
+  imports: [CommonModule],
+  exports: [<%= directiveName %>]
+})
+export class <%= moduleName %> {}

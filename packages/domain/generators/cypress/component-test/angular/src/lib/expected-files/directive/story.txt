@@ -1,0 +1,20 @@
+import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { CommonModule } from '@angular/common';
+import { action } from '@storybook/addon-actions';
+import { TestAppTestDomainDirectiveTestExampleModule } from './test-example.directive';
+import { TestComponent } from './test.component';
+
+export default {
+    component: TestComponent,
+    title: 'TestApp/TestDomain/DirectiveTestExample',
+} as Meta;
+
+const Template: Story<TestComponent> = () => ({
+    component: TestComponent,
+    moduleMetadata({
+        declarations: [TestComponent],
+        imports: [ ...GLOBAL_MOUNT_OPTIONS.imports, TestAppTestDomainDirectiveTestExampleModule ]
+    })
+});
+
+export const Default = Template.bind({});

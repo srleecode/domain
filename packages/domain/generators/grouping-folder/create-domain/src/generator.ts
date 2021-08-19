@@ -15,6 +15,6 @@ export async function createDomainGroupingFolderGenerator(
 
 export default createDomainGroupingFolderGenerator;
 
-export const removeSchematic = convertNxGenerator(
+export const createDomainGroupingFolderSchematic = convertNxGenerator(
   createDomainGroupingFolderGenerator
 );

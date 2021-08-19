@@ -4,7 +4,7 @@ import * as libraryGeneratorSpy from '@nrwl/angular/src/generators/library/libra
 import * as setupComponentTestSpy from '@srleecode/domain/cypress/component-test/angular';
 import { defaultOptions } from './default-options.constant';
 import { createComponentGenerator } from './generator';
-import { MountType } from '@srleecode/domain/shared/utils';
+import { MountType, ElementType } from '@srleecode/domain/shared/utils';
 
 describe('createComponentGenerator', () => {
   let tree: Tree;
@@ -47,10 +47,11 @@ describe('createComponentGenerator', () => {
     expect(
       setupComponentTestSpy.setupComponentTestGenerator
     ).toHaveBeenCalledWith(expect.anything(), {
-      componentName: 'TestExample',
+      name: 'TestExample',
       mountType: MountType.Component,
       projectName: 'test-app-test-domain-feature-test-example',
       selector: 'srlee-test-app-test-domain-feature-test-example',
+      type: ElementType.Component,
     });
   });
 });

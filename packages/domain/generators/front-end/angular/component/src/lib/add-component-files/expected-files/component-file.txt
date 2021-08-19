@@ -13,9 +13,7 @@ import{ Component, OnInit } from '@angular/core';
 
 @NgModule({
   declarations: [TestExampleComponent],
-  imports: [
-    CommonModule
-  ],
-  exports: [TestExampleComponent],
+  imports: [CommonModule],
+  exports: [TestExampleComponent]
 })
 export class TestAppTestDomainFeatureTestExampleModule {}
