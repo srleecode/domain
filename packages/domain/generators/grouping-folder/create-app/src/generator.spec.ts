@@ -88,18 +88,10 @@ describe('createAppGroupingFolderGenerator', () => {
         eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
           .depConstraints
       ).toEqual([
-        { onlyDependOnLibsWithTags: ['type:util'], sourceTag: 'type:domain' },
         {
           onlyDependOnLibsWithTags: [
-            'type:data-access',
-            'type:domain',
-            'type:util',
-          ],
-          sourceTag: 'type:data-access',
-        },
-        {
-          onlyDependOnLibsWithTags: [
-            'type:data-access',
+            'type:application-layer',
+            'type:shell',
             'type:feature',
             'type:ui',
             'type:util',
@@ -108,7 +100,7 @@ describe('createAppGroupingFolderGenerator', () => {
         },
         {
           onlyDependOnLibsWithTags: [
-            'type:data-access',
+            'type:application-layer',
             'type:feature',
             'type:ui',
             'type:util',
@@ -116,10 +108,30 @@ describe('createAppGroupingFolderGenerator', () => {
           sourceTag: 'type:feature',
         },
         {
-          onlyDependOnLibsWithTags: ['type:util'],
+          onlyDependOnLibsWithTags: ['type:feature', 'type:ui', 'type:util'],
           sourceTag: 'type:ui',
         },
-        { onlyDependOnLibsWithTags: ['type:util'], sourceTag: 'type:util' },
+        {
+          onlyDependOnLibsWithTags: [
+            'type:application-layer',
+            'type:data-access-layer',
+            'type:domain-layer',
+            'type:util',
+          ],
+          sourceTag: 'type:application-layer',
+        },
+        {
+          onlyDependOnLibsWithTags: ['type:domain-layer', 'type:util'],
+          sourceTag: 'type:domain-layer',
+        },
+        {
+          onlyDependOnLibsWithTags: ['type:data-access-layer', 'type:util'],
+          sourceTag: 'type:data-access-layer',
+        },
+        {
+          onlyDependOnLibsWithTags: ['type:util'],
+          sourceTag: 'type:util',
+        },
       ]);
     });
   });
