@@ -2,6 +2,8 @@ import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
 import { CreateDomainLayerGeneratorSchema } from './schema';
 import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
 import { getLibraryCommonOptions } from '@srleecode/domain/angular/shared';
+import { removeTestTarget } from '@srleecode/domain/front-end/shared';
+import { getDasherizedFolderPath } from '@srleecode/domain/shared/utils';
 
 export async function createDomainLayerGenerator(
   tree: Tree,
@@ -21,6 +23,8 @@ export async function createDomainLayerGenerator(
     logger.error(e.message);
     throw e;
   });
+  const domain = getDasherizedFolderPath(tree, groupingFolder);
+  removeTestTarget(tree, `${domain}-${libraryCommonOptions.name}`);
 }
 
 export default createDomainLayerGenerator;

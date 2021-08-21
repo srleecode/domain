@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'domain-angular-directive',
+  displayName: 'domain-front-end-angular-directive',
   preset: '../../../../../../jest.preset.js',
   coverageDirectory: '../../../../../../coverage/packages/domain/generators/front-end/angular/directive',
   transform: {

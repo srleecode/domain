@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'domain-angular-util',
+  displayName: 'domain-front-end-angular-util',
   preset: '../../../../../../jest.preset.js',
   coverageDirectory: '../../../../../../coverage/packages/domain/generators/front-end/angular/util',
   transform: {

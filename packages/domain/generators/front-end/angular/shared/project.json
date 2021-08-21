@@ -22,5 +22,8 @@
       }
     }
   },
-  "tags": ["package:domain-angular", "scope:domain-angular-shared"]
+  "tags": [
+    "package:domain-front-end-angular",
+    "scope:domain-front-end-angular-shared"
+  ]
 }

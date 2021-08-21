@@ -20,5 +20,8 @@
       }
     }
   },
-  "tags": ["package:domain-angular", "scope:domain-angular-util"]
+  "tags": [
+    "package:domain-front-end-angular",
+    "scope:domain-front-end-angular-util"
+  ]
 }

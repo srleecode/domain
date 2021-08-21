@@ -13,9 +13,10 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "package:domain-angular",
+                "sourceTag": "package:domain-front-end-angular",
                 "onlyDependOnLibsWithTags": [
-                  "scope:domain-angular-shared",
+                  "scope:domain-front-end-angular-shared",
+                  "scope:domain-front-end-shared",
                   "scope:domain-shared-utils",
                   "scope:domain-shared-test-utils",
                   "scope:domain-cypress-component-test-angular"

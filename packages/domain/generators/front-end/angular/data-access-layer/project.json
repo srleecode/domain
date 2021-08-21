@@ -22,5 +22,8 @@
       }
     }
   },
-  "tags": ["package:domain-angular", "scope:domain-angular-data-access-layer"]
+  "tags": [
+    "package:domain-front-end-angular",
+    "scope:domain-front-end-angular-data-access-layer"
+  ]
 }

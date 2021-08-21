@@ -35,6 +35,9 @@
       "@srleecode/domain/angular/util": [
         "packages/domain/generators/front-end/angular/util/src/generator.ts"
       ],
+      "@srleecode/domain/front-end/shared": [
+        "packages/domain/generators/front-end/shared/index.ts"
+      ],
       "@srleecode/domain/cypress/e2e": [
         "packages/domain/generators/cypress/e2e/src/generator.ts"
       ],

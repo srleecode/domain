@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'domain-angular-domain-layer',
+  displayName: 'domain-front-end-angular-domain-layer',
   preset: '../../../../../../jest.preset.js',
   coverageDirectory: '../../../../../../coverage/packages/domain/generators/front-end/angular/domain-layer',
   transform: {

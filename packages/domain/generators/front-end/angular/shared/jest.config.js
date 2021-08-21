@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'domain-angular-shared',
+  displayName: 'domain-front-end-angular-shared',
   preset: '../../../../../../jest.preset.js',
   coverageDirectory: '../../../../../../coverage/packages/domain/generators/front-end/angular/shared',
   transform: {
