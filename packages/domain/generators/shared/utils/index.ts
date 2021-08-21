@@ -7,3 +7,4 @@ export { getDomainPath } from './src/get-domain-path';
 export { MountType } from './src/model/mount-type.enum';
 export { UnitTestType } from './src/model/unit-test-type.enum';
 export { ElementType } from './src/model/element-type.enum';
+export { ApplicationType } from './src/model/application-type.enum';

@@ -1,6 +1,6 @@
 import { Tree } from '@nrwl/devkit';
 import { initialiseAngularWorkspace } from '../angular/initialise-angular-workspace';
-import { ApplicationType } from '@srleecode/domain/grouping-folder/shared';
+import { ApplicationType } from '@srleecode/domain/shared/utils';
 import { addEslintLayerConstraints } from './add-eslint-layer-constraints';
 
 export const initialiseWorkspace = async (

@@ -3,9 +3,10 @@ import { ViewEncapsulation } from './model/view-encapsulation.enum';
 import { UnitTestType } from './model/unit-test-type.enum';
 import { StyleType } from './model/style-type.enum';
 import { MountType } from '@srleecode/domain/shared/utils';
-import { CreateLibrarySchema } from '@srleecode/domain/angular/shared';
+import { AngularCreateLibrarySchema } from '@srleecode/domain/front-end/shared';
 
-export interface CreateComponentGeneratorSchema extends CreateLibrarySchema {
+export interface CreateComponentGeneratorSchema
+  extends AngularCreateLibrarySchema {
   groupingFolder: string;
   name?: string;
   mountType?: MountType;

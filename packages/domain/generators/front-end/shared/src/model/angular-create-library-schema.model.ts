@@ -1,4 +1,4 @@
-export interface CreateLibrarySchema {
+export interface AngularCreateLibrarySchema {
   buildable?: boolean;
   strict?: boolean;
   enableIvy?: boolean;

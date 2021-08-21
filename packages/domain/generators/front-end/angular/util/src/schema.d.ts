@@ -1,5 +1,5 @@
-import { CreateLibrarySchema } from '@srleecode/domain/angular/shared';
+import { AngularCreateLibrarySchema } from '@srleecode/domain/front-end/shared';
 
-export interface CreateUtilGeneratorSchema extends CreateLibrarySchema {
+export interface CreateUtilGeneratorSchema extends AngularCreateLibrarySchema {
   groupingFolder: string;
 }

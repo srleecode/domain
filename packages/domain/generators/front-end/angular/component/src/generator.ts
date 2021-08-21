@@ -1,27 +1,20 @@
 import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
-import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
 import { CreateComponentGeneratorSchema } from './schema';
-import { getLibraryCommonOptions } from '@srleecode/domain/angular/shared';
 import { setupComponentTestGenerator } from '@srleecode/domain/cypress/component-test/angular';
 import {
   getDasherizedFolderPath,
   ElementType,
+  ApplicationType,
 } from '@srleecode/domain/shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { addComponentFiles } from './lib/add-component-files/add-component-files';
+import { addDomainLibrary } from '@srleecode/domain/front-end/shared';
 
 export async function createComponentGenerator(
   tree: Tree,
   options: CreateComponentGeneratorSchema
 ): Promise<void> {
   const { name, groupingFolder, type, prefix, mountType } = options;
-  const libraryCommonOptions = getLibraryCommonOptions(
-    tree,
-    name,
-    type,
-    groupingFolder,
-    options
-  );
   const dasherisedGroupingFolder = `${getDasherizedFolderPath(
     tree,
     groupingFolder
@@ -29,14 +22,14 @@ export async function createComponentGenerator(
   const libraryName = name ? `${type}-${dasherize(name)}` : type;
   const projectName = `${dasherisedGroupingFolder}-${libraryName}`;
   const selector = prefix ? `${prefix}-${projectName}` : `${projectName}`;
-
-  await libraryGenerator(tree, {
-    prefix,
-    ...libraryCommonOptions,
-  }).catch((e) => {
-    logger.error(e.message);
-    throw e;
-  });
+  await addDomainLibrary(
+    tree,
+    name,
+    type,
+    groupingFolder,
+    ApplicationType.Angular,
+    options
+  );
   addComponentFiles(
     tree,
     options,

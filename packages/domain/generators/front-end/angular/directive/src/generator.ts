@@ -1,8 +1,7 @@
 import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
 import { CreateDirectiveGeneratorSchema } from './schema';
-import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
-import { getLibraryCommonOptions } from '@srleecode/domain/angular/shared';
 import {
+  ApplicationType,
   ElementType,
   getDasherizedFolderPath,
 } from '@srleecode/domain/shared/utils';
@@ -13,17 +12,19 @@ import {
 } from '@nrwl/workspace/src/utils/strings';
 import { addDirectiveFiles } from './lib/add-directive-files/add-directive-files';
 import { setupComponentTestGenerator } from '@srleecode/domain/cypress/component-test/angular';
+import { addDomainLibrary } from '@srleecode/domain/front-end/shared';
 
 export async function createDirectiveGenerator(
   tree: Tree,
   options: CreateDirectiveGeneratorSchema
 ): Promise<void> {
   const { name, groupingFolder, prefix, mountType } = options;
-  const libraryCommonOptions = getLibraryCommonOptions(
+  await addDomainLibrary(
     tree,
     name,
     'directive',
     groupingFolder,
+    ApplicationType.Angular,
     options
   );
   const dasherisedGroupingFolder = `${getDasherizedFolderPath(
@@ -35,13 +36,6 @@ export async function createDirectiveGenerator(
   const selector = prefix
     ? `${prefix}${classify(projectName)}`
     : `${camelize(projectName)}`;
-  await libraryGenerator(tree, {
-    prefix,
-    ...libraryCommonOptions,
-  }).catch((e) => {
-    logger.error(e.message);
-    throw e;
-  });
   addDirectiveFiles(
     tree,
     options,

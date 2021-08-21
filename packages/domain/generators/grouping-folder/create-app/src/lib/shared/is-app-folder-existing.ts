@@ -1,5 +1,5 @@
 import { Tree } from '@nrwl/devkit';
-import { ApplicationType } from '@srleecode/domain/grouping-folder/shared';
+import { ApplicationType } from '@srleecode/domain/shared/utils';
 
 export const isAppFolderExisting = (
   tree: Tree,

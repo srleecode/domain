@@ -1,18 +1,18 @@
 import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
-import { CreateLibrarySchema } from './model/create-library-schema.model';
 import { LibraryCommonOptions } from './model/library-common-options.model';
 import {
   getDasherizedFolderPath,
   getDomainPath,
 } from '@srleecode/domain/shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import { AngularCreateLibrarySchema } from './model/angular-create-library-schema.model';
 
 export const getLibraryCommonOptions = (
   tree: Tree,
   name: string,
   type: string,
   groupingFolder: string,
-  createLibrarySchema: CreateLibrarySchema
+  createLibrarySchema: AngularCreateLibrarySchema
 ): LibraryCommonOptions => {
   const { buildable, strict, enableIvy, publishable } = createLibrarySchema;
   const libraryName = name ? `${type}-${dasherize(name)}` : type;

@@ -1,12 +1,14 @@
 import { readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createDomainLayerGenerator } from './generator';
-import { CreateLibrarySchema } from '@srleecode/domain/angular/shared';
-import * as libraryGeneratorMock from '@nrwl/angular/src/generators/library/library';
+import { AngularCreateLibrarySchema } from '@srleecode/domain/front-end/shared';
+import * as frontEndSharedMock from '@srleecode/domain/front-end/shared';
+import { CreateDomainLayerGeneratorSchema } from './schema';
+import { ApplicationType } from '@srleecode/domain/shared/utils';
 
 describe('createDomainLayerGenerator', () => {
   let tree: Tree;
-  const commonLibraryOptions: CreateLibrarySchema = {
+  const commonLibraryOptions: AngularCreateLibrarySchema = {
     buildable: true,
     strict: false,
     enableIvy: true,
@@ -15,24 +17,25 @@ describe('createDomainLayerGenerator', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
-    jest.spyOn(libraryGeneratorMock, 'libraryGenerator');
+    jest.spyOn(frontEndSharedMock, 'addDomainLibrary');
   });
 
   it('should pass correct parameters to @nrwl/angular generator', async () => {
-    await createDomainLayerGenerator(tree, {
+    const schema: CreateDomainLayerGeneratorSchema = {
       groupingFolder: 'libs/test-app/test-domain',
-      ...commonLibraryOptions,
-    });
-    expect(libraryGeneratorMock.libraryGenerator).toHaveBeenCalledWith(
+      buildable: true,
+      strict: false,
+      enableIvy: true,
+      publishable: false,
+    };
+    await createDomainLayerGenerator(tree, schema);
+    expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
-      {
-        directory: 'test-app/test-domain',
-        importPath: '@proj/test-app/test-domain/domain-layer',
-        name: 'domain-layer',
-        standaloneConfig: false,
-        tags: 'app:test-app,scope:test-app-test-domain,type:domain-layer',
-        ...commonLibraryOptions,
-      }
+      '',
+      'domain-layer',
+      schema.groupingFolder,
+      ApplicationType.Angular,
+      schema
     );
   });
   it('should remove test target from generated library', async () => {

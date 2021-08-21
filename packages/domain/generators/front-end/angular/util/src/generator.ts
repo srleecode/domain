@@ -1,26 +1,21 @@
-import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
+import { Tree, convertNxGenerator } from '@nrwl/devkit';
 import { CreateUtilGeneratorSchema } from './schema';
-import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
-import { getLibraryCommonOptions } from '@srleecode/domain/angular/shared';
+import { addDomainLibrary } from '@srleecode/domain/front-end/shared';
+import { ApplicationType } from '@srleecode/domain/shared/utils';
 
 export async function createUtilGenerator(
   tree: Tree,
   options: CreateUtilGeneratorSchema
 ): Promise<void> {
   const { groupingFolder } = options;
-  const libraryCommonOptions = getLibraryCommonOptions(
+  await addDomainLibrary(
     tree,
     '',
     'util',
     groupingFolder,
+    ApplicationType.Angular,
     options
   );
-  await libraryGenerator(tree, {
-    ...libraryCommonOptions,
-  }).catch((e) => {
-    logger.error(e.message);
-    throw e;
-  });
 }
 
 export default createUtilGenerator;

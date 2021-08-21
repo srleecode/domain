@@ -17,7 +17,7 @@ import {
 } from '@srleecode/domain/shared/utils';
 import { SetupComponentTestGeneratorSchema } from '../schema';
 
-export const addComponentsTestFiles = (
+export const addTestFiles = (
   tree: Tree,
   options: SetupComponentTestGeneratorSchema
 ): void => {

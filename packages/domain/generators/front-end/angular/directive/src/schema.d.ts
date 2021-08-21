@@ -1,6 +1,7 @@
-import { CreateLibrarySchema } from '@srleecode/domain/angular/shared';
+import { AngularCreateLibrarySchema } from '@srleecode/domain/front-end/shared';
 
-export interface CreateDirectiveGeneratorSchema extends CreateLibrarySchema {
+export interface CreateDirectiveGeneratorSchema
+  extends AngularCreateLibrarySchema {
   groupingFolder: string;
   name: string;
   mountType?: MountType;

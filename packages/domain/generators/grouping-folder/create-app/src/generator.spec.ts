@@ -1,7 +1,7 @@
 import { readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createAppGroupingFolderGenerator } from './generator';
-import { ApplicationType } from '@srleecode/domain/grouping-folder/shared';
+import { ApplicationType } from '@srleecode/domain/shared/utils';
 import * as initialiseAngularWorkspaceMock from './lib/angular/initialise-angular-workspace';
 
 describe('createAppGroupingFolderGenerator', () => {

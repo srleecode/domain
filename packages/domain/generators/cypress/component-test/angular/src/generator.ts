@@ -2,7 +2,7 @@ import { convertNxGenerator, logger, Tree } from '@nrwl/devkit';
 import { SetupComponentTestGeneratorSchema } from './schema';
 import { setupCtGenerator } from '@jscutlery/cypress-angular/src/generators/setup-ct/setup-ct';
 import { addComponentTestingTarget } from './lib/add-component-testing-target';
-import { addComponentsTestFiles } from './lib/add-components--test-files';
+import { addTestFiles } from './lib/add--test-files';
 import { removeSampleTest } from './lib/remove-sample-test';
 
 export async function setupComponentTestGenerator(
@@ -17,7 +17,7 @@ export async function setupComponentTestGenerator(
     throw e;
   });
   removeSampleTest(tree, projectName);
-  addComponentsTestFiles(tree, options);
+  addTestFiles(tree, options);
   addComponentTestingTarget(tree, projectName);
 }
 

@@ -1,30 +1,30 @@
-import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
+import { Tree, convertNxGenerator } from '@nrwl/devkit';
 import { CreateDomainLayerGeneratorSchema } from './schema';
-import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
-import { getLibraryCommonOptions } from '@srleecode/domain/angular/shared';
-import { removeTestTarget } from '@srleecode/domain/front-end/shared';
-import { getDasherizedFolderPath } from '@srleecode/domain/shared/utils';
+import {
+  addDomainLibrary,
+  removeTestTarget,
+} from '@srleecode/domain/front-end/shared';
+import {
+  ApplicationType,
+  getDasherizedFolderPath,
+} from '@srleecode/domain/shared/utils';
 
 export async function createDomainLayerGenerator(
   tree: Tree,
   options: CreateDomainLayerGeneratorSchema
 ): Promise<void> {
   const { groupingFolder } = options;
-  const libraryCommonOptions = getLibraryCommonOptions(
+  const libraryName = 'domain-layer';
+  await addDomainLibrary(
     tree,
     '',
-    'domain-layer',
+    libraryName,
     groupingFolder,
+    ApplicationType.Angular,
     options
   );
-  await libraryGenerator(tree, {
-    ...libraryCommonOptions,
-  }).catch((e) => {
-    logger.error(e.message);
-    throw e;
-  });
   const domain = getDasherizedFolderPath(tree, groupingFolder);
-  removeTestTarget(tree, `${domain}-${libraryCommonOptions.name}`);
+  removeTestTarget(tree, `${domain}-${libraryName}`);
 }
 
 export default createDomainLayerGenerator;
