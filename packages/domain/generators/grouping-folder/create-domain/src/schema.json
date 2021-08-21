@@ -7,7 +7,7 @@
   "description": "Creates domain grouping folder",
   "properties": {
     "name": {
-      "description": "The name of the application",
+      "description": "The name of the domain",
       "type": "string"
     },
     "baseFolder": {

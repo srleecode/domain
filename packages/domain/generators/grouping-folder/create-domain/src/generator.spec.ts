@@ -1,9 +1,23 @@
 import { readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createDomainGroupingFolderGenerator } from './generator';
+import { CreateDomainGroupingFolderGeneratorSchema } from './schema';
 
 describe('createAppGroupingFolderGenerator', () => {
   let tree: Tree;
+  const options: CreateDomainGroupingFolderGeneratorSchema = {
+    baseFolder: 'libs/test-app',
+    name: 'test-domain',
+  };
+  const domainScope = 'scope:test-app-test-domain';
+
+  const expectDepConstraint = (dependencyTag: string): void => {
+    const eslint = readJson(tree, '.eslintrc.json');
+    expect(
+      eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+        .depConstraints[0].onlyDependOnLibsWithTags
+    ).toContainEqual(dependencyTag);
+  };
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
@@ -31,53 +45,31 @@ describe('createAppGroupingFolderGenerator', () => {
   });
 
   it('should create directory', async () => {
-    await createDomainGroupingFolderGenerator(tree, {
-      baseFolder: 'libs/test-app',
-      name: 'test',
-    });
-    const fileChanges = tree.listChanges();
-    expect(fileChanges[fileChanges.length - 1].path).toBe('libs/test-app/test');
+    await createDomainGroupingFolderGenerator(tree, options);
+    const folders = tree.children(options.baseFolder);
+    expect(folders).toContainEqual(options.name);
   });
 
-  it('should add shared domain eslint rule to all domains in grouping folder', async () => {
-    await createDomainGroupingFolderGenerator(tree, {
-      baseFolder: 'libs/test-app',
-      name: 'test-domain',
-    });
-    await createDomainGroupingFolderGenerator(tree, {
-      baseFolder: 'libs/test-app',
-      name: 'shared',
-    });
-    const eslint = readJson(tree, '.eslintrc.json');
-    expect(
-      eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
-        .depConstraints
-    ).toEqual([
-      {
-        onlyDependOnLibsWithTags: ['scope:test-app-shared'],
-        sourceTag: 'scope:test-app-test-domain',
-      },
-    ]);
+  it('should allow imports in same domain', async () => {
+    await createDomainGroupingFolderGenerator(tree, options);
+    expectDepConstraint(domainScope);
   });
 
-  it('should add shared domain eslint rule to all child domains in parent domain grouping folder', async () => {
+  it('should allow imports from inside shared app grouping folder', async () => {
+    await createDomainGroupingFolderGenerator(tree, options);
+    expectDepConstraint('app:shared');
+  });
+
+  it('should allow imports from inside shared domain in app grouping folder', async () => {
+    await createDomainGroupingFolderGenerator(tree, options);
+    expectDepConstraint('scope:test-app-shared');
+  });
+
+  it('should allow imports from parent domains shared grouping folder when child domain', async () => {
     await createDomainGroupingFolderGenerator(tree, {
       baseFolder: 'libs/test-app/parent-domain',
       name: 'child-domain',
     });
-    await createDomainGroupingFolderGenerator(tree, {
-      baseFolder: 'libs/test-app/parent-domain',
-      name: 'shared',
-    });
-    const eslint = readJson(tree, '.eslintrc.json');
-    expect(
-      eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
-        .depConstraints
-    ).toEqual([
-      {
-        onlyDependOnLibsWithTags: ['scope:test-app-parent-domain-shared'],
-        sourceTag: 'scope:test-app-parent-domain-child-domain',
-      },
-    ]);
+    expectDepConstraint('scope:test-app-parent-domain-shared');
   });
 });

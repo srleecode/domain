@@ -7,7 +7,7 @@ import { cypressInitGenerator } from '@nrwl/cypress';
 
 export async function ngAddGenerator(tree: Tree) {
   await cypressInitGenerator(tree);
-  // This was raised to get access to the @nrwl/angular initGenerator https://github.com/nrwl/nx/issues/6713
+  // This was raised to get access to the @nrwl/angular initGenerator https://github.com/nrwl/nx/issues/6790
   // Ideally we would just call that generator
   return addDependenciesToPackageJson(
     tree,
