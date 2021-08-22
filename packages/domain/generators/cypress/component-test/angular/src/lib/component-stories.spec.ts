@@ -1,6 +1,6 @@
 import { logger, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { checkFileContentIsSame } from '@srleecode/domain/shared/test-utils';
+import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 import {
   defaultDirectiveOptions,
@@ -39,11 +39,12 @@ describe('stories file', () => {
         ...defaultOptions,
         mountType: MountType.Story,
       });
-      checkFileContentIsSame(
+      const filesContents = getFilesContents(
         tree,
         testFilePath,
         join(__dirname, './expected-files/component/story.txt')
       );
+      expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
     });
   });
 
@@ -64,11 +65,12 @@ describe('stories file', () => {
         ...defaultDirectiveOptions,
         mountType: MountType.Story,
       });
-      checkFileContentIsSame(
+      const filesContents = getFilesContents(
         tree,
         testFilePath,
         join(__dirname, './expected-files/directive/story.txt')
       );
+      expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
     });
   });
 });

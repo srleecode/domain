@@ -4,7 +4,7 @@ import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { UnitTestType } from '@srleecode/domain/shared/utils';
 import { createComponentGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
-import { checkFileContentIsSame } from '@srleecode/domain/shared/test-utils';
+import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 
 describe('test file', () => {
@@ -21,22 +21,24 @@ describe('test file', () => {
       ...defaultOptions,
       unitTestType: UnitTestType.TestBed,
     });
-    checkFileContentIsSame(
+    const filesContents = getFilesContents(
       tree,
       testFilePath,
       join(__dirname, './expected-files/test-bed-test.txt')
     );
+    expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
   it('should create test file with no test bed when unitTestType is NoTestBed', async () => {
     await createComponentGenerator(tree, {
       ...defaultOptions,
       unitTestType: UnitTestType.NoTestBed,
     });
-    checkFileContentIsSame(
+    const filesContents = getFilesContents(
       tree,
       testFilePath,
       join(__dirname, './expected-files/no-test-bed-test.txt')
     );
+    expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
 
   it('should not create test file when unitTestType is NoTests', async () => {

@@ -1,7 +1,7 @@
 import { logger, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { defaultOptions, LIB_PATH } from '../default-options.constant';
-import { checkFileContentIsSame } from '@srleecode/domain/shared/test-utils';
+import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
 import { setupComponentTestGenerator } from '../generator';
@@ -23,10 +23,11 @@ describe('test harness file', () => {
 
   it('should create component test harness', async () => {
     await setupComponentTestGenerator(tree, defaultOptions);
-    checkFileContentIsSame(
+    const filesContents = getFilesContents(
       tree,
       testFilePath,
       join(__dirname, './expected-files/harness.txt')
     );
+    expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
 });

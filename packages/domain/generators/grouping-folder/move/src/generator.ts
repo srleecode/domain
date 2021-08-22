@@ -11,7 +11,7 @@ import {
   getNormalisedPath,
   getProjectNames,
 } from '@srleecode/domain/shared/utils';
-import { moveGenerator as nrwlmoveGenerator } from '@nrwl/workspace';
+import { moveGenerator as nrwlMoveGenerator } from '@nrwl/workspace';
 
 export async function moveGenerator(
   tree: Tree,
@@ -27,7 +27,7 @@ export async function moveGenerator(
       folder,
       destination
     );
-    await nrwlmoveGenerator(tree, {
+    await nrwlMoveGenerator(tree, {
       projectName,
       destination: movedProjectRoot,
       updateImportPath: true,

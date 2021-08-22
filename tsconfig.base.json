@@ -29,8 +29,8 @@
       "@srleecode/domain/angular/domain-layer": [
         "packages/domain/generators/front-end/angular/domain-layer/src/generator.ts"
       ],
-      "@srleecode/domain/angular/remove": [
-        "packages/domain/generators/front-end/angular/remove/src/generator.ts"
+      "@srleecode/domain/angular/remove-library": [
+        "packages/domain/generators/front-end/angular/remove-library/src/generator.ts"
       ],
       "@srleecode/domain/angular/shared": [
         "packages/domain/generators/front-end/angular/shared/index.ts"

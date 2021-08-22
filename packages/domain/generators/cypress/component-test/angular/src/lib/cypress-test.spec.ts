@@ -1,6 +1,6 @@
 import { logger, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { checkFileContentIsSame } from '@srleecode/domain/shared/test-utils';
+import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 import {
   defaultDirectiveOptions,
@@ -33,11 +33,12 @@ describe('cypress test file', () => {
 
     it('should create cy-spec file with component mount type when mount type is component', async () => {
       await setupComponentTestGenerator(tree, defaultOptions);
-      checkFileContentIsSame(
+      const filesContents = getFilesContents(
         tree,
         testFilePath,
         join(__dirname, './expected-files/component/component-test.txt')
       );
+      expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
     });
 
     it('should create cy-spec file with story mount type when mount type is story', async () => {
@@ -45,11 +46,12 @@ describe('cypress test file', () => {
         ...defaultOptions,
         mountType: MountType.Story,
       });
-      checkFileContentIsSame(
+      const filesContents = getFilesContents(
         tree,
         testFilePath,
         join(__dirname, './expected-files/component/story-test.txt')
       );
+      expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
     });
   });
 
@@ -67,11 +69,12 @@ describe('cypress test file', () => {
 
     it('should use directives test component when element type is directive and mountType is component', async () => {
       await setupComponentTestGenerator(tree, defaultDirectiveOptions);
-      checkFileContentIsSame(
+      const filesContents = getFilesContents(
         tree,
         testFilePath,
         join(__dirname, './expected-files/directive/component-test.txt')
       );
+      expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
     });
 
     it('should use story when elementType is directive and mountType is story', async () => {
@@ -79,11 +82,12 @@ describe('cypress test file', () => {
         ...defaultDirectiveOptions,
         mountType: MountType.Story,
       });
-      checkFileContentIsSame(
+      const filesContents = getFilesContents(
         tree,
         testFilePath,
         join(__dirname, './expected-files/directive/story-test.txt')
       );
+      expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
     });
   });
 });

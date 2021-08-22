@@ -3,7 +3,7 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { createComponentGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
-import { checkFileContentIsSame } from '@srleecode/domain/shared/test-utils';
+import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 
 describe('component template file', () => {
@@ -17,10 +17,11 @@ describe('component template file', () => {
   });
   it('should create component template file', async () => {
     await createComponentGenerator(tree, defaultOptions);
-    checkFileContentIsSame(
+    const filesContents = getFilesContents(
       tree,
       testFilePath,
       join(__dirname, './expected-files/component-template.txt')
     );
+    expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
 });
