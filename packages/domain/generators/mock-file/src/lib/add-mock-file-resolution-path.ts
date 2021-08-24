@@ -4,7 +4,8 @@ import {
   Tree,
   updateJson,
 } from '@nrwl/devkit';
-import { getDomainPath } from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { getDomainPath } from '../../../shared/utils';
 
 export const addMockFileResolutionPath = (
   tree: Tree,

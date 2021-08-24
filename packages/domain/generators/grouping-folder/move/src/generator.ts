@@ -7,24 +7,22 @@ import {
   getWorkspaceLayout,
 } from '@nrwl/devkit';
 import { MoveGeneratorSchema } from './schema';
-import {
-  getNormalisedPath,
-  getProjectNames,
-} from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { getNormalisedPath, getProjectNames } from '../../../shared/utils';
 import { moveGenerator as nrwlMoveGenerator } from '@nrwl/workspace';
 
 export async function moveGenerator(
   tree: Tree,
   options: MoveGeneratorSchema
 ): Promise<void> {
-  const { folder, destination } = options;
-  const projectNames = getProjectNames(tree, folder);
+  const { groupingFolder, destination } = options;
+  const projectNames = getProjectNames(tree, groupingFolder);
   const projects = getProjects(tree);
   for (const projectName of projectNames) {
     const movedProjectRoot = getMovedProjectRoot(
       tree,
       projects.get(projectName),
-      folder,
+      groupingFolder,
       destination
     );
     await nrwlMoveGenerator(tree, {

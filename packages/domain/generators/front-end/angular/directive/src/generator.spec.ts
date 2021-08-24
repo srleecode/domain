@@ -1,7 +1,8 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createDirectiveGenerator } from './generator';
-import * as frontEndSharedMock from '@srleecode/domain/front-end/shared';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import * as frontEndSharedMock from '../../../shared';
 import * as setupComponentTestSpy from '@srleecode/domain/cypress/component-test/angular';
 import { defaultOptions } from './default-options.constant';
 import {

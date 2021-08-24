@@ -12,21 +12,26 @@
         "packageJson": "packages/domain/package.json",
         "main": "packages/domain/index.ts",
         "assets": [
-          "packages/domain/*.md",
           {
-            "input": "./generators",
-            "glob": "**/!(*.ts)",
-            "output": "./src"
+            "input": "packages/domain",
+            "glob": "**/files/**",
+            "output": "/"
           },
           {
-            "input": "./generators",
+            "input": "packages/domain",
+            "glob": "**/*schema.json",
+            "output": "/"
+          },
+          {
+            "input": "packages/domain",
+            "glob": "**/*.js",
+            "ignore": ["**/jest.config.js"],
+            "output": "/"
+          },
+          {
+            "input": "packages/domain",
             "glob": "**/*.d.ts",
-            "output": "./src"
-          },
-          {
-            "input": "./packages/domain",
-            "glob": "**/schema.json",
-            "output": "."
+            "output": "/"
           },
           {
             "input": "./packages/domain",

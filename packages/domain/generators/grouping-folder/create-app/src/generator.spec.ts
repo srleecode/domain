@@ -15,22 +15,6 @@ describe('createAppGroupingFolderGenerator', () => {
       .mockImplementation();
   });
 
-  it('should create directory with language prefixed to name', async () => {
-    await createAppGroupingFolderGenerator(tree, {
-      name: 'test',
-      applicationType: ApplicationType.Angular,
-    });
-    const fileChanges = tree.listChanges();
-    expect(fileChanges[fileChanges.length - 1].path).toBe('libs/ng-test');
-  });
-  it('should create directory with just name when no language provided', async () => {
-    await createAppGroupingFolderGenerator(tree, {
-      name: 'test',
-    });
-    const fileChanges = tree.listChanges();
-    expect(fileChanges[fileChanges.length - 1].path).toBe('libs/test');
-  });
-
   describe('initialiseAngularWorkspace', () => {
     it('should initialise angular workspace when language is angular and there is no existing angular app', async () => {
       await createAppGroupingFolderGenerator(tree, {

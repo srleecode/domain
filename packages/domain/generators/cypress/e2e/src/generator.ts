@@ -1,9 +1,12 @@
-import { Tree, convertNxGenerator, getWorkspaceLayout } from '@nrwl/devkit';
-import { cypressProjectGenerator } from '@nrwl/cypress';
 import {
-  getDasherizedFolderPath,
-  getDomainPath,
-} from '@srleecode/domain/shared/utils';
+  Tree,
+  convertNxGenerator,
+  getWorkspaceLayout,
+  logger,
+} from '@nrwl/devkit';
+import { cypressProjectGenerator } from '@nrwl/cypress';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { getDasherizedFolderPath, getDomainPath } from '../../../shared/utils';
 import { CreateE2EGeneratorSchema } from './schema';
 import { removeUneededCypressProjectFiles } from './lib/remove-uneeded-cypress-project-files';
 import { removeDevServerTarget } from './lib/remove-dev-server-target';
@@ -16,14 +19,17 @@ export async function cypressE2EGenerator(
   tree: Tree,
   options: CreateE2EGeneratorSchema
 ) {
-  const { baseFolder } = options;
-  const dasherisedFolderPath = getDasherizedFolderPath(tree, baseFolder);
+  const { groupingFolder } = options;
+  const dasherisedFolderPath = getDasherizedFolderPath(tree, groupingFolder);
   const { appsDir, standaloneAsDefault, npmScope } = getWorkspaceLayout(tree);
-  const domainPath = getDomainPath(tree, baseFolder);
+  const domainPath = getDomainPath(tree, groupingFolder);
   await cypressProjectGenerator(tree, {
     name: `e2e-${dasherisedFolderPath}`,
     directory: domainPath,
     standaloneConfig: standaloneAsDefault,
+  }).catch((e) => {
+    logger.error(e.message);
+    throw e;
   });
   const originalProjectName = `${dasherisedFolderPath}-e2e-${dasherisedFolderPath}`;
   const originalProjectPath = `${appsDir}/${domainPath}/e2e-${dasherisedFolderPath}`;
@@ -33,7 +39,7 @@ export async function cypressE2EGenerator(
   addImplicitDependencies(
     tree,
     originalProjectName,
-    baseFolder,
+    groupingFolder,
     dasherisedFolderPath
   );
   await moveProjectToDomain(
@@ -42,7 +48,10 @@ export async function cypressE2EGenerator(
     domainPath,
     dasherisedFolderPath,
     npmScope
-  );
+  ).catch((e) => {
+    logger.error(e.message);
+    throw e;
+  });
   renameCypressProject(tree, dasherisedFolderPath, standaloneAsDefault);
 }
 

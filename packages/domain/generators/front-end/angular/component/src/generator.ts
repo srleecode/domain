@@ -8,7 +8,8 @@ import {
 } from '@srleecode/domain/shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { addComponentFiles } from './lib/add-component-files/add-component-files';
-import { addDomainLibrary } from '@srleecode/domain/front-end/shared';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { addDomainLibrary } from '../../../shared';
 
 export async function createComponentGenerator(
   tree: Tree,

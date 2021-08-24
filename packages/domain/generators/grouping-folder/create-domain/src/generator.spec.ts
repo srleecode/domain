@@ -44,12 +44,6 @@ describe('createAppGroupingFolderGenerator', () => {
     tree.write('.eslintrc.json', JSON.stringify(json));
   });
 
-  it('should create directory', async () => {
-    await createDomainGroupingFolderGenerator(tree, options);
-    const folders = tree.children(options.baseFolder);
-    expect(folders).toContainEqual(options.name);
-  });
-
   it('should allow imports in same domain', async () => {
     await createDomainGroupingFolderGenerator(tree, options);
     expectDepConstraint(domainScope);

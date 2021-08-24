@@ -2,11 +2,11 @@ import { Tree, convertNxGenerator, getWorkspaceLayout } from '@nrwl/devkit';
 import { CreateAppGroupingFolderGeneratorSchema } from './schema';
 import { isAppFolderExisting } from './lib/shared/is-app-folder-existing';
 import { initialiseWorkspace } from './lib/shared/initialise-workspace';
-
+import { mkdirSync } from 'fs';
 export async function createAppGroupingFolderGenerator(
   tree: Tree,
   options: CreateAppGroupingFolderGeneratorSchema
-): Promise<void> {
+) {
   const { applicationType, name } = options;
   if (!isAppFolderExisting(tree, applicationType)) {
     await initialiseWorkspace(tree, applicationType);
@@ -16,7 +16,9 @@ export async function createAppGroupingFolderGenerator(
   const directory = applicationType
     ? `${baseFolder}/${applicationType}-${name}`
     : `${baseFolder}/${name}`;
-  tree.write(directory, '');
+  return () => {
+    mkdirSync(directory);
+  };
 }
 
 export default createAppGroupingFolderGenerator;

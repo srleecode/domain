@@ -1,10 +1,11 @@
 import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
 import { CreateDirectiveGeneratorSchema } from './schema';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   ApplicationType,
   ElementType,
   getDasherizedFolderPath,
-} from '@srleecode/domain/shared/utils';
+} from '../../../../shared/utils';
 import {
   camelize,
   classify,
@@ -12,7 +13,8 @@ import {
 } from '@nrwl/workspace/src/utils/strings';
 import { addDirectiveFiles } from './lib/add-directive-files/add-directive-files';
 import { setupComponentTestGenerator } from '@srleecode/domain/cypress/component-test/angular';
-import { addDomainLibrary } from '@srleecode/domain/front-end/shared';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { addDomainLibrary } from '../../../shared';
 
 export async function createDirectiveGenerator(
   tree: Tree,

@@ -4,32 +4,29 @@ import {
   readWorkspaceConfiguration,
   Tree,
 } from '@nrwl/devkit';
-import { addDependencies } from './add-dependencies';
 import { addGlobalComponentTestingOptions } from './add-global-component-testing-options/add-global-component-testing-options';
+import { cypressInitGenerator } from '@nrwl/cypress';
+import { ngAddGenerator } from '@jscutlery/cypress-angular/src/generators/ng-add/ng-add';
 
-export const initialiseAngularWorkspace = (tree: Tree): GeneratorCallback => {
-  checkNrwlAngularIsAdded(tree);
-  checkNrwlCypressIsAdded(tree);
+export const initialiseAngularWorkspace = async (tree: Tree): Promise<void> => {
+  if (!isNrwlAngularAdded(tree)) {
+    // TODO: call angular init generator here
+  }
+  if (!isNrwlCypressAdded(tree)) {
+    await cypressInitGenerator(tree);
+  }
   if (!tree.exists(`.component-testing/global-mount-options.constant.ts`)) {
     addGlobalComponentTestingOptions(tree);
   }
-  return addDependencies(tree);
+  await ngAddGenerator(tree);
 };
 
-const checkNrwlAngularIsAdded = (tree: Tree): void => {
+const isNrwlAngularAdded = (tree: Tree): boolean => {
   const workspace = readWorkspaceConfiguration(tree);
-  if (!workspace?.generators?.['@nrwl/angular:component']) {
-    throw new Error(
-      'Before creating an Angular application grouping folder. Please make sure you have run npx ng add @nrwl/angular @nrwl/cypress'
-    );
-  }
+  return !workspace?.generators?.['@nrwl/angular:component'];
 };
 
-const checkNrwlCypressIsAdded = (tree: Tree): void => {
+const isNrwlCypressAdded = (tree: Tree): boolean => {
   const packageJson = readJson(tree, 'package.json');
-  if (!packageJson?.devDependencices?.['@nrwl/cypress']) {
-    throw new Error(
-      'Before creating an Angular application grouping folder. Please make sure you have run npx ng add @nrwl/angular @nrwl/cypress'
-    );
-  }
+  return !packageJson?.devDependencices?.['@nrwl/cypress'];
 };

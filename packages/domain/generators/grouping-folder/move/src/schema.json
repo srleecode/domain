@@ -6,7 +6,7 @@
   "type": "object",
   "description": "Moves domain including libraries and cypress projects",
   "properties": {
-    "folder": {
+    "groupingFolder": {
       "type": "string",
       "description": "Path to the grouping folder relative to the root of the workspace that will be moved",
       "x-prompt": "What is the path for the grouping folder relative to the root of the workspace that will be moved?"
@@ -17,5 +17,5 @@
       "x-prompt": "What is the path for the grouping folder relative to the root of the workspace that will be moved?"
     }
   },
-  "required": ["folder"]
+  "required": ["groupingFolder", "destination"]
 }

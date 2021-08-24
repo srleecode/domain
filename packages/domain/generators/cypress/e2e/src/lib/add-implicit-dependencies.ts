@@ -7,14 +7,15 @@ import {
 export const addImplicitDependencies = (
   tree: Tree,
   projectName: string,
-  baseFolder: string,
+  groupingFolder: string,
   dasherisedFolderPath: string
 ): void => {
   const projectConfig = readProjectConfiguration(tree, projectName);
   const implicitDependencies = tree
-    .children(baseFolder)
+    .children(groupingFolder)
     .filter(
-      (folder) => !tree.isFile(`${baseFolder}/${folder}`) && folder !== '.e2e'
+      (folder) =>
+        !tree.isFile(`${groupingFolder}/${folder}`) && folder !== '.e2e'
     )
     .map((folder) => `${dasherisedFolderPath}-${folder}`);
   projectConfig.implicitDependencies = implicitDependencies;

@@ -1,6 +1,7 @@
 import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
 import { RemoveGeneratorSchema } from './schema';
-import { getProjectNames } from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { getProjectNames } from '../../../shared/utils';
 import { removeGenerator as nrwlRemoveGenerator } from '@nrwl/workspace';
 
 export async function removeGenerator(

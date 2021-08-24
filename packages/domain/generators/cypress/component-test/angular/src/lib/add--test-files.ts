@@ -10,11 +10,12 @@ import {
   camelize,
 } from '@nrwl/workspace/src/utils/strings';
 import { join } from 'path';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   ElementType,
   getDomainPath,
   MountType,
-} from '@srleecode/domain/shared/utils';
+} from '../../../../../shared/utils';
 import { SetupComponentTestGeneratorSchema } from '../schema';
 
 export const addTestFiles = (

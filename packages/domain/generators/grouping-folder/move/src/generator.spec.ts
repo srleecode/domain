@@ -25,7 +25,7 @@ describe('moveGenerator', () => {
   it('should be no changes when no projects root starts with given folder', async () => {
     const existingFileChanges = appTree.listChanges();
     await moveGenerator(appTree, {
-      folder: originalFolder,
+      groupingFolder: originalFolder,
       destination,
     });
     expect(appTree.listChanges()).toEqual(existingFileChanges);
@@ -34,7 +34,7 @@ describe('moveGenerator', () => {
   it('should move all projects under the given folder', async () => {
     await addProjects();
     await moveGenerator(appTree, {
-      folder: originalFolder,
+      groupingFolder: originalFolder,
       destination,
     });
     const projects = getProjects(appTree);
@@ -51,7 +51,7 @@ describe('moveGenerator', () => {
     });
     let projects = getProjects(appTree);
     await moveGenerator(appTree, {
-      folder: originalFolder,
+      groupingFolder: originalFolder,
       destination,
     });
     projects = getProjects(appTree);

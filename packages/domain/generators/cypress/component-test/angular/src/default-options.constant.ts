@@ -1,4 +1,5 @@
-import { MountType, ElementType } from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { MountType, ElementType } from '../../../../shared/utils';
 import { SetupComponentTestGeneratorSchema } from './schema';
 
 export const defaultOptions: SetupComponentTestGeneratorSchema = {

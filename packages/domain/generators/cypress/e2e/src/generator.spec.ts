@@ -9,7 +9,7 @@ describe('cypressE2EGenerator', () => {
     tree = createTreeWithEmptyWorkspace();
     tree.write(`libs/test-app/test-domain/shell/src.index.ts`, '');
     await cypressE2EGenerator(tree, {
-      baseFolder: 'libs/test-app/test-domain',
+      groupingFolder: 'libs/test-app/test-domain',
     });
   });
 

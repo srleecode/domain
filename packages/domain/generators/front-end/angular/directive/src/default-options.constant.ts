@@ -1,4 +1,5 @@
-import { MountType } from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { MountType } from '../../../../shared/utils';
 import { CreateDirectiveGeneratorSchema } from './schema';
 
 export const defaultOptions: CreateDirectiveGeneratorSchema = {

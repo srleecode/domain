@@ -8,11 +8,13 @@
   "scripts": {
     "nx": "nx",
     "build": "nx build domain",
+    "e2e": "nx e2e domain-e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
     "affected:test": "nx affected:test",
     "affected:lint": "nx affected:lint",
+    "affected:e2e": "nx affected:e2e",
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
     "format": "nx format:write",

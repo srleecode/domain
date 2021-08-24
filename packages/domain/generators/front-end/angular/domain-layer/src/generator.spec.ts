@@ -2,7 +2,8 @@ import { readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createDomainLayerGenerator } from './generator';
 import { AngularCreateLibrarySchema } from '@srleecode/domain/front-end/shared';
-import * as frontEndSharedMock from '@srleecode/domain/front-end/shared';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import * as frontEndSharedMock from '../../../shared';
 import { CreateDomainLayerGeneratorSchema } from './schema';
 import { ApplicationType } from '@srleecode/domain/shared/utils';
 

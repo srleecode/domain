@@ -9,8 +9,8 @@
       "description": "Create angulaar component test schematic"
     },
     "e2e": {
-      "factory": "./generators/cypress/e2e/generator#cypressProjectSchematic",
-      "schema": "./generators/cypress/e2e/schema.json",
+      "factory": "./generators/cypress/e2e/src/generator#cypressProjectSchematic",
+      "schema": "./generators/cypress/e2e/src/schema.json",
       "description": "Add cypress project generator"
     },
     "ngApplicationLayer": {
@@ -95,8 +95,8 @@
       "description": "Create angulaar component test schematic"
     },
     "e2e": {
-      "factory": "./generators/cypress/e2e/generator#cypressProjectSchematic",
-      "schema": "./generators/cypress/e2e/schema.json",
+      "factory": "./generators/cypress/e2e/src/generator",
+      "schema": "./generators/cypress/e2e/src/schema.json",
       "description": "Add cypress project generator"
     },
     "ngApplicationLayer": {

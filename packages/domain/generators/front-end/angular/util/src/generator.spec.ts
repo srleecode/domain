@@ -1,7 +1,8 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createUtilGenerator } from './generator';
-import * as frontEndSharedMock from '@srleecode/domain/front-end/shared';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import * as frontEndSharedMock from '../../../shared';
 import { CreateUtilGeneratorSchema } from './schema';
 import { ApplicationType } from '@srleecode/domain/shared/utils';
 
