@@ -1,9 +1,8 @@
 import { ComponentType } from './model/component-type.enum';
-import { MountType } from '@srleecode/domain/shared/utils';
-import { StyleType } from './model/style-type.enum';
-import { UnitTestType } from '@srleecode/domain/shared/utils';
+import { MountType, UnitTestType } from '@srleecode/domain/shared/utils';
 import { ViewEncapsulation } from './model/view-encapsulation.enum';
 import { CreateComponentGeneratorSchema } from './schema';
+import { StyleType } from './model/style-type.enum';
 
 export const defaultOptions: CreateComponentGeneratorSchema = {
   groupingFolder: 'libs/test-app/test-domain',

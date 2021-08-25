@@ -1,12 +1,12 @@
 import {
   checkFilesExist,
-  ensureNxProject,
+  newNxProject,
   runNxCommandAsync,
 } from '@nrwl/nx-plugin/testing';
 
 describe('app grouping folder', () => {
   beforeAll(() => {
-    ensureNxProject('@srleecode/domain', 'dist/packages/domain');
+    newNxProject('@srleecode/domain', 'dist/packages/domain');
   });
 
   it('should create directory with language prefixed to name', async () => {

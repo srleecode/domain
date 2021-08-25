@@ -11,5 +11,11 @@
       }
     }
   },
-  "implicitDependencies": ["domain"]
+  "implicitDependencies": [
+    "domain-grouping-folder-create-app",
+    "domain-grouping-folder-create-domain",
+    "domain-grouping-folder-move",
+    "domain-grouping-folder-remove",
+    "domain-grouping-folder-shared"
+  ]
 }

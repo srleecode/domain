@@ -1,11 +1,13 @@
 import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
 import { CreateComponentGeneratorSchema } from './schema';
-import { setupComponentTestGenerator } from '@srleecode/domain/cypress/component-test/angular';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { setupComponentTestGenerator } from '../../../../cypress/component-test/angular/src/generator';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
   ElementType,
   ApplicationType,
-} from '@srleecode/domain/shared/utils';
+} from '../../../../shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { addComponentFiles } from './lib/add-component-files/add-component-files';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
@@ -31,6 +33,7 @@ export async function createComponentGenerator(
     ApplicationType.Angular,
     options
   );
+
   addComponentFiles(
     tree,
     options,

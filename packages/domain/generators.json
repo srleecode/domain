@@ -23,7 +23,7 @@
       "schema": "./generators/front-end/angular/component/src/schema.json",
       "description": "Add component domain library generator"
     },
-    "ngDataAccessLauer": {
+    "ngDataAccessLayer": {
       "factory": "./generators/front-end/angular/data-access-layer/src/generator#createDataAccessLayeSchematic",
       "schema": "./generators/front-end/angular/data-access-layer/src/schema.json",
       "description": "Add data access layer domain library generator"
@@ -109,7 +109,7 @@
       "schema": "./generators/front-end/angular/component/src/schema.json",
       "description": "Add component domain library generator"
     },
-    "ngDataAccessLauer": {
+    "ngDataAccessLayer": {
       "factory": "./generators/front-end/angular/data-access-layer/src/generator",
       "schema": "./generators/front-end/angular/data-access-layer/src/schema.json",
       "description": "Add data access layer domain library generator"

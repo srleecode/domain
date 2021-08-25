@@ -1,7 +1,8 @@
 import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
 import { RemoveLibraryGeneratorSchema } from './schema';
 import { removeGenerator } from '@nrwl/workspace';
-import { getDasherizedFolderPath } from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { getDasherizedFolderPath } from '../../../../shared/utils';
 
 export async function removeLibraryGenerator(
   tree: Tree,

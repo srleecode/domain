@@ -8,8 +8,8 @@ export async function removeGenerator(
   tree: Tree,
   options: RemoveGeneratorSchema
 ): Promise<void> {
-  const { folder } = options;
-  const projectNames = getProjectNames(tree, folder);
+  const { groupingFolder } = options;
+  const projectNames = getProjectNames(tree, groupingFolder);
   for (const projectName of projectNames) {
     await nrwlRemoveGenerator(tree, {
       projectName,
@@ -20,6 +20,7 @@ export async function removeGenerator(
       throw e;
     });
   }
+  tree.delete(groupingFolder);
 }
 
 export default removeGenerator;

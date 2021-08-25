@@ -33,7 +33,7 @@ export const addTestFiles = (
     className: 'TestComponent',
   };
   let templateOptions = {
-    ...names(name),
+    ...names(name || ''),
     selector,
     type,
     className: classify(`${name}-${type}`),

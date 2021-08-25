@@ -34,6 +34,7 @@ export async function moveGenerator(
       throw e;
     });
   }
+  tree.delete(groupingFolder);
 }
 
 const getMovedProjectRoot = (

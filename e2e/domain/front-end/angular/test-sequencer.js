@@ -3,10 +3,13 @@ const path = require('path');
 
 class CustomSequencer extends Sequencer {
   testsOrder = {
-    'app-grouping-folder.spec.ts': 0,
-    'domain-grouping-folder.spec.ts': 1,
-    'move.spec.ts': 2,
-    'remove.spec.ts': 3
+    'application-layer.spec.ts': 0,
+    'component.spec.ts': 1,
+    'data-access-layer.spec.ts': 2,
+    'directive.spec.ts': 3,
+    'domain-layer.spec.ts': 4,
+    'util.spec.ts': 5,
+    'remove-library.spec.ts': 6
   };
   sort(tests) {
     const orderedTests = [];

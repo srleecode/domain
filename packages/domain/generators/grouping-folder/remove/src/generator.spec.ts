@@ -38,7 +38,7 @@ describe('removeGenerator', () => {
   it('should be no changes when no projects root starts with given folder', async () => {
     const existingFileChanges = appTree.listChanges();
     await removeGenerator(appTree, {
-      folder: folderToDelete,
+      groupingFolder: folderToDelete,
     });
     expect(appTree.listChanges()).toEqual(existingFileChanges);
   });
@@ -46,7 +46,7 @@ describe('removeGenerator', () => {
   it('should remove all projects under the given folder', async () => {
     await addProjects();
     await removeGenerator(appTree, {
-      folder: folderToDelete,
+      groupingFolder: folderToDelete,
     });
     const projects = getProjects(appTree);
     expect(projects.size).toBe(0);

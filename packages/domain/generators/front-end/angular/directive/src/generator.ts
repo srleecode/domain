@@ -12,7 +12,8 @@ import {
   dasherize,
 } from '@nrwl/workspace/src/utils/strings';
 import { addDirectiveFiles } from './lib/add-directive-files/add-directive-files';
-import { setupComponentTestGenerator } from '@srleecode/domain/cypress/component-test/angular';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { setupComponentTestGenerator } from '../../../../cypress/component-test/angular/src/generator';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { addDomainLibrary } from '../../../shared';
 
