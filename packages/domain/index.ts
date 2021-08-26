@@ -1,5 +1,4 @@
-export * from './generators/cypress/component-test/angular/src/generator';
-export * from './generators/cypress/e2e/src/generator';
+export * from './generators/cypress/domain-test/src/generator';
 export * from './generators/front-end/angular/application-layer/src/generator';
 export * from './generators/front-end/angular/component/src/generator';
 export * from './generators/front-end/angular/data-access-layer/src/generator';

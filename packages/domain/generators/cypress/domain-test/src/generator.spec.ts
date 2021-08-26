@@ -1,14 +1,14 @@
 import { readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { cypressE2EGenerator } from './generator';
+import { setupDomainTestGenerator } from './generator';
 
-describe('cypressE2EGenerator', () => {
+describe('setupDomainTestGenerator', () => {
   let tree: Tree;
 
   beforeAll(async () => {
     tree = createTreeWithEmptyWorkspace();
     tree.write(`libs/test-app/test-domain/shell/src.index.ts`, '');
-    await cypressE2EGenerator(tree, {
+    await setupDomainTestGenerator(tree, {
       groupingFolder: 'libs/test-app/test-domain',
     });
   });

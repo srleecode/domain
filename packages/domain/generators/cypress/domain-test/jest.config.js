@@ -1,7 +1,7 @@
 module.exports = {
-  displayName: 'domain-cypress-e2e',
+  displayName: 'domain-cypress-domain-test',
   preset: '../../../../../jest.preset.js',
-  coverageDirectory: '../../../../../coverage/packages/domain/generators/cypress/e2e',
+  coverageDirectory: '../../../../../coverage/packages/domain/generators/cypress/domain-test',
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },

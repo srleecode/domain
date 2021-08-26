@@ -3,10 +3,10 @@
   "name": "domain",
   "version": "0.0.1",
   "schematics": {
-    "ngComponentTest": {
-      "factory": "./generators/cypress/component-test/angular/src/generator#setupComponentTestSchematic",
-      "schema": "./generators/cypress/component-test/angular/src/schema.json",
-      "description": "Create angulaar component test schematic"
+    "domainTest": {
+      "factory": "./generators/cypress/domain-test/src/generator#setupDomainTestSchematic",
+      "schema": "./generators/cypress/domain-test/src/schema.json",
+      "description": "Create cypress domain test files component test schematic"
     },
     "e2e": {
       "factory": "./generators/cypress/e2e/src/generator#cypressProjectSchematic",
@@ -89,10 +89,10 @@
     }
   },
   "generators": {
-    "ngComponentTest": {
-      "factory": "./generators/cypress/component-test/angular/src/generator",
-      "schema": "./generators/cypress/component-test/angular/src/schema.json",
-      "description": "Create angulaar component test schematic"
+    "domainTest": {
+      "factory": "./generators/cypress/domain-test/src/generator",
+      "schema": "./generators/cypress/domain-test/src/schema.json",
+      "description": "Create cypress domain test files component test"
     },
     "e2e": {
       "factory": "./generators/cypress/e2e/src/generator",

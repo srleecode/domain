@@ -1,0 +1,15 @@
+{
+  "root": "e2e/domain/cypress/domain-test",
+  "sourceRoot": "e2e/domain/cypress/domain-test/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "domain:build",
+        "jestConfig": "e2e/domain/cypress/domain-test/jest.config.js"
+      }
+    }
+  },
+  "implicitDependencies": ["domain-cypress-domain-test"]
+}

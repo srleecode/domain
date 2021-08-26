@@ -3,7 +3,7 @@
   "projects": {
     "domain": "packages/domain",
     "domain-cypress-component-test-angular": "packages/domain/generators/cypress/component-test/angular",
-    "domain-cypress-e2e": "packages/domain/generators/cypress/e2e",
+    "domain-cypress-domain-test": "packages/domain/generators/cypress/domain-test",
     "domain-front-end-angular-application-layer": "packages/domain/generators/front-end/angular/application-layer",
     "domain-front-end-angular-component": "packages/domain/generators/front-end/angular/component",
     "domain-front-end-angular-data-access-layer": "packages/domain/generators/front-end/angular/data-access-layer",
@@ -21,8 +21,9 @@
     "domain-mock-file": "packages/domain/generators/mock-file",
     "domain-shared-test-utils": "packages/domain/generators/shared/test-utils",
     "domain-shared-utils": "packages/domain/generators/shared/utils",
-    "e2e-domain-grouping-folder": "e2e/domain/grouping-folder",
-    "e2e-domain-front-end-angular": "e2e/domain/front-end/angular"
+    "e2e-domain-cypress-domain-test": "e2e/domain/cypress/domain-test",
+    "e2e-domain-front-end-angular": "e2e/domain/front-end/angular",
+    "e2e-domain-grouping-folder": "e2e/domain/grouping-folder"
   },
   "cli": {
     "defaultCollection": "@nrwl/workspace"

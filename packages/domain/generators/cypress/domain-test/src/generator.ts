@@ -7,18 +7,18 @@ import {
 import { cypressProjectGenerator } from '@nrwl/cypress';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { getDasherizedFolderPath, getDomainPath } from '../../../shared/utils';
-import { CreateE2EGeneratorSchema } from './schema';
 import { removeUneededCypressProjectFiles } from './lib/remove-uneeded-cypress-project-files';
 import { removeDevServerTarget } from './lib/remove-dev-server-target';
 import { setProjectToLibraryType } from './lib/set-project-to-library-type';
 import { moveProjectToDomain } from './lib/move-project-to-domain';
 import { renameCypressProject } from './lib/rename-cypress-project';
 import { addImplicitDependencies } from './lib/add-implicit-dependencies';
+import { SetupDomainTestGeneratorSchema } from './schema';
 
-export async function cypressE2EGenerator(
+export async function setupDomainTestGenerator(
   tree: Tree,
-  options: CreateE2EGeneratorSchema
-) {
+  options: SetupDomainTestGeneratorSchema
+): Promise<void> {
   const { groupingFolder } = options;
   const dasherisedFolderPath = getDasherizedFolderPath(tree, groupingFolder);
   const { appsDir, standaloneAsDefault, npmScope } = getWorkspaceLayout(tree);
@@ -55,8 +55,8 @@ export async function cypressE2EGenerator(
   renameCypressProject(tree, dasherisedFolderPath, standaloneAsDefault);
 }
 
-export default cypressProjectGenerator;
+export default setupDomainTestGenerator;
 
-export const cypressProjectSchematic = convertNxGenerator(
-  cypressProjectGenerator
+export const setupDomainTestSchematic = convertNxGenerator(
+  setupDomainTestGenerator
 );
