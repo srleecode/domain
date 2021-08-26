@@ -36,6 +36,9 @@ export async function createDirectiveGenerator(
   )}`;
   const libraryName = `directive-${dasherize(name)}`;
   const projectName = `${dasherisedGroupingFolder}-${dasherize(libraryName)}`;
+  tree.delete(
+    `${groupingFolder}/${libraryName}/src/lib/${projectName}.module.ts`
+  );
   const selector = prefix
     ? `${prefix}${classify(projectName)}`
     : `${camelize(projectName)}`;

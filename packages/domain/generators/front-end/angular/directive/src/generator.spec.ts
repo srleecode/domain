@@ -9,8 +9,10 @@ import { defaultOptions } from './default-options.constant';
 import {
   ApplicationType,
   ElementType,
+  getDasherizedFolderPath,
   MountType,
 } from '@srleecode/domain/shared/utils';
+import { dasherize } from '@nrwl/workspace/src/utils/strings';
 
 describe('createDirectiveGenerator', () => {
   let tree: Tree;
@@ -32,6 +34,17 @@ describe('createDirectiveGenerator', () => {
       ApplicationType.Angular,
       defaultOptions
     );
+  });
+
+  it('should remove module created by angular library generator', async () => {
+    await createDirectiveGenerator(tree, defaultOptions);
+    const libraryName = dasherize(defaultOptions.name);
+    const fileName = `${getDasherizedFolderPath(
+      tree,
+      defaultOptions.groupingFolder
+    )}-${libraryName}.module.ts`;
+    const filePath = `${defaultOptions.groupingFolder}/src/lib/${fileName}`;
+    expect(tree.exists(filePath)).toBe(false);
   });
 
   it('should pass correct parameters to setupComponentTestGenerator', async () => {

@@ -33,7 +33,9 @@ export async function createComponentGenerator(
     ApplicationType.Angular,
     options
   );
-
+  tree.delete(
+    `${groupingFolder}/${libraryName}/src/lib/${projectName}.module.ts`
+  );
   addComponentFiles(
     tree,
     options,
