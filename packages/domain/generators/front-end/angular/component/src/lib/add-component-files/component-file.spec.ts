@@ -1,17 +1,18 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
 import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 import { ComponentType } from '../../model/component-type.enum';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
 import { createComponentGenerator } from '../../generator';
+import { getLibraryName } from '@srleecode/domain/front-end/shared';
 
 describe('component file', () => {
   let tree: Tree;
-  const testFilePath = `${LIB_PATH}/${dasherize(
-    defaultOptions.name
+  const testFilePath = `${LIB_PATH}/${getLibraryName(
+    { name: defaultOptions.name,
+      type: defaultOptions.type}
   )}.component.ts`;
 
   beforeEach(() => {
@@ -32,7 +33,10 @@ describe('component file', () => {
       ...defaultOptions,
       type: ComponentType.Ui,
     });
-    const uiTestFilePath = testFilePath.replace('feature', 'ui');
+    const uiTestFilePath =  `${LIB_PATH.replace('feature', 'ui')}/${getLibraryName(
+    { name: defaultOptions.name,
+      type: ComponentType.Ui}
+  )}.component.ts`;
     const componentFile = tree.read(uiTestFilePath).toString();
     expect(componentFile).toMatch(
       /changeDetection: ChangeDetectionStrategy.OnPush/

@@ -12,14 +12,14 @@ describe('component', () => {
 
   it('should create feature component library', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type feature`
+      `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type feature --name test-example`
     );
-    checkFilesExist(`${groupingFolder}/feature/src/index.ts`);
+    checkFilesExist(`${groupingFolder}/feature-test-example/src/index.ts`);
   });
 
   it('should create ui component library', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type ui`
+      `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type ui `
     );
     checkFilesExist(`${groupingFolder}/ui/src/index.ts`);
   });

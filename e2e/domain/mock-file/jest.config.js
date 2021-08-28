@@ -7,6 +7,6 @@ module.exports = {
   globals: { 'ts-jest': { tsconfig: '<rootDir>/tsconfig.spec.json' } },
   maxWorkers: 1,
   testSequencer: './test-sequencer.js',
-  displayName: 'e2e-domain-mock-file',
+  displayName: 'e2e-domain-grouping-folder',
   setupFilesAfterEnv: ['./jest.setup.ts'],
 };

@@ -15,13 +15,13 @@ export const addComponentFiles = (
   libraryName: string,
   selector: string
 ): void => {
-  const { groupingFolder, name } = options;
+  const { groupingFolder } = options;
   const target = normalize(`${groupingFolder}/${libraryName}/src/lib`);
   const templateOptions = {
     ...options,
-    ...names(options.name || ''),
+    ...names(libraryName),
     selector,
-    componentName: classify(`${name}Component`),
+    componentName: classify(`${libraryName}Component`),
     moduleName: classify(`${dasherisedGroupingFolder}-${libraryName}Module`),
     isUsingNonDefaultViewEncapsulation:
       options.viewEncapsulation !== ViewEncapsulation.Emulated,
@@ -34,6 +34,6 @@ export const addComponentFiles = (
   };
   generateFiles(tree, join(__dirname, './files'), target, templateOptions);
   if (options.unitTestType === UnitTestType.NoTests) {
-    tree.delete(join(target, `${dasherize(name)}.component.spec.ts`));
+    tree.delete(join(target, `${libraryName}.component.spec.ts`));
   }
 };

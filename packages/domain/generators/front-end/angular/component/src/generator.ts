@@ -8,10 +8,10 @@ import {
   ElementType,
   ApplicationType,
 } from '../../../../shared/utils';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { addComponentFiles } from './lib/add-component-files/add-component-files';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { addDomainLibrary } from '../../../shared';
+import { addDomainLibrary, getLibraryName } from '../../../shared';
+import { dasherize } from '@nrwl/workspace/src/utils/strings';
 
 export async function createComponentGenerator(
   tree: Tree,
@@ -22,8 +22,13 @@ export async function createComponentGenerator(
     tree,
     groupingFolder
   )}`;
-  const libraryName = name ? `${type}-${dasherize(name)}` : type;
-  const projectName = `${dasherisedGroupingFolder}-${libraryName}`;
+  const libraryName = getLibraryName({
+    name,
+    type,
+    domainName: dasherisedGroupingFolder
+  });
+  const typedName = name ? `${type}-${dasherize(name)}` : type;
+  const projectName = `${dasherisedGroupingFolder}-${typedName}`;
   const selector = prefix ? `${prefix}-${projectName}` : `${projectName}`;
   await addDomainLibrary(
     tree,

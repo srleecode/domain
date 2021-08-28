@@ -1,15 +1,16 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 import { createComponentGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
+import { getLibraryName } from '@srleecode/domain/front-end/shared';
 
 describe('style file', () => {
   let tree: Tree;
-  const testFilePath = `${LIB_PATH}/${dasherize(
-    defaultOptions.name
+  const testFilePath = `${LIB_PATH}/${getLibraryName(
+    { name: defaultOptions.name,
+      type: defaultOptions.type}
   )}.component.${defaultOptions.style}`;
 
   beforeEach(() => {

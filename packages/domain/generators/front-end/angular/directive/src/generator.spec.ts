@@ -58,7 +58,7 @@ describe('createDirectiveGenerator', () => {
       mountType: MountType.Component,
       projectName: 'test-app-test-domain-directive-test-example',
       selector: 'srleeTestAppTestDomainDirectiveTestExample',
-      type: ElementType.Component,
+      type: ElementType.Directive,
     });
   });
 });

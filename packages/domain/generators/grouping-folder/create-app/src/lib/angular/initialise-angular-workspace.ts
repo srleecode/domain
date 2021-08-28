@@ -1,5 +1,4 @@
 import {
-  GeneratorCallback,
   readJson,
   readWorkspaceConfiguration,
   Tree,
