@@ -1,1 +1,1 @@
-<p>feature-test-example works!</p>
+<p>test-example works!</p>

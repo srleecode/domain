@@ -1,4 +1,4 @@
-import { FeatureTestExampleComponent } from './feature-test-example.component';
+import { FeatureTestExampleComponent } from './test-example.component';
 
 describe('FeatureTestExampleComponent', () => {
   let component: FeatureTestExampleComponent;

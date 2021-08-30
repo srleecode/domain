@@ -9,6 +9,9 @@ describe('application-layer', () => {
   beforeAll(async () => {
     newNxProject('@srleecode/domain', 'dist/packages/domain');
     await runNxCommandAsync(
+      `generate @srleecode/domain:ng-add`
+    );
+    await runNxCommandAsync(
       `generate @srleecode/domain:appGroupingFolder --name test-app --applicationType ng`
     );
     await runNxCommandAsync(

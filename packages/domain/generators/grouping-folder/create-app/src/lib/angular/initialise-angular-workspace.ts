@@ -1,6 +1,5 @@
 import {
   readJson,
-  readWorkspaceConfiguration,
   Tree,
 } from '@nrwl/devkit';
 import { addGlobalComponentTestingOptions } from './add-global-component-testing-options/add-global-component-testing-options';
@@ -8,24 +7,27 @@ import { cypressInitGenerator } from '@nrwl/cypress';
 import { ngAddGenerator } from '@jscutlery/cypress-angular/src/generators/ng-add/ng-add';
 
 export const initialiseAngularWorkspace = async (tree: Tree): Promise<void> => {
-  if (!isNrwlAngularAdded(tree)) {
+  const packageJson = readJson(tree, 'package.json');
+  if (isPackageAdded('@nrwl/angular', packageJson)) {
     // TODO: call angular init generator here
+  } else {
+    throw Error('@nrwl/angular is not installed. Did you run ng add @srleecode/domain?')
   }
-  if (!isNrwlCypressAdded(tree)) {
+  if (isPackageAdded('@nrwl/cypress', packageJson)) {
     await cypressInitGenerator(tree);
+  } else {
+    throw Error('@nrwl/cypress is not installed. Did you run ng add @srleecode/domain?')
+  }
+  if (isPackageAdded('@jscutlery/cypress-angular', packageJson)) {
+    await ngAddGenerator(tree);
+  } else {
+    throw Error('@jscutlery/cypress-angular is not installed. Did you run ng add @srleecode/domain?')
   }
   if (!tree.exists(`.component-testing/global-mount-options.constant.ts`)) {
     addGlobalComponentTestingOptions(tree);
   }
-  await ngAddGenerator(tree);
+  
 };
 
-const isNrwlAngularAdded = (tree: Tree): boolean => {
-  const workspace = readWorkspaceConfiguration(tree);
-  return !workspace?.generators?.['@nrwl/angular:component'];
-};
-
-const isNrwlCypressAdded = (tree: Tree): boolean => {
-  const packageJson = readJson(tree, 'package.json');
-  return !packageJson?.devDependencices?.['@nrwl/cypress'];
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isPackageAdded = (packageToCheck: string, packageJson: any): boolean => packageJson?.devDependencies?.[packageToCheck];

@@ -2,20 +2,23 @@ import {
   Tree,
   convertNxGenerator,
   addDependenciesToPackageJson,
+  installPackagesTask,
 } from '@nrwl/devkit';
-import { cypressInitGenerator } from '@nrwl/cypress';
+
+const nrwlVersion = '2.8.0';
+const jscutleryVersion = '0.5.1'
 
 export async function ngAddGenerator(tree: Tree) {
-  await cypressInitGenerator(tree);
-  // This was raised to get access to the @nrwl/angular initGenerator https://github.com/nrwl/nx/issues/6790
-  // Ideally we would just call that generator
-  return addDependenciesToPackageJson(
+  addDependenciesToPackageJson(
     tree,
     {},
     {
-      '@nrwl/angular': 'latest',
+      '@nrwl/angular': nrwlVersion,
+      '@nrwl/cypress': nrwlVersion,
+      '@jscutlery/cypress-angular': jscutleryVersion
     }
   );
+  return installPackagesTask(tree);
 }
 
 export default ngAddGenerator;

@@ -79,7 +79,7 @@
       "factory": "./generators/init/ng-add/src/generator#reactAddSchematic",
       "schema": "./generators/init/react-add/src/schema.json",
       "description": "Initializes the @srleecode/domain generator for react",
-      "aliases": ["react-add"],
+       "aliases": ["react-add"],
       "hidden": true
     },
     "mockFile": {
@@ -155,17 +155,17 @@
       "description": "Remove grouping folder generator"
     },
     "ng-init": {
-      "factory": "./generators/init/ng-add/src/generator",
+      "factory": "./generators/init/ng-add/src/generator#ngAddGenerator",
       "schema": "./generators/init/ng-add/src/schema.json",
       "description": "Initializes the @srleecode/domain generator for angular",
       "aliases": ["ng-add"],
       "hidden": true
     },
     "react-init": {
-      "factory": "./generators/init/ng-add/src/generator",
+      "factory": "./generators/init/ng-add/src/generator#reactAddGenerator",
       "schema": "./generators/init/react-add/src/schema.json",
       "description": "Initializes the @srleecode/domain generator for react",
-      "aliases": ["react-add"],
+       "aliases": ["react-add"],
       "hidden": true
     },
     "mockFile": {

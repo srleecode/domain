@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "DomainInit",
+  "$id": "DomainInit",
   "cli": "nx",
   "title": "Adds domain generators dependencies to the workspace",
   "type": "object",

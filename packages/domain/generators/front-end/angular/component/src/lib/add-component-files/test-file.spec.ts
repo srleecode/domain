@@ -5,13 +5,12 @@ import { createComponentGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
 import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
-import { getLibraryName } from '@srleecode/domain/front-end/shared';
+import { dasherize } from '@nrwl/workspace/src/utils/strings';
 
 describe('test file', () => {
   let tree: Tree;
-  const testFilePath = `${LIB_PATH}/${getLibraryName(
-    { name: defaultOptions.name,
-      type: defaultOptions.type}
+  const testFilePath = `${LIB_PATH}/${dasherize(
+  defaultOptions.name
   )}.component.spec.ts`;
 
   beforeEach(() => {

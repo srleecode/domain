@@ -5,8 +5,11 @@ import {
 } from '@nrwl/nx-plugin/testing';
 
 describe('app grouping folder', () => {
-  beforeAll(() => {
+  beforeAll(async() => {
     newNxProject('@srleecode/domain', 'dist/packages/domain');
+    await runNxCommandAsync(
+      `generate @srleecode/domain:ng-add`
+    );
   });
 
   it('should create directory with language prefixed to name', async () => {

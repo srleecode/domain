@@ -57,10 +57,10 @@
         "packages/domain/generators/grouping-folder/shared/index.ts"
       ],
       "@srleecode/domain/init/ng-add": [
-        "packages/domain/generators/grouping-folder/init/ng-add/src/generator.ts"
+        "packages/domain/generators/init/ng-add/src/generator.ts"
       ],
       "@srleecode/domain/init/react-add": [
-        "packages/domain/generators/grouping-folder/init/react-add/src/generator.ts"
+        "packages/domain/generators/init/react-add/src/generator.ts"
       ],
       "@srleecode/domain/mock-file": [
         "packages/domain/generators/mock-file/src/generator.ts"

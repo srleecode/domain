@@ -6,13 +6,12 @@ import { join } from 'path';
 import { ComponentType } from '../../model/component-type.enum';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
 import { createComponentGenerator } from '../../generator';
-import { getLibraryName } from '@srleecode/domain/front-end/shared';
+import { dasherize } from '@nrwl/workspace/src/utils/strings';
 
 describe('component file', () => {
   let tree: Tree;
-  const testFilePath = `${LIB_PATH}/${getLibraryName(
-    { name: defaultOptions.name,
-      type: defaultOptions.type}
+  const testFilePath = `${LIB_PATH}/${dasherize(
+  defaultOptions.name
   )}.component.ts`;
 
   beforeEach(() => {
@@ -33,10 +32,7 @@ describe('component file', () => {
       ...defaultOptions,
       type: ComponentType.Ui,
     });
-    const uiTestFilePath =  `${LIB_PATH.replace('feature', 'ui')}/${getLibraryName(
-    { name: defaultOptions.name,
-      type: ComponentType.Ui}
-  )}.component.ts`;
+    const uiTestFilePath =  `${LIB_PATH.replace('feature', 'ui')}/${dasherize(defaultOptions.name)}.component.ts`;
     const componentFile = tree.read(uiTestFilePath).toString();
     expect(componentFile).toMatch(
       /changeDetection: ChangeDetectionStrategy.OnPush/
