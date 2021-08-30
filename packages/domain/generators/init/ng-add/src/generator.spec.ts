@@ -15,6 +15,7 @@ describe('ngAddGenerator', () => {
     expect(packageJson.devDependencies['@nrwl/cypress']).toBeDefined();
     expect(packageJson.devDependencies['@nrwl/angular']).toBeDefined();
     expect(packageJson.devDependencies['@jscutlery/cypress-angular']).toBeDefined();
+    expect(packageJson.devDependencies['@jscutlery/cypress-harness']).toBeDefined();
     expect(packageJson.devDependencies['@angular/cdk']).toBeDefined();
     expect(packageJson.devDependencies['cypress-pipe']).toBeDefined();
   });
