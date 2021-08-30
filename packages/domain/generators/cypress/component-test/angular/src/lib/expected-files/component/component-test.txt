@@ -1,13 +1,13 @@
 import { mount } from '@jscutlery/cypress-angular/mount';
 import { getHarness } from '@jscutlery/cypress-harness';
 import { TestAppTestDomainFeatureTestExampleHarness } from './test-example.harness';
-import { TestExampleComponent, TestAppTestDomainFeatureTestExampleModule } from './test-example.component';
+import { FeatureTestExampleComponent, TestAppTestDomainFeatureTestExampleModule } from './test-example.component';
 import { GLOBAL_MOUNT_OPTIONS } from '@cypress/component-testing';
 
-describe('TestExampleComponent', () => {
+describe('FeatureTestExampleComponent', () => {
   const harness = getHarness(TestAppTestDomainFeatureTestExampleHarness);
   beforeEach(() => {
-      mount(TestExampleComponent, {
+      mount(FeatureTestExampleComponent, {
       ...GLOBAL_MOUNT_OPTIONS,
       imports: [ ...GLOBAL_MOUNT_OPTIONS.imports, TestAppTestDomainFeatureTestExampleModule ]
     });

@@ -1,4 +1,4 @@
-import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
+import { Tree, convertNxGenerator, logger, formatFiles } from '@nrwl/devkit';
 import { CreateComponentGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { setupComponentTestGenerator } from '../../../../cypress/component-test/angular/src/generator';
@@ -58,6 +58,7 @@ export async function createComponentGenerator(
     logger.error(e.message);
     throw e;
   });
+  await formatFiles(tree);
 }
 
 export default createComponentGenerator;

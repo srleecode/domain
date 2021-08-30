@@ -25,6 +25,7 @@ export const addTestFiles = (
   const { projectName, name, type, mountType, selector } = options;
   const projectConfig = readProjectConfiguration(tree, projectName);
   const libraryPath = getDomainPath(tree, projectConfig.root);
+  const libraryName = classify(getLibraryName(projectConfig.root));
   const directiveTag = camelize(selector.replace('[', '').replace(']', ''));
   const directiveOptions = {
     directiveTag,
@@ -36,7 +37,7 @@ export const addTestFiles = (
     ...names(name || ''),
     selector,
     type,
-    className: classify(`${name}-${type}`),
+    className: classify(`${libraryName}-${type}`),
     moduleName: classify(`${projectName}Module`),
     harnessName: classify(`${projectName}Harness`),
     storybookTitle: getStorybookTitle(libraryPath),
@@ -68,3 +69,8 @@ const getStorybookTitle = (libraryPath: string): string =>
     .split('/')
     .map((folder) => classify(folder))
     .join('/');
+
+const getLibraryName = (projectRoot: string): string => {
+  const splitProjectRoot = projectRoot.split('/');
+  return splitProjectRoot[splitProjectRoot.length - 1];
+}

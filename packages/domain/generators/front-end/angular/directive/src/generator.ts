@@ -1,4 +1,4 @@
-import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
+import { Tree, convertNxGenerator, logger, formatFiles } from '@nrwl/devkit';
 import { CreateDirectiveGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
@@ -63,6 +63,7 @@ export async function createDirectiveGenerator(
     logger.error(e.message);
     throw e;
   });
+  await formatFiles(tree);
 }
 
 export default createDirectiveGenerator;

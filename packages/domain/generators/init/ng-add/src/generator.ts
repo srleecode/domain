@@ -5,17 +5,17 @@ import {
   installPackagesTask,
 } from '@nrwl/devkit';
 
-const nrwlVersion = '2.8.0';
-const jscutleryVersion = '0.5.1'
-
 export async function ngAddGenerator(tree: Tree) {
+  const nrwlVersion = '2.8.0';
   addDependenciesToPackageJson(
     tree,
     {},
     {
       '@nrwl/angular': nrwlVersion,
       '@nrwl/cypress': nrwlVersion,
-      '@jscutlery/cypress-angular': jscutleryVersion
+      '@jscutlery/cypress-angular': '0.5.1',
+      '@angular/cdk': '12.2.3',
+      'cypress-pipe': '2.0.0'
     }
   );
   return installPackagesTask(tree);
