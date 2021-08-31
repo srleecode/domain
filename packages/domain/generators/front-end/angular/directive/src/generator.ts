@@ -16,6 +16,7 @@ import { addDirectiveFiles } from './lib/add-directive-files/add-directive-files
 import { setupComponentTestGenerator } from '../../../../cypress/component-test/angular/src/generator';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { addDomainLibrary, getLibraryName } from '../../../shared';
+import { setIndexToDirectiveFile } from './lib/set-index-to-directive-file';
 
 export async function createDirectiveGenerator(
   tree: Tree,
@@ -37,9 +38,11 @@ export async function createDirectiveGenerator(
   const libraryName = getLibraryName({
     name,
     type: 'directive',
-    domainName: dasherisedGroupingFolder
+    domainName: dasherisedGroupingFolder,
   });
-  const projectName = `${dasherisedGroupingFolder}-directive-${dasherize(name)}`;
+  const projectName = `${dasherisedGroupingFolder}-directive-${dasherize(
+    name
+  )}`;
   tree.delete(
     `${groupingFolder}/${libraryName}/src/lib/${projectName}.module.ts`
   );
@@ -63,6 +66,7 @@ export async function createDirectiveGenerator(
     logger.error(e.message);
     throw e;
   });
+  setIndexToDirectiveFile(tree, groupingFolder, name);
   await formatFiles(tree);
 }
 

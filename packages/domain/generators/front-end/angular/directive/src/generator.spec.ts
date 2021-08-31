@@ -61,4 +61,14 @@ describe('createDirectiveGenerator', () => {
       type: ElementType.Directive,
     });
   });
+
+  it('should set index to directive file', async () => {
+    await createDirectiveGenerator(tree, defaultOptions);
+    const index = tree
+      .read(
+        `${defaultOptions.groupingFolder}/directive-test-example/src/index.ts`
+      )
+      .toString();
+    expect(index).toBe(`export * from './lib/test-example.directive.ts';`);
+  });
 });

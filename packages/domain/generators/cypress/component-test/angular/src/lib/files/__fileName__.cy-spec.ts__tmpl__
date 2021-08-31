@@ -12,8 +12,7 @@ describe('<% if(isDirective) { %><%= directiveName %><% } else { %><%= className
   beforeEach(() => {
     <% if(isUsingComponentMountType) { %>
      mount(<%= className %>, {
-      ...GLOBAL_MOUNT_OPTIONS,
-      <% if(isDirective) { %>declarations: [<%= className %>],<% } %>
+      ...GLOBAL_MOUNT_OPTIONS,<% if(isDirective) { %>declarations: [<%= className %>],<% } %>
       imports: [ ...GLOBAL_MOUNT_OPTIONS.imports, <%= moduleName %> ]
     });
     <% } else { %>

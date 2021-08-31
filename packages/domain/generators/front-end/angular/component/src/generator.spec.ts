@@ -66,4 +66,14 @@ describe('createComponentGenerator', () => {
       type: ElementType.Component,
     });
   });
+
+  it('should set index to component file', async () => {
+    await createComponentGenerator(tree, defaultOptions);
+    const index = tree
+      .read(
+        `${defaultOptions.groupingFolder}/feature-test-example/src/index.ts`
+      )
+      .toString();
+    expect(index).toBe(`export * from './lib/test-example.component.ts';`);
+  });
 });

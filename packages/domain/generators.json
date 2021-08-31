@@ -6,12 +6,7 @@
     "domainTest": {
       "factory": "./generators/cypress/domain-test/src/generator#setupDomainTestSchematic",
       "schema": "./generators/cypress/domain-test/src/schema.json",
-      "description": "Create cypress domain test files component test schematic"
-    },
-    "e2e": {
-      "factory": "./generators/cypress/e2e/src/generator#cypressProjectSchematic",
-      "schema": "./generators/cypress/e2e/src/schema.json",
-      "description": "Add cypress project generator"
+      "description": "Create cypress test files for E2E testing domain"
     },
     "ngApplicationLayer": {
       "factory": "./generators/front-end/angular/application-layer/src/generator#createApplicationLayerSchematic",
@@ -79,7 +74,7 @@
       "factory": "./generators/init/ng-add/src/generator#reactAddSchematic",
       "schema": "./generators/init/react-add/src/schema.json",
       "description": "Initializes the @srleecode/domain generator for react",
-       "aliases": ["react-add"],
+      "aliases": ["react-add"],
       "hidden": true
     },
     "mockFile": {
@@ -92,12 +87,7 @@
     "domainTest": {
       "factory": "./generators/cypress/domain-test/src/generator",
       "schema": "./generators/cypress/domain-test/src/schema.json",
-      "description": "Create cypress domain test files component test"
-    },
-    "e2e": {
-      "factory": "./generators/cypress/e2e/src/generator",
-      "schema": "./generators/cypress/e2e/src/schema.json",
-      "description": "Add cypress project generator"
+      "description": "Create cypress test files for E2E testing domain"
     },
     "ngApplicationLayer": {
       "factory": "./generators/front-end/angular/application-layer/src/generator",
@@ -165,7 +155,7 @@
       "factory": "./generators/init/ng-add/src/generator#reactAddGenerator",
       "schema": "./generators/init/react-add/src/schema.json",
       "description": "Initializes the @srleecode/domain generator for react",
-       "aliases": ["react-add"],
+      "aliases": ["react-add"],
       "hidden": true
     },
     "mockFile": {
