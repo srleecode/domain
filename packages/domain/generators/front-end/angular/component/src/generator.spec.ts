@@ -62,7 +62,7 @@ describe('createComponentGenerator', () => {
       name: 'TestExample',
       mountType: MountType.Component,
       projectName: 'test-app-test-domain-feature-test-example',
-      selector: 'srlee-test-app-test-domain-feature-test-example',
+      selector: 'test-app-test-domain-feature-test-example',
       type: ElementType.Component,
     });
   });
@@ -74,6 +74,6 @@ describe('createComponentGenerator', () => {
         `${defaultOptions.groupingFolder}/feature-test-example/src/index.ts`
       )
       .toString();
-    expect(index).toBe(`export * from './lib/test-example.component.ts';`);
+    expect(index).toBe(`export * from './lib/test-example.component';`);
   });
 });

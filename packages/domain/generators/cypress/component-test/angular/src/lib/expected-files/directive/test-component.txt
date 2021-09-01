@@ -1,6 +1,14 @@
 import{ Component } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TestAppTestDomainDirectiveTestExampleModule } from './test-example.directive';
 
 @Component({
     selector: 'srlee-test',
-    template: `<div srleeTestAppTestDomainDirectiveTestExample /></div>`
+    template: `<div srleeTestAppTestDomainDirectiveTestExample ></div>`
 }) export class TestComponent {}
+
+@NgModule({
+  declarations: [TestComponent],
+  imports: [TestAppTestDomainDirectiveTestExampleModule],
+  exports:[TestComponent]
+}) export class TestModule {}

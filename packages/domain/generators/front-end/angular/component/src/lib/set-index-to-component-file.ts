@@ -9,6 +9,6 @@ export const setIndexToComponentFile = (
 ): void => {
   tree.write(
     `${groupingFolder}/${libraryName}/src/index.ts`,
-    `export * from './lib/${dasherize(name)}.component.ts';`
+    `export * from './lib/${dasherize(name)}.component';`
   );
 };

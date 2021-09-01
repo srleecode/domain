@@ -57,7 +57,7 @@ describe('createDirectiveGenerator', () => {
       name: 'TestExample',
       mountType: MountType.Component,
       projectName: 'test-app-test-domain-directive-test-example',
-      selector: 'srleeTestAppTestDomainDirectiveTestExample',
+      selector: 'testAppTestDomainDirectiveTestExample',
       type: ElementType.Directive,
     });
   });
@@ -69,6 +69,6 @@ describe('createDirectiveGenerator', () => {
         `${defaultOptions.groupingFolder}/directive-test-example/src/index.ts`
       )
       .toString();
-    expect(index).toBe(`export * from './lib/test-example.directive.ts';`);
+    expect(index).toBe(`export * from './lib/test-example.directive';`);
   });
 });

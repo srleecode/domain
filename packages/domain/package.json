@@ -1,6 +1,6 @@
 {
   "name": "@srleecode/domain",
-  "version": "12.7.2-alpha-11",
+  "version": "12.7.2-alpha-12",
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",

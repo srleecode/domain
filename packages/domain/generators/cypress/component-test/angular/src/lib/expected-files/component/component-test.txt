@@ -9,7 +9,7 @@ describe('FeatureTestExampleComponent', () => {
   beforeEach(() => {
       mount(FeatureTestExampleComponent, {
       ...GLOBAL_MOUNT_OPTIONS,
-      imports: [ ...GLOBAL_MOUNT_OPTIONS.imports, TestAppTestDomainFeatureTestExampleModule ]
+      imports: [ TestAppTestDomainFeatureTestExampleModule, ...GLOBAL_MOUNT_OPTIONS.imports ]
     });
   });
 });

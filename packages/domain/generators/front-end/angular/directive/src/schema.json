@@ -35,11 +35,6 @@
         ]
       }
     },
-    "prefix": {
-      "type": "string",
-      "description": "The prefix to apply to generated selectors.",
-      "x-prompt": "What is the prefix to apply to generated selectors?"
-    },
     "unitTestType": {
       "description": "The type of unit test file to create",
       "type": "string",

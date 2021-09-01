@@ -22,7 +22,7 @@ export async function createDirectiveGenerator(
   tree: Tree,
   options: CreateDirectiveGeneratorSchema
 ): Promise<void> {
-  const { name, groupingFolder, prefix, mountType } = options;
+  const { name, groupingFolder, mountType } = options;
   await addDomainLibrary(
     tree,
     name,
@@ -46,9 +46,7 @@ export async function createDirectiveGenerator(
   tree.delete(
     `${groupingFolder}/${libraryName}/src/lib/${projectName}.module.ts`
   );
-  const selector = prefix
-    ? `${prefix}${classify(projectName)}`
-    : `${camelize(projectName)}`;
+  const selector = camelize(projectName);
   addDirectiveFiles(
     tree,
     options,

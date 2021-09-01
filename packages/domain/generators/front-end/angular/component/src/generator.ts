@@ -18,7 +18,7 @@ export async function createComponentGenerator(
   tree: Tree,
   options: CreateComponentGeneratorSchema
 ): Promise<void> {
-  const { name, groupingFolder, type, prefix, mountType } = options;
+  const { name, groupingFolder, type, mountType } = options;
   const dasherisedGroupingFolder = `${getDasherizedFolderPath(
     tree,
     groupingFolder
@@ -30,7 +30,7 @@ export async function createComponentGenerator(
   });
   const typedName = name ? `${type}-${dasherize(name)}` : type;
   const projectName = `${dasherisedGroupingFolder}-${typedName}`;
-  const selector = prefix ? `${prefix}-${projectName}` : `${projectName}`;
+  const selector = projectName;
   await addDomainLibrary(
     tree,
     name,

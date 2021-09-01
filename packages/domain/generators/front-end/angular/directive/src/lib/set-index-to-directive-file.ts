@@ -9,6 +9,6 @@ export const setIndexToDirectiveFile = (
   const dasherisedName = dasherize(name);
   tree.write(
     `${groupingFolder}/directive-${dasherisedName}/src/index.ts`,
-    `export * from './lib/${dasherisedName}.directive.ts';`
+    `export * from './lib/${dasherisedName}.directive';`
   );
 };

@@ -9,7 +9,6 @@ export const defaultOptions: CreateComponentGeneratorSchema = {
   groupingFolder: 'libs/test-app/test-domain',
   type: ComponentType.Feature,
   mountType: MountType.Component,
-  prefix: 'srlee',
   name: 'TestExample',
   displayBlock: false,
   viewEncapsulation: ViewEncapsulation.Emulated,

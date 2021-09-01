@@ -1,10 +1,8 @@
-import { mount } from '@jscutlery/cypress-angular/mount';
+import { <% if(isUsingComponentMountType) { %>mount<% } else { %>mountStory<% } %> } from '@jscutlery/cypress-angular/mount';
 import { getHarness } from '@jscutlery/cypress-harness';
-import { <%= harnessName %> } from './<%= fileName %>.harness';
-import { <% if(!isDirective) { %><%= className %>,<% } %><%= moduleName %> } from './<%= fileName %>.<%= type %>';
+import { <%= harnessName %> } from './<%= fileName %>.harness';<% if(isUsingComponentMountType && !isDirective) { %>import { <%= className %>,<%= moduleName %> } from './<%= fileName %>.<%= type %>';<% } %><% if(isUsingComponentMountType && isDirective) { %>import { <%= moduleName %> } from './<%= fileName %>.<%= type %>';<% } %>
 import { <% if(isUsingComponentMountType) { %>GLOBAL_MOUNT_OPTIONS<% } else { %>GLOBAL_MOUNT_STYLE_OPTIONS<% } %> } from '@cypress/component-testing';
-<% if(!isUsingComponentMountType) { %>import { Default } from './<%= fileName %>.stories.ts';<% } %>
-<% if(isDirective && isUsingComponentMountType) { %>import { <%= className %> } from './test.component';<% } %>
+<% if(!isUsingComponentMountType) { %>import { Default } from './<%= fileName %>.stories';<% } %> <% if(isDirective && isUsingComponentMountType) { %>import { TestComponent, TestModule } from './test.component';<% } %>
 
 describe('<% if(isDirective) { %><%= directiveName %><% } else { %><%= className %><% } %>', () => {
   const harness = getHarness(<%= harnessName %>);
@@ -12,8 +10,8 @@ describe('<% if(isDirective) { %><%= directiveName %><% } else { %><%= className
   beforeEach(() => {
     <% if(isUsingComponentMountType) { %>
      mount(<%= className %>, {
-      ...GLOBAL_MOUNT_OPTIONS,<% if(isDirective) { %>declarations: [<%= className %>],<% } %>
-      imports: [ ...GLOBAL_MOUNT_OPTIONS.imports, <%= moduleName %> ]
+      ...GLOBAL_MOUNT_OPTIONS,
+      imports: [ <%= moduleName %><% if(isDirective && isUsingComponentMountType) { %>, TestModule<% } %>, ...GLOBAL_MOUNT_OPTIONS.imports]
     });
     <% } else { %>
     mountStory(Default, { ...GLOBAL_MOUNT_STYLE_OPTIONS })
