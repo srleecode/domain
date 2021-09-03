@@ -22,14 +22,14 @@ export const addTestFiles = (
   tree: Tree,
   options: SetupComponentTestGeneratorSchema
 ): void => {
-  const { projectName, name, type, mountType, selector } = options;
+  const { projectName, name, type, mountType, prefix, selector } = options;
   const projectConfig = readProjectConfiguration(tree, projectName);
   const libraryPath = getDomainPath(tree, projectConfig.root);
   const libraryName = classify(getLibraryName(projectConfig.root));
   const directiveTag = camelize(selector.replace('[', '').replace(']', ''));
   const directiveOptions = {
     directiveTag,
-    prefix: directiveTag.replace(classify(projectName), ''),
+    prefix,
     directiveName: classify(`${name}-${type}`),
     className: 'TestComponent',
   };
@@ -73,4 +73,4 @@ const getStorybookTitle = (libraryPath: string): string =>
 const getLibraryName = (projectRoot: string): string => {
   const splitProjectRoot = projectRoot.split('/');
   return splitProjectRoot[splitProjectRoot.length - 1];
-}
+};

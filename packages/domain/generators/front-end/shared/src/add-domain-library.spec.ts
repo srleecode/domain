@@ -31,6 +31,7 @@ describe('addDomainLibrary', () => {
       '',
       'application-layer',
       'libs/test-app/test-domain',
+      'test-app',
       ApplicationType.Angular,
       commonLibraryOptions
     );
@@ -42,6 +43,7 @@ describe('addDomainLibrary', () => {
         name: 'application-layer',
         standaloneConfig: false,
         tags: 'app:test-app,scope:test-app-test-domain,type:application-layer',
+        prefix: 'test-app',
         ...commonLibraryOptions,
       }
     );
@@ -62,6 +64,7 @@ describe('addDomainLibrary', () => {
       '',
       'application-layer',
       'libs/test-app/test-domain',
+      'test-app',
       ApplicationType.Angular,
       commonLibraryOptions
     );

@@ -11,6 +11,7 @@ import {
   ElementType,
   ApplicationType,
   getDasherizedFolderPath,
+  getGroupingFolders,
 } from '@srleecode/domain/shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 
@@ -44,11 +45,16 @@ describe('createComponentGenerator', () => {
 
   it('should pass correct parameters to addDomainLibrary', async () => {
     await createComponentGenerator(tree, defaultOptions);
+    const groupingFolders = getGroupingFolders(
+      tree,
+      defaultOptions.groupingFolder
+    );
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       defaultOptions.name,
       defaultOptions.type,
       defaultOptions.groupingFolder,
+      groupingFolders.app,
       ApplicationType.Angular,
       defaultOptions
     );
@@ -63,6 +69,7 @@ describe('createComponentGenerator', () => {
       mountType: MountType.Component,
       projectName: 'test-app-test-domain-feature-test-example',
       selector: 'test-app-test-domain-feature-test-example',
+      prefix: 'test-app',
       type: ElementType.Component,
     });
   });

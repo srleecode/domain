@@ -15,7 +15,7 @@ describe('application-layer', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:domainGroupingFolder --name test-domain --baseFolder libs/ng-test-app`
     );
-  });
+  }, 180000);
 
   it('should create application layer library', async () => {
     await runNxCommandAsync(

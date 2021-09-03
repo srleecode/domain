@@ -4,6 +4,7 @@ export interface SetupComponentTestGeneratorSchema {
   projectName: string;
   name: string;
   selector: string;
+  prefix: string;
   type: ElementType;
   mountType?: MountType;
 }

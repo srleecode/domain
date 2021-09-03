@@ -6,6 +6,7 @@ import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
 import {
   ApplicationType,
   getDasherizedFolderPath,
+  getGroupingFolders,
 } from '../../../shared/utils';
 import { isProjectExisting } from './is-project-existing';
 import { addImplicitDependency } from './add-implicit-dependency';
@@ -14,7 +15,8 @@ export const addDomainLibrary = async (
   tree: Tree,
   name: string,
   type: string,
-  groupingFolder: string,
+  groupingFolderPath: string,
+  appGroupingFolder: string,
   applicationType: ApplicationType,
   schema?: Partial<Schema>
 ): Promise<void> => {
@@ -22,13 +24,14 @@ export const addDomainLibrary = async (
     tree,
     name,
     type,
-    groupingFolder,
+    groupingFolderPath,
     schema
   );
   if (applicationType === ApplicationType.Angular) {
     await libraryGenerator(tree, {
       ...(schema || {}),
       ...libraryCommonOptions,
+      prefix: appGroupingFolder,
     }).catch((e) => {
       logger.error(e.message);
       throw e;
@@ -36,7 +39,7 @@ export const addDomainLibrary = async (
   }
   const dasherisedGroupingFolder = getDasherizedFolderPath(
     tree,
-    groupingFolder
+    groupingFolderPath
   );
   const e2eProjectName = `e2e-${dasherisedGroupingFolder}`;
   if (isProjectExisting(tree, e2eProjectName)) {

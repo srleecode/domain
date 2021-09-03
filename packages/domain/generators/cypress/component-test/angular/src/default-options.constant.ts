@@ -5,16 +5,18 @@ import { SetupComponentTestGeneratorSchema } from './schema';
 export const defaultOptions: SetupComponentTestGeneratorSchema = {
   projectName: 'test-app-test-domain-feature-test-example',
   name: 'TestExample',
+  prefix: 'test-app',
   type: ElementType.Component,
-  selector: 'srlee-test-app-test-domain-feature-test-example',
+  selector: 'test-app-test-domain-feature-test-example',
   mountType: MountType.Component,
 };
 
 export const defaultDirectiveOptions: SetupComponentTestGeneratorSchema = {
   projectName: 'test-app-test-domain-directive-test-example',
   name: 'TestExample',
+  prefix: 'test-app',
   type: ElementType.Directive,
-  selector: 'srlee-test-app-test-domain-directive-test-example',
+  selector: 'test-app-test-domain-directive-test-example',
   mountType: MountType.Component,
 };
 

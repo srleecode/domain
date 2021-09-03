@@ -53,9 +53,19 @@ describe('setupComponentTestGenerator', () => {
   it('should remove generated cypress test file', async () => {
     jest.spyOn(tree, 'delete');
     await setupComponentTestGenerator(tree, defaultOptions);
-    tree.delete.call;
     expect(tree.delete).toHaveBeenCalledWith(
       'libs/test-app/test-domain/feature-test-example/src/sample.cy-spec.ts'
     );
+  });
+
+  it('should remove generated cypress test file', async () => {
+    await setupComponentTestGenerator(tree, defaultOptions);
+    const projectConfig = readProjectConfiguration(
+      tree,
+      'test-app-test-domain-feature-test-example'
+    );
+    const supportFilePath = `${projectConfig.root}/cypress/support/index.ts`;
+    const supportFile = tree.read(supportFilePath).toString();
+    expect(supportFile).toMatch(`import '@jscutlery/cypress-mount/support`);
   });
 });

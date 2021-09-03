@@ -4,7 +4,10 @@ import { createDataAccessLayerGenerator } from './generator';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import * as frontEndSharedMock from '../../../shared';
 import { CreateDataAccessLayerGeneratorSchema } from './schema';
-import { ApplicationType } from '@srleecode/domain/shared/utils';
+import {
+  ApplicationType,
+  getGroupingFolders,
+} from '@srleecode/domain/shared/utils';
 describe('createDataAccessLayerGenerator', () => {
   let tree: Tree;
 
@@ -22,12 +25,14 @@ describe('createDataAccessLayerGenerator', () => {
       enableIvy: true,
       publishable: false,
     };
+    const groupingFolders = getGroupingFolders(tree, schema.groupingFolder);
     await createDataAccessLayerGenerator(tree, schema);
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       '',
       'data-access-layer',
       schema.groupingFolder,
+      groupingFolders.app,
       ApplicationType.Angular,
       schema
     );

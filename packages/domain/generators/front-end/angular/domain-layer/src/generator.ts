@@ -6,6 +6,7 @@ import { addDomainLibrary, removeTestTarget } from '../../../shared';
 import {
   ApplicationType,
   getDasherizedFolderPath,
+  getGroupingFolders,
 } from '../../../../shared/utils';
 
 export async function createDomainLayerGenerator(
@@ -14,11 +15,13 @@ export async function createDomainLayerGenerator(
 ): Promise<void> {
   const { groupingFolder } = options;
   const libraryName = 'domain-layer';
+  const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
     tree,
     '',
     libraryName,
     groupingFolder,
+    groupingFolders.app,
     ApplicationType.Angular,
     options
   );

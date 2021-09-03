@@ -5,6 +5,7 @@ import {
   ApplicationType,
   ElementType,
   getDasherizedFolderPath,
+  getGroupingFolders,
 } from '../../../../shared/utils';
 import {
   camelize,
@@ -23,11 +24,13 @@ export async function createDirectiveGenerator(
   options: CreateDirectiveGeneratorSchema
 ): Promise<void> {
   const { name, groupingFolder, mountType } = options;
+  const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
     tree,
     name,
     'directive',
     groupingFolder,
+    groupingFolders.app,
     ApplicationType.Angular,
     options
   );
@@ -58,6 +61,7 @@ export async function createDirectiveGenerator(
     projectName,
     name,
     mountType,
+    prefix: groupingFolders.app,
     selector,
     type: ElementType.Directive,
   }).catch((e) => {

@@ -3,7 +3,10 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createApplicationLayerGenerator } from './generator';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import * as frontEndSharedMock from '../../../shared';
-import { ApplicationType } from '@srleecode/domain/shared/utils';
+import {
+  ApplicationType,
+  getGroupingFolders,
+} from '@srleecode/domain/shared/utils';
 import { CreateApplicationLayerGeneratorSchema } from './schema';
 
 describe('createDomainLayerGenerator', () => {
@@ -24,11 +27,13 @@ describe('createDomainLayerGenerator', () => {
       publishable: false,
     };
     await createApplicationLayerGenerator(tree, schema);
+    const groupingFolders = getGroupingFolders(tree, schema.groupingFolder);
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       '',
       'application-layer',
       schema.groupingFolder,
+      groupingFolders.app,
       ApplicationType.Angular,
       schema
     );

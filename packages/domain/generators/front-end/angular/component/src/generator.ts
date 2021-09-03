@@ -7,6 +7,7 @@ import {
   getDasherizedFolderPath,
   ElementType,
   ApplicationType,
+  getGroupingFolders,
 } from '../../../../shared/utils';
 import { addComponentFiles } from './lib/add-component-files/add-component-files';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
@@ -31,11 +32,13 @@ export async function createComponentGenerator(
   const typedName = name ? `${type}-${dasherize(name)}` : type;
   const projectName = `${dasherisedGroupingFolder}-${typedName}`;
   const selector = projectName;
+  const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
     tree,
     name,
     type,
     groupingFolder,
+    groupingFolders.app,
     ApplicationType.Angular,
     options
   );
@@ -53,6 +56,7 @@ export async function createComponentGenerator(
     projectName,
     name,
     mountType,
+    prefix: groupingFolders.app,
     selector,
     type: ElementType.Component,
   }).catch((e) => {

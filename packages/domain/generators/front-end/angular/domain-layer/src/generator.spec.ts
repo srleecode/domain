@@ -5,7 +5,10 @@ import { AngularCreateLibrarySchema } from '@srleecode/domain/front-end/shared';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import * as frontEndSharedMock from '../../../shared';
 import { CreateDomainLayerGeneratorSchema } from './schema';
-import { ApplicationType } from '@srleecode/domain/shared/utils';
+import {
+  ApplicationType,
+  getGroupingFolders,
+} from '@srleecode/domain/shared/utils';
 
 describe('createDomainLayerGenerator', () => {
   let tree: Tree;
@@ -29,12 +32,14 @@ describe('createDomainLayerGenerator', () => {
       enableIvy: true,
       publishable: false,
     };
+    const groupingFolders = getGroupingFolders(tree, schema.groupingFolder);
     await createDomainLayerGenerator(tree, schema);
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       '',
       'domain-layer',
       schema.groupingFolder,
+      groupingFolders.app,
       ApplicationType.Angular,
       schema
     );

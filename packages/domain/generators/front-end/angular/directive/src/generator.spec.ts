@@ -10,6 +10,7 @@ import {
   ApplicationType,
   ElementType,
   getDasherizedFolderPath,
+  getGroupingFolders,
   MountType,
 } from '@srleecode/domain/shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
@@ -26,11 +27,16 @@ describe('createDirectiveGenerator', () => {
 
   it('should pass correct parameters to addDomainLibrary', async () => {
     await createDirectiveGenerator(tree, defaultOptions);
+    const groupingFolders = getGroupingFolders(
+      tree,
+      defaultOptions.groupingFolder
+    );
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       defaultOptions.name,
       'directive',
       defaultOptions.groupingFolder,
+      groupingFolders.app,
       ApplicationType.Angular,
       defaultOptions
     );
@@ -51,11 +57,16 @@ describe('createDirectiveGenerator', () => {
     await createDirectiveGenerator(tree, {
       ...defaultOptions,
     });
+    const groupingFolders = getGroupingFolders(
+      tree,
+      defaultOptions.groupingFolder
+    );
     expect(
       setupComponentTestSpy.setupComponentTestGenerator
     ).toHaveBeenCalledWith(expect.anything(), {
       name: 'TestExample',
       mountType: MountType.Component,
+      prefix: groupingFolders.app,
       projectName: 'test-app-test-domain-directive-test-example',
       selector: 'testAppTestDomainDirectiveTestExample',
       type: ElementType.Directive,
