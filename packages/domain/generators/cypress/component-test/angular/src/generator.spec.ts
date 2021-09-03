@@ -58,7 +58,7 @@ describe('setupComponentTestGenerator', () => {
     );
   });
 
-  it('should remove generated cypress test file', async () => {
+  it('should add required cypress support file content', async () => {
     await setupComponentTestGenerator(tree, defaultOptions);
     const projectConfig = readProjectConfiguration(
       tree,
@@ -66,6 +66,7 @@ describe('setupComponentTestGenerator', () => {
     );
     const supportFilePath = `${projectConfig.root}/cypress/support/index.ts`;
     const supportFile = tree.read(supportFilePath).toString();
-    expect(supportFile).toMatch(`import '@jscutlery/cypress-mount/support`);
+    expect(supportFile).toMatch(`import '@jscutlery/cypress-harness/support';`);
+    expect(supportFile).toMatch(`(window as any)['global'] = window;`);
   });
 });

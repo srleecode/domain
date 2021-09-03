@@ -6,7 +6,6 @@ import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
 import {
   ApplicationType,
   getDasherizedFolderPath,
-  getGroupingFolders,
 } from '../../../shared/utils';
 import { isProjectExisting } from './is-project-existing';
 import { addImplicitDependency } from './add-implicit-dependency';

@@ -26,9 +26,10 @@ export const addTestFiles = (
   const projectConfig = readProjectConfiguration(tree, projectName);
   const libraryPath = getDomainPath(tree, projectConfig.root);
   const libraryName = classify(getLibraryName(projectConfig.root));
-  const directiveTag = camelize(selector.replace('[', '').replace(']', ''));
+  const directiveTag = camelize(selector);
   const directiveOptions = {
     directiveTag,
+    selector: `[${directiveTag}]`,
     prefix,
     directiveName: classify(`${name}-${type}`),
     className: 'TestComponent',
