@@ -13,8 +13,9 @@ export async function removeLibraryGenerator(
     projectName,
     skipFormat: false,
     forceRemove: true,
-  }).catch((e) => {
+  }).catch((e: Error) => {
     logger.error(e.message);
+    logger.error(e.stack);
     throw e;
   });
 }

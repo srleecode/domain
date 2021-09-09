@@ -38,9 +38,9 @@
       "schema": "./generators/front-end/angular/remove-library/src/schema.json",
       "description": "Remove domain library generator"
     },
-    "ngUtil": {
-      "factory": "./generators/front-end/angular/util/src/generator#createUtilSchematic",
-      "schema": "./generators/front-end/angular/util/src/schema.json",
+    "ngUtilLayer": {
+      "factory": "./generators/front-end/angular/util-layer/src/generator#createUtilSchematic",
+      "schema": "./generators/front-end/angular/util-layer/src/schema.json",
       "description": "Add util domain library generator"
     },
     "appGroupingFolder": {
@@ -119,9 +119,9 @@
       "schema": "./generators/front-end/angular/remove-library/src/schema.json",
       "description": "Remove domain library generator"
     },
-    "ngUtil": {
-      "factory": "./generators/front-end/angular/util/src/generator",
-      "schema": "./generators/front-end/angular/util/src/schema.json",
+    "ngUtilLayer": {
+      "factory": "./generators/front-end/angular/util-layer/src/generator",
+      "schema": "./generators/front-end/angular/util-layer/src/schema.json",
       "description": "Add util domain library generator"
     },
     "appGroupingFolder": {

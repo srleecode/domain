@@ -5,7 +5,7 @@ export * from './generators/front-end/angular/data-access-layer/src/generator';
 export * from './generators/front-end/angular/directive/src/generator';
 export * from './generators/front-end/angular/domain-layer/src/generator';
 export * from './generators/front-end/angular/remove-library/src/generator';
-export * from './generators/front-end/angular/util/src/generator';
+export * from './generators/front-end/angular/util-layer/src/generator';
 export * from './generators/grouping-folder/create-app/src/generator';
 export * from './generators/grouping-folder/create-domain/src/generator';
 export * from './generators/grouping-folder/move/src/generator';

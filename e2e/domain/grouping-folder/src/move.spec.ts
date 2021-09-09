@@ -6,11 +6,11 @@ describe('move', () => {
 
   it('should move domain grouping folder', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:ngUtil --groupingFolder ${groupingFolder}`
+      `generate @srleecode/domain:ngUtilLayer --groupingFolder ${groupingFolder}`
     );
     await runNxCommandAsync(
       `generate @srleecode/domain:moveGroupingFolder --groupingFolder ${groupingFolder} --destination ${movedDomainGroupingFolder}`
     );
-    checkFilesExist(`${movedDomainGroupingFolder}/util/src/index.ts`);
+    checkFilesExist(`${movedDomainGroupingFolder}/util-layer/src/index.ts`);
   });
 });

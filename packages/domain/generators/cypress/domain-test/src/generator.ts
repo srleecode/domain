@@ -10,10 +10,10 @@ import { getDasherizedFolderPath, getDomainPath } from '../../../shared/utils';
 import { removeUneededCypressProjectFiles } from './lib/remove-uneeded-cypress-project-files';
 import { removeDevServerTarget } from './lib/remove-dev-server-target';
 import { setProjectToLibraryType } from './lib/set-project-to-library-type';
-import { moveProjectToDomain } from './lib/move-project-to-domain';
 import { renameCypressProject } from './lib/rename-cypress-project';
 import { addImplicitDependencies } from './lib/add-implicit-dependencies';
 import { SetupDomainTestGeneratorSchema } from './schema';
+import { moveProjectToDomain } from './lib/move-project-to-domain';
 
 export async function setupDomainTestGenerator(
   tree: Tree,
@@ -27,8 +27,9 @@ export async function setupDomainTestGenerator(
     name: `e2e-${dasherisedFolderPath}`,
     directory: domainPath,
     standaloneConfig: standaloneAsDefault,
-  }).catch((e) => {
+  }).catch((e: Error) => {
     logger.error(e.message);
+    logger.error(e.stack);
     throw e;
   });
   const originalProjectName = `${dasherisedFolderPath}-e2e-${dasherisedFolderPath}`;
@@ -50,6 +51,7 @@ export async function setupDomainTestGenerator(
     npmScope
   ).catch((e) => {
     logger.error(e.message);
+    logger.error(e.stack);
     throw e;
   });
   renameCypressProject(tree, dasherisedFolderPath, standaloneAsDefault);

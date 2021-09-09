@@ -31,8 +31,9 @@ export const addDomainLibrary = async (
       ...(schema || {}),
       ...libraryCommonOptions,
       prefix: appGroupingFolder,
-    }).catch((e) => {
+    }).catch((e: Error) => {
       logger.error(e.message);
+      logger.error(e.stack);
       throw e;
     });
   }

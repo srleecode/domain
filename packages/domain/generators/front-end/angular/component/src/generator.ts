@@ -59,8 +59,9 @@ export async function createComponentGenerator(
     prefix: groupingFolders.app,
     selector,
     type: ElementType.Component,
-  }).catch((e) => {
+  }).catch((e: Error) => {
     logger.error(e.message);
+    logger.error(e.stack);
     throw e;
   });
   setIndexToComponentFile(tree, groupingFolder, libraryName, name);

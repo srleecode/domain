@@ -6,7 +6,7 @@ import { CreateDomainGroupingFolderGeneratorSchema } from './schema';
 describe('createAppGroupingFolderGenerator', () => {
   let tree: Tree;
   const options: CreateDomainGroupingFolderGeneratorSchema = {
-    baseFolder: 'libs/test-app',
+    groupingFolder: 'libs/test-app',
     name: 'test-domain',
   };
   const domainScope = 'scope:test-app-test-domain';
@@ -61,7 +61,7 @@ describe('createAppGroupingFolderGenerator', () => {
 
   it('should allow imports from parent domains shared grouping folder when child domain', async () => {
     await createDomainGroupingFolderGenerator(tree, {
-      baseFolder: 'libs/test-app/parent-domain',
+      groupingFolder: 'libs/test-app/parent-domain',
       name: 'child-domain',
     });
     expectDepConstraint('scope:test-app-parent-domain-shared');

@@ -13,8 +13,9 @@ describe('removeLibraryGenerator', () => {
     await libraryGenerator(tree, {
       name: 'feature-test-example',
       directory: 'test-app/test-domain',
-    }).catch((e) => {
+    }).catch((e: Error) => {
       logger.error(e.message);
+      logger.error(e.stack);
       throw e;
     });
     jest.spyOn(nrwlWorkspaceMock, 'removeGenerator');

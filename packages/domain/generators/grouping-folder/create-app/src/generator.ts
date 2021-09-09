@@ -12,10 +12,10 @@ export async function createAppGroupingFolderGenerator(
     await initialiseWorkspace(tree, applicationType);
   }
   const workspaceLayout = getWorkspaceLayout(tree);
-  const baseFolder = workspaceLayout.libsDir;
+  const libsDir = workspaceLayout.libsDir;
   const directory = applicationType
-    ? `${baseFolder}/${applicationType}-${name}`
-    : `${baseFolder}/${name}`;
+    ? `${libsDir}/${applicationType}-${name}`
+    : `${libsDir}/${name}`;
   return () => {
     mkdirSync(directory);
   };

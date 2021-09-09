@@ -2,6 +2,7 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { getProjects, Tree } from '@nrwl/devkit';
 import { moveGenerator } from './generator';
 import { libraryGenerator } from '@nrwl/workspace';
+import { setupDomainTestGenerator } from '@srleecode/domain/cypress/domain-test';
 
 describe('moveGenerator', () => {
   let appTree: Tree;
@@ -15,6 +16,9 @@ describe('moveGenerator', () => {
     await libraryGenerator(appTree, {
       name: 'shell',
       directory: `test-app/second-test-domain`,
+    });
+    await setupDomainTestGenerator(appTree, {
+      groupingFolder: 'libs/test-app/test-domain',
     });
   };
 
@@ -41,6 +45,7 @@ describe('moveGenerator', () => {
     expect([...projects.keys()]).toEqual([
       'second-test-app-second-test-domain-shell',
       'second-test-app-test-domain-data-access',
+      'second-test-app-test-domain-e2e',
     ]);
   });
 

@@ -10,6 +10,7 @@ import { MoveGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { getNormalisedPath, getProjectNames } from '../../../shared/utils';
 import { moveGenerator as nrwlMoveGenerator } from '@nrwl/workspace';
+import { moveDomainTestProject } from './lib/move-domain-test-project';
 
 export async function moveGenerator(
   tree: Tree,
@@ -25,14 +26,23 @@ export async function moveGenerator(
       groupingFolder,
       destination
     );
-    await nrwlMoveGenerator(tree, {
-      projectName,
-      destination: movedProjectRoot,
-      updateImportPath: true,
-    }).catch((e) => {
-      logger.error(e.message);
-      throw e;
-    });
+    if (projectName.startsWith('e2e')) {
+      await moveDomainTestProject(tree, projectName, movedProjectRoot).catch(
+        (e) => {
+          logger.error(e.message);
+          throw e;
+        }
+      );
+    } else {
+      await nrwlMoveGenerator(tree, {
+        projectName,
+        destination: movedProjectRoot,
+        updateImportPath: true,
+      }).catch((e) => {
+        logger.error(e.message);
+        throw e;
+      });
+    }
   }
   tree.delete(groupingFolder);
 }

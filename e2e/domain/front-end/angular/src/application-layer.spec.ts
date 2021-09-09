@@ -13,7 +13,7 @@ describe('application-layer', () => {
       `generate @srleecode/domain:appGroupingFolder --name test-app --applicationType ng`
     );
     await runNxCommandAsync(
-      `generate @srleecode/domain:domainGroupingFolder --name test-domain --baseFolder libs/ng-test-app`
+      `generate @srleecode/domain:domainGroupingFolder --name test-domain --groupingFolder libs/ng-test-app`
     );
   }, 180000);
 

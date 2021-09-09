@@ -24,8 +24,9 @@ describe('directive test component file', () => {
       await libraryGenerator(tree, {
         name: 'feature-test-example',
         directory: 'test-app/test-domain',
-      }).catch((e) => {
+      }).catch((e: Error) => {
         logger.error(e.message);
+        logger.error(e.stack);
         throw e;
       });
       await setupComponentTestGenerator(tree, defaultOptions);
@@ -40,8 +41,9 @@ describe('directive test component file', () => {
       await libraryGenerator(tree, {
         name: 'directive-test-example',
         directory: 'test-app/test-domain',
-      }).catch((e) => {
+      }).catch((e: Error) => {
         logger.error(e.message);
+        logger.error(e.stack);
         throw e;
       });
       await setupComponentTestGenerator(tree, defaultDirectiveOptions);

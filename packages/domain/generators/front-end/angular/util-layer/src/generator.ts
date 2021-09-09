@@ -14,7 +14,7 @@ export async function createUtilGenerator(
   await addDomainLibrary(
     tree,
     '',
-    'util',
+    'util-layer',
     groupingFolder,
     groupingFolders.app,
     ApplicationType.Angular,

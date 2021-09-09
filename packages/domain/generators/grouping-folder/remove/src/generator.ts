@@ -15,8 +15,9 @@ export async function removeGenerator(
       projectName,
       skipFormat: false,
       forceRemove: true,
-    }).catch((e) => {
+    }).catch((e: Error) => {
       logger.error(e.message);
+      logger.error(e.stack);
       throw e;
     });
   }

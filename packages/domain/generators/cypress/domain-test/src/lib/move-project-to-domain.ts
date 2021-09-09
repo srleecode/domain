@@ -13,8 +13,9 @@ export const moveProjectToDomain = async (
     projectName: projectName,
     destination: `${domainPath}/.e2e`,
     updateImportPath: true,
-  }).catch((e) => {
+  }).catch((e: Error) => {
     logger.error(e.message);
+    logger.error(e.stack);
     throw e;
   });
   removeDummyTsConfigPath(tree, dasherisedFolderPath, npmScope);

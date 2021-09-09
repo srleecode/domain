@@ -7,6 +7,6 @@ describe('remove', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:removeGroupingFolder --groupingFolder ${groupingFolder}`
     );
-    expect(fileExists(`${groupingFolder}/util/src/index.ts`)).toBe(false);
+    expect(fileExists(`${groupingFolder}/util-layer/src/index.ts`)).toBe(false);
   });
 });

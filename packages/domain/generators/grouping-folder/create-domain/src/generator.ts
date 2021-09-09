@@ -7,10 +7,10 @@ export async function createDomainGroupingFolderGenerator(
   tree: Tree,
   options: CreateDomainGroupingFolderGeneratorSchema
 ) {
-  const { name, baseFolder } = options;
+  const { name, groupingFolder } = options;
   addSharedLintContraints(tree, options);
   return () => {
-    mkdirSync(`${baseFolder}/${name}`);
+    mkdirSync(`${groupingFolder}/${name}`);
   };
 }
 

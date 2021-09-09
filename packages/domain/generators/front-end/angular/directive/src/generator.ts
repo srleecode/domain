@@ -7,11 +7,7 @@ import {
   getDasherizedFolderPath,
   getGroupingFolders,
 } from '../../../../shared/utils';
-import {
-  camelize,
-  classify,
-  dasherize,
-} from '@nrwl/workspace/src/utils/strings';
+import { camelize, dasherize } from '@nrwl/workspace/src/utils/strings';
 import { addDirectiveFiles } from './lib/add-directive-files/add-directive-files';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { setupComponentTestGenerator } from '../../../../cypress/component-test/angular/src/generator';
@@ -64,8 +60,9 @@ export async function createDirectiveGenerator(
     prefix: groupingFolders.app,
     selector,
     type: ElementType.Directive,
-  }).catch((e) => {
+  }).catch((e: Error) => {
     logger.error(e.message);
+    logger.error(e.stack);
     throw e;
   });
   setIndexToDirectiveFile(tree, groupingFolder, name);
