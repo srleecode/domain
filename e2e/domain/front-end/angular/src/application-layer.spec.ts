@@ -15,12 +15,12 @@ describe('application-layer', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:domainGroupingFolder --name test-domain --groupingFolder libs/ng-test-app`
     );
-  }, 180000);
+  });
 
   it('should create application layer library', async () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:ngApplicationLayer --groupingFolder ${groupingFolder}`
     );
     checkFilesExist(`${groupingFolder}/application-layer/src/index.ts`);
-  }, 180000);
+  });
 });

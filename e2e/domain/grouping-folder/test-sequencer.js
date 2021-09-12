@@ -6,7 +6,7 @@ class CustomSequencer extends Sequencer {
     'app-grouping-folder.spec.ts': 0,
     'domain-grouping-folder.spec.ts': 1,
     'move.spec.ts': 2,
-    'remove.spec.ts': 3
+    'remove.spec.ts': 3,
   };
   sort(tests) {
     const orderedTests = [];

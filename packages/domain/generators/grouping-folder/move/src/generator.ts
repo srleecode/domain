@@ -8,21 +8,26 @@ import {
 } from '@nrwl/devkit';
 import { MoveGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { getNormalisedPath, getProjectNames } from '../../../shared/utils';
+import {
+  getNormalisedPath,
+  getProjectNames,
+  isHavingMockFile,
+} from '../../../shared/utils';
 import { moveGenerator as nrwlMoveGenerator } from '@nrwl/workspace';
 import { moveDomainTestProject } from './lib/move-domain-test-project';
+import { moveEslintReference } from './lib/move-eslint-reference';
+import { moveLibraryResolutionPath } from './lib/move-library-resolution-path';
+import { moveMockFileResolutionPath } from './lib/move-mock-file-resolution-path';
 
-export async function moveGenerator(
-  tree: Tree,
-  options: MoveGeneratorSchema
-): Promise<void> {
+export async function moveGenerator(tree: Tree, options: MoveGeneratorSchema) {
   const { groupingFolder, destination } = options;
   const projectNames = getProjectNames(tree, groupingFolder);
   const projects = getProjects(tree);
   for (const projectName of projectNames) {
+    const project = projects.get(projectName);
     const movedProjectRoot = getMovedProjectRoot(
       tree,
-      projects.get(projectName),
+      project,
       groupingFolder,
       destination
     );
@@ -43,8 +48,13 @@ export async function moveGenerator(
         throw e;
       });
     }
+    moveLibraryResolutionPath(tree, movedProjectRoot);
+    if (isHavingMockFile(tree, project.root)) {
+      moveMockFileResolutionPath(tree, project.root, movedProjectRoot);
+    }
   }
   tree.delete(groupingFolder);
+  moveEslintReference(tree, groupingFolder, destination);
 }
 
 const getMovedProjectRoot = (

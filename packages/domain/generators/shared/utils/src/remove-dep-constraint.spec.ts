@@ -1,18 +1,9 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readJson } from '@nrwl/devkit';
-import { updateDepConstraint } from './update-dep-contraint';
+import { removeDepConstraint } from './remove-dep-contraint';
 
-describe('updateDepConstraint', () => {
+describe('removeDepConstraint', () => {
   let appTree: Tree;
-
-  const addDependency = () => {
-    updateDepConstraint(appTree, (depConstraints) => {
-      depConstraints.push({
-        sourceTag: 'type:domain',
-        onlyDependOnLibsWithTags: ['type:util'],
-      });
-    });
-  };
 
   describe('eslintrc.json', () => {
     beforeEach(() => {
@@ -32,6 +23,10 @@ describe('updateDepConstraint', () => {
                   allow: [],
                   depConstraints: [
                     { sourceTag: '*', onlyDependOnLibsWithTags: ['*'] },
+                    {
+                      sourceTag: 'type:domain',
+                      onlyDependOnLibsWithTags: ['type:util'],
+                    },
                   ],
                 },
               ],
@@ -43,49 +38,15 @@ describe('updateDepConstraint', () => {
     });
 
     it('should add dependency constraints if it doesnt exist in eslintrc.json', () => {
-      addDependency();
+      removeDepConstraint(appTree, 'type:domain');
       const eslint = readJson(appTree, '.eslintrc.json');
       expect(
         eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
-          .depConstraints[1]
-      ).toEqual({
+          .depConstraints
+      ).not.toContainEqual({
         onlyDependOnLibsWithTags: ['type:util'],
         sourceTag: 'type:domain',
       });
-    });
-
-    it('should not add dependency constraint if it already exists in eslintrc.json', () => {
-      addDependency();
-      addDependency();
-      const eslint = readJson(appTree, '.eslintrc.json');
-      expect(
-        eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
-          .depConstraints
-      ).toEqual([
-        { onlyDependOnLibsWithTags: ['*'], sourceTag: '*' },
-        { onlyDependOnLibsWithTags: ['type:util'], sourceTag: 'type:domain' },
-      ]);
-    });
-
-    it('should add to existing source tag when depConstraint already exists in eslintrc.json', () => {
-      addDependency();
-      updateDepConstraint(appTree, (depConstraints) => {
-        depConstraints.push({
-          sourceTag: 'type:domain',
-          onlyDependOnLibsWithTags: ['type:domain'],
-        });
-      });
-      const eslint = readJson(appTree, '.eslintrc.json');
-      expect(
-        eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
-          .depConstraints
-      ).toEqual([
-        { onlyDependOnLibsWithTags: ['*'], sourceTag: '*' },
-        {
-          onlyDependOnLibsWithTags: ['type:util', 'type:domain'],
-          sourceTag: 'type:domain',
-        },
-      ]);
     });
   });
   describe('tslint', () => {
@@ -116,6 +77,10 @@ describe('updateDepConstraint', () => {
                     'type:data',
                   ],
                 },
+                {
+                  sourceTag: 'type:domain',
+                  onlyDependOnLibsWithTags: ['type:util'],
+                },
               ],
               enforceBuildableLibDependency: true,
             },
@@ -127,23 +92,14 @@ describe('updateDepConstraint', () => {
     });
 
     it('should update dependency constraints in tslint.json', () => {
-      addDependency();
+      removeDepConstraint(appTree, 'type:domain');
       const tslint = readJson(appTree, 'tslint.json');
       expect(
-        tslint.rules['nx-enforce-module-boundaries'][1].depConstraints[2]
-      ).toEqual({
+        tslint.rules['nx-enforce-module-boundaries'][1].depConstraints
+      ).not.toContainEqual({
         onlyDependOnLibsWithTags: ['type:util'],
         sourceTag: 'type:domain',
       });
-    });
-
-    it('should replace dependency constraint if it already exists in tslint.json', () => {
-      addDependency();
-      addDependency();
-      const tslint = readJson(appTree, 'tslint.json');
-      expect(
-        tslint.rules['nx-enforce-module-boundaries'][1].depConstraints[3]
-      ).toBeUndefined();
     });
   });
 });
