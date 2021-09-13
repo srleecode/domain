@@ -22,7 +22,15 @@ export const addTestFiles = (
   tree: Tree,
   options: SetupComponentTestGeneratorSchema
 ): void => {
-  const { projectName, name, type, mountType, prefix, selector } = options;
+  const {
+    projectName,
+    name,
+    componentType,
+    type,
+    mountType,
+    prefix,
+    selector,
+  } = options;
   const projectConfig = readProjectConfiguration(tree, projectName);
   const libraryPath = getDomainPath(tree, projectConfig.root);
   const libraryName = classify(getLibraryName(projectConfig.root));
@@ -35,7 +43,7 @@ export const addTestFiles = (
     className: 'TestComponent',
   };
   let templateOptions = {
-    ...names(name || ''),
+    ...names(name || componentType || type),
     selector,
     type,
     className: classify(`${libraryName}-${type}`),

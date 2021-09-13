@@ -30,6 +30,30 @@
         ]
       }
     },
+    "componentType": {
+      "description": "The type of component to create",
+      "enum": ["feature", "shell", "ui"],
+      "type": "string",
+      "default": "shell",
+      "x-prompt": {
+        "message": "Which type of component would you like to create?",
+        "type": "list",
+        "items": [
+          {
+            "value": "feature",
+            "label": "feature - for smart components (containers)"
+          },
+          {
+            "value": "shell",
+            "label": "shell - for the parent smart component, i.e. container for the page. It also includes routing for the domain and is the export point for the domain. The shell module will be lazy loaded in other domains and applications"
+          },
+          {
+            "value": "ui",
+            "label": "ui - for dumb components"
+          }
+        ]
+      }
+    },
     "name": {
       "type": "string",
       "description": "The name of the element, e.g. test-example.component.ts, would be TestExample or test-example",

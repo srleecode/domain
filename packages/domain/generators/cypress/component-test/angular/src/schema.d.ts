@@ -6,5 +6,6 @@ export interface SetupComponentTestGeneratorSchema {
   selector: string;
   prefix: string;
   type: ElementType;
+  componentType?: ComponentType;
   mountType?: MountType;
 }

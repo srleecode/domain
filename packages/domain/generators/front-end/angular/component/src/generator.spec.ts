@@ -14,6 +14,7 @@ import {
   getGroupingFolders,
 } from '@srleecode/domain/shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import { ComponentType } from './model/component-type.enum';
 
 describe('createComponentGenerator', () => {
   let tree: Tree;
@@ -67,6 +68,7 @@ describe('createComponentGenerator', () => {
     ).toHaveBeenCalledWith(expect.anything(), {
       name: 'TestExample',
       mountType: MountType.Component,
+      componentType: ComponentType.Feature,
       projectName: 'test-app-test-domain-feature-test-example',
       selector: 'test-app-test-domain-feature-test-example',
       prefix: 'test-app',

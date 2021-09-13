@@ -58,6 +58,7 @@ export async function createComponentGenerator(
     mountType,
     prefix: groupingFolders.app,
     selector,
+    componentType: type,
     type: ElementType.Component,
   }).catch((e: Error) => {
     logger.error(e.message);

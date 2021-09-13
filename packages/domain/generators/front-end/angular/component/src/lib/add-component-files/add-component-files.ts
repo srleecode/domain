@@ -15,12 +15,12 @@ export const addComponentFiles = (
   libraryName: string,
   selector: string
 ): void => {
-  const { groupingFolder, name } = options;
+  const { groupingFolder, name, type } = options;
   const target = normalize(`${groupingFolder}/${libraryName}/src/lib`);
   const templateOptions = {
     ...options,
     ...names(libraryName),
-    fileName: dasherize(name),
+    fileName: dasherize(name) || type,
     selector,
     componentName: classify(`${libraryName}Component`),
     moduleName: classify(`${dasherisedGroupingFolder}-${libraryName}Module`),
