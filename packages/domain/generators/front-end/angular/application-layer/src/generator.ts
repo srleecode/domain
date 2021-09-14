@@ -14,7 +14,7 @@ export async function createApplicationLayerGenerator(
   await addDomainLibrary(
     tree,
     '',
-    'application-layer',
+    'application',
     groupingFolder,
     groupingFolders.app,
     ApplicationType.Angular,

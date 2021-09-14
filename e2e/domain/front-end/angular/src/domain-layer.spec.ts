@@ -7,6 +7,6 @@ describe('domain-layer', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:ngDomainLayer --groupingFolder ${groupingFolder}`
     );
-    checkFilesExist(`${groupingFolder}/domain-layer/src/index.ts`);
+    checkFilesExist(`${groupingFolder}/domain/src/index.ts`);
   });
 });

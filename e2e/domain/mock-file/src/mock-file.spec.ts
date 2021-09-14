@@ -22,8 +22,8 @@ describe('mockFile e2e', () => {
 
   it('should add mock file to domain library', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:mockFile --projectName ng-test-app-test-domain-util-layer --mockFileName test-example`
+      `generate @srleecode/domain:mockFile --projectName ng-test-app-test-domain-util --mockFileName test-example`
     );
-    checkFilesExist(`${groupingFolder}/util-layer/src/testing.ts`);
+    checkFilesExist(`${groupingFolder}/util/src/testing.ts`);
   });
 });

@@ -30,7 +30,7 @@ describe('createDataAccessLayerGenerator', () => {
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       '',
-      'data-access-layer',
+      'data-access',
       schema.groupingFolder,
       groupingFolders.app,
       ApplicationType.Angular,

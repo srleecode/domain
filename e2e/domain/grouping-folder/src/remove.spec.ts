@@ -12,7 +12,7 @@ describe('remove', () => {
     );
   });
   it('should remove domain grouping folder', async () => {
-    expect(fileExists(`${groupingFolder}/util-layer/src/index.ts`)).toBe(false);
+    expect(fileExists(`${groupingFolder}/util/src/index.ts`)).toBe(false);
   });
 
   it('should remove project references', async () => {
@@ -26,10 +26,10 @@ describe('remove', () => {
     const tsConfig = readJson('tsconfig.base.json');
     const tsConfigPaths = Object.keys(tsConfig.compilerOptions.paths);
     expect(tsConfigPaths).not.toContainEqual(
-      '@proj/ng-test-app/new-domain/util-layer'
+      '@proj/ng-test-app/new-domain/util'
     );
     expect(tsConfigPaths).not.toContainEqual(
-      '@proj/ng-test-app/new-domain/util-layer/testing'
+      '@proj/ng-test-app/new-domain/util/testing'
     );
   });
 });

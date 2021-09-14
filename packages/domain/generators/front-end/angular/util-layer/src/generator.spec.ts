@@ -31,7 +31,7 @@ describe('createUtilGenerator', () => {
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       '',
-      'util-layer',
+      'util',
       schema.groupingFolder,
       groupingFolders.app,
       ApplicationType.Angular,

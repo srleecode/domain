@@ -7,6 +7,6 @@ describe('util', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:ngUtilLayer --groupingFolder ${groupingFolder}`
     );
-    checkFilesExist(`${groupingFolder}/util-layer/src/index.ts`);
+    checkFilesExist(`${groupingFolder}/util/src/index.ts`);
   });
 });

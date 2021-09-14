@@ -29,7 +29,7 @@ describe('addDomainLibrary', () => {
     await addDomainLibrary(
       tree,
       '',
-      'application-layer',
+      'application',
       'libs/test-app/test-domain',
       'test-app',
       ApplicationType.Angular,
@@ -39,10 +39,10 @@ describe('addDomainLibrary', () => {
       expect.anything(),
       {
         directory: 'test-app/test-domain',
-        importPath: '@proj/test-app/test-domain/application-layer',
-        name: 'application-layer',
+        importPath: '@proj/test-app/test-domain/application',
+        name: 'application',
         standaloneConfig: false,
-        tags: 'app:test-app,scope:test-app-test-domain,type:application-layer',
+        tags: 'app:test-app,scope:test-app-test-domain,type:application',
         prefix: 'test-app',
         ...commonLibraryOptions,
       }
@@ -62,7 +62,7 @@ describe('addDomainLibrary', () => {
     await addDomainLibrary(
       tree,
       '',
-      'application-layer',
+      'application',
       'libs/test-app/test-domain',
       'test-app',
       ApplicationType.Angular,
@@ -73,7 +73,7 @@ describe('addDomainLibrary', () => {
       'e2e-test-app-test-domain'
     );
     expect(projectConfig.implicitDependencies).toEqual([
-      'test-app-test-domain-application-layer',
+      'test-app-test-domain-application',
     ]);
   });
 });

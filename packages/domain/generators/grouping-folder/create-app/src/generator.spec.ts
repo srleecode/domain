@@ -74,7 +74,7 @@ describe('createAppGroupingFolderGenerator', () => {
       ).toEqual([
         {
           onlyDependOnLibsWithTags: [
-            'type:application-layer',
+            'type:application',
             'type:shell',
             'type:feature',
             'type:ui',
@@ -84,7 +84,7 @@ describe('createAppGroupingFolderGenerator', () => {
         },
         {
           onlyDependOnLibsWithTags: [
-            'type:application-layer',
+            'type:application',
             'type:feature',
             'type:ui',
             'type:util',
@@ -97,20 +97,20 @@ describe('createAppGroupingFolderGenerator', () => {
         },
         {
           onlyDependOnLibsWithTags: [
-            'type:application-layer',
-            'type:data-access-layer',
-            'type:domain-layer',
+            'type:application',
+            'type:data-access',
+            'type:domain',
             'type:util',
           ],
-          sourceTag: 'type:application-layer',
+          sourceTag: 'type:application',
         },
         {
-          onlyDependOnLibsWithTags: ['type:domain-layer', 'type:util'],
-          sourceTag: 'type:domain-layer',
+          onlyDependOnLibsWithTags: ['type:domain', 'type:util'],
+          sourceTag: 'type:domain',
         },
         {
-          onlyDependOnLibsWithTags: ['type:data-access-layer', 'type:util'],
-          sourceTag: 'type:data-access-layer',
+          onlyDependOnLibsWithTags: ['type:data-access', 'type:util'],
+          sourceTag: 'type:data-access',
         },
         {
           onlyDependOnLibsWithTags: ['type:util'],

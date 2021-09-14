@@ -14,7 +14,7 @@ export async function createDomainLayerGenerator(
   options: CreateDomainLayerGeneratorSchema
 ): Promise<void> {
   const { groupingFolder } = options;
-  const libraryName = 'domain-layer';
+  const libraryName = 'domain';
   const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
     tree,

@@ -7,6 +7,6 @@ describe('data-access-layer', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:ngDataAccessLayer --groupingFolder ${groupingFolder}`
     );
-    checkFilesExist(`${groupingFolder}/data-access-layer/src/index.ts`);
+    checkFilesExist(`${groupingFolder}/data-access/src/index.ts`);
   });
 });

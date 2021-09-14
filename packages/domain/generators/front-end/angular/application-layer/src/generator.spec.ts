@@ -31,7 +31,7 @@ describe('createDomainLayerGenerator', () => {
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       '',
-      'application-layer',
+      'application',
       schema.groupingFolder,
       groupingFolders.app,
       ApplicationType.Angular,

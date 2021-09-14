@@ -21,6 +21,6 @@ describe('application-layer', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:ngApplicationLayer --groupingFolder ${groupingFolder}`
     );
-    checkFilesExist(`${groupingFolder}/application-layer/src/index.ts`);
+    checkFilesExist(`${groupingFolder}/application/src/index.ts`);
   });
 });

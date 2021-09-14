@@ -14,7 +14,7 @@ export async function createDataAccessLayerGenerator(
   await addDomainLibrary(
     tree,
     '',
-    'data-access-layer',
+    'data-access',
     groupingFolder,
     groupingFolders.app,
     ApplicationType.Angular,

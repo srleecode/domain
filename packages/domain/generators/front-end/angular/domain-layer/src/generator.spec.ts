@@ -37,7 +37,7 @@ describe('createDomainLayerGenerator', () => {
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       '',
-      'domain-layer',
+      'domain',
       schema.groupingFolder,
       groupingFolders.app,
       ApplicationType.Angular,
@@ -51,7 +51,7 @@ describe('createDomainLayerGenerator', () => {
     });
     const projectConfig = readProjectConfiguration(
       tree,
-      'test-app-test-domain-domain-layer'
+      'test-app-test-domain-domain'
     );
     expect(projectConfig.targets['test']).toBeUndefined();
   });
