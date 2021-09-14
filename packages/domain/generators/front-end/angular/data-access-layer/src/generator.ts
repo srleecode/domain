@@ -18,6 +18,7 @@ export async function createDataAccessLayerGenerator(
     groupingFolder,
     groupingFolders.app,
     ApplicationType.Angular,
+    true,
     options
   );
 }

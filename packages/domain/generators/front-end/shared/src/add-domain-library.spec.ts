@@ -1,6 +1,7 @@
 import {
   addProjectConfiguration,
   ProjectConfiguration,
+  readJson,
   readProjectConfiguration,
   Tree,
 } from '@nrwl/devkit';
@@ -33,6 +34,7 @@ describe('addDomainLibrary', () => {
       'libs/test-app/test-domain',
       'test-app',
       ApplicationType.Angular,
+      true,
       commonLibraryOptions
     );
     expect(libraryGeneratorMock.libraryGenerator).toHaveBeenCalledWith(
@@ -47,6 +49,24 @@ describe('addDomainLibrary', () => {
         ...commonLibraryOptions,
       }
     );
+  });
+
+  it('should clear lint file overrides', async () => {
+    await addDomainLibrary(
+      tree,
+      '',
+      'application',
+      'libs/test-app/test-domain',
+      'test-app',
+      ApplicationType.Angular,
+      true,
+      commonLibraryOptions
+    );
+    const lintJson = readJson(
+      tree,
+      'libs/test-app/test-domain/application/.eslintrc.json'
+    );
+    expect(lintJson.overrides).toEqual([]);
   });
 
   it('should add project to e2e projects implicitDependencies', async () => {
@@ -66,6 +86,7 @@ describe('addDomainLibrary', () => {
       'libs/test-app/test-domain',
       'test-app',
       ApplicationType.Angular,
+      true,
       commonLibraryOptions
     );
     const projectConfig = readProjectConfiguration(

@@ -18,6 +18,7 @@ export async function createUtilGenerator(
     groupingFolder,
     groupingFolders.app,
     ApplicationType.Angular,
+    true,
     options
   );
 }

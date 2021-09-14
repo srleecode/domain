@@ -9,6 +9,7 @@ import {
 } from '../../../shared/utils';
 import { isProjectExisting } from './is-project-existing';
 import { addImplicitDependency } from './add-implicit-dependency';
+import { removeLintOverrideRules } from './remove-lint-override-rules';
 
 export const addDomainLibrary = async (
   tree: Tree,
@@ -17,6 +18,7 @@ export const addDomainLibrary = async (
   groupingFolderPath: string,
   appGroupingFolder: string,
   applicationType: ApplicationType,
+  removeLintOverrides: boolean,
   schema?: Partial<Schema>
 ): Promise<void> => {
   const libraryCommonOptions = getLibraryCommonOptions(
@@ -42,11 +44,11 @@ export const addDomainLibrary = async (
     groupingFolderPath
   );
   const e2eProjectName = `e2e-${dasherisedGroupingFolder}`;
+  const projectName = `${dasherisedGroupingFolder}-${libraryCommonOptions.name}`;
   if (isProjectExisting(tree, e2eProjectName)) {
-    addImplicitDependency(
-      tree,
-      e2eProjectName,
-      `${dasherisedGroupingFolder}-${libraryCommonOptions.name}`
-    );
+    addImplicitDependency(tree, e2eProjectName, projectName);
+  }
+  if (removeLintOverrides) {
+    removeLintOverrideRules(tree, projectName);
   }
 };

@@ -41,6 +41,7 @@ describe('createDomainLayerGenerator', () => {
       schema.groupingFolder,
       groupingFolders.app,
       ApplicationType.Angular,
+      true,
       schema
     );
   });

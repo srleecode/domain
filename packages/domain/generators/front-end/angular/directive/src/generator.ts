@@ -28,6 +28,7 @@ export async function createDirectiveGenerator(
     groupingFolder,
     groupingFolders.app,
     ApplicationType.Angular,
+    false,
     options
   );
   const dasherisedGroupingFolder = `${getDasherizedFolderPath(

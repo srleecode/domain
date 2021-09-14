@@ -57,6 +57,7 @@ describe('createComponentGenerator', () => {
       defaultOptions.groupingFolder,
       groupingFolders.app,
       ApplicationType.Angular,
+      false,
       defaultOptions
     );
   });

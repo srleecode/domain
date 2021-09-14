@@ -40,6 +40,7 @@ export async function createComponentGenerator(
     groupingFolder,
     groupingFolders.app,
     ApplicationType.Angular,
+    false,
     options
   );
   tree.delete(

@@ -23,6 +23,7 @@ export async function createDomainLayerGenerator(
     groupingFolder,
     groupingFolders.app,
     ApplicationType.Angular,
+    true,
     options
   );
   const domain = getDasherizedFolderPath(tree, groupingFolder);

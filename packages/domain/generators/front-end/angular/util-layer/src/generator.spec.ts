@@ -35,6 +35,7 @@ describe('createUtilGenerator', () => {
       schema.groupingFolder,
       groupingFolders.app,
       ApplicationType.Angular,
+      true,
       schema
     );
   });

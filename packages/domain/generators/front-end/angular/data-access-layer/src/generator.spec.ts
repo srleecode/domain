@@ -34,6 +34,7 @@ describe('createDataAccessLayerGenerator', () => {
       schema.groupingFolder,
       groupingFolders.app,
       ApplicationType.Angular,
+      true,
       schema
     );
   });

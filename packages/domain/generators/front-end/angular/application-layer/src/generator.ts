@@ -18,6 +18,7 @@ export async function createApplicationLayerGenerator(
     groupingFolder,
     groupingFolders.app,
     ApplicationType.Angular,
+    true,
     options
   );
 }

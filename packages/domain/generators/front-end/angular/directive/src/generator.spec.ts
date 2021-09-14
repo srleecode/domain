@@ -38,6 +38,7 @@ describe('createDirectiveGenerator', () => {
       defaultOptions.groupingFolder,
       groupingFolders.app,
       ApplicationType.Angular,
+      false,
       defaultOptions
     );
   });
