@@ -3,6 +3,7 @@ import { CreateAppGroupingFolderGeneratorSchema } from './schema';
 import { isAppFolderExisting } from './lib/shared/is-app-folder-existing';
 import { initialiseWorkspace } from './lib/shared/initialise-workspace';
 import { mkdirSync } from 'fs';
+
 export async function createAppGroupingFolderGenerator(
   tree: Tree,
   options: CreateAppGroupingFolderGeneratorSchema
