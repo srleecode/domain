@@ -3,144 +3,165 @@
   "name": "domain",
   "version": "0.0.1",
   "schematics": {
-    "create": {
-      "factory": "./src/generators/create/generator#createSchematic",
-      "schema": "./src/generators/create/schema.json",
-      "description": "create generator schematic"
+    "domainTest": {
+      "factory": "./generators/cypress/domain-test/src/generator#setupDomainTestSchematic",
+      "schema": "./generators/cypress/domain-test/src/schema.json",
+      "description": "Create cypress test files for E2E testing domain"
     },
-    "cypressProject": {
-      "factory": "./src/generators/cypress-project/generator#cypressProjectSchematic",
-      "schema": "./src/generators/cypress-project/schema.json",
-      "description": "Add cypress project generator"
+    "ngApplicationLayer": {
+      "factory": "./generators/front-end/angular/application-layer/src/generator#createApplicationLayerSchematic",
+      "schema": "./generators/front-end/angular/application-layer/src/schema.json",
+      "description": "Add application layer domain library generator"
     },
-    "addCypressProject": {
-      "factory": "./src/generators/cypress-project/generator#cypressProjectSchematic",
-      "schema": "./src/generators/cypress-project/schema.json",
-      "description": "Add cypress project generator"
+    "ngComponent": {
+      "factory": "./generators/front-end/angular/component/src/generator#createComponentSchematic",
+      "schema": "./generators/front-end/angular/component/src/schema.json",
+      "description": "Add component domain library generator"
     },
-    "addLibraries": {
-      "factory": "./src/generators/libraries/generator#librariesSchematic",
-      "schema": "./src/generators/libraries/schema.json",
-      "description": "libraries generator"
+    "ngDataAccessLayer": {
+      "factory": "./generators/front-end/angular/data-access-layer/src/generator#createDataAccessLayeSchematic",
+      "schema": "./generators/front-end/angular/data-access-layer/src/schema.json",
+      "description": "Add data access layer domain library generator"
     },
-    "libraries": {
-      "factory": "./src/generators/libraries/generator#librariesSchematic",
-      "schema": "./src/generators/libraries/schema.json",
-      "description": "libraries generator"
+    "ngDirective": {
+      "factory": "./generators/front-end/angular/directive/src/generator#createDirectiveSchematic",
+      "schema": "./generators/front-end/angular/directive/src/schema.json",
+      "description": "Add directive domain library generator"
     },
-    "removeCypressProject": {
-      "factory": "./src/generators/remove-cypress-project/generator#removeCypressProjectSchematic",
-      "schema": "./src/generators/remove-cypress-project/schema.json",
-      "description": "Remove cypress project generator"
+    "ngDomainLayer": {
+      "factory": "./generators/front-end/angular/domain-layer/src/generator#createDomainLayerSchematic",
+      "schema": "./generators/front-end/angular/domain-layer/src/schema.json",
+      "description": "Add domain layer domain library generator"
     },
-    "removeLibraries": {
-      "factory": "./src/generators/remove-libraries/generator#removeLibrariesSchematic",
-      "schema": "./src/generators/remove-libraries/schema.json",
-      "description": "Remove libraries generator"
+    "ngRemoveLibrary": {
+      "factory": "./generators/front-end/angular/remove-library/src/generator#removeLibrarySchematic",
+      "schema": "./generators/front-end/angular/remove-library/src/schema.json",
+      "description": "Remove domain library generator"
     },
-    "move": {
-      "factory": "./src/generators/move/generator#moveSchematic",
-      "schema": "./src/generators/move/schema.json",
-      "description": "Move generator"
+    "ngUtilLayer": {
+      "factory": "./generators/front-end/angular/util-layer/src/generator#createUtilSchematic",
+      "schema": "./generators/front-end/angular/util-layer/src/schema.json",
+      "description": "Add util domain library generator"
     },
-    "remove": {
-      "factory": "./src/generators/remove/generator#removeSchematic",
-      "schema": "./src/generators/remove/schema.json",
-      "description": "Remove generator"
+    "appGroupingFolder": {
+      "factory": "./generators/grouping-folder/create-app/src/generator#createAppGroupingFolderSchematic",
+      "schema": "./generators/grouping-folder/create-app/src/schema.json",
+      "description": "Add application grouping folder generator"
     },
-    "addPrivateApi": {
-      "factory": "./src/generators/private-api/generator#privateApiSchematic",
-      "schema": "./src/generators/private-api/schema.json",
-      "description": "Add private api, i.e. exports that can only be used inside a domain and not outside of it"
+    "domainGroupingFolder": {
+      "factory": "./generators/grouping-folder/create-domain/src/generator#createDomainGroupingFolderSchematic",
+      "schema": "./generators/grouping-folder/create-domain/src/schema.json",
+      "description": "Add domain grouping folder generator"
     },
-    "privateApi": {
-      "factory": "./src/generators/private-api/generator#privateApiSchematic",
-      "schema": "./src/generators/private-api/schema.json",
-      "description": "Add private api, i.e. exports that can only be used inside a domain and not outside of it"
+    "moveGroupingFolder": {
+      "factory": "./generators/grouping-folder/move/src/generator#moveSchematic",
+      "schema": "./generators/grouping-folder/move/src/schema.json",
+      "description": "Move grouping folder generator"
     },
-    "addComponent": {
-      "factory": "./src/generators/component/generator#componentSchematic",
-      "schema": "./src/generators/component/schema.json",
-      "description": "component generator"
+    "removeGroupingFolder": {
+      "factory": "./generators/grouping-folder/remove/src/generator#removeSchematic",
+      "schema": "./generators/grouping-folder/remove/src/schema.json",
+      "description": "Remove grouping folder generator"
     },
-    "component": {
-      "factory": "./src/generators/component/generator#componentSchematic",
-      "schema": "./src/generators/component/schema.json",
-      "description": "component generator"
-    }
-  },
-  "generators": {
-    "init": {
-      "factory": "./src/generators/init/init.compat#initSchematic",
-      "schema": "./src/generators/init/schema.json",
-      "description": "Initializes the @nrwl/angular plugin.",
+    "ng-init": {
+      "factory": "./generators/init/ng-add/src/generator#ngAddSchematic",
+      "schema": "./generators/init/ng-add/src/schema.json",
+      "description": "Initializes the @srleecode/domain generator for angular",
       "aliases": ["ng-add"],
       "hidden": true
     },
-    "create": {
-      "factory": "./src/generators/create/generator",
-      "schema": "./src/generators/create/schema.json",
-      "description": "create generator"
+    "react-init": {
+      "factory": "./generators/init/ng-add/src/generator#reactAddSchematic",
+      "schema": "./generators/init/react-add/src/schema.json",
+      "description": "Initializes the @srleecode/domain generator for react",
+      "aliases": ["react-add"],
+      "hidden": true
     },
-    "cypressProject": {
-      "factory": "./src/generators/cypress-project/generator",
-      "schema": "./src/generators/cypress-project/schema.json",
-      "description": "Add cypress project generator"
+    "mockFile": {
+      "factory": "./generators/mock-file/src/generator#createMockFileSchematic",
+      "schema": "./generators/mock-file/src/schema.json",
+      "description": "Add mock file and export to domain library"
+    }
+  },
+  "generators": {
+    "domainTest": {
+      "factory": "./generators/cypress/domain-test/src/generator",
+      "schema": "./generators/cypress/domain-test/src/schema.json",
+      "description": "Create cypress test files for E2E testing domain"
     },
-    "addCypressProject": {
-      "factory": "./src/generators/cypress-project/generator",
-      "schema": "./src/generators/cypress-project/schema.json",
-      "description": "Add cypress project generator"
+    "ngApplicationLayer": {
+      "factory": "./generators/front-end/angular/application-layer/src/generator",
+      "schema": "./generators/front-end/angular/application-layer/src/schema.json",
+      "description": "Add application layer domain library generator"
     },
-    "removeCypressProject": {
-      "factory": "./src/generators/remove-cypress-project/generator",
-      "schema": "./src/generators/remove-cypress-project/schema.json",
-      "description": "Remove cypress project generator"
+    "ngComponent": {
+      "factory": "./generators/front-end/angular/component/src/generator",
+      "schema": "./generators/front-end/angular/component/src/schema.json",
+      "description": "Add component domain library generator"
     },
-    "move": {
-      "factory": "./src/generators/move/generator",
-      "schema": "./src/generators/move/schema.json",
-      "description": "Move generator"
+    "ngDataAccessLayer": {
+      "factory": "./generators/front-end/angular/data-access-layer/src/generator",
+      "schema": "./generators/front-end/angular/data-access-layer/src/schema.json",
+      "description": "Add data access layer domain library generator"
     },
-    "remove": {
-      "factory": "./src/generators/remove/generator",
-      "schema": "./src/generators/remove/schema.json",
-      "description": "Remove generator"
+    "ngDirective": {
+      "factory": "./generators/front-end/angular/directive/src/generator",
+      "schema": "./generators/front-end/angular/directive/src/schema.json",
+      "description": "Add directive domain library generator"
     },
-    "addComponent": {
-      "factory": "./src/generators/component/generator",
-      "schema": "./src/generators/component/schema.json",
-      "description": "component generator"
+    "ngDomainLayer": {
+      "factory": "./generators/front-end/angular/domain-layer/src/generator",
+      "schema": "./generators/front-end/angular/domain-layer/src/schema.json",
+      "description": "Add domain layer domain library generator"
     },
-    "component": {
-      "factory": "./src/generators/component/generator",
-      "schema": "./src/generators/component/schema.json",
-      "description": "component generator"
+    "ngRemoveLibrary": {
+      "factory": "./generators/front-end/angular/remove-library/src/generator",
+      "schema": "./generators/front-end/angular/remove-library/src/schema.json",
+      "description": "Remove domain library generator"
     },
-    "addPrivateApi": {
-      "factory": "./src/generators/private-api/generator",
-      "schema": "./src/generators/private-api/schema.json",
-      "description": "Add private api, i.e. exports that can only be used inside a domain and not outside of it"
+    "ngUtilLayer": {
+      "factory": "./generators/front-end/angular/util-layer/src/generator",
+      "schema": "./generators/front-end/angular/util-layer/src/schema.json",
+      "description": "Add util domain library generator"
     },
-    "privateApi": {
-      "factory": "./src/generators/private-api/generator",
-      "schema": "./src/generators/private-api/schema.json",
-      "description": "Add private api, i.e. exports that can only be used inside a domain and not outside of it"
+    "appGroupingFolder": {
+      "factory": "./generators/grouping-folder/create-app/src/generator",
+      "schema": "./generators/grouping-folder/create-app/src/schema.json",
+      "description": "Add application grouping folder generator"
     },
-    "addLibraries": {
-      "factory": "./src/generators/libraries/generator",
-      "schema": "./src/generators/libraries/schema.json",
-      "description": "libraries generator"
+    "domainGroupingFolder": {
+      "factory": "./generators/grouping-folder/create-domain/src/generator",
+      "schema": "./generators/grouping-folder/create-domain/src/schema.json",
+      "description": "Add domain grouping folder generator"
     },
-    "libraries": {
-      "factory": "./src/generators/libraries/generator",
-      "schema": "./src/generators/libraries/schema.json",
-      "description": "libraries generator"
+    "moveGroupingFolder": {
+      "factory": "./generators/grouping-folder/move/src/generator",
+      "schema": "./generators/grouping-folder/move/src/schema.json",
+      "description": "Move grouping folder generator"
     },
-    "removeLibraries": {
-      "factory": "./src/generators/remove-libraries/generator",
-      "schema": "./src/generators/remove-libraries/schema.json",
-      "description": "Remove libraries generator"
+    "removeGroupingFolder": {
+      "factory": "./generators/grouping-folder/remove/src/generator",
+      "schema": "./generators/grouping-folder/remove/src/schema.json",
+      "description": "Remove grouping folder generator"
+    },
+    "ng-init": {
+      "factory": "./generators/init/ng-add/src/generator#ngAddGenerator",
+      "schema": "./generators/init/ng-add/src/schema.json",
+      "description": "Initializes the @srleecode/domain generator for angular",
+      "aliases": ["ng-add"],
+      "hidden": true
+    },
+    "react-init": {
+      "factory": "./generators/init/ng-add/src/generator#reactAddGenerator",
+      "schema": "./generators/init/react-add/src/schema.json",
+      "description": "Initializes the @srleecode/domain generator for react",
+      "aliases": ["react-add"],
+      "hidden": true
+    },
+    "mockFile": {
+      "factory": "./generators/mock-file/src/generator",
+      "schema": "./generators/mock-file/src/schema.json",
+      "description": "Add mock file and export to domain library"
     }
   }
 }

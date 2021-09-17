@@ -6,11 +6,11 @@
   "type": "object",
   "description": "removes domain including libraries and cypress projects",
   "properties": {
-    "folder": {
+    "groupingFolder": {
       "type": "string",
       "description": "Path to the grouping folder relative to the root of the workspace that will be deleted",
       "x-prompt": "What is the path for the grouping folder relative to the root of the workspace that will be deleted?"
     }
   },
-  "required": ["folder"]
+  "required": ["groupingFolder"]
 }

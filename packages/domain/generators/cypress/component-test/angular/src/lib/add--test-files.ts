@@ -10,32 +10,43 @@ import {
   camelize,
 } from '@nrwl/workspace/src/utils/strings';
 import { join } from 'path';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   ElementType,
   getDomainPath,
   MountType,
-} from '@srleecode/domain/shared/utils';
+} from '../../../../../shared/utils';
 import { SetupComponentTestGeneratorSchema } from '../schema';
 
 export const addTestFiles = (
   tree: Tree,
   options: SetupComponentTestGeneratorSchema
 ): void => {
-  const { projectName, name, type, mountType, selector } = options;
+  const {
+    projectName,
+    name,
+    componentType,
+    type,
+    mountType,
+    prefix,
+    selector,
+  } = options;
   const projectConfig = readProjectConfiguration(tree, projectName);
   const libraryPath = getDomainPath(tree, projectConfig.root);
-  const directiveTag = camelize(selector.replace('[', '').replace(']', ''));
+  const libraryName = classify(getLibraryName(projectConfig.root));
+  const directiveTag = camelize(selector);
   const directiveOptions = {
     directiveTag,
-    prefix: directiveTag.replace(classify(projectName), ''),
+    selector: `[${directiveTag}]`,
+    prefix,
     directiveName: classify(`${name}-${type}`),
     className: 'TestComponent',
   };
   let templateOptions = {
-    ...names(name),
+    ...names(name || componentType || type),
     selector,
     type,
-    className: classify(`${name}-${type}`),
+    className: classify(`${libraryName}-${type}`),
     moduleName: classify(`${projectName}Module`),
     harnessName: classify(`${projectName}Harness`),
     storybookTitle: getStorybookTitle(libraryPath),
@@ -67,3 +78,8 @@ const getStorybookTitle = (libraryPath: string): string =>
     .split('/')
     .map((folder) => classify(folder))
     .join('/');
+
+const getLibraryName = (projectRoot: string): string => {
+  const splitProjectRoot = projectRoot.split('/');
+  return splitProjectRoot[splitProjectRoot.length - 1];
+};

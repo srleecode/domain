@@ -3,7 +3,8 @@ import { dasherize, classify } from '@nrwl/workspace/src/utils/strings';
 import { join, normalize } from 'path';
 import { ChangeDetection } from '../../model/change-detection-type.enum';
 import { ComponentType } from '../../model/component-type.enum';
-import { UnitTestType } from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { UnitTestType } from '../../../../../../shared/utils';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
 import { CreateComponentGeneratorSchema } from '../../schema';
 
@@ -14,13 +15,14 @@ export const addComponentFiles = (
   libraryName: string,
   selector: string
 ): void => {
-  const { groupingFolder, name } = options;
+  const { groupingFolder, name, type } = options;
   const target = normalize(`${groupingFolder}/${libraryName}/src/lib`);
   const templateOptions = {
     ...options,
-    ...names(options.name),
+    ...names(libraryName),
+    fileName: dasherize(name) || type,
     selector,
-    componentName: classify(`${name}Component`),
+    componentName: classify(`${libraryName}Component`),
     moduleName: classify(`${dasherisedGroupingFolder}-${libraryName}Module`),
     isUsingNonDefaultViewEncapsulation:
       options.viewEncapsulation !== ViewEncapsulation.Emulated,

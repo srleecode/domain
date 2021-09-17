@@ -1,35 +1,40 @@
-import {
-  GeneratorCallback,
-  readJson,
-  readWorkspaceConfiguration,
-  Tree,
-} from '@nrwl/devkit';
-import { addDependencies } from './add-dependencies';
+import { readJson, Tree } from '@nrwl/devkit';
 import { addGlobalComponentTestingOptions } from './add-global-component-testing-options/add-global-component-testing-options';
+import { cypressInitGenerator } from '@nrwl/cypress';
+import { ngAddGenerator } from '@jscutlery/cypress-angular/src/generators/ng-add/ng-add';
+import { angularInitGenerator } from '@nrwl/angular/src/generators/init/init';
 
-export const initialiseAngularWorkspace = (tree: Tree): GeneratorCallback => {
-  checkNrwlAngularIsAdded(tree);
-  checkNrwlCypressIsAdded(tree);
+export const initialiseAngularWorkspace = async (tree: Tree): Promise<void> => {
+  const packageJson = readJson(tree, 'package.json');
+  if (isPackageAdded('@nrwl/angular', packageJson)) {
+    await angularInitGenerator(tree, {
+      style: 'scss',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
+  } else {
+    throw Error(
+      '@nrwl/angular is not installed. Did you run ng add @srleecode/domain?'
+    );
+  }
+  if (isPackageAdded('@nrwl/cypress', packageJson)) {
+    await cypressInitGenerator(tree);
+  } else {
+    throw Error(
+      '@nrwl/cypress is not installed. Did you run ng add @srleecode/domain?'
+    );
+  }
+  if (isPackageAdded('@jscutlery/cypress-angular', packageJson)) {
+    await ngAddGenerator(tree);
+  } else {
+    throw Error(
+      '@jscutlery/cypress-angular is not installed. Did you run ng add @srleecode/domain?'
+    );
+  }
   if (!tree.exists(`.component-testing/global-mount-options.constant.ts`)) {
     addGlobalComponentTestingOptions(tree);
   }
-  return addDependencies(tree);
 };
 
-const checkNrwlAngularIsAdded = (tree: Tree): void => {
-  const workspace = readWorkspaceConfiguration(tree);
-  if (!workspace?.generators?.['@nrwl/angular:component']) {
-    throw new Error(
-      'Before creating an Angular application grouping folder. Please make sure you have run npx ng add @nrwl/angular @nrwl/cypress'
-    );
-  }
-};
-
-const checkNrwlCypressIsAdded = (tree: Tree): void => {
-  const packageJson = readJson(tree, 'package.json');
-  if (!packageJson?.devDependencices?.['@nrwl/cypress']) {
-    throw new Error(
-      'Before creating an Angular application grouping folder. Please make sure you have run npx ng add @nrwl/angular @nrwl/cypress'
-    );
-  }
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isPackageAdded = (packageToCheck: string, packageJson: any): boolean =>
+  packageJson?.devDependencies?.[packageToCheck];

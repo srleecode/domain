@@ -8,7 +8,7 @@ import {
 } from '../default-options.constant';
 import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
 import { setupComponentTestGenerator } from '../generator';
-import { checkFileContentIsSame } from '@srleecode/domain/shared/test-utils';
+import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 
 describe('directive test component file', () => {
@@ -24,8 +24,9 @@ describe('directive test component file', () => {
       await libraryGenerator(tree, {
         name: 'feature-test-example',
         directory: 'test-app/test-domain',
-      }).catch((e) => {
+      }).catch((e: Error) => {
         logger.error(e.message);
+        logger.error(e.stack);
         throw e;
       });
       await setupComponentTestGenerator(tree, defaultOptions);
@@ -40,16 +41,18 @@ describe('directive test component file', () => {
       await libraryGenerator(tree, {
         name: 'directive-test-example',
         directory: 'test-app/test-domain',
-      }).catch((e) => {
+      }).catch((e: Error) => {
         logger.error(e.message);
+        logger.error(e.stack);
         throw e;
       });
       await setupComponentTestGenerator(tree, defaultDirectiveOptions);
-      checkFileContentIsSame(
+      const filesContents = getFilesContents(
         tree,
         testFilePath,
         join(__dirname, './expected-files/directive/test-component.txt')
       );
+      expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
     });
   });
 });

@@ -10,10 +10,10 @@
       "description": "The name of the domain",
       "type": "string"
     },
-    "baseFolder": {
-      "description": "The folder that the grouping folder will be created in",
+    "groupingFolder": {
+      "description": "The app grouping folder that the domain will be created in",
       "type": "string"
     }
   },
-  "required": ["name", "baseFolder"]
+  "required": ["name", "groupingFolder"]
 }

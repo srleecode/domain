@@ -14,8 +14,9 @@ describe('setupComponentTestGenerator', () => {
     await libraryGenerator(tree, {
       name: 'feature-test-example',
       directory: 'test-app/test-domain',
-    }).catch((e) => {
+    }).catch((e: Error) => {
       logger.error(e.message);
+      logger.error(e.stack);
       throw e;
     });
     jest.spyOn(setupCtGeneratorMock, 'setupCtGenerator');
@@ -53,9 +54,20 @@ describe('setupComponentTestGenerator', () => {
   it('should remove generated cypress test file', async () => {
     jest.spyOn(tree, 'delete');
     await setupComponentTestGenerator(tree, defaultOptions);
-    tree.delete.call;
     expect(tree.delete).toHaveBeenCalledWith(
       'libs/test-app/test-domain/feature-test-example/src/sample.cy-spec.ts'
     );
+  });
+
+  it('should add required cypress support file content', async () => {
+    await setupComponentTestGenerator(tree, defaultOptions);
+    const projectConfig = readProjectConfiguration(
+      tree,
+      'test-app-test-domain-feature-test-example'
+    );
+    const supportFilePath = `${projectConfig.root}/cypress/support/index.ts`;
+    const supportFile = tree.read(supportFilePath).toString();
+    expect(supportFile).toMatch(`import '@jscutlery/cypress-harness/support';`);
+    expect(supportFile).toMatch(`(window as any)['global'] = window;`);
   });
 });

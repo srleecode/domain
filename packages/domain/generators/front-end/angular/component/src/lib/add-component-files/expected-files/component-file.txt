@@ -1,10 +1,12 @@
 import{ Component, OnInit } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector:'srlee-test-app-test-domain-feature-test-example',
+    selector:'test-app-test-domain-feature-test-example',
     templateUrl:'./test-example.component.html',
     styleUrls: ['./test-example.component.scss']
-}) export class TestExampleComponent implements OnInit {
+}) export class FeatureTestExampleComponent implements OnInit {
     constructor() {}
 
     ngOnInit():void {
@@ -12,8 +14,8 @@ import{ Component, OnInit } from '@angular/core';
 }
 
 @NgModule({
-  declarations: [TestExampleComponent],
+  declarations: [FeatureTestExampleComponent],
   imports: [CommonModule],
-  exports: [TestExampleComponent]
+  exports: [FeatureTestExampleComponent]
 })
 export class TestAppTestDomainFeatureTestExampleModule {}

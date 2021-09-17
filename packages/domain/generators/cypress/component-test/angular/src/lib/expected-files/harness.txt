@@ -1,5 +1,0 @@
-import { ComponentHarness } from '@angular/cdk/testing';
-
-export class TestAppTestDomainFeatureTestExampleHarness extends ComponentHarness {
-    static hostSelector = 'srlee-test-app-test-domain-feature-test-example';
-}

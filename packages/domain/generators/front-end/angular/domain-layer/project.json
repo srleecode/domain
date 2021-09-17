@@ -9,7 +9,8 @@
         "lintFilePatterns": [
           "packages/domain/generators/front-end/angular/domain-layer/**/*.ts"
         ]
-      }
+      },
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nrwl/jest:jest",

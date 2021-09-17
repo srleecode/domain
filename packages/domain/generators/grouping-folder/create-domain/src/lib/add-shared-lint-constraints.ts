@@ -1,16 +1,17 @@
 import { Tree } from '@nrwl/devkit';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   getGroupingFolders,
   updateDepConstraint,
-} from '@srleecode/domain/shared/utils';
+} from '../../../../shared/utils';
 import { CreateDomainGroupingFolderGeneratorSchema } from '../schema';
 
 export const addSharedLintContraints = (
   tree: Tree,
   options: CreateDomainGroupingFolderGeneratorSchema
 ): void => {
-  const { name, baseFolder } = options;
-  const groupingFolders = getGroupingFolders(tree, `${baseFolder}/${name}`);
+  const { name, groupingFolder } = options;
+  const groupingFolders = getGroupingFolders(tree, `${groupingFolder}/${name}`);
   const scope = `scope:${groupingFolders.app}-${groupingFolders.domain.join(
     '-'
   )}`;

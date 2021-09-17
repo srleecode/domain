@@ -2,9 +2,13 @@ import { readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createDomainLayerGenerator } from './generator';
 import { AngularCreateLibrarySchema } from '@srleecode/domain/front-end/shared';
-import * as frontEndSharedMock from '@srleecode/domain/front-end/shared';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import * as frontEndSharedMock from '../../../shared';
 import { CreateDomainLayerGeneratorSchema } from './schema';
-import { ApplicationType } from '@srleecode/domain/shared/utils';
+import {
+  ApplicationType,
+  getGroupingFolders,
+} from '@srleecode/domain/shared/utils';
 
 describe('createDomainLayerGenerator', () => {
   let tree: Tree;
@@ -28,13 +32,16 @@ describe('createDomainLayerGenerator', () => {
       enableIvy: true,
       publishable: false,
     };
+    const groupingFolders = getGroupingFolders(tree, schema.groupingFolder);
     await createDomainLayerGenerator(tree, schema);
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       '',
-      'domain-layer',
+      'domain',
       schema.groupingFolder,
+      groupingFolders.app,
       ApplicationType.Angular,
+      true,
       schema
     );
   });
@@ -45,7 +52,7 @@ describe('createDomainLayerGenerator', () => {
     });
     const projectConfig = readProjectConfiguration(
       tree,
-      'test-app-test-domain-domain-layer'
+      'test-app-test-domain-domain'
     );
     expect(projectConfig.targets['test']).toBeUndefined();
   });

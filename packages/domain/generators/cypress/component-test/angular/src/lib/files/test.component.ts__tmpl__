@@ -1,7 +1,15 @@
 import { Component } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { <%= moduleName %> } from './<%= fileName %>.directive';
 
 @Component({
   selector: '<%= prefix %>-test',
-  template: `<div <%= directiveTag %>/></div>`
+  template: `<div <%= directiveTag %>></div>`
 })
 export class TestComponent {}
+
+@NgModule({
+  declarations: [TestComponent],
+  imports: [<%= moduleName %>],
+  exports:[TestComponent]
+}) export class TestModule {}

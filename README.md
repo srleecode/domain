@@ -1,47 +1,56 @@
-# Domain schematics
+# Domain generators
 
-[![Join the chat at https://gitter.im/srleecode/domain](https://badges.gitter.im/srleecode/domain.svg)](https://gitter.im/srleecode/domain?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+With these generators, I am trying to develop tooling that utilises [nx](https://nx.dev/) and helps to reach the goals of [scalability](./documentation/goals/scalability.md) and [corrigibilty](./documentation/goals/corrigibility.md). The below are some areas that I think are important:
+ - [domain operations](./documentation/next/stategies.md#domain-operations) - domains are a common way to group related libraries. A problem is that by default there is no way to operate at the level of domains you can only operate at the level of libraires. For example, you cannot rename a domain. You need to instead rename all the libraries inside a domain. This is cumbersome. The domain generators allow you to perform operations at the domain level. 
+ - [layering](./documentation/next/stategies.md#layering) - a goal of this project is to have generators that help generate clean architecture. This means creating layers that expose stable expectations and decouple these from code that is not stable.
+ - [UI tests](./documentation/next/stategies.md#ui-tests) - interaction/E2E tests are the kind of tests we want to be writing as they give us the most confidence. They have been avoided in large amounts in the past because of issues with their speed and error specificity. UI tests are a less expesnive alternative to E2E tests for UI/interaction testing. They also enable outside-in tdd which is important for TDD on the front end. A goal of this project is to have generators that enable UI testing. 
+ - [component test harnesses](./documentation/next/stategies.md#component-test-harnesses) - E2E tests are normally brittle and broken easily by changes. One of the major reasons for this is that the selectors used for selecting elements are duplicated, longer than necessary and not tested. Component test harnesses allow you to expose apis for your components. These apis can then be tested using the UI tests. A goal of this project is to enable the easy generation of component test harnesses.
+ - [vscode extension](https://github.com/srleecode/vscode-domain-generators-extension) to be able to trigger generators - calling generators can get annoying, e.g. always having to type out the correct project name. A vscode extension has be written to allow the generators to be called more easily. The extension will launch the nx console and add appropriate default values based on the command trigger context.
 
-## Why you should use the domain schematics
+## Layer libraries and SCAM/SDAM libraries that make up domains
 
-### Nrwl nx already implicitly uses domains
+Layers:
+ - application: provides facades for use cases and handles state management 
+ - data-access: infrasturcture layer that implements data accesses, e.g. via HTTP or WebSockets
+domain
+ - domain: domain logic like calculating additional expenses and validations. It also contains the domain models (classes, interfaces, types) that are used by the domain 
+ - util: provides helper functions
 
-[Nrwl nx](https://github.com/nrwl/nx) recommends splitting libraries into [four different types](https://nx.dev/latest/angular/workspace/structure/library-types):
- - feature: libraries that contain smart (with access to data sources) UI components for specific business use cases or pages in an application
- - ui: libraries that contain only presentational components (also called "dumb" components)
- - data-access: libraries that contain code for interacting with a back-end system. It also includes all the code related to state management.
- - utility: libraries that contain low-level utilities used by many libraries and applications.
+SCAM (Single Component Angular Module) enable easy UI testing. Therefore, they are used for component and directives. The idea is that each component and directive has its own library and module. Domains can have the following libraries related to this:
+ - shell - contains the parent component  wrapper feature component in a domain. It also contains the routing and guards for the domain.This includes packaging the libraries in the domain and exposing them in a module that can be used for lazy loading.
+ - feature - contains so-called "smart components”
+ - ui - contains a presentational component (also called "dumb" component)
+ - directive - contains a directive
 
-Nx also recommends [grouping](https://nx.dev/latest/angular/workspace/structure/grouping-libraries) libraries by scope. A library's scope is either the application to which it belongs or (for larger applications) a section within that application. In this context, a group of these libraries with a scope are going to be referred to as a domain. Therefore, it can be said that nx already recommends using domains.
+## Generators
 
-### The need for domain schematics
+Grouping folders:
+ - appGroupingFolder
+   - creates an application grouping folder
+   - initialises the workspace for the given type of application, e.g. Angular.
+   - adds the layer rules into eslint  
+ - domainGroupingFolder 
+   - creates a domain grouping folder
+   - sets up the eslint rules for that domain
+ - moveGroupingFolder
+   - moves a grouping folder to another location. It also moves all of the libraries under the grouping folder
+ - removeGroupingFolder
+   - removes a grouping folder. It also removes all of the libraries under the grouping folder
 
-Even though nx recommends using domains, by default all operations must happen at the level of libraries. For example, you cannot rename a domain. You need to instead rename all the libraries inside a domain. This is cumbersome. The domain schematics allow you to perform operations at the domain level. 
+Angular domain libraries
+ - ngApplicationLayer - creates an application library in a domain
+ - ngComponent  - creates an SCAM library for a component. Based on the given type, this will create either a feature, shell or ui library in the domain
+ - ngDataAccessLayer - creates a data-access library in a domain
+ - ngDirective - creates a directive library in a domain
+ - ngDomainLayer - creates a data-access library in a domain
+ - ngRemoveLibrary - removes a library from a domain
+ - ngUtilLayer - creates a util library in a domain
 
-## Installation and required schematic libraries
+Other:
+ - domainTest - creates a project in a grouping for E2E tests related to that grouping folder
+ - mockFile - the naive approach of using mock files in your tests involves exporting them in the index.ts. This will cause the mock files to be included in the build output. As mock files are only used in the tests, this makes the build output larger than neccessary. This generator creates a seperate tsconfig path for the mock files which allows them to be imported into other libraies and not included in the build output
 
-```
-yarn add -D @srleecode/domain @nrwl/cypress @nrwl/storybook @nrwl/workspace @nrwl/angular @ngrx/schematics jest-junit
-
-# or 
- 
-npm install -D @srleecode/domain @nrwl/cypress @nrwl/storybook @nrwl/workspace @nrwl/angular jest-junit
-```
-
-jest-junit is required when the option addJestJunitReporter is true when creating domains.
-
-To more easily use these schematics install the vscode extension domain shematics: https://marketplace.visualstudio.com/items?itemName=srleecode.domain-schematics
-
-This extension launches the nx console and adds appropriate default values based on the command trigger context.
-  
-## What is a domain
-
-A domain is a folder that contains up to five libraries of which there are none or at most one of the following types:
- - feature: for smart components (containers)
- - ui: for dumb components
- - data-access: for state management and services
- - util: for model files, constants, validators, pipes and any other miscellaneous items, e.g. shared functions.
- - shell: for wrapping different libraries and exposing them all together so that they can be imported as a single import. Nx doesn't explicitly mention this type of library, but it does allow [other library types](https://nx.dev/latest/angular/workspace/structure/library-types#other-types) as long as you keep the number of library types low and clearly document what each type of library means. Shell libraries are useful for consuming domains in other domains.
+## tags
 
 When the domain libraries are created, the following tags are automatically added:
  - app - the application the library is for
@@ -82,53 +91,6 @@ As applications get more complicated, it becomes apparent that there are relatio
 
 ### Cypress projects
 
-Nx has schematics for cypress and storybook projects. However, the schematics operate at the level of libraries. The domain schematics allow you to add and remove cypress projects at the domain level. The schematics also move the cypress projects into the domain folder instead of the apps folder which is the default. For example, if you add a storybook project to the shared/table domain it will create two folders which are:
- - .cypress - this holds the cypress specifc config including test specs.
- - .storybook - this holds the storybook specific config
-
-Adding a storybook project for the domain shared/table would create a project called: storybook-shared-table which would have the following tasks:
- - storybook -  this would run the storybook instance
- - storybook-e2e - this would run the storybook instance and then the cypress tests
+Nx has schematics for cypress and storybook projects. However, the schematics operate at the level of libraries. The domain generators allow you to add cypress projects at the domain level. The schematics also move the cypress projects into the domain folder instead of the apps folder which is the default. For example, if you add a storybook project to the shared/table domain it will create a folder .e2e. This holds the cypress specifc config including test specs.
 
 Adding a e2e project for the domain shared/table would create a project called: e2e-shared-table which would have the default e2e task.
-
-## What generators are available
-
-  - component - creates a component
-  - create - creates a domain
-  - cypress-project - adds either an e2e or storybook cypress project to the domain
-  - libraries - adds one or more of the following library types (data-access, feature, shell, ui, util) to a domain. A library can only be added if it doesn't already exist in the domain
-  - move - moves a domain, i.e. updates the scope tags, renames the domains grouping folder, moves all the libraries in the domain and moves any related cypress projects
-  - private-api - adds an index file (private-api.ts) so that you can import content between libraries inside a domain and not outside of it
-  - remove - removes a domain, i.e. removes the domain grouping folder, all the domain libraries and any related cypress projects
-  - remove-cypress-project - removes either an e2e or storybook cypress project from the domain
-  - remove-libraries - removes a library from an existing domain. If this will remove the last library in the domain, the domain will be removed
-
-## Other things the generators do
-
- - tsconfig paths for mock files in the library - by default when you create a domain with a util library or add a util lirbary to a domain it will create a mock file and a tsconfig path for that mock file. The naive approach of using mock files in your tests involves exporting them in the index.ts. This will cause the mock files to be included in the build output. As mock files are only used in the tests, this makes the build output larger than neccessary.
- - component command generation - if you select the addComponentCommand option when generating a cypress project it will generate a component command for you, see https://github.com/srleecode/component-command-utils for information on component commands
- - jest-junit reporter config - if you select the addJestJunitReporter when you create a domain or add a library to a domain it will add the jest junit reporter config to the libraries jest file
-
-## Internally used generators
-
-The following generators are used internally by this project.
-
-@nrwl/cypress 
-
- - cypress-project - used for creating cypress projects
-
-@nrwl/storybook 
- - configuration - used for creating storybook projects
-
-@nrwl/workspace 
- - move - used for moving cypress projects and moving domain libraries
- - remove - used for removing cypress projects and removing domain libraries
-
-@nrwl/angular
- - lib - used for adding domain libraries
-
-## Limitations
-
-- the schematics been built for use with Angular. Other languages have not been considered
-- it is tested with the latest versions of the above internally used schematics. Some schematics might not work if you use ealier versions of the internally used schematics. 

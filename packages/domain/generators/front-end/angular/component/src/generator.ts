@@ -1,34 +1,50 @@
-import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
+import { Tree, convertNxGenerator, logger, formatFiles } from '@nrwl/devkit';
 import { CreateComponentGeneratorSchema } from './schema';
-import { setupComponentTestGenerator } from '@srleecode/domain/cypress/component-test/angular';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { setupComponentTestGenerator } from '../../../../cypress/component-test/angular/src/generator';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
   ElementType,
   ApplicationType,
-} from '@srleecode/domain/shared/utils';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
+  getGroupingFolders,
+} from '../../../../shared/utils';
 import { addComponentFiles } from './lib/add-component-files/add-component-files';
-import { addDomainLibrary } from '@srleecode/domain/front-end/shared';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { addDomainLibrary, getLibraryName } from '../../../shared';
+import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import { setIndexToComponentFile } from './lib/set-index-to-component-file';
 
 export async function createComponentGenerator(
   tree: Tree,
   options: CreateComponentGeneratorSchema
 ): Promise<void> {
-  const { name, groupingFolder, type, prefix, mountType } = options;
+  const { name, groupingFolder, type, mountType } = options;
   const dasherisedGroupingFolder = `${getDasherizedFolderPath(
     tree,
     groupingFolder
   )}`;
-  const libraryName = name ? `${type}-${dasherize(name)}` : type;
-  const projectName = `${dasherisedGroupingFolder}-${libraryName}`;
-  const selector = prefix ? `${prefix}-${projectName}` : `${projectName}`;
+  const libraryName = getLibraryName({
+    name,
+    type,
+    domainName: dasherisedGroupingFolder,
+  });
+  const typedName = name ? `${type}-${dasherize(name)}` : type;
+  const projectName = `${dasherisedGroupingFolder}-${typedName}`;
+  const selector = projectName;
+  const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
     tree,
     name,
     type,
     groupingFolder,
+    groupingFolders.app,
     ApplicationType.Angular,
+    false,
     options
+  );
+  tree.delete(
+    `${groupingFolder}/${libraryName}/src/lib/${projectName}.module.ts`
   );
   addComponentFiles(
     tree,
@@ -41,12 +57,17 @@ export async function createComponentGenerator(
     projectName,
     name,
     mountType,
+    prefix: groupingFolders.app,
     selector,
+    componentType: type,
     type: ElementType.Component,
-  }).catch((e) => {
+  }).catch((e: Error) => {
     logger.error(e.message);
+    logger.error(e.stack);
     throw e;
   });
+  setIndexToComponentFile(tree, groupingFolder, libraryName, name);
+  await formatFiles(tree);
 }
 
 export default createComponentGenerator;

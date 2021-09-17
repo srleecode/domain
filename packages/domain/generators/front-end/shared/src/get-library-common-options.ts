@@ -1,9 +1,7 @@
 import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
 import { LibraryCommonOptions } from './model/library-common-options.model';
-import {
-  getDasherizedFolderPath,
-  getDomainPath,
-} from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { getDasherizedFolderPath, getDomainPath } from '../../../shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { AngularCreateLibrarySchema } from './model/angular-create-library-schema.model';
 

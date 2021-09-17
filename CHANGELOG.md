@@ -6,6 +6,14 @@ Updates to this library will increment the patch version/
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [12.9.0]
+### Changed
+ - updated to 12.9.0 nrwl dependencies
+ - Major rewrite to:
+   - implement tooling for cypress component testing using https://github.com/jscutlery/test-utils
+   - seperate the generators into different libraries to allow the affected commands to work. This opens up the option of adding generators for other types of languages other than Angular
+   - simplify and improve the generators
+
 ## [12.6.3]
 ### Changed
  - updated to 12.6.3 nrwl dependencies

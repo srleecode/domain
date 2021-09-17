@@ -1,3 +1,3 @@
 export interface RemoveGeneratorSchema {
-  folder: string;
+  groupingFolder: string;
 }

@@ -1,6 +1,7 @@
 import { Tree } from '@nrwl/devkit';
 import { initialiseAngularWorkspace } from '../angular/initialise-angular-workspace';
-import { ApplicationType } from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ApplicationType } from '../../../../../shared/utils';
 import { addEslintLayerConstraints } from './add-eslint-layer-constraints';
 
 export const initialiseWorkspace = async (

@@ -1,0 +1,17 @@
+{
+  "root": "e2e/domain/mock-file",
+  "sourceRoot": "e2e/domain/mock-file/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "domain:build",
+        "jestConfig": "e2e/domain/mock-file/jest.config.js"
+      }
+    }
+  },
+  "implicitDependencies": [
+    "domain-mock-file"
+  ]
+}

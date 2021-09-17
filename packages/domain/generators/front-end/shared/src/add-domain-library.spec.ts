@@ -1,6 +1,7 @@
 import {
   addProjectConfiguration,
   ProjectConfiguration,
+  readJson,
   readProjectConfiguration,
   Tree,
 } from '@nrwl/devkit';
@@ -29,22 +30,43 @@ describe('addDomainLibrary', () => {
     await addDomainLibrary(
       tree,
       '',
-      'application-layer',
+      'application',
       'libs/test-app/test-domain',
+      'test-app',
       ApplicationType.Angular,
+      true,
       commonLibraryOptions
     );
     expect(libraryGeneratorMock.libraryGenerator).toHaveBeenCalledWith(
       expect.anything(),
       {
         directory: 'test-app/test-domain',
-        importPath: '@proj/test-app/test-domain/application-layer',
-        name: 'application-layer',
+        importPath: '@proj/test-app/test-domain/application',
+        name: 'application',
         standaloneConfig: false,
-        tags: 'app:test-app,scope:test-app-test-domain,type:application-layer',
+        tags: 'app:test-app,scope:test-app-test-domain,type:application',
+        prefix: 'test-app',
         ...commonLibraryOptions,
       }
     );
+  });
+
+  it('should clear lint file overrides', async () => {
+    await addDomainLibrary(
+      tree,
+      '',
+      'application',
+      'libs/test-app/test-domain',
+      'test-app',
+      ApplicationType.Angular,
+      true,
+      commonLibraryOptions
+    );
+    const lintJson = readJson(
+      tree,
+      'libs/test-app/test-domain/application/.eslintrc.json'
+    );
+    expect(lintJson.overrides).toEqual([]);
   });
 
   it('should add project to e2e projects implicitDependencies', async () => {
@@ -60,9 +82,11 @@ describe('addDomainLibrary', () => {
     await addDomainLibrary(
       tree,
       '',
-      'application-layer',
+      'application',
       'libs/test-app/test-domain',
+      'test-app',
       ApplicationType.Angular,
+      true,
       commonLibraryOptions
     );
     const projectConfig = readProjectConfiguration(
@@ -70,7 +94,7 @@ describe('addDomainLibrary', () => {
       'e2e-test-app-test-domain'
     );
     expect(projectConfig.implicitDependencies).toEqual([
-      'test-app-test-domain-application-layer',
+      'test-app-test-domain-application',
     ]);
   });
 });

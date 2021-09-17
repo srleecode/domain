@@ -1,5 +1,6 @@
 import { Tree } from '@nrwl/devkit';
-import { updateDepConstraint } from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { updateDepConstraint } from '../../../../../shared/utils';
 import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
 
 export const addEslintLayerConstraints = (tree: Tree) => {
@@ -7,7 +8,7 @@ export const addEslintLayerConstraints = (tree: Tree) => {
     depConstraints.push({
       sourceTag: 'type:shell',
       onlyDependOnLibsWithTags: [
-        'type:application-layer',
+        'type:application',
         'type:shell',
         'type:feature',
         'type:ui',
@@ -17,7 +18,7 @@ export const addEslintLayerConstraints = (tree: Tree) => {
     depConstraints.push({
       sourceTag: 'type:feature',
       onlyDependOnLibsWithTags: [
-        'type:application-layer',
+        'type:application',
         'type:feature',
         'type:ui',
         'type:util',
@@ -28,21 +29,21 @@ export const addEslintLayerConstraints = (tree: Tree) => {
       onlyDependOnLibsWithTags: ['type:feature', 'type:ui', 'type:util'],
     });
     depConstraints.push({
-      sourceTag: 'type:application-layer',
+      sourceTag: 'type:application',
       onlyDependOnLibsWithTags: [
-        'type:application-layer',
-        'type:data-access-layer',
-        'type:domain-layer',
+        'type:application',
+        'type:data-access',
+        'type:domain',
         'type:util',
       ],
     });
     depConstraints.push({
-      sourceTag: 'type:domain-layer',
-      onlyDependOnLibsWithTags: ['type:domain-layer', 'type:util'],
+      sourceTag: 'type:domain',
+      onlyDependOnLibsWithTags: ['type:domain', 'type:util'],
     });
     depConstraints.push({
-      sourceTag: 'type:data-access-layer',
-      onlyDependOnLibsWithTags: ['type:data-access-layer', 'type:util'],
+      sourceTag: 'type:data-access',
+      onlyDependOnLibsWithTags: ['type:data-access', 'type:util'],
     });
     depConstraints.push({
       sourceTag: 'type:util',

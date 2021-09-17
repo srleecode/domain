@@ -2,6 +2,7 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { getProjects, Tree } from '@nrwl/devkit';
 import { moveGenerator } from './generator';
 import { libraryGenerator } from '@nrwl/workspace';
+import { setupDomainTestGenerator } from '@srleecode/domain/cypress/domain-test';
 
 describe('moveGenerator', () => {
   let appTree: Tree;
@@ -16,6 +17,9 @@ describe('moveGenerator', () => {
       name: 'shell',
       directory: `test-app/second-test-domain`,
     });
+    await setupDomainTestGenerator(appTree, {
+      groupingFolder: 'libs/test-app/test-domain',
+    });
   };
 
   beforeEach(() => {
@@ -25,7 +29,7 @@ describe('moveGenerator', () => {
   it('should be no changes when no projects root starts with given folder', async () => {
     const existingFileChanges = appTree.listChanges();
     await moveGenerator(appTree, {
-      folder: originalFolder,
+      groupingFolder: originalFolder,
       destination,
     });
     expect(appTree.listChanges()).toEqual(existingFileChanges);
@@ -34,13 +38,14 @@ describe('moveGenerator', () => {
   it('should move all projects under the given folder', async () => {
     await addProjects();
     await moveGenerator(appTree, {
-      folder: originalFolder,
+      groupingFolder: originalFolder,
       destination,
     });
     const projects = getProjects(appTree);
     expect([...projects.keys()]).toEqual([
       'second-test-app-second-test-domain-shell',
       'second-test-app-test-domain-data-access',
+      'second-test-app-test-domain-e2e',
     ]);
   });
 
@@ -51,7 +56,7 @@ describe('moveGenerator', () => {
     });
     let projects = getProjects(appTree);
     await moveGenerator(appTree, {
-      folder: originalFolder,
+      groupingFolder: originalFolder,
       destination,
     });
     projects = getProjects(appTree);

@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SetupDomainTestGenerator",
+  "title": "Setup Domain Test Generator Schema",
+  "cli": "nx",
+  "type": "object",
+  "description": "Creates cypress domain test files",
+  "properties": {
+    "groupingFolder": {
+      "description": "The grouping folder for the domain",
+      "type": "string"
+    }
+  },
+  "required": ["groupingFolder"]
+}

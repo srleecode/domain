@@ -1,23 +1,16 @@
 import { logger, Tree, updateJson } from '@nrwl/devkit';
 import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
+import { getBoundariesRule } from './get-boundaries-rule';
+import { getLintFilePath } from './get-lint-file-path';
 
 export function updateDepConstraint(
   tree: Tree,
   update: (depConstraints: DepConstraint[]) => void
 ) {
-  let filePath = '';
-  let boundariesRule = '';
+  const filePath = getLintFilePath(tree);
+  const boundariesRule = getBoundariesRule(tree);
 
-  if (tree.exists('tslint.json')) {
-    filePath = 'tslint.json';
-    boundariesRule = 'nx-enforce-module-boundaries';
-  } else if (tree.exists('.eslintrc.json')) {
-    filePath = '.eslintrc.json';
-    boundariesRule = '@nrwl/nx/enforce-module-boundaries';
-  } else if (tree.exists('.eslintrc')) {
-    filePath = '.eslintrc';
-    boundariesRule = '@nrwl/nx/enforce-module-boundaries';
-  } else {
+  if (!filePath && !boundariesRule) {
     logger.info('Cannot add linting rules: linting config file does not exist');
     return;
   }
@@ -25,12 +18,11 @@ export function updateDepConstraint(
   if (filePath === 'tslint.json') {
     updateJson(tree, filePath, (json) => {
       let depConstraints = [];
-      if (json.rules['nx-enforce-module-boundaries']) {
-        depConstraints =
-          json.rules['nx-enforce-module-boundaries'][1].depConstraints;
+      if (json.rules[boundariesRule]) {
+        depConstraints = json.rules[boundariesRule][1].depConstraints;
       }
       update(depConstraints);
-      json.rules['nx-enforce-module-boundaries'][1].depConstraints =
+      json.rules[boundariesRule][1].depConstraints =
         getDedupedDepConstraints(depConstraints);
       return json;
     });

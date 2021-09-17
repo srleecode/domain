@@ -54,7 +54,7 @@ describe('updateDepConstraint', () => {
       });
     });
 
-    it('should remove dependency constraint if it already exists in eslintrc.json', () => {
+    it('should not add dependency constraint if it already exists in eslintrc.json', () => {
       addDependency();
       addDependency();
       const eslint = readJson(appTree, '.eslintrc.json');

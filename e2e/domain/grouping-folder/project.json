@@ -1,0 +1,21 @@
+{
+  "root": "e2e/domain/grouping-folder",
+  "sourceRoot": "e2e/domain/grouping-folder/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "domain:build",
+        "jestConfig": "e2e/domain/grouping-folder/jest.config.js"
+      }
+    }
+  },
+  "implicitDependencies": [
+    "domain-grouping-folder-create-app",
+    "domain-grouping-folder-create-domain",
+    "domain-grouping-folder-move",
+    "domain-grouping-folder-remove",
+    "domain-grouping-folder-shared"
+  ]
+}

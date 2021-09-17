@@ -11,7 +11,6 @@ export interface CreateComponentGeneratorSchema
   name?: string;
   mountType?: MountType;
   type?: ComponentType;
-  prefix?: string;
   displayBlock?: boolean;
   viewEncapsulation?: ViewEncapsulation;
   style?: StyleType;

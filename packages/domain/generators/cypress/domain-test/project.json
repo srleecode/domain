@@ -1,0 +1,25 @@
+{
+  "root": "packages/domain/generators/cypress/domain-test",
+  "sourceRoot": "packages/domain/generators/cypress/domain-test/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/domain/generators/cypress/domain-test/**/*.ts"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/domain/generators/cypress/domain-test"],
+      "options": {
+        "jestConfig": "packages/domain/generators/cypress/domain-test/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["package:domain-cypress", "scope:domain-cypress-domain-test"]
+}

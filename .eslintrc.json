@@ -34,6 +34,8 @@
                 "sourceTag": "package:domain-grouping-folder",
                 "onlyDependOnLibsWithTags": [
                   "scope:domain-grouping-folder-shared",
+                  "scope:domain-cypress-domain-test",
+                  "scope:domain-init-ng-add",
                   "scope:domain-shared-utils",
                   "scope:domain-shared-test-utils"
                 ]

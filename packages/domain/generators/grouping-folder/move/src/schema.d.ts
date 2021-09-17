@@ -1,4 +1,4 @@
 export interface MoveGeneratorSchema {
-  folder: string;
+  groupingFolder: string;
   destination: string;
 }

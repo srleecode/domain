@@ -1,5 +1,6 @@
 import { Tree } from '@nrwl/devkit';
-import { ApplicationType } from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ApplicationType } from '../../../../../shared/utils';
 
 export const isAppFolderExisting = (
   tree: Tree,
