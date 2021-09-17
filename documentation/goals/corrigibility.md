@@ -2,7 +2,7 @@
 
  > A decision is easy to correct, or highly corrigible, when, if it is mistaken, the mistake can be discovered quickly and cheaply and when the mistake imposes only small costs which can be eliminated quickly and at little expense. - David Collingridge, The Control of Technology (NY, St. Martin’s Press, 1980)
 
-Software projects are often built in such a way that they become locked into the particular frameworks, or tooling that has have chosen. After this happens it is extremely costly to change it and it becomes more costly overtime as more functionality and tests are added based on those choices. This is because decisions like this have a legacy as new functionality will build on top of them.
+Software projects are often built in such a way that they become locked into the particular frameworks, or tooling that has been chosen. After this happens it is extremely costly to change it and it becomes more costly overtime as more functionality and tests are added based on those choices. This is because decisions like this have a legacy as new functionality will build on top of them.
 
 Being locked into something reduces your agency and it means there are massive costs associated with change. This is dangerous. Companies today are becoming more complex and the frequency of wrong decisions is increasing. The environment and the best practices are also rapdily changing. Therefore, there is a need to maximize their ability to be able to change and a desire to have solid predictions before commitments are made. That is, there is a need for corigibility.
 
@@ -10,7 +10,7 @@ Corrigibility is a term that means capable of being corrected, reformed or impro
 
 The essence of an approach that allows corrigibility is to take small steps and have an exit strategy.
 
-We want to test stable expectations like behaviors so that we know that our code is working correclty. As part of this testing, we often mock out things like service calls to improve the performance of the tests. Mocking allows targetted tests, but it also sets us new expectations. Theese expectations should be tested as the reliability and valididty of the tests depends on the accurancy of the expectations setup in the mocks.
+We want to test stable expectations like behaviors so that we know that our code is working correclty. As part of this testing, we often mock out things like service calls to improve the performance of the tests. Mocking allows targetted tests, but it also sets us new expectations. These expectations should be tested as the reliability and valididty of the tests depends on the accurancy of the expectations setup in the mocks.
 
 ## Small steps
 
