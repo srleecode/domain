@@ -10,6 +10,7 @@ export const addEslintLayerConstraints = (tree: Tree) => {
       onlyDependOnLibsWithTags: [
         'type:application',
         'type:shell',
+        'type:directive',
         'type:feature',
         'type:ui',
         'type:util',
@@ -20,13 +21,27 @@ export const addEslintLayerConstraints = (tree: Tree) => {
       onlyDependOnLibsWithTags: [
         'type:application',
         'type:feature',
+        'type:directive',
         'type:ui',
         'type:util',
       ],
     });
     depConstraints.push({
       sourceTag: 'type:ui',
-      onlyDependOnLibsWithTags: ['type:feature', 'type:ui', 'type:util'],
+      onlyDependOnLibsWithTags: [
+        'type:feature',
+        'type:directive',
+        'type:ui',
+        'type:util',
+      ],
+    });
+    depConstraints.push({
+      sourceTag: 'type:directive',
+      onlyDependOnLibsWithTags: [
+        'type:application',
+        'type:directive',
+        'type:util',
+      ],
     });
     depConstraints.push({
       sourceTag: 'type:application',
@@ -43,7 +58,11 @@ export const addEslintLayerConstraints = (tree: Tree) => {
     });
     depConstraints.push({
       sourceTag: 'type:data-access',
-      onlyDependOnLibsWithTags: ['type:data-access', 'type:util'],
+      onlyDependOnLibsWithTags: [
+        'type:data-access',
+        'type:domain',
+        'type:util',
+      ],
     });
     depConstraints.push({
       sourceTag: 'type:util',
