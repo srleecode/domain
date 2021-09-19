@@ -22,6 +22,15 @@ SCAM (Single Component Angular Module) enable easy UI testing. Therefore, they a
  - ui - contains a presentational component (also called "dumb" component)
  - directive - contains a directive
 
+## Testing a domain
+
+The different layers use different testing approaches:
+ - application: the tests cover use cases of the domain. HttpMockModule is used to mock out any http calls. 
+ - data-access: the tests cover that external api are called correctly. This layer should should export the HttpMock[] that is going be used in the application and component tests to mock out the http calls.
+ - domain: there should be no tests in the domain layer as this code isinherently unstable
+ - util: Tests cover everything that is exposed. 
+ - components/directives: Tests use UI tests and cover the use cases of the components/directives. HttpMockModule is used to mock out any http calls. 
+
 ## Generators
 
 Grouping folders:

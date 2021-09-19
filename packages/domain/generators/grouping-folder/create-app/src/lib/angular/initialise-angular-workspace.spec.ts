@@ -8,14 +8,12 @@ describe('initialiseAngularWorkspace', () => {
 
   beforeEach(async () => {
     tree = createTreeWithEmptyWorkspace();
-    await ngAddGenerator(tree)
+    await ngAddGenerator(tree);
   });
 
   it('should add component testing file', async () => {
     await initialiseAngularWorkspace(tree);
-    expect(
-      tree.exists(`.component-testing/global-mount-options.constant.ts`)
-    ).toBe(true);
+    expect(tree.exists(`.component-testing/index.ts`)).toBe(true);
   });
 
   it('should add component testing ts config path', async () => {
@@ -23,6 +21,6 @@ describe('initialiseAngularWorkspace', () => {
     const tsConfig = readJson(tree, 'tsconfig.base.json');
     expect(
       tsConfig.compilerOptions.paths[`@cypress/component-testing`]
-    ).toEqual([`.component-testing/global-mount-options.constant.ts`]);
+    ).toEqual([`.component-testing/index.ts`]);
   });
 });

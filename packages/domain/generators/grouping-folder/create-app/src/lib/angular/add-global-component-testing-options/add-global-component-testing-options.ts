@@ -12,7 +12,7 @@ export const addGlobalComponentTestingOptions = (tree: Tree): void => {
       }
     }
     json.compilerOptions.paths[`@cypress/component-testing`] = [
-      `.component-testing/global-mount-options.constant.ts`,
+      `.component-testing/index.ts`,
     ];
     return json;
   });
