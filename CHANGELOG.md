@@ -6,6 +6,10 @@ Updates to this library will increment the patch version/
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [13.1.1]
+## Changed
+ - updated to 13.1.1 nrwl dependencies
+
 ## [12.9.1]
 ## Changed
  - Added HttpMockModule to angular app grouping folder init

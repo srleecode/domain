@@ -26,8 +26,5 @@
     "e2e-domain-front-end-angular": "e2e/domain/front-end/angular",
     "e2e-domain-grouping-folder": "e2e/domain/grouping-folder",
     "e2e-domain-mock-file": "e2e/domain/mock-file"
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/workspace"
   }
 }
