@@ -6,16 +6,16 @@ import {
 } from '@nrwl/devkit';
 
 export async function ngAddGenerator(tree: Tree) {
-  const nrwlVersion = '12.9.0';
+  const nrwlVersion = '13.1.3';
   addDependenciesToPackageJson(
     tree,
     {},
     {
       '@nrwl/angular': nrwlVersion,
       '@nrwl/cypress': nrwlVersion,
-      '@jscutlery/cypress-angular': '0.5.1',
-      '@jscutlery/cypress-harness': '0.3.6',
-      '@angular/cdk': '12.2.3',
+      '@jscutlery/cypress-angular': '0.8.4',
+      '@jscutlery/cypress-harness': '0.3.9',
+      '@angular/cdk': '12.2.6',
       'cypress-pipe': '2.0.0',
     }
   );

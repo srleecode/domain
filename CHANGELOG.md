@@ -6,6 +6,10 @@ Updates to this library will increment the patch version/
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [13.1.3]
+## Changed
+ - updated to 13.1.3 nrwl dependencies
+
 ## [13.1.1]
 ## Changed
  - updated to 13.1.1 nrwl dependencies
