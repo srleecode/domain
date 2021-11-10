@@ -32,9 +32,10 @@ export const addSharedLintContraints = (
       sourceTag: scope,
       onlyDependOnLibsWithTags: [`scope:${groupingFolders.app}-shared`],
     });
+    const appType = groupingFolders.app.split('-')?.[0];
     depConstraints.push({
       sourceTag: scope,
-      onlyDependOnLibsWithTags: [`app:shared`],
+      onlyDependOnLibsWithTags: [`app:${appType}-shared`],
     });
   });
 };

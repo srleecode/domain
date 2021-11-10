@@ -5,15 +5,15 @@ import { GLOBAL_MOUNT_OPTIONS } from '@cypress/component-testing';<% if(isDirect
 export default {
   component: <%= className %>,
   title: '<%= storybookTitle %>',
-} as Meta;
-
-const Template: Story<<%= className %>> = () => ({
-  component: <%= className %>,
   decorators: [
     moduleMetadata({
       imports: [ <%= moduleName %><% if(isDirective) { %>, TestModule<% } %>, ...GLOBAL_MOUNT_OPTIONS.imports ]
     })
   ]
+} as Meta;
+
+const Template: Story<<%= className %>> = (args) => ({
+  props: args
 });
 
 export const Default = Template.bind({});

@@ -10,7 +10,7 @@ import { dasherize } from '@nrwl/workspace/src/utils/strings';
 describe('test file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
-  defaultOptions.name
+    defaultOptions.name
   )}.component.spec.ts`;
 
   beforeEach(() => {
@@ -47,5 +47,17 @@ describe('test file', () => {
       unitTestType: UnitTestType.NoTests,
     });
     expect(tree.exists(testFilePath)).toBe(false);
+  });
+  it('should not create test file when unitTestType is NoTests', async () => {
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      name: '',
+      unitTestType: UnitTestType.NoTests,
+    });
+    expect(
+      tree.exists(
+        `${defaultOptions.groupingFolder}/feature/src/lib/feature.component.spec.ts`
+      )
+    ).toBe(false);
   });
 });

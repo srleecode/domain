@@ -6,10 +6,10 @@ import { CreateDomainGroupingFolderGeneratorSchema } from './schema';
 describe('createAppGroupingFolderGenerator', () => {
   let tree: Tree;
   const options: CreateDomainGroupingFolderGeneratorSchema = {
-    groupingFolder: 'libs/test-app',
+    groupingFolder: 'libs/ng-test-app',
     name: 'test-domain',
   };
-  const domainScope = 'scope:test-app-test-domain';
+  const domainScope = 'scope:ng-test-app-test-domain';
 
   const expectDepConstraint = (dependencyTag: string): void => {
     const eslint = readJson(tree, '.eslintrc.json');
@@ -51,19 +51,19 @@ describe('createAppGroupingFolderGenerator', () => {
 
   it('should allow imports from inside shared app grouping folder', async () => {
     await createDomainGroupingFolderGenerator(tree, options);
-    expectDepConstraint('app:shared');
+    expectDepConstraint('app:ng-shared');
   });
 
   it('should allow imports from inside shared domain in app grouping folder', async () => {
     await createDomainGroupingFolderGenerator(tree, options);
-    expectDepConstraint('scope:test-app-shared');
+    expectDepConstraint('scope:ng-test-app-shared');
   });
 
   it('should allow imports from parent domains shared grouping folder when child domain', async () => {
     await createDomainGroupingFolderGenerator(tree, {
-      groupingFolder: 'libs/test-app/parent-domain',
+      groupingFolder: 'libs/ng-test-app/parent-domain',
       name: 'child-domain',
     });
-    expectDepConstraint('scope:test-app-parent-domain-shared');
+    expectDepConstraint('scope:ng-test-app-parent-domain-shared');
   });
 });

@@ -86,4 +86,14 @@ describe('createComponentGenerator', () => {
       .toString();
     expect(index).toBe(`export * from './lib/test-example.component';`);
   });
+  it('should set index to component file when name is empty', async () => {
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      name: '',
+    });
+    const index = tree
+      .read(`${defaultOptions.groupingFolder}/feature/src/index.ts`)
+      .toString();
+    expect(index).toBe(`export * from './lib/feature.component';`);
+  });
 });

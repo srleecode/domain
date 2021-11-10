@@ -66,7 +66,7 @@ export async function createComponentGenerator(
     logger.error(e.stack);
     throw e;
   });
-  setIndexToComponentFile(tree, groupingFolder, libraryName, name);
+  setIndexToComponentFile(tree, groupingFolder, libraryName, name, type);
   await formatFiles(tree);
 }
 

@@ -75,6 +75,7 @@ describe('createAppGroupingFolderGenerator', () => {
         {
           onlyDependOnLibsWithTags: [
             'type:application',
+            'type:domain',
             'type:shell',
             'type:directive',
             'type:feature',
@@ -86,6 +87,7 @@ describe('createAppGroupingFolderGenerator', () => {
         {
           onlyDependOnLibsWithTags: [
             'type:application',
+            'type:domain',
             'type:feature',
             'type:directive',
             'type:ui',
@@ -96,6 +98,7 @@ describe('createAppGroupingFolderGenerator', () => {
         {
           onlyDependOnLibsWithTags: [
             'type:feature',
+            'type:domain',
             'type:directive',
             'type:ui',
             'type:util',
@@ -105,6 +108,7 @@ describe('createAppGroupingFolderGenerator', () => {
         {
           onlyDependOnLibsWithTags: [
             'type:application',
+            'type:domain',
             'type:directive',
             'type:util',
           ],
@@ -120,7 +124,7 @@ describe('createAppGroupingFolderGenerator', () => {
           sourceTag: 'type:application',
         },
         {
-          onlyDependOnLibsWithTags: ['type:domain', 'type:util'],
+          onlyDependOnLibsWithTags: ['type:domain'],
           sourceTag: 'type:domain',
         },
         {
@@ -132,7 +136,7 @@ describe('createAppGroupingFolderGenerator', () => {
           sourceTag: 'type:data-access',
         },
         {
-          onlyDependOnLibsWithTags: ['type:util'],
+          onlyDependOnLibsWithTags: ['type:domain', 'type:util'],
           sourceTag: 'type:util',
         },
       ]);

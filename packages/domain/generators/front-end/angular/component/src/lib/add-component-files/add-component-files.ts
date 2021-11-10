@@ -35,6 +35,6 @@ export const addComponentFiles = (
   };
   generateFiles(tree, join(__dirname, './files'), target, templateOptions);
   if (options.unitTestType === UnitTestType.NoTests) {
-    tree.delete(join(target, `${dasherize(name)}.component.spec.ts`));
+    tree.delete(join(target, `${dasherize(name) || type}.component.spec.ts`));
   }
 };
