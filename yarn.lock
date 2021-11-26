@@ -2318,7 +2318,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jscutlery/cypress-angular@npm:0.8.4":
+"@jscutlery/cypress-angular@npm:^0.8.4":
   version: 0.8.4
   resolution: "@jscutlery/cypress-angular@npm:0.8.4"
   dependencies:
@@ -2528,7 +2528,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/devkit@npm:13.2.2":
+"@nrwl/devkit@npm:13.2.2, @nrwl/devkit@npm:^13.0.2":
   version: 13.2.2
   resolution: "@nrwl/devkit@npm:13.2.2"
   dependencies:
@@ -2556,23 +2556,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/devkit@npm:^13.0.2":
+"@nrwl/eslint-plugin-nx@npm:13.2.2":
   version: 13.2.2
-  resolution: "@nrwl/devkit@npm:13.2.2"
-  dependencies:
-    "@nrwl/tao": 13.2.2
-    ejs: ^3.1.5
-    ignore: ^5.0.4
-    rxjs: ^6.5.4
-    semver: 7.3.4
-    tslib: ^2.3.0
-  checksum: 2f93daf83cc7f96ec1cb87d6948f7bbdde91e0826ab2b3594c0447c00013649ddff2fc28337a3f05b6394fad99547dbfac0bf3e9f4a06d8b2643204a64ab38bf
-  languageName: node
-  linkType: hard
-
-"@nrwl/eslint-plugin-nx@npm:13.1.3":
-  version: 13.1.3
-  resolution: "@nrwl/eslint-plugin-nx@npm:13.1.3"
+  resolution: "@nrwl/eslint-plugin-nx@npm:13.2.2"
   dependencies:
     "@nrwl/devkit": 13.2.2
     "@nrwl/workspace": 13.2.2
@@ -2651,7 +2637,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/nx-cloud@npm:latest":
+"@nrwl/nx-cloud@latest":
   version: 12.5.4
   resolution: "@nrwl/nx-cloud@npm:12.5.4"
   dependencies:
@@ -3097,24 +3083,26 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@srleecode/domain@workspace:."
   dependencies:
-    "@angular-devkit/schematics": ^12.2.1
+    "@angular-devkit/schematics": 13.0.3
+    "@angular/core": ^13.0.0
     "@commitlint/cli": ^15.0.0
     "@commitlint/config-angular": ^15.0.0
     "@jscutlery/cypress-angular": ^0.8.4
     "@jscutlery/semver": ^2.13.3
-    "@nrwl/angular": 13.1.3
-    "@nrwl/cli": 13.1.3
-    "@nrwl/cypress": 13.1.3
-    "@nrwl/devkit": 13.1.3
-    "@nrwl/eslint-plugin-nx": 13.1.3
-    "@nrwl/jest": 13.1.3
-    "@nrwl/linter": 13.1.3
-    "@nrwl/node": 13.1.3
-    "@nrwl/nx-plugin": 13.1.3
-    "@nrwl/react": 13.1.3
-    "@nrwl/storybook": 13.1.3
-    "@nrwl/tao": 13.1.3
-    "@nrwl/workspace": 13.1.3
+    "@nrwl/angular": 13.2.2
+    "@nrwl/cli": 13.2.2
+    "@nrwl/cypress": 13.2.2
+    "@nrwl/devkit": 13.2.2
+    "@nrwl/eslint-plugin-nx": 13.2.2
+    "@nrwl/jest": 13.2.2
+    "@nrwl/linter": 13.2.2
+    "@nrwl/node": 13.2.2
+    "@nrwl/nx-cloud": latest
+    "@nrwl/nx-plugin": 13.2.2
+    "@nrwl/react": 13.2.2
+    "@nrwl/storybook": 13.2.2
+    "@nrwl/tao": 13.2.2
+    "@nrwl/workspace": 13.2.2
     "@types/jest": 27.0.2
     "@types/node": 16.6.1
     "@typescript-eslint/eslint-plugin": 4.33.0
@@ -3128,7 +3116,7 @@ __metadata:
     ts-jest: 27.0.5
     ts-node: ~10.2.0
     tslib: ^2.3.1
-    typescript: 4.4.4
+    typescript: 4.3.5
     yarn: ^1.22.17
   languageName: unknown
   linkType: soft
@@ -8534,9 +8522,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.3.564, electron-to-chromium@npm:^1.3.896":
-  version: 1.4.3
-  resolution: "electron-to-chromium@npm:1.4.3"
-  checksum: e78480718ca7c3c8e16c5c4d22bc8055b04f1ff17f33fe33767c62edd5af06e936ba40ef28839813222418376ecfa2fc5515134dba6f24b7e1c6e856ce5e0862
+  version: 1.4.4
+  resolution: "electron-to-chromium@npm:1.4.4"
+  checksum: df54c523cf40cb3d790ffa5c6c8f7c166ce11a85e8d1207f1bcec3d917b49c3a43acb7927d07c075e8372c72261eb18ea0b381ebf2cb0854b861445a1ce8b653
   languageName: node
   linkType: hard
 
@@ -15511,13 +15499,13 @@ __metadata:
   linkType: hard
 
 "postcss@npm:^8.2.15, postcss@npm:^8.3.5":
-  version: 8.4.1
-  resolution: "postcss@npm:8.4.1"
+  version: 8.4.3
+  resolution: "postcss@npm:8.4.3"
   dependencies:
     nanoid: ^3.1.30
     picocolors: ^1.0.0
     source-map-js: ^1.0.1
-  checksum: 89ede712ccca478f3d3bc4137eac8efa9cc434ab193ae5348dfba343ab5144faa39a71e3cf53e2b45bc01e705829259706f9610d7c7c46a7a3affccd56b3e74f
+  checksum: fbc0d43380c2d7ee905081577c79b18a341a3445d34211385c33d57cc38f3abe6859b2ad94b96f41bb4107133a1cd5f317d82bb3f603280433f1dcf5dc62acb5
   languageName: node
   linkType: hard
 
@@ -18617,7 +18605,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^9, ts-node@npm:^9.1.1":
+"ts-node@npm:^9, ts-node@npm:^9.1.1, ts-node@npm:~9.1.1":
   version: 9.1.1
   resolution: "ts-node@npm:9.1.1"
   dependencies:
@@ -18732,7 +18720,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2, tslib@npm:^2.0.0, tslib@npm:^2.0.3, tslib@npm:^2.2.0, tslib@npm:^2.3.0, tslib@npm:^2.3.1":
+"tslib@npm:^2, tslib@npm:^2.0.0, tslib@npm:^2.0.3, tslib@npm:^2.3.0, tslib@npm:^2.3.1":
   version: 2.3.1
   resolution: "tslib@npm:2.3.1"
   checksum: de17a98d4614481f7fcb5cd53ffc1aaf8654313be0291e1bfaee4b4bb31a20494b7d218ff2e15017883e8ea9626599b3b0e0229c18383ba9dce89da2adf15cb9
@@ -18843,13 +18831,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:4.4.4":
-  version: 4.4.4
-  resolution: "typescript@npm:4.4.4"
+"typescript@npm:4.3.5":
+  version: 4.3.5
+  resolution: "typescript@npm:4.3.5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 89ecb8436bb48ef5594d49289f5f89103071716b6e4844278f4fb3362856e31203e187a9c76d205c3f0b674d221a058fd28310dbcbcf5d95e9a57229bb5203f1
+  checksum: bab033b5e2b0790dd35b77fd005df976ef80b8d84fd2c6e63cc31808151875beae9216e5a315fe7068e8499905c3c354248fe83272cdfc13b7705635f0c66c97
   languageName: node
   linkType: hard
 
@@ -18869,7 +18857,7 @@ __metadata:
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: bd629ad0da4a15d79aaad56baf3ee7d96f6a181760d430ae77f8c5325df7bffd9edee57544a3970e3651e8b796fe03a5838a7eb39c6d46cc3866c0b23d36a0dd
+  checksum: 61fc1a2ca5037420de5bbe17c6ddc4cbcc0d52301ed94f0a7b5821c55ff9eb96307f0816f745ca8f0fc87ed92f3951cde6d97cd6fd6bc6920c02ea63b5b26259
   languageName: node
   linkType: hard
 
