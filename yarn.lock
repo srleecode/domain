@@ -2489,7 +2489,6 @@ __metadata:
   version: 13.2.2
   resolution: "@nrwl/cli@npm:13.2.2"
   dependencies:
-    "@nrwl/tao": 13.2.2
     chalk: 4.1.0
     enquirer: ~2.3.6
     v8-compile-cache: 2.3.0
@@ -2532,7 +2531,6 @@ __metadata:
   version: 13.2.2
   resolution: "@nrwl/devkit@npm:13.2.2"
   dependencies:
-    "@nrwl/tao": 13.2.2
     ejs: ^3.1.5
     ignore: ^5.0.4
     rxjs: ^6.5.4
@@ -2546,7 +2544,6 @@ __metadata:
   version: 12.10.0
   resolution: "@nrwl/devkit@npm:12.10.0"
   dependencies:
-    "@nrwl/tao": 12.10.0
     ejs: ^3.1.5
     ignore: ^5.0.4
     rxjs: ^6.5.4
@@ -2653,7 +2650,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/nx-plugin@npm:13.2.2":
+"@nrwl/nx-plugin@npm:^13.2.2":
   version: 13.2.2
   resolution: "@nrwl/nx-plugin@npm:13.2.2"
   dependencies:
@@ -2715,27 +2712,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/tao@npm:12.10.0":
-  version: 12.10.0
-  resolution: "@nrwl/tao@npm:12.10.0"
-  dependencies:
-    chalk: 4.1.0
-    enquirer: ~2.3.6
-    fs-extra: ^9.1.0
-    jsonc-parser: 3.0.0
-    nx: 12.10.0
-    rxjs: ^6.5.4
-    rxjs-for-await: 0.0.2
-    semver: 7.3.4
-    tmp: ~0.2.1
-    tslib: ^2.0.0
-    yargs-parser: 20.0.0
-  bin:
-    tao: index.js
-  checksum: c490dd27804f9015ee5049f43e88a590bc37f301c431d98b2b1303f59ec5d0a4e6e2c8958e0da732692a7a2fd1828fd1b77d8af1d25f73423c4ffae7c0f83c76
-  languageName: node
-  linkType: hard
-
 "@nrwl/tao@npm:13.2.2":
   version: 13.2.2
   resolution: "@nrwl/tao@npm:13.2.2"
@@ -2754,6 +2730,27 @@ __metadata:
   bin:
     tao: index.js
   checksum: 9bf7ef57586be09e26ce66799205d19eb38be19f31c24dba7fc0e6b8f3cf1dea94fb300431f335904caabc501af599014035686f4af6f0df972fc53e95caa537
+  languageName: node
+  linkType: hard
+
+"@nrwl/tao@patch:@nrwl/tao@npm:13.2.2#.yarn/patches/@nrwl-tao-npm-13.2.2-701855e572::locator=%40srleecode%2Fdomain%40workspace%3A.":
+  version: 13.2.2
+  resolution: "@nrwl/tao@patch:@nrwl/tao@npm%3A13.2.2#.yarn/patches/@nrwl-tao-npm-13.2.2-701855e572::version=13.2.2&hash=9b4f55&locator=%40srleecode%2Fdomain%40workspace%3A."
+  dependencies:
+    chalk: 4.1.0
+    enquirer: ~2.3.6
+    fs-extra: ^9.1.0
+    jsonc-parser: 3.0.0
+    nx: 13.2.2
+    rxjs: ^6.5.4
+    rxjs-for-await: 0.0.2
+    semver: 7.3.4
+    tmp: ~0.2.1
+    tslib: ^2.3.0
+    yargs-parser: 20.0.0
+  bin:
+    tao: index.js
+  checksum: 057a097f0ef858fc363197cff1b237966f9b42132301d2bc972191b78516a179b2235e7091c59910e4c89907c203e52bc4db08be57c71c3354f2ac97c6f5801e
   languageName: node
   linkType: hard
 
@@ -3098,7 +3095,7 @@ __metadata:
     "@nrwl/linter": 13.2.2
     "@nrwl/node": 13.2.2
     "@nrwl/nx-cloud": latest
-    "@nrwl/nx-plugin": 13.2.2
+    "@nrwl/nx-plugin": ^13.2.2
     "@nrwl/react": 13.2.2
     "@nrwl/storybook": 13.2.2
     "@nrwl/tao": 13.2.2
@@ -14141,17 +14138,6 @@ __metadata:
   version: 2.2.0
   resolution: "nwsapi@npm:2.2.0"
   checksum: 5ef4a9bc0c1a5b7f2e014aa6a4b359a257503b796618ed1ef0eb852098f77e772305bb0e92856e4bbfa3e6c75da48c0113505c76f144555ff38867229c2400a7
-  languageName: node
-  linkType: hard
-
-"nx@npm:12.10.0":
-  version: 12.10.0
-  resolution: "nx@npm:12.10.0"
-  dependencies:
-    "@nrwl/cli": "*"
-  bin:
-    nx: bin/nx.js
-  checksum: eb07f7439e554ffc165693c13ead4467ccc655840156e62903cff31f589efcc061010f48202e9afe8d3f06479cdda19b9a9f3122b438b28ff9bda460f0491abe
   languageName: node
   linkType: hard
 

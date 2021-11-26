@@ -7,5 +7,11 @@
   "schematics": "./generators.json",
   "ng-add": {
     "save": "devDependencies"
-  }
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": "please-use-yarn",
+    "yarn": ">=1.22.7"
+  },
+  "packageManager": "yarn@3.2.0-rc.6"
 }

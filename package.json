@@ -49,7 +49,7 @@
     "@nrwl/linter": "13.2.2",
     "@nrwl/node": "13.2.2",
     "@nrwl/nx-cloud": "latest",
-    "@nrwl/nx-plugin": "13.2.2",
+    "@nrwl/nx-plugin": "^13.2.2",
     "@nrwl/react": "13.2.2",
     "@nrwl/storybook": "13.2.2",
     "@nrwl/tao": "13.2.2",
@@ -72,8 +72,11 @@
   },
   "engines": {
     "node": ">=16.0.0",
-    "npm": ">=8.0.0",
-    "yarn": ">=1.22.0"
+    "npm": "please-use-yarn",
+    "yarn": ">=3.0.0"
   },
-  "packageManager": "yarn@3.2.0-rc.6"
+  "packageManager": "yarn@3.2.0-rc.6",
+  "resolutions": {
+    "@nrwl/tao@13.2.2": "patch:@nrwl/tao@npm:13.2.2#.yarn/patches/@nrwl-tao-npm-13.2.2-701855e572"
+  }
 }
