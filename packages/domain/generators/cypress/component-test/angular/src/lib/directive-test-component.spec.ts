@@ -6,7 +6,7 @@ import {
   DIRECTIVES_LIB_PATH,
   LIB_PATH,
 } from '../default-options.constant';
-import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
+import { libraryGenerator } from '@nrwl/angular/generators';
 import { setupComponentTestGenerator } from '../generator';
 import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';

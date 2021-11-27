@@ -1,6 +1,6 @@
 import { logger, readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
+import { libraryGenerator } from '@nrwl/angular/generators';
 import { createMockFileGenerator } from './generator';
 
 describe('createMockFileGenerator', () => {

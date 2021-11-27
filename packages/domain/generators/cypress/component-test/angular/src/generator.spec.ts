@@ -3,7 +3,7 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import * as setupCtGeneratorMock from '@jscutlery/cypress-angular/src/generators/setup-ct/setup-ct';
 import { defaultOptions } from './default-options.constant';
 import { setupComponentTestGenerator } from './generator';
-import libraryGenerator from '@nrwl/angular/src/generators/library/library';
+import { libraryGenerator } from '@nrwl/angular/generators';
 
 describe('setupComponentTestGenerator', () => {
   let tree: Tree;
