@@ -7,7 +7,7 @@ index 259ff28b90bea84abd71e53d410798d9e71ba1db..921e72f111704bc3d5ddb3ac32e40abe
      const commands = {
          yarn: () => ({
 -            install: 'yarn',
-+            install: 'yarn install --immutable',
++            install: 'touch yarn.lock && yarn install',
              add: 'yarn add',
              addDev: 'yarn add -D',
              rm: 'yarn remove',
