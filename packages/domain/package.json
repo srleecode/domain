@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "engines": {
     "node": ">=16.0.0",
-    "npm": "please-use-yarn",
+    "npm": ">=8.0.0",
     "yarn": ">=1.22.7"
   },
   "executors": "./executors.json",
@@ -12,6 +12,5 @@
   "ng-add": {
     "save": "devDependencies"
   },
-  "packageManager": "yarn@3.2.0-rc.6",
   "schematics": "./generators.json"
 }

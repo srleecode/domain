@@ -30,10 +30,6 @@
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator"
   },
-  "resolutions": {
-    "@nrwl/tao@13.2.2": "patch:@nrwl/tao@npm:13.2.2#.yarn/patches/@nrwl-tao-npm-13.2.2-701855e572",
-    "@nrwl/nx-plugin@13.2.2": "patch:@nrwl/nx-plugin@npm:13.2.2#.yarn/patches/@nrwl-nx-plugin-npm-13.2.2-9ae4bffcd4"
-  },
   "dependencies": {
     "@angular/core": "^13.0.0",
     "tslib": "^2.3.1"
@@ -76,8 +72,7 @@
   },
   "engines": {
     "node": ">=16.0.0",
-    "npm": "please-use-yarn",
+    "npm": ">=8.0.0",
     "yarn": ">=1.22.17"
-  },
-  "packageManager": "yarn@3.2.0-rc.6"
+  }
 }
