@@ -55,6 +55,7 @@
     "@types/node": "16.6.1",
     "@typescript-eslint/eslint-plugin": "5.3.1",
     "@typescript-eslint/parser": "5.3.1",
+    "@yarnpkg/plugin-dlx": "^3.1.1",
     "@yarnpkg/plugin-patch": "^3.1.1-rc.4",
     "dotenv": "10.0.0",
     "eslint": "8.2.0",
