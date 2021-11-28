@@ -38,7 +38,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          # see: https://github.blog/2020-08-03-github-actions-improvements-for-fork-and-pull-request-workflows/
+          # regarding `pull_request_target`
+          ref: ${{ github.event.pull_request_target.head.ref }}
           fetch-depth: 0
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2
