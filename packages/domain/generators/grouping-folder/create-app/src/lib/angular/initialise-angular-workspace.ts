@@ -2,7 +2,7 @@ import { readJson, Tree } from '@nrwl/devkit';
 import { addGlobalComponentTestingOptions } from './add-global-component-testing-options/add-global-component-testing-options';
 import { cypressInitGenerator } from '@nrwl/cypress';
 import { ngAddGenerator } from '@jscutlery/cypress-angular/src/generators/ng-add/ng-add';
-import { angularInitGenerator } from '@nrwl/angular/src/generators/init/init';
+import { angularInitGenerator } from '@nrwl/angular/generators';
 
 export const initialiseAngularWorkspace = async (tree: Tree): Promise<void> => {
   const packageJson = readJson(tree, 'package.json');

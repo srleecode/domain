@@ -8,7 +8,7 @@ import {
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { addDomainLibrary } from './add-domain-library';
 import { AngularCreateLibrarySchema } from './model/angular-create-library-schema.model';
-import * as libraryGeneratorMock from '@nrwl/angular/generators';
+import * as libraryGeneratorMock from '@nrwl/angular/src/generators/library/library';
 import { ApplicationType } from '@srleecode/domain/shared/utils';
 
 describe('addDomainLibrary', () => {

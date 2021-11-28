@@ -8,4 +8,4 @@ git fetch origin --prune && git tag -l | xargs git tag -d && git fetch -t
 npx sort-package-json
 
 # after merging code, new package.json dependencies might be introduced
-yarn install
+npm install

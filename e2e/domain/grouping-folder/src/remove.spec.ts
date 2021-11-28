@@ -11,6 +11,7 @@ describe('remove', () => {
       `generate @srleecode/domain:removeGroupingFolder --groupingFolder ${groupingFolder}`
     );
   });
+
   it('should remove domain grouping folder', async () => {
     expect(fileExists(`${groupingFolder}/util/src/index.ts`)).toBe(false);
   });
