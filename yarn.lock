@@ -2690,6 +2690,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nrwl/nx-plugin@patch:@nrwl/nx-plugin@npm:13.3.0-beta.3#.yarn/patches/@nrwl-nx-plugin-npm-13.3.0-beta.3-f28720d9c3::locator=%40srleecode%2Fdomain%40workspace%3A.":
+  version: 13.3.0-beta.3
+  resolution: "@nrwl/nx-plugin@patch:@nrwl/nx-plugin@npm%3A13.3.0-beta.3#.yarn/patches/@nrwl-nx-plugin-npm-13.3.0-beta.3-f28720d9c3::version=13.3.0-beta.3&hash=592a10&locator=%40srleecode%2Fdomain%40workspace%3A."
+  dependencies:
+    "@nrwl/devkit": 13.3.0-beta.3
+    "@nrwl/jest": 13.3.0-beta.3
+    "@nrwl/linter": 13.3.0-beta.3
+    "@nrwl/node": 13.3.0-beta.3
+    fs-extra: ^9.1.0
+    rxjs: ^6.5.4
+    tslib: ^2.3.0
+    yargs: 15.4.1
+  checksum: c85b13e989925d104452e9d6ef48ffaeb8f0e7ac370a63a8eff173f9915b7c6f9c51e906ef0a59d5a1ed70eaf7cbb7a97e25e77fbbac915a66031c9aa6dfd7a2
+  languageName: node
+  linkType: hard
+
 "@nrwl/react@npm:13.3.0-beta.3":
   version: 13.3.0-beta.3
   resolution: "@nrwl/react@npm:13.3.0-beta.3"
@@ -2796,6 +2812,27 @@ __metadata:
   bin:
     tao: index.js
   checksum: 53006a10a3cc2345a637f8c2e47a5552718b5aa455eafb3063e56652dcf60baf25fc59cbbafed15077d1440874330da7b10c30bb156919caa3087fbed15160a6
+  languageName: node
+  linkType: hard
+
+"@nrwl/tao@patch:@nrwl/tao@npm:13.3.0-beta.3#.yarn/patches/@nrwl-tao-npm-13.3.0-beta.3-16932da4db::locator=%40srleecode%2Fdomain%40workspace%3A.":
+  version: 13.3.0-beta.3
+  resolution: "@nrwl/tao@patch:@nrwl/tao@npm%3A13.3.0-beta.3#.yarn/patches/@nrwl-tao-npm-13.3.0-beta.3-16932da4db::version=13.3.0-beta.3&hash=3d71e4&locator=%40srleecode%2Fdomain%40workspace%3A."
+  dependencies:
+    chalk: 4.1.0
+    enquirer: ~2.3.6
+    fs-extra: ^9.1.0
+    jsonc-parser: 3.0.0
+    nx: 13.3.0-beta.3
+    rxjs: ^6.5.4
+    rxjs-for-await: 0.0.2
+    semver: 7.3.4
+    tmp: ~0.2.1
+    tslib: ^2.3.0
+    yargs-parser: 20.0.0
+  bin:
+    tao: index.js
+  checksum: 54df68728bf598fa74bb217635ea0b9c81325a859edd1909d766bdde6b446b0551151622049a4a12760868ba32652e959adc605aa2069931c06d2c27c37915df
   languageName: node
   linkType: hard
 
