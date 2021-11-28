@@ -2817,7 +2817,7 @@ __metadata:
 
 "@nrwl/tao@patch:@nrwl/tao@npm:13.3.0-beta.3#.yarn/patches/@nrwl-tao-npm-13.3.0-beta.3-16932da4db::locator=%40srleecode%2Fdomain%40workspace%3A.":
   version: 13.3.0-beta.3
-  resolution: "@nrwl/tao@patch:@nrwl/tao@npm%3A13.3.0-beta.3#.yarn/patches/@nrwl-tao-npm-13.3.0-beta.3-16932da4db::version=13.3.0-beta.3&hash=3d71e4&locator=%40srleecode%2Fdomain%40workspace%3A."
+  resolution: "@nrwl/tao@patch:@nrwl/tao@npm%3A13.3.0-beta.3#.yarn/patches/@nrwl-tao-npm-13.3.0-beta.3-16932da4db::version=13.3.0-beta.3&hash=01e496&locator=%40srleecode%2Fdomain%40workspace%3A."
   dependencies:
     chalk: 4.1.0
     enquirer: ~2.3.6
@@ -2832,7 +2832,7 @@ __metadata:
     yargs-parser: 20.0.0
   bin:
     tao: index.js
-  checksum: 54df68728bf598fa74bb217635ea0b9c81325a859edd1909d766bdde6b446b0551151622049a4a12760868ba32652e959adc605aa2069931c06d2c27c37915df
+  checksum: 8caa819107d2411ee3e848e2555a100cd51ceceee9b83ef2bf9831f506a3cd09723cab218521a1cb052eb6528410e43a3eaf956fdb0374c62545cb289200a388
   languageName: node
   linkType: hard
 
@@ -3194,8 +3194,8 @@ __metadata:
     husky: ^7.0.4
     jest: 27.2.3
     prettier: 2.5.0
-    ts-jest: 27.0.7
-    ts-node: ~10.2.1
+    ts-jest: 27.0.5
+    ts-node: ~10.2.0
     tslib: ^2.3.1
     typescript: 4.3.5
     yarn: ^1.22.17
@@ -13204,7 +13204,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.memoize@npm:4.x, lodash.memoize@npm:^4.1.2":
+"lodash.memoize@npm:^4.1.2":
   version: 4.1.2
   resolution: "lodash.memoize@npm:4.1.2"
   checksum: 9ff3942feeccffa4f1fafa88d32f0d24fdc62fd15ded5a74a5f950ff5f0c6f61916157246744c620173dddf38d37095a92327d5fd3861e2063e736a5c207d089
@@ -13225,7 +13225,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.7.0":
+"lodash@npm:4.x, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.7.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -18724,15 +18724,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:27.0.7":
-  version: 27.0.7
-  resolution: "ts-jest@npm:27.0.7"
+"ts-jest@npm:27.0.5":
+  version: 27.0.5
+  resolution: "ts-jest@npm:27.0.5"
   dependencies:
     bs-logger: 0.x
     fast-json-stable-stringify: 2.x
     jest-util: ^27.0.0
     json5: 2.x
-    lodash.memoize: 4.x
+    lodash: 4.x
     make-error: 1.x
     semver: 7.x
     yargs-parser: 20.x
@@ -18751,7 +18751,7 @@ __metadata:
       optional: true
   bin:
     ts-jest: cli.js
-  checksum: 3711361cb5ae54aac547b00f8ad118ec88333c391af4bff0420497e9faa296eace4e8272c627ecbf4be675af9f68c437e4c2ccc5693c6d744796ec7da6dda131
+  checksum: fd53cdb6f913cbe802799d2b491f70f33c52c840c4b8483cecf600ff360efbd00c8d7ed9eb0dd677219f330ee38928b7b9890e9853e9f4d3574b9d8e1dcf4a30
   languageName: node
   linkType: hard
 
@@ -18807,7 +18807,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:~10.2.1":
+"ts-node@npm:~10.2.0":
   version: 10.2.1
   resolution: "ts-node@npm:10.2.1"
   dependencies:

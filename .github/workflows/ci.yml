@@ -22,16 +22,16 @@ jobs:
         uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: 'master'
-      - uses: actions/setup-node@v1 
-        with: 
+      - uses: actions/setup-node@v1
+        with:
           node-version: '16'
       - run: npm ci
-      - run: npx nx-cloud start-ci-run    
-      - run: npm run build
-      - run: npx nx affected --target=lint --parallel --max-parallel=3
-      - run: npx nx affected --target=test --parallel --max-parallel=3
-      - run: npm run e2e
-      - run: npx nx-cloud stop-all-agents
+      - run: yarn dlx nx-cloud start-ci-run
+      - run: yarn run build
+      - run: yarn dlx nx affected --target=lint --parallel --max-parallel=3
+      - run: yarn dlx nx affected --target=test --parallel=3
+      - run: yarn run e2e
+      - run: yarn dlx nx-cloud stop-all-agents
   pr:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
@@ -44,16 +44,16 @@ jobs:
         uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: 'master'
-      - uses: actions/setup-node@v1 
-        with: 
+      - uses: actions/setup-node@v1
+        with:
           node-version: '16'
       - run: npm ci
-      - run: npx nx-cloud start-ci-run    
-      - run: npm run build
-      - run: npx nx affected --target=lint --parallel --max-parallel=3
-      - run: npx nx affected --target=test --parallel --max-parallel=3
-      - run: npm run e2e
-      - run: npx nx-cloud stop-all-agents
+      - run: yarn dlx nx-cloud start-ci-run
+      - run: yarn run build
+      - run: yarn dlx nx affected --target=lint --parallel --max-parallel=3
+      - run: yarn dlx nx affected --target=test --parallel --max-parallel=3
+      - run: yarn run e2e
+      - run: yarn dlx nx-cloud stop-all-agents
   agents:
     runs-on: ubuntu-latest
     name: Agent 1
@@ -64,8 +64,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-        with: 
+        with:
           node-version: '16'
       - run: npm ci
       - name: Start Nx Agent ${{ matrix.agent }}
-        run: npx nx-cloud start-agent
+        run: yarn dlx nx-cloud start-agent
