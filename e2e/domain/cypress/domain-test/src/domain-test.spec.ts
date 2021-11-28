@@ -16,7 +16,6 @@ describe('domainTest e2e', () => {
       `generate @srleecode/domain:domainGroupingFolder --name test-domain --groupingFolder libs/ng-test-app`
     );
   });
-
   it('should create e2e project for domain', async () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:domainTest --groupingFolder ${groupingFolder}`

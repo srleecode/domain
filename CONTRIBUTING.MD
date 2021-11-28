@@ -29,8 +29,60 @@ You can file new issues by filling out our [issue form](https://github.com/srlee
 
 ### <a name="submit-pr"></a> Submitting a PR
 
-Please follow the following guidelines:
+```sh
+npm install
 
-- Make sure unit tests pass (`npm run affected:test`)
-- Make sure lint passes (`npm run affected:lint`)
-- Make sure the e2e tests pass (`npm run affected:e2e`)
+# Make sure that the below are passing
+npm run affected:test
+npm run  affected:lint
+npm run  e2e
+```
+
+#### Commit Message Guidelines
+
+The commit message should follow the following format:
+
+```
+type(scope): subject
+BLANK LINE
+body
+```
+
+##### Type
+
+The type must be one of the following:
+
+- feat - New or improved behavior being introduced (e.g. Updating to new versions of React or Jest which bring in new features)
+- fix - Fixes the current unexpected behavior to match expected behavior (e.g. Fixing the library generator to create the proper named project)
+- cleanup - Code Style changes that have little to no effect on the user (e.g. Refactoring some functions into a different file)
+- docs - Changes to the documentation (e.g. Adding more details into the getting started guide)
+- chore - Changes that have absolutely no effect on users (e.g. Updating the version of Nx used to build the repo)
+
+##### Scope
+
+The scope must be one of the following:
+
+- cypress - anything related to the cypress generators
+- front-end - anything related to the front-end generators
+- grouping-folder - anything related to the grouping-folder generators
+- init - anything related to the init generators
+- mock-file - anything related to the mock-file generators
+- shared - anything related to the utlities used across all the types of generators
+- repo - anything related to managing the repo itself
+- misc - misc stuff
+
+##### Subject and Body
+
+The subject must contain a description of the change, and the body of the message contains any additional details to provide more context about the change.
+
+Including the issue number that the PR relates to also helps with tracking.
+
+#### Example
+
+```
+feat(front-end): add an option to generate lazy-loadable modules
+
+Updates the generateed libraries to allow the option to include --lazy `nx generate lib mylib --lazy`
+
+Closes #157
+```

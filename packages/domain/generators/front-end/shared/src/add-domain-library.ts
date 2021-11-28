@@ -1,7 +1,7 @@
 import { logger, Tree } from '@nrwl/devkit';
 import { Schema } from '@nrwl/angular/src/generators/library/schema';
 import { getLibraryCommonOptions } from './get-library-common-options';
-import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
+import { libraryGenerator } from '@nrwl/angular/generators';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   ApplicationType,

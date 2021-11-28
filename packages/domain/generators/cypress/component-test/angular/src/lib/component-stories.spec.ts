@@ -10,7 +10,7 @@ import {
 } from '../default-options.constant';
 import { MountType } from '@srleecode/domain/shared/utils';
 import { setupComponentTestGenerator } from '../generator';
-import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
+import { libraryGenerator } from '@nrwl/angular/generators';
 
 describe('stories file', () => {
   let tree: Tree;

@@ -8,7 +8,7 @@ import {
 } from '../default-options.constant';
 import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
-import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
+import { libraryGenerator } from '@nrwl/angular/generators';
 import { setupComponentTestGenerator } from '../generator';
 
 describe('test harness file', () => {

@@ -2,7 +2,7 @@ import { logger, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import * as nrwlWorkspaceMock from '@nrwl/workspace';
 import { removeLibraryGenerator } from './generator';
-import { libraryGenerator } from '@nrwl/angular/src/generators/library/library';
+import { libraryGenerator } from '@nrwl/angular/generators';
 
 describe('removeLibraryGenerator', () => {
   let tree: Tree;

@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname $0)/_/husky.sh"
+
+# including this as an example :D
+# echo "\n\n\n\n\n\n format your code! \n\n\n\n\n\n" # yarn format

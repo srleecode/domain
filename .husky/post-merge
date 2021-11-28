@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# clean up each developers local git repo whenever they merge code
+git fetch origin --prune && git tag -l | xargs git tag -d && git fetch -t
+
+# its always good to make sure your package.json is sorted :)
+npx sort-package-json
+
+# after merging code, new package.json dependencies might be introduced
+npm install
