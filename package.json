@@ -55,6 +55,7 @@
     "@types/node": "16.6.1",
     "@typescript-eslint/eslint-plugin": "5.3.1",
     "@typescript-eslint/parser": "5.3.1",
+    "@yarnpkg/plugin-patch": "^3.1.1-rc.4",
     "dotenv": "10.0.0",
     "eslint": "8.2.0",
     "eslint-config-prettier": "8.3.0",
@@ -71,5 +72,9 @@
     "node": ">=16.0.0",
     "npm": ">=8.0.0",
     "yarn": ">=1.22.17"
+  },
+  "resolutions": {
+    "@nrwl/tao@13.3.0-beta.3": "patch:@nrwl/tao@npm:13.3.0-beta.3#.yarn/patches/@nrwl-tao-npm-13.3.0-beta.3-16932da4db",
+    "@nrwl/nx-plugin@13.3.0-beta.3": "patch:@nrwl/nx-plugin@npm:13.3.0-beta.3#.yarn/patches/@nrwl-nx-plugin-npm-13.3.0-beta.3-f28720d9c3"
   }
 }

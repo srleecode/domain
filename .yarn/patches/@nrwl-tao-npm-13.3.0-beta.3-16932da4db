@@ -1,0 +1,13 @@
+diff --git a/src/shared/package-manager.js b/src/shared/package-manager.js
+index 259ff28b90bea84abd71e53d410798d9e71ba1db..bc7136f9ab264df9daa6de110cfb90a4f9c2d5f1 100644
+--- a/src/shared/package-manager.js
++++ b/src/shared/package-manager.js
+@@ -29,7 +29,7 @@ exports.detectPackageManager = detectPackageManager;
+ function getPackageManagerCommand(packageManager = detectPackageManager()) {
+     const commands = {
+         yarn: () => ({
+-            install: 'yarn',
++            install: 'touch yarn.lock && yarn',
+             add: 'yarn add',
+             addDev: 'yarn add -D',
+             rm: 'yarn remove',

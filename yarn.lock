@@ -3149,6 +3149,7 @@ __metadata:
     "@types/node": 16.6.1
     "@typescript-eslint/eslint-plugin": 5.3.1
     "@typescript-eslint/parser": 5.3.1
+    "@yarnpkg/plugin-patch": ^3.1.1-rc.4
     dotenv: 10.0.0
     eslint: 8.2.0
     eslint-config-prettier: 8.3.0
@@ -4169,6 +4170,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/emscripten@npm:^1.38.0":
+  version: 1.39.6
+  resolution: "@types/emscripten@npm:1.39.6"
+  checksum: 437f2f9cdfd9057255662508fa9a415fe704ba484c6198f3549c5b05feebcdcd612b1ec7b10026d2566935d05d3c36f9366087cb42bc90bd25772a88fcfc9343
+  languageName: node
+  linkType: hard
+
 "@types/eslint-scope@npm:^3.7.0":
   version: 3.7.1
   resolution: "@types/eslint-scope@npm:3.7.1"
@@ -5025,6 +5033,41 @@ __metadata:
   version: 4.2.2
   resolution: "@xtuc/long@npm:4.2.2"
   checksum: 8ed0d477ce3bc9c6fe2bf6a6a2cc316bb9c4127c5a7827bae947fa8ec34c7092395c5a283cc300c05b5fa01cbbfa1f938f410a7bf75db7c7846fea41949989ec
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/fslib@npm:^2.6.1-rc.1":
+  version: 2.6.1-rc.1
+  resolution: "@yarnpkg/fslib@npm:2.6.1-rc.1"
+  dependencies:
+    "@yarnpkg/libzip": ^2.2.3-rc.1
+    tslib: ^1.13.0
+  checksum: e07a3849ff6b748e5514f4e9ea468819a41661c4d3efa5a874566c9e4979b655849f0d9e6fb32b680cbb832def636fd3eb4e5fd95689e4ed4ded3aab27b89d69
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/libzip@npm:^2.2.3-rc.1":
+  version: 2.2.3-rc.1
+  resolution: "@yarnpkg/libzip@npm:2.2.3-rc.1"
+  dependencies:
+    "@types/emscripten": ^1.38.0
+    tslib: ^1.13.0
+  checksum: b24f7605ceac08a87b14c00d6ce1b80bf84469717221efe5ff764af8577fe37822d58457a16aabf7073d6744feb50d20d4dd54b7a3589c1d1fcd1a2480ab0f98
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/plugin-patch@npm:^3.1.1-rc.4":
+  version: 3.1.1-rc.4
+  resolution: "@yarnpkg/plugin-patch@npm:3.1.1-rc.4"
+  dependencies:
+    "@yarnpkg/fslib": ^2.6.1-rc.1
+    "@yarnpkg/libzip": ^2.2.3-rc.1
+    clipanion: ^3.0.1
+    tslib: ^1.13.0
+  peerDependencies:
+    "@yarnpkg/cli": ^3.2.0-rc.6
+    "@yarnpkg/core": ^3.2.0-rc.6
+  checksum: 2cde48334c498ac02062e826d6805718bce9e007377d2a43472209fa9b59d24a0ef0c9dbff333bf145aab490c7c5a171750579963610d9273129aacc473d613f
   languageName: node
   linkType: hard
 
@@ -6834,6 +6877,17 @@ __metadata:
   version: 3.0.0
   resolution: "cli-width@npm:3.0.0"
   checksum: 4c94af3769367a70e11ed69aa6095f1c600c0ff510f3921ab4045af961820d57c0233acfa8b6396037391f31b4c397e1f614d234294f979ff61430a6c166c3f6
+  languageName: node
+  linkType: hard
+
+"clipanion@npm:^3.0.1":
+  version: 3.1.0
+  resolution: "clipanion@npm:3.1.0"
+  dependencies:
+    typanion: ^3.3.1
+  peerDependencies:
+    typanion: "*"
+  checksum: bf350082e8953c697cfe35262845700012bdeb1cc490f81cd17de2fe985c8861750164509795ad95d3ee6a2b3742a1d5c6394cdf0f3ff4c4d24173a9fec3418e
   languageName: node
   linkType: hard
 
@@ -18757,7 +18811,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^1.10.0, tslib@npm:^1.8.1, tslib@npm:^1.9.0":
+"tslib@npm:^1.10.0, tslib@npm:^1.13.0, tslib@npm:^1.8.1, tslib@npm:^1.9.0":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd
@@ -18786,6 +18840,13 @@ __metadata:
   version: 0.0.0
   resolution: "tty-browserify@npm:0.0.0"
   checksum: a06f746acc419cb2527ba19b6f3bd97b4a208c03823bfb37b2982629d2effe30ebd17eaed0d7e2fc741f3c4f2a0c43455bd5fb4194354b378e78cfb7ca687f59
+  languageName: node
+  linkType: hard
+
+"typanion@npm:^3.3.1":
+  version: 3.7.1
+  resolution: "typanion@npm:3.7.1"
+  checksum: 79f396a960167956999b585eb9f0baa61c79455c680778dd950261e73bf6465f5a38779cc176142099c7fbf440d578b44664632bb1e3e41769199278751d7d92
   languageName: node
   linkType: hard
 
