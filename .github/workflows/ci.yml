@@ -1,0 +1,19 @@
+name: Continous Integration
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  test_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm run affected:lint
+      - run: npm run affected:test
+      - run: npm run e2e
+      - run: npm run build
