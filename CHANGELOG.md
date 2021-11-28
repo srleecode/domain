@@ -2,7 +2,7 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
-# [13.2.0](https://github.com/srleecode/domain/compare/13.1.3...13.2.0) (2021-11-28)
+# [13.2.3](https://github.com/srleecode/domain/compare/13.1.3...13.2.3) (2021-11-28)
 
 
 ### Bug Fixes
@@ -20,8 +20,7 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 * introduce @jscutlery/semver and git hooks ([b4ac41a](https://github.com/srleecode/domain/commit/b4ac41a08ddb8b20d69553532d0a71fd13cc5619))
 * nx 13.2.2 without Yarn v3 ([3a9e47d](https://github.com/srleecode/domain/commit/3a9e47d638d343e427a79a4a9954a3b910b59d18))
 * switch to Yarn v3 as the package manager default ([0e9edde](https://github.com/srleecode/domain/commit/0e9edde9faea485d5702f2a64fbf426c58679221))
-* upgrade to Nx 13.2.2 ([90cd620](https://github.com/srleecode/domain/commit/90cd620a6db416a190775fd6df51842f893e47ef))
-* upgrade to Nx 13.2.2 ([7123187](https://github.com/srleecode/domain/commit/71231875f60756fa20fdd25545eb3bf278ab8294))
+* upgrade to Nx 13.2.3 ([90cd620](https://github.com/srleecode/domain/commit/90cd620a6db416a190775fd6df51842f893e47ef))
 
 
 

@@ -34,8 +34,8 @@ npm install
 
 # Make sure that the below are passing
 npm run affected:test
-npm run  affected:lint
-npm run  e2e
+npm run affected:lint
+npm run e2e
 ```
 
 #### Commit Message Guidelines
