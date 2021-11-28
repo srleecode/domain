@@ -24,7 +24,7 @@
     "help": "nx help",
     "nx": "nx",
     "prepare": "husky install",
-    "publish": "npm run build && npm publish ./dist/packages/domain --access=public && yarn dlx nx run workspace:version",
+    "publish": "npm run build && npm publish ./dist/packages/domain --access=public",
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator"
   },

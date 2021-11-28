@@ -1,0 +1,71 @@
+name: Continous Integration
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+env:
+  NX_CLOUD_DISTRIBUTED_EXECUTION: true
+
+jobs:
+  master:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout [master]
+        with:
+          fetch-depth: 0
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'master'
+      - uses: actions/setup-node@v1 
+        with: 
+          node-version: '16'
+      - run: npm ci
+      - run: npx nx-cloud start-ci-run    
+      - run: npm run build
+      - run: npx nx affected --target=lint --parallel --max-parallel=3
+      - run: npx nx affected --target=test --parallel --max-parallel=3
+      - run: npm run e2e
+      - run: npx nx-cloud stop-all-agents
+  pr:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'master'
+      - uses: actions/setup-node@v1 
+        with: 
+          node-version: '16'
+      - run: npm ci
+      - run: npx nx-cloud start-ci-run    
+      - run: npm run build
+      - run: npx nx affected --target=lint --parallel --max-parallel=3
+      - run: npx nx affected --target=test --parallel --max-parallel=3
+      - run: npm run e2e
+      - run: npx nx-cloud stop-all-agents
+  agents:
+    runs-on: ubuntu-latest
+    name: Agent 1
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        agent: [ 1, 2, 3 ]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with: 
+          node-version: '16'
+      - run: npm ci
+      - name: Start Nx Agent ${{ matrix.agent }}
+        run: npx nx-cloud start-agent
