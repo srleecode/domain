@@ -5,7 +5,7 @@
 git fetch origin --prune && git tag -l | xargs git tag -d && git fetch -t
 
 # its always good to make sure your package.json is sorted :)
-npx sort-package-json
+yarn dlx sort-package-json
 
 # after merging code, new package.json dependencies might be introduced
 npm install
