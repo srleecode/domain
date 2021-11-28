@@ -26,12 +26,12 @@ jobs:
         with:
           node-version: '16'
       - run: npm ci
-      - run: yarn dlx nx-cloud start-ci-run
+      - run: yarn run nx-cloud start-ci-run
       - run: yarn run build
       - run: yarn dlx nx affected --target=lint --parallel=3
       - run: yarn dlx nx affected --target=test --parallel=3
       - run: yarn run e2e
-      - run: yarn dlx nx-cloud stop-all-agents
+      - run: yarn run nx-cloud stop-all-agents
   pr:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
@@ -50,12 +50,12 @@ jobs:
         with:
           node-version: '16'
       - run: npm ci
-      - run: yarn dlx nx-cloud start-ci-run
+      - run: yarn run nx-cloud start-ci-run
       - run: yarn run build
       - run: yarn dlx nx affected --target=lint --parallel=3
       - run: yarn dlx nx affected --target=test --parallel=3
       - run: yarn run e2e
-      - run: yarn dlx nx-cloud stop-all-agents
+      - run: yarn run nx-cloud stop-all-agents
   agents:
     runs-on: ubuntu-latest
     name: Agent 1
@@ -70,4 +70,4 @@ jobs:
           node-version: '16'
       - run: npm ci
       - name: Start Nx Agent ${{ matrix.agent }}
-        run: yarn dlx nx-cloud start-agent
+        run: yarn run nx-cloud start-agent
