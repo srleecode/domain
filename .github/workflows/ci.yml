@@ -28,7 +28,7 @@ jobs:
       - run: npm ci
       - run: yarn dlx nx-cloud start-ci-run
       - run: yarn run build
-      - run: yarn dlx nx affected --target=lint --parallel --max-parallel=3
+      - run: yarn dlx nx affected --target=lint --parallel=3
       - run: yarn dlx nx affected --target=test --parallel=3
       - run: yarn run e2e
       - run: yarn dlx nx-cloud stop-all-agents
@@ -52,8 +52,8 @@ jobs:
       - run: npm ci
       - run: yarn dlx nx-cloud start-ci-run
       - run: yarn run build
-      - run: yarn dlx nx affected --target=lint --parallel --max-parallel=3
-      - run: yarn dlx nx affected --target=test --parallel --max-parallel=3
+      - run: yarn dlx nx affected --target=lint --parallel=3
+      - run: yarn dlx nx affected --target=test --parallel=3
       - run: yarn run e2e
       - run: yarn dlx nx-cloud stop-all-agents
   agents:
