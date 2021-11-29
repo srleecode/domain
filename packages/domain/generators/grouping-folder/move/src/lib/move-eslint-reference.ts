@@ -1,4 +1,4 @@
-import { readJson, Tree, writeJson } from '@nrwl/devkit';
+import { logger, readJson, Tree, writeJson } from '@nrwl/devkit';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
@@ -13,6 +13,12 @@ export const moveEslintReference = (
   const oldScope = `scope:${getDasherizedFolderPath(tree, oldGroupingFolder)}`;
   const newScope = `scope:${getDasherizedFolderPath(tree, newGroupingFolder)}`;
   const filePath = getLintFilePath(tree);
+  if (!filePath) {
+    logger.info(
+      'Cannot find linting rules: linting config file does not exist'
+    );
+    return;
+  }
   const json = readJson(tree, filePath);
   if (json) {
     let jsonString = JSON.stringify(json);
