@@ -30,12 +30,12 @@ You can file new issues by filling out our [issue form](https://github.com/srlee
 ### <a name="submit-pr"></a> Submitting a PR
 
 ```sh
-npm install
+yarn install
 
 # Make sure that the below are passing
-npm run affected:test
-npm run affected:lint
-npm run e2e
+yarn affected:test
+yarn affected:lint
+yarn affected:e2e
 ```
 
 #### Commit Message Guidelines
