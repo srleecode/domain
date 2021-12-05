@@ -53,8 +53,8 @@ export async function moveGenerator(tree: Tree, options: MoveGeneratorSchema) {
       moveMockFileResolutionPath(tree, project.root, movedProjectRoot);
     }
   }
-  tree.delete(groupingFolder);
   moveEslintReference(tree, groupingFolder, destination);
+  tree.delete(groupingFolder);
 }
 
 const getMovedProjectRoot = (
