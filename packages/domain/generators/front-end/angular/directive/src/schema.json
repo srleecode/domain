@@ -17,13 +17,17 @@
     },
     "mountType": {
       "description": "The mount type to use for the component test",
-      "enum": ["component", "story"],
+      "enum": ["none", "component", "story"],
       "type": "string",
-      "default": "component",
+      "default": "none",
       "x-prompt": {
         "message": "Which mount type would you like to use for the component test?",
         "type": "list",
         "items": [
+          {
+            "value": "none",
+            "label": "none - do not create a cypress test runner test"
+          },
           {
             "value": "component",
             "label": "component - mount the component class directly"

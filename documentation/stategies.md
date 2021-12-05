@@ -27,12 +27,6 @@ Different test types have different characteristics:
  SCAM stands for Single Component Angular Module. SCAMs are used because they enable easier component testing. SCAMs means that all feature and UI libraries get their own library. For further information, see https://marmicode.io/blog/your-angular-module-is-a-scam
 
 I think Single Component Angular Module (SCAM) and Single Directive Angular Module (SDAM), i.e. having a separate library for each component and directive, works well with UI testing as they allow more targeted test runs and affected results. It also makes it easy to configure the ct target.
- 
-## Component test harnesses
-
-E2E tests are normally brittle and broken easily by changes. One of the major reasons for this is that the selectors used for selecting elements are duplicated, longer than necessary and not tested. Component test harnesses allow you to expose apis for your components. These apis can then be tested using the UI tests.
-
-When it comes to the cypress testing, it is normally done on two different levels. There are the UI tests that can be run through the cypress component test harness. There are then the E2E tests. These two different types of tests run at different stages in the software development process. The UI tests can run earlier in the CI stage whereas the E2E tests need to often be run later after the deploy stage. Using something like component test harnesses means that your components end up with apis that are tested in the CI stage. This means that there is no duplication in things like selectors between the UI and the E2E tests. It also means that your E2E tests won’t break due to dom changes and broken selectors as these issues will be picked up in the CI stage through the UI tests.
 
 ## Layering
 

@@ -6,6 +6,7 @@ import {
   ElementType,
   getDasherizedFolderPath,
   getGroupingFolders,
+  MountType,
 } from '../../../../shared/utils';
 import { camelize, dasherize } from '@nrwl/workspace/src/utils/strings';
 import { addDirectiveFiles } from './lib/add-directive-files/add-directive-files';
@@ -54,18 +55,20 @@ export async function createDirectiveGenerator(
     libraryName,
     selector
   );
-  await setupComponentTestGenerator(tree, {
-    projectName,
-    name,
-    mountType,
-    prefix: groupingFolders.app,
-    selector,
-    type: ElementType.Directive,
-  }).catch((e: Error) => {
-    logger.error(e.message);
-    logger.error(e.stack);
-    throw e;
-  });
+  if (mountType !== MountType.None) {
+    await setupComponentTestGenerator(tree, {
+      projectName,
+      name,
+      mountType,
+      prefix: groupingFolders.app,
+      selector,
+      type: ElementType.Directive,
+    }).catch((e: Error) => {
+      logger.error(e.message);
+      logger.error(e.stack);
+      throw e;
+    });
+  }
   setIndexToDirectiveFile(tree, groupingFolder, name);
   await formatFiles(tree);
 }

@@ -63,7 +63,7 @@ The type must be one of the following:
 The scope must be one of the following:
 
 - cypress - anything related to the cypress generators
-- front-end - anything related to the front-end generators
+- angular - anything related to the front-end angular generators
 - grouping-folder - anything related to the grouping-folder generators
 - init - anything related to the init generators
 - mock-file - anything related to the mock-file generators
