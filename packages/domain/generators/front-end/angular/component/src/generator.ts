@@ -8,6 +8,7 @@ import {
   ElementType,
   ApplicationType,
   getGroupingFolders,
+  MountType,
 } from '../../../../shared/utils';
 import { addComponentFiles } from './lib/add-component-files/add-component-files';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
@@ -53,19 +54,21 @@ export async function createComponentGenerator(
     libraryName,
     selector
   );
-  await setupComponentTestGenerator(tree, {
-    projectName,
-    name,
-    mountType,
-    prefix: groupingFolders.app,
-    selector,
-    componentType: type,
-    type: ElementType.Component,
-  }).catch((e: Error) => {
-    logger.error(e.message);
-    logger.error(e.stack);
-    throw e;
-  });
+  if (mountType !== MountType.None) {
+    await setupComponentTestGenerator(tree, {
+      projectName,
+      name,
+      mountType,
+      prefix: groupingFolders.app,
+      selector,
+      componentType: type,
+      type: ElementType.Component,
+    }).catch((e: Error) => {
+      logger.error(e.message);
+      logger.error(e.stack);
+      throw e;
+    });
+  }
   setIndexToComponentFile(tree, groupingFolder, libraryName, name, type);
   await formatFiles(tree);
 }

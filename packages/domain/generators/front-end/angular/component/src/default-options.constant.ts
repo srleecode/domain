@@ -10,7 +10,6 @@ export const defaultOptions: CreateComponentGeneratorSchema = {
   type: ComponentType.Feature,
   mountType: MountType.Component,
   name: 'TestExample',
-  displayBlock: false,
   viewEncapsulation: ViewEncapsulation.Emulated,
   style: StyleType.Scss,
   unitTestType: UnitTestType.NoTestBed,
