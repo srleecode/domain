@@ -48,7 +48,7 @@
         "message": "Which mount type would you like to use for the component test?",
         "type": "list",
         "items": [
-           {
+          {
             "value": "none",
             "label": "none - do not create a cypress test runner test"
           },
@@ -86,11 +86,6 @@
           }
         ]
       }
-    },
-    "displayBlock": {
-      "description": "Specifies if the style will contain `:host { display: block; }`",
-      "type": "boolean",
-      "default": false
     },
     "viewEncapsulation": {
       "description": "The view encapsulation strategy to use in the new component.",
