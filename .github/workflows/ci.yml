@@ -25,13 +25,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '16'
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
+      - run: yarn dlx nx affected:e2e --parallel=1 --verbose
       - run: yarn run nx-cloud start-ci-run
       - run: yarn run build
       - run: yarn dlx nx affected --target=lint --parallel=3
       - run: yarn dlx nx affected --target=test --parallel=3
-      - run: yarn dlx nx affected:e2e --parallel=1 --verbose
       - run: yarn run nx-cloud stop-all-agents
+      
   pr:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
@@ -48,13 +49,14 @@ jobs:
         with:
           node-version: '16'
           cache: yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
+      - run: yarn dlx nx affected:e2e --parallel=1 --verbose
       - run: yarn run nx-cloud start-ci-run
       - run: yarn run build
       - run: yarn dlx nx affected --target=lint --parallel=3
       - run: yarn dlx nx affected --target=test --parallel=3
-      - run: yarn dlx nx affected:e2e --parallel=1
       - run: yarn run nx-cloud stop-all-agents
+      
   agents:
     runs-on: ubuntu-latest
     name: Agent 1
@@ -68,6 +70,6 @@ jobs:
         with:
           node-version: '16'
           cache: yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
       - name: Start Nx Agent ${{ matrix.agent }}
         run: yarn run nx-cloud start-agent
