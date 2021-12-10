@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '16'
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
       - run: yarn run nx-cloud start-ci-run
       - run: yarn run build
       - run: yarn dlx nx affected --target=lint --parallel=3
@@ -48,7 +48,7 @@ jobs:
         with:
           node-version: '16'
           cache: yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
       - run: yarn run nx-cloud start-ci-run
       - run: yarn run build
       - run: yarn dlx nx affected --target=lint --parallel=3
@@ -68,6 +68,6 @@ jobs:
         with:
           node-version: '16'
           cache: yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
       - name: Start Nx Agent ${{ matrix.agent }}
         run: yarn run nx-cloud start-agent
