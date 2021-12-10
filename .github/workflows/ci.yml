@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: '16'
       - run: yarn install --immutable
-      - run: yarn dlx nx affected:e2e --parallel=1
+      - run: yarn dlx nx affected:e2e --parallel=1 --verbose
       - run: yarn run nx-cloud start-ci-run
       - run: yarn run build
       - run: yarn dlx nx affected --target=lint --parallel=3
@@ -50,7 +50,7 @@ jobs:
           node-version: '16'
           cache: yarn
       - run: yarn install --immutable
-      - run: yarn dlx nx affected:e2e --parallel=1
+      - run: yarn dlx nx affected:e2e --parallel=1 --verbose
       - run: yarn run nx-cloud start-ci-run
       - run: yarn run build
       - run: yarn dlx nx affected --target=lint --parallel=3
