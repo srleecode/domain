@@ -2,9 +2,9 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [13.3.4](https://github.com/srleecode/domain/compare/13.2.4...13.3.4) (2021-12-15)
+
 ## [13.2.4](https://github.com/srleecode/domain/compare/13.2.3...13.2.4) (2021-12-09)
-
-
 
 # [13.2.3](https://github.com/srleecode/domain/compare/13.1.3...13.2.3) (2021-11-28)
 
