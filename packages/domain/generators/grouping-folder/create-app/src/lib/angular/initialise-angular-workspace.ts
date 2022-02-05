@@ -17,7 +17,7 @@ export const initialiseAngularWorkspace = async (tree: Tree): Promise<void> => {
     );
   }
   if (isPackageAdded('@nrwl/cypress', packageJson)) {
-    await cypressInitGenerator(tree);
+    await cypressInitGenerator(tree, {});
   } else {
     throw Error(
       '@nrwl/cypress is not installed. Did you run ng add @srleecode/domain?'

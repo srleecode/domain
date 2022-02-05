@@ -24,6 +24,7 @@ export async function setupDomainTestGenerator(
   const { appsDir, standaloneAsDefault, npmScope } = getWorkspaceLayout(tree);
   const domainPath = getDomainPath(tree, groupingFolder);
   await cypressProjectGenerator(tree, {
+    baseUrl: './',
     name: `e2e-${dasherisedFolderPath}`,
     directory: domainPath,
     standaloneConfig: standaloneAsDefault,
