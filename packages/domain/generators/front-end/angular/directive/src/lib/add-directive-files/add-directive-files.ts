@@ -11,14 +11,23 @@ export const addDirectiveFiles = (
   selector: string
 ): void => {
   const { groupingFolder, name } = options;
-  const target = `${normalize(groupingFolder)}/${libraryName}/src/lib`;
+  const libraryPath = `${groupingFolder}/${libraryName}`;
+  const target = normalize(`${libraryPath}/src/lib`);
   const templateOptions = {
     ...options,
     ...names(options.name),
     selector,
+    storybookTitle: getStorybookTitle(libraryPath),
     directiveName: classify(`${name}Directive`),
     moduleName: classify(`${dasherisedGroupingFolder}-${libraryName}Module`),
     tmpl: '',
   };
   generateFiles(tree, join(__dirname, './files'), target, templateOptions);
 };
+
+const getStorybookTitle = (libraryPath: string): string =>
+  libraryPath
+    .replace('libs/', '')
+    .split('/')
+    .map((folder) => classify(folder))
+    .join('/');

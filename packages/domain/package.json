@@ -1,6 +1,6 @@
 {
   "name": "@srleecode/domain",
-  "version": "13.7.3",
+  "version": "13.8.3",
   "main": "index.js",
   "engines": {
     "node": ">=16.0.0",

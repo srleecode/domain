@@ -63,7 +63,10 @@ describe('createComponentGenerator', () => {
   });
 
   it('should pass correct parameters to setupComponentTestGenerator', async () => {
-    await createComponentGenerator(tree, defaultOptions);
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      mountType: MountType.Component,
+    });
     expect(
       setupComponentTestSpy.setupComponentTestGenerator
     ).toHaveBeenCalledWith(expect.anything(), {

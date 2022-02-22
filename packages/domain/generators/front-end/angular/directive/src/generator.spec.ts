@@ -57,6 +57,7 @@ describe('createDirectiveGenerator', () => {
   it('should pass correct parameters to setupComponentTestGenerator', async () => {
     await createDirectiveGenerator(tree, {
       ...defaultOptions,
+      mountType: MountType.Component,
     });
     const groupingFolders = getGroupingFolders(
       tree,

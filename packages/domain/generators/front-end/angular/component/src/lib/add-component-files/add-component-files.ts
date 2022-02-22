@@ -16,7 +16,9 @@ export const addComponentFiles = (
   selector: string
 ): void => {
   const { groupingFolder, name, type } = options;
-  const target = normalize(`${groupingFolder}/${libraryName}/src/lib`);
+  const libraryPath = `${groupingFolder}/${libraryName}`;
+  const target = normalize(`${libraryPath}/src/lib`);
+
   const templateOptions = {
     ...options,
     ...names(libraryName),
@@ -27,6 +29,7 @@ export const addComponentFiles = (
     isUsingNonDefaultViewEncapsulation:
       options.viewEncapsulation !== ViewEncapsulation.Emulated,
     isTestUsingTestBed: options.unitTestType === UnitTestType.TestBed,
+    storybookTitle: getStorybookTitle(libraryPath),
     changeDetection:
       options.type === ComponentType.Ui
         ? ChangeDetection.OnPush
@@ -38,3 +41,10 @@ export const addComponentFiles = (
     tree.delete(join(target, `${dasherize(name) || type}.component.spec.ts`));
   }
 };
+
+const getStorybookTitle = (libraryPath: string): string =>
+  libraryPath
+    .replace('libs/', '')
+    .split('/')
+    .map((folder) => classify(folder))
+    .join('/');
