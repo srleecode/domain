@@ -8,7 +8,7 @@ import { StyleType } from './model/style-type.enum';
 export const defaultOptions: CreateComponentGeneratorSchema = {
   groupingFolder: 'libs/test-app/test-domain',
   type: ComponentType.Feature,
-  mountType: MountType.Component,
+  mountType: MountType.None,
   name: 'TestExample',
   viewEncapsulation: ViewEncapsulation.Emulated,
   style: StyleType.Scss,
