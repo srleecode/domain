@@ -15,7 +15,9 @@ export const addImplicitDependencies = (
     .children(groupingFolder)
     .filter(
       (folder) =>
-        !tree.isFile(`${groupingFolder}/${folder}`) && folder !== '.e2e'
+        !tree.isFile(`${groupingFolder}/${folder}`) &&
+        folder !== '.e2e' &&
+        folder !== '.ct'
     )
     .map((folder) => `${dasherisedFolderPath}-${folder}`);
   projectConfig.implicitDependencies = implicitDependencies;

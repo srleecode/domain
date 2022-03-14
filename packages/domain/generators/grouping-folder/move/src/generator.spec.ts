@@ -19,6 +19,7 @@ describe('moveGenerator', () => {
     });
     await setupDomainTestGenerator(appTree, {
       groupingFolder: 'libs/test-app/test-domain',
+      type: 'e2e',
     });
   };
 

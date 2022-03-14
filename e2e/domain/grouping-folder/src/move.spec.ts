@@ -1,3 +1,4 @@
+import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
 import {
   checkFilesExist,
   readJson,
@@ -28,14 +29,16 @@ describe('move', () => {
     const depConstraints =
       eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
         .depConstraints;
-    expect(depConstraints[depConstraints.length - 1]).toEqual({
+    const depConstraint: DepConstraint = {
+      notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [
         'scope:ng-test-app-new-domain',
         'scope:ng-test-app-shared',
         'app:ng-shared',
       ],
       sourceTag: 'scope:ng-test-app-new-domain',
-    });
+    };
+    expect(depConstraints[depConstraints.length - 1]).toEqual(depConstraint);
     const tsConfig = readJson('tsconfig.base.json');
     expect(
       tsConfig.compilerOptions.paths['@proj/ng-test-app/new-domain/util']

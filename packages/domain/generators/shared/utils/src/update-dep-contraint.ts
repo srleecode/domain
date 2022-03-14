@@ -68,6 +68,7 @@ const getDedupedDepConstraints = (
     ([key, value]: [string, string[]]): DepConstraint => ({
       sourceTag: key,
       onlyDependOnLibsWithTags: value,
+      notDependOnLibsWithTags: [],
     })
   );
 };

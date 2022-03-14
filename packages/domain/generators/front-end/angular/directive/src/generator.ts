@@ -1,17 +1,13 @@
-import { Tree, convertNxGenerator, logger, formatFiles } from '@nrwl/devkit';
+import { Tree, convertNxGenerator, formatFiles } from '@nrwl/devkit';
 import { CreateDirectiveGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   ApplicationType,
-  ElementType,
   getDasherizedFolderPath,
   getGroupingFolders,
-  MountType,
 } from '../../../../shared/utils';
 import { camelize, dasherize } from '@nrwl/workspace/src/utils/strings';
 import { addDirectiveFiles } from './lib/add-directive-files/add-directive-files';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { setupComponentTestGenerator } from '../../../../cypress/component-test/angular/src/generator';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { addDomainLibrary, getLibraryName } from '../../../shared';
 import { setIndexToDirectiveFile } from './lib/set-index-to-directive-file';
@@ -20,7 +16,7 @@ export async function createDirectiveGenerator(
   tree: Tree,
   options: CreateDirectiveGeneratorSchema
 ): Promise<void> {
-  const { name, groupingFolder, mountType } = options;
+  const { name, groupingFolder } = options;
   const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
     tree,
@@ -55,20 +51,6 @@ export async function createDirectiveGenerator(
     libraryName,
     selector
   );
-  if (mountType !== MountType.None) {
-    await setupComponentTestGenerator(tree, {
-      projectName,
-      name,
-      mountType,
-      prefix: groupingFolders.app,
-      selector,
-      type: ElementType.Directive,
-    }).catch((e: Error) => {
-      logger.error(e.message);
-      logger.error(e.stack);
-      throw e;
-    });
-  }
   setIndexToDirectiveFile(tree, groupingFolder, name);
   await formatFiles(tree);
 }

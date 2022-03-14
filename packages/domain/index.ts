@@ -11,5 +11,4 @@ export * from './generators/grouping-folder/create-domain/src/generator';
 export * from './generators/grouping-folder/move/src/generator';
 export * from './generators/grouping-folder/remove/src/generator';
 export * from './generators/init/ng-add/src/generator';
-export * from './generators/init/react-add/src/generator';
 export * from './generators/mock-file/src/generator';

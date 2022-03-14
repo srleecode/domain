@@ -70,13 +70,6 @@
       "aliases": ["ng-add"],
       "hidden": true
     },
-    "react-init": {
-      "factory": "./generators/init/ng-add/src/generator#reactAddSchematic",
-      "schema": "./generators/init/react-add/src/schema.json",
-      "description": "Initializes the @srleecode/domain generator for react",
-      "aliases": ["react-add"],
-      "hidden": true
-    },
     "mockFile": {
       "factory": "./generators/mock-file/src/generator#createMockFileSchematic",
       "schema": "./generators/mock-file/src/schema.json",
@@ -149,13 +142,6 @@
       "schema": "./generators/init/ng-add/src/schema.json",
       "description": "Initializes the @srleecode/domain generator for angular",
       "aliases": ["ng-add"],
-      "hidden": true
-    },
-    "react-init": {
-      "factory": "./generators/init/ng-add/src/generator#reactAddGenerator",
-      "schema": "./generators/init/react-add/src/schema.json",
-      "description": "Initializes the @srleecode/domain generator for react",
-      "aliases": ["react-add"],
       "hidden": true
     },
     "mockFile": {

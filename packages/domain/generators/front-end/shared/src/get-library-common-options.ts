@@ -1,9 +1,13 @@
-import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
 import { LibraryCommonOptions } from './model/library-common-options.model';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { getDasherizedFolderPath, getDomainPath } from '../../../shared/utils';
+import {
+  getDasherizedFolderPath,
+  getDomainPath,
+  getWorkspaceLayout,
+} from '../../../shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { AngularCreateLibrarySchema } from './model/angular-create-library-schema.model';
+import { Tree } from '@nrwl/devkit';
 
 export const getLibraryCommonOptions = (
   tree: Tree,
@@ -20,10 +24,9 @@ export const getLibraryCommonOptions = (
       `project already exists in: ${groupingFolder}/${libraryName}`
     );
   }
-  const workspaceLayout = getWorkspaceLayout(tree);
-  const { npmScope, standaloneAsDefault } = workspaceLayout;
+  const { npmScope, standaloneAsDefault } = getWorkspaceLayout(tree);
   const domainPath = getDomainPath(tree, groupingFolder);
-  const importPath = `@${npmScope}/${domainPath}/${libraryName}`;
+  const importPath = `${npmScope}/${domainPath}/${libraryName}`;
   return {
     name: libraryName,
     importPath,

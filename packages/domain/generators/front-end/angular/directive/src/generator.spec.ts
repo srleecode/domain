@@ -3,16 +3,13 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createDirectiveGenerator } from './generator';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import * as frontEndSharedMock from '../../../shared';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import * as setupComponentTestSpy from '../../../../cypress/component-test/angular/src/generator';
 import { defaultOptions } from './default-options.constant';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   ApplicationType,
-  ElementType,
   getDasherizedFolderPath,
   getGroupingFolders,
-  MountType,
-} from '@srleecode/domain/shared/utils';
+} from '../../../../shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 
 describe('createDirectiveGenerator', () => {
@@ -22,7 +19,6 @@ describe('createDirectiveGenerator', () => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
     jest.spyOn(frontEndSharedMock, 'addDomainLibrary');
-    jest.spyOn(setupComponentTestSpy, 'setupComponentTestGenerator');
   });
 
   it('should pass correct parameters to addDomainLibrary', async () => {
@@ -52,27 +48,6 @@ describe('createDirectiveGenerator', () => {
     )}-${libraryName}.module.ts`;
     const filePath = `${defaultOptions.groupingFolder}/src/lib/${fileName}`;
     expect(tree.exists(filePath)).toBe(false);
-  });
-
-  it('should pass correct parameters to setupComponentTestGenerator', async () => {
-    await createDirectiveGenerator(tree, {
-      ...defaultOptions,
-      mountType: MountType.Component,
-    });
-    const groupingFolders = getGroupingFolders(
-      tree,
-      defaultOptions.groupingFolder
-    );
-    expect(
-      setupComponentTestSpy.setupComponentTestGenerator
-    ).toHaveBeenCalledWith(expect.anything(), {
-      name: 'TestExample',
-      mountType: MountType.Component,
-      prefix: groupingFolders.app,
-      projectName: 'test-app-test-domain-directive-test-example',
-      selector: 'testAppTestDomainDirectiveTestExample',
-      type: ElementType.Directive,
-    });
   });
 
   it('should set index to directive file', async () => {

@@ -3,10 +3,8 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createApplicationLayerGenerator } from './generator';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import * as frontEndSharedMock from '../../../shared';
-import {
-  ApplicationType,
-  getGroupingFolders,
-} from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
 import { CreateApplicationLayerGeneratorSchema } from './schema';
 
 describe('createDomainLayerGenerator', () => {

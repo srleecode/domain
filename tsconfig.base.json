@@ -35,9 +35,6 @@
       "@srleecode/domain/angular/util-layer": [
         "packages/domain/generators/front-end/angular/util-layer/src/generator.ts"
       ],
-      "@srleecode/domain/cypress/component-test/angular": [
-        "packages/domain/generators/cypress/component-test/angular/src/generator.ts"
-      ],
       "@srleecode/domain/cypress/domain-test": [
         "packages/domain/generators/cypress/domain-test/src/generator.ts"
       ],

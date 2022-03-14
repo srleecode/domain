@@ -9,6 +9,26 @@
     "groupingFolder": {
       "description": "The grouping folder for the domain",
       "type": "string"
+    },
+    "type": {
+      "description": "The type of domain tests",
+      "enum": ["e2e", "ct"],
+      "type": "string",
+      "default": "e2e",
+      "x-prompt": {
+        "message": "Which type of domain tests would you like to create?",
+        "type": "list",
+        "items": [
+          {
+            "value": "e2e",
+            "label": "e2e - E2E tests run on a deployed application"
+          },
+          {
+            "value": "ct",
+            "label": "component test - test run on a running storybook instance"
+          }
+        ]
+      }
     }
   },
   "required": ["groupingFolder"]

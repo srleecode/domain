@@ -1,4 +1,4 @@
-import { AngularCreateLibrarySchema } from '@srleecode/domain/front-end/shared';
+import { AngularCreateLibrarySchema } from '../../../shared';
 
 export interface CreateApplicationLayerGeneratorSchema
   extends AngularCreateLibrarySchema {

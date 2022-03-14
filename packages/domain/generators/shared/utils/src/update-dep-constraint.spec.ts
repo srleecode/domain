@@ -1,6 +1,7 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readJson } from '@nrwl/devkit';
 import { updateDepConstraint } from './update-dep-contraint';
+import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
 
 describe('updateDepConstraint', () => {
   let appTree: Tree;
@@ -9,6 +10,7 @@ describe('updateDepConstraint', () => {
     updateDepConstraint(appTree, (depConstraints) => {
       depConstraints.push({
         sourceTag: 'type:domain',
+        notDependOnLibsWithTags: [],
         onlyDependOnLibsWithTags: ['type:util'],
       });
     });
@@ -45,26 +47,37 @@ describe('updateDepConstraint', () => {
     it('should add dependency constraints if it doesnt exist in eslintrc.json', () => {
       addDependency();
       const eslint = readJson(appTree, '.eslintrc.json');
+      const expected: DepConstraint = {
+        notDependOnLibsWithTags: [],
+        onlyDependOnLibsWithTags: ['type:util'],
+        sourceTag: 'type:domain',
+      };
       expect(
         eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
           .depConstraints[1]
-      ).toEqual({
-        onlyDependOnLibsWithTags: ['type:util'],
-        sourceTag: 'type:domain',
-      });
+      ).toEqual(expected);
     });
 
     it('should not add dependency constraint if it already exists in eslintrc.json', () => {
       addDependency();
       addDependency();
       const eslint = readJson(appTree, '.eslintrc.json');
+      const expected: DepConstraint[] = [
+        {
+          notDependOnLibsWithTags: [],
+          onlyDependOnLibsWithTags: ['*'],
+          sourceTag: '*',
+        },
+        {
+          notDependOnLibsWithTags: [],
+          onlyDependOnLibsWithTags: ['type:util'],
+          sourceTag: 'type:domain',
+        },
+      ];
       expect(
         eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
           .depConstraints
-      ).toEqual([
-        { onlyDependOnLibsWithTags: ['*'], sourceTag: '*' },
-        { onlyDependOnLibsWithTags: ['type:util'], sourceTag: 'type:domain' },
-      ]);
+      ).toEqual(expected);
     });
 
     it('should add to existing source tag when depConstraint already exists in eslintrc.json', () => {
@@ -72,20 +85,27 @@ describe('updateDepConstraint', () => {
       updateDepConstraint(appTree, (depConstraints) => {
         depConstraints.push({
           sourceTag: 'type:domain',
+          notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: ['type:domain'],
         });
       });
       const eslint = readJson(appTree, '.eslintrc.json');
-      expect(
-        eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
-          .depConstraints
-      ).toEqual([
-        { onlyDependOnLibsWithTags: ['*'], sourceTag: '*' },
+      const expected: DepConstraint[] = [
         {
+          notDependOnLibsWithTags: [],
+          onlyDependOnLibsWithTags: ['*'],
+          sourceTag: '*',
+        },
+        {
+          notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: ['type:util', 'type:domain'],
           sourceTag: 'type:domain',
         },
-      ]);
+      ];
+      expect(
+        eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+          .depConstraints
+      ).toEqual(expected);
     });
   });
   describe('tslint', () => {
@@ -129,12 +149,14 @@ describe('updateDepConstraint', () => {
     it('should update dependency constraints in tslint.json', () => {
       addDependency();
       const tslint = readJson(appTree, 'tslint.json');
-      expect(
-        tslint.rules['nx-enforce-module-boundaries'][1].depConstraints[2]
-      ).toEqual({
+      const expected: DepConstraint = {
+        notDependOnLibsWithTags: [],
         onlyDependOnLibsWithTags: ['type:util'],
         sourceTag: 'type:domain',
-      });
+      };
+      expect(
+        tslint.rules['nx-enforce-module-boundaries'][1].depConstraints[2]
+      ).toEqual(expected);
     });
 
     it('should replace dependency constraint if it already exists in tslint.json', () => {

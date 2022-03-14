@@ -11,7 +11,5 @@
       }
     }
   },
-  "implicitDependencies": [
-    "domain-mock-file"
-  ]
+  "implicitDependencies": ["domain"]
 }

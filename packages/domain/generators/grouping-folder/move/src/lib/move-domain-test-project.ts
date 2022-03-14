@@ -1,5 +1,4 @@
 import {
-  getWorkspaceLayout,
   logger,
   Tree,
   updateJson,
@@ -12,6 +11,7 @@ import { moveGenerator } from '@nrwl/workspace';
 import {
   getDasherizedFolderPath,
   getDomainPath,
+  getWorkspaceLayout,
 } from '../../../../shared/utils';
 
 export const moveDomainTestProject = async (
@@ -21,10 +21,7 @@ export const moveDomainTestProject = async (
 ): Promise<void> => {
   const { npmScope } = getWorkspaceLayout(tree);
   const projectConfig = readProjectConfiguration(tree, projectName);
-  const tsConfigPath = `@${npmScope}/${getDomainPath(
-    tree,
-    projectConfig.root
-  )}`;
+  const tsConfigPath = `${npmScope}/${getDomainPath(tree, projectConfig.root)}`;
   addDummyTsConfigPath(tree, tsConfigPath);
   await moveGenerator(tree, {
     projectName,

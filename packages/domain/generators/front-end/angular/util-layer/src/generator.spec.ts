@@ -1,13 +1,11 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createUtilGenerator } from './generator';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import * as frontEndSharedMock from '../../../shared';
 import { CreateUtilGeneratorSchema } from './schema';
-import {
-  ApplicationType,
-  getGroupingFolders,
-} from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { getGroupingFolders, ApplicationType } from '../../../../shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import * as mock from '../../../shared';
 
 describe('createUtilGenerator', () => {
   let tree: Tree;
@@ -15,7 +13,7 @@ describe('createUtilGenerator', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
-    jest.spyOn(frontEndSharedMock, 'addDomainLibrary');
+    jest.spyOn(mock, 'addDomainLibrary');
   });
 
   it('should pass correct parameters to @nrwl/angular generator', async () => {
@@ -28,7 +26,7 @@ describe('createUtilGenerator', () => {
     };
     const groupingFolders = getGroupingFolders(tree, schema.groupingFolder);
     await createUtilGenerator(tree, schema);
-    expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
+    expect(mock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       '',
       'util',

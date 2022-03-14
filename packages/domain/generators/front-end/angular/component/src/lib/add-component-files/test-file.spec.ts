@@ -1,9 +1,11 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { UnitTestType } from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { UnitTestType } from '../../../../../../shared/utils';
 import { createComponentGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
-import { getFilesContents } from '@srleecode/domain/shared/test-utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { getFilesContents } from '../../../../../../shared/test-utils';
 import { join } from 'path';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 

@@ -22,4 +22,10 @@ describe('domainTest e2e', () => {
     );
     checkFilesExist(`${groupingFolder}/.e2e/cypress.json`);
   });
+  it('should create ct project for domain', async () => {
+    await runNxCommandAsync(
+      `generate @srleecode/domain:domainTest --groupingFolder ${groupingFolder} --type ct`
+    );
+    checkFilesExist(`${groupingFolder}/.ct/cypress.json`);
+  });
 });

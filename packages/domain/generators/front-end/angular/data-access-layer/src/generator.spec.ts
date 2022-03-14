@@ -4,10 +4,8 @@ import { createDataAccessLayerGenerator } from './generator';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import * as frontEndSharedMock from '../../../shared';
 import { CreateDataAccessLayerGeneratorSchema } from './schema';
-import {
-  ApplicationType,
-  getGroupingFolders,
-} from '@srleecode/domain/shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
 describe('createDataAccessLayerGenerator', () => {
   let tree: Tree;
 

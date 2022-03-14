@@ -1,7 +1,6 @@
 import { readJson, Tree } from '@nrwl/devkit';
 import { addGlobalComponentTestingOptions } from './add-global-component-testing-options/add-global-component-testing-options';
 import { cypressInitGenerator } from '@nrwl/cypress';
-import { ngAddGenerator } from '@jscutlery/cypress-angular/src/generators/ng-add/ng-add';
 import { angularInitGenerator } from '@nrwl/angular/generators';
 
 export const initialiseAngularWorkspace = async (tree: Tree): Promise<void> => {
@@ -21,13 +20,6 @@ export const initialiseAngularWorkspace = async (tree: Tree): Promise<void> => {
   } else {
     throw Error(
       '@nrwl/cypress is not installed. Did you run ng add @srleecode/domain?'
-    );
-  }
-  if (isPackageAdded('@jscutlery/cypress-angular', packageJson)) {
-    await ngAddGenerator(tree);
-  } else {
-    throw Error(
-      '@jscutlery/cypress-angular is not installed. Did you run ng add @srleecode/domain?'
     );
   }
   if (!tree.exists(`.component-testing/global-mount-options.constant.ts`)) {
