@@ -1,8 +1,10 @@
 import { readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createAppGroupingFolderGenerator } from './generator';
-import { ApplicationType } from '@srleecode/domain/shared/utils';
 import * as initialiseAngularWorkspaceMock from './lib/angular/initialise-angular-workspace';
+import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ApplicationType } from '../../../shared/utils';
 
 describe('createAppGroupingFolderGenerator', () => {
   let tree: Tree;
@@ -68,11 +70,9 @@ describe('createAppGroupingFolderGenerator', () => {
         applicationType: ApplicationType.Angular,
       });
       const eslint = readJson(tree, '.eslintrc.json');
-      expect(
-        eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
-          .depConstraints
-      ).toEqual([
+      const expected: DepConstraint[] = [
         {
+          notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: [
             'type:application',
             'type:domain',
@@ -85,8 +85,10 @@ describe('createAppGroupingFolderGenerator', () => {
           sourceTag: 'type:shell',
         },
         {
+          notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: [
             'type:application',
+            'type:shell',
             'type:domain',
             'type:feature',
             'type:directive',
@@ -96,7 +98,10 @@ describe('createAppGroupingFolderGenerator', () => {
           sourceTag: 'type:feature',
         },
         {
+          notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: [
+            'type:application',
+            'type:shell',
             'type:feature',
             'type:domain',
             'type:directive',
@@ -106,6 +111,7 @@ describe('createAppGroupingFolderGenerator', () => {
           sourceTag: 'type:ui',
         },
         {
+          notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: [
             'type:application',
             'type:domain',
@@ -115,6 +121,7 @@ describe('createAppGroupingFolderGenerator', () => {
           sourceTag: 'type:directive',
         },
         {
+          notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: [
             'type:application',
             'type:data-access',
@@ -124,10 +131,12 @@ describe('createAppGroupingFolderGenerator', () => {
           sourceTag: 'type:application',
         },
         {
+          notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: ['type:domain'],
           sourceTag: 'type:domain',
         },
         {
+          notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: [
             'type:data-access',
             'type:domain',
@@ -136,10 +145,15 @@ describe('createAppGroupingFolderGenerator', () => {
           sourceTag: 'type:data-access',
         },
         {
+          notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: ['type:domain', 'type:util'],
           sourceTag: 'type:util',
         },
-      ]);
+      ];
+      expect(
+        eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+          .depConstraints
+      ).toEqual(expected);
     });
   });
 });

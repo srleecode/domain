@@ -7,6 +7,7 @@ export const addEslintLayerConstraints = (tree: Tree) => {
   updateDepConstraint(tree, (depConstraints: DepConstraint[]) => {
     depConstraints.push({
       sourceTag: 'type:shell',
+      notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [
         'type:application',
         'type:domain',
@@ -19,8 +20,10 @@ export const addEslintLayerConstraints = (tree: Tree) => {
     });
     depConstraints.push({
       sourceTag: 'type:feature',
+      notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [
         'type:application',
+        'type:shell',
         'type:domain',
         'type:feature',
         'type:directive',
@@ -30,7 +33,10 @@ export const addEslintLayerConstraints = (tree: Tree) => {
     });
     depConstraints.push({
       sourceTag: 'type:ui',
+      notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [
+        'type:application',
+        'type:shell',
         'type:feature',
         'type:domain',
         'type:directive',
@@ -40,6 +46,7 @@ export const addEslintLayerConstraints = (tree: Tree) => {
     });
     depConstraints.push({
       sourceTag: 'type:directive',
+      notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [
         'type:application',
         'type:domain',
@@ -49,6 +56,7 @@ export const addEslintLayerConstraints = (tree: Tree) => {
     });
     depConstraints.push({
       sourceTag: 'type:application',
+      notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [
         'type:application',
         'type:data-access',
@@ -58,10 +66,12 @@ export const addEslintLayerConstraints = (tree: Tree) => {
     });
     depConstraints.push({
       sourceTag: 'type:domain',
+      notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: ['type:domain'],
     });
     depConstraints.push({
       sourceTag: 'type:data-access',
+      notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [
         'type:data-access',
         'type:domain',
@@ -70,6 +80,7 @@ export const addEslintLayerConstraints = (tree: Tree) => {
     });
     depConstraints.push({
       sourceTag: 'type:util',
+      notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: ['type:domain', 'type:util'],
     });
   });

@@ -1,8 +1,10 @@
-import { Tree, convertNxGenerator, getWorkspaceLayout } from '@nrwl/devkit';
+import { Tree, convertNxGenerator } from '@nrwl/devkit';
 import { CreateAppGroupingFolderGeneratorSchema } from './schema';
 import { isAppFolderExisting } from './lib/shared/is-app-folder-existing';
 import { initialiseWorkspace } from './lib/shared/initialise-workspace';
 import { mkdirSync } from 'fs';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { getWorkspaceLayout } from '../../../shared/utils/src/get-workspace-layout';
 
 export async function createAppGroupingFolderGenerator(
   tree: Tree,

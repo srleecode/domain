@@ -1,5 +1,0 @@
-import { ComponentHarness } from '@angular/cdk/testing';
-
-export class <%= harnessName %> extends ComponentHarness {
-  static hostSelector = '<%= selector %>';
-}

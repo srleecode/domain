@@ -4,62 +4,6 @@
   "plugins": ["@nrwl/nx"],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
-          "error",
-          {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "package:domain-front-end-angular",
-                "onlyDependOnLibsWithTags": [
-                  "scope:domain-front-end-angular-shared",
-                  "scope:domain-front-end-shared",
-                  "scope:domain-shared-utils",
-                  "scope:domain-shared-test-utils",
-                  "scope:domain-cypress-component-test-angular"
-                ]
-              },
-              {
-                "sourceTag": "package:domain-front-end",
-                "onlyDependOnLibsWithTags": [
-                  "scope:domain-front-end-shared",
-                  "scope:domain-shared-utils",
-                  "scope:domain-shared-test-utils"
-                ]
-              },
-              {
-                "sourceTag": "package:domain-grouping-folder",
-                "onlyDependOnLibsWithTags": [
-                  "scope:domain-grouping-folder-shared",
-                  "scope:domain-cypress-domain-test",
-                  "scope:domain-init-ng-add",
-                  "scope:domain-shared-utils",
-                  "scope:domain-shared-test-utils"
-                ]
-              },
-              {
-                "sourceTag": "package:domain-mock-file",
-                "onlyDependOnLibsWithTags": [
-                  "scope:domain-shared-utils",
-                  "scope:domain-shared-test-utils"
-                ]
-              },
-              {
-                "sourceTag": "package:domain-cypress",
-                "onlyDependOnLibsWithTags": [
-                  "scope:domain-shared-utils",
-                  "scope:domain-shared-test-utils"
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
       "rules": {}

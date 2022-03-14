@@ -1,14 +1,10 @@
 import { Tree, convertNxGenerator, logger, formatFiles } from '@nrwl/devkit';
 import { CreateComponentGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { setupComponentTestGenerator } from '../../../../cypress/component-test/angular/src/generator';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
-  ElementType,
   ApplicationType,
   getGroupingFolders,
-  MountType,
 } from '../../../../shared/utils';
 import { addComponentFiles } from './lib/add-component-files/add-component-files';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
@@ -20,7 +16,7 @@ export async function createComponentGenerator(
   tree: Tree,
   options: CreateComponentGeneratorSchema
 ): Promise<void> {
-  const { name, groupingFolder, type, mountType } = options;
+  const { name, groupingFolder, type } = options;
   const dasherisedGroupingFolder = `${getDasherizedFolderPath(
     tree,
     groupingFolder
@@ -54,21 +50,6 @@ export async function createComponentGenerator(
     libraryName,
     selector
   );
-  if (mountType !== MountType.None) {
-    await setupComponentTestGenerator(tree, {
-      projectName,
-      name,
-      mountType,
-      prefix: groupingFolders.app,
-      selector,
-      componentType: type,
-      type: ElementType.Component,
-    }).catch((e: Error) => {
-      logger.error(e.message);
-      logger.error(e.stack);
-      throw e;
-    });
-  }
   setIndexToComponentFile(tree, groupingFolder, libraryName, name, type);
   await formatFiles(tree);
 }

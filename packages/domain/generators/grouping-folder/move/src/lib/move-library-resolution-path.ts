@@ -1,8 +1,9 @@
-import { getWorkspaceLayout, Tree, updateJson } from '@nrwl/devkit';
+import { Tree, updateJson } from '@nrwl/devkit';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
   getDomainPath,
+  getWorkspaceLayout,
 } from '../../../../shared/utils';
 
 export const moveLibraryResolutionPath = (
@@ -14,13 +15,13 @@ export const moveLibraryResolutionPath = (
     const { npmScope } = getWorkspaceLayout(tree);
     updateJson(tree, tsConfigPath, (json) => {
       if (!!json.compilerOptions && !!json.compilerOptions?.paths) {
-        const projectName = `@${npmScope}/${getDasherizedFolderPath(
+        const projectName = `${npmScope}/${getDasherizedFolderPath(
           tree,
           newLibraryFolder
         )}`;
         const projectReference = json.compilerOptions.paths[projectName];
         delete json.compilerOptions.paths[projectName];
-        const newProjectName = `@${npmScope}/${getDomainPath(
+        const newProjectName = `${npmScope}/${getDomainPath(
           tree,
           newLibraryFolder
         )}`;

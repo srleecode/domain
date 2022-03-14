@@ -2,30 +2,9 @@
   "version": 2,
   "projects": {
     "domain": "packages/domain",
-    "domain-cypress-component-test-angular": "packages/domain/generators/cypress/component-test/angular",
-    "domain-cypress-domain-test": "packages/domain/generators/cypress/domain-test",
-    "domain-front-end-angular-application-layer": "packages/domain/generators/front-end/angular/application-layer",
-    "domain-front-end-angular-component": "packages/domain/generators/front-end/angular/component",
-    "domain-front-end-angular-data-access-layer": "packages/domain/generators/front-end/angular/data-access-layer",
-    "domain-front-end-angular-directive": "packages/domain/generators/front-end/angular/directive",
-    "domain-front-end-angular-domain-layer": "packages/domain/generators/front-end/angular/domain-layer",
-    "domain-front-end-angular-remove-library": "packages/domain/generators/front-end/angular/remove-library",
-    "domain-front-end-angular-util-layer": "packages/domain/generators/front-end/angular/util-layer",
-    "domain-front-end-shared": "packages/domain/generators/front-end/shared",
-    "domain-grouping-folder-create-app": "packages/domain/generators/grouping-folder/create-app",
-    "domain-grouping-folder-create-domain": "packages/domain/generators/grouping-folder/create-domain",
-    "domain-grouping-folder-move": "packages/domain/generators/grouping-folder/move",
-    "domain-grouping-folder-remove": "packages/domain/generators/grouping-folder/remove",
-    "domain-grouping-folder-shared": "packages/domain/generators/grouping-folder/shared",
-    "domain-init-ng-add": "packages/domain/generators/init/ng-add",
-    "domain-init-react-add": "packages/domain/generators/init/react-add",
-    "domain-mock-file": "packages/domain/generators/mock-file",
-    "domain-shared-test-utils": "packages/domain/generators/shared/test-utils",
-    "domain-shared-utils": "packages/domain/generators/shared/utils",
     "e2e-domain-cypress-domain-test": "e2e/domain/cypress/domain-test",
     "e2e-domain-front-end-angular": "e2e/domain/front-end/angular",
     "e2e-domain-grouping-folder": "e2e/domain/grouping-folder",
-    "e2e-domain-mock-file": "e2e/domain/mock-file",
-    "workspace": "."
+    "e2e-domain-mock-file": "e2e/domain/mock-file"
   }
 }

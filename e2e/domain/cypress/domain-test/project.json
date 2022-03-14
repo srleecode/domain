@@ -11,5 +11,5 @@
       }
     }
   },
-  "implicitDependencies": ["domain-cypress-domain-test"]
+  "implicitDependencies": ["domain"]
 }

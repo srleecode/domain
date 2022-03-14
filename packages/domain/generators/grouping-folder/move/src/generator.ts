@@ -4,13 +4,13 @@ import {
   logger,
   getProjects,
   ProjectConfiguration,
-  getWorkspaceLayout,
 } from '@nrwl/devkit';
 import { MoveGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   getNormalisedPath,
   getProjectNames,
+  getWorkspaceLayout,
   isHavingMockFile,
 } from '../../../shared/utils';
 import { moveGenerator as nrwlMoveGenerator } from '@nrwl/workspace';
@@ -31,7 +31,7 @@ export async function moveGenerator(tree: Tree, options: MoveGeneratorSchema) {
       groupingFolder,
       destination
     );
-    if (projectName.startsWith('e2e')) {
+    if (projectName.startsWith('e2e') || projectName.startsWith('ct')) {
       await moveDomainTestProject(tree, projectName, movedProjectRoot).catch(
         (e) => {
           logger.error(e.message);

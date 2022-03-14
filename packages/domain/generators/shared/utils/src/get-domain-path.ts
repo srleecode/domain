@@ -1,5 +1,6 @@
-import { getWorkspaceLayout, Tree } from '@nrwl/devkit';
+import { Tree } from '@nrwl/devkit';
 import { getNormalisedPath } from './get-normalised-path';
+import { getWorkspaceLayout } from './get-workspace-layout';
 
 export const getDomainPath = (
   tree: Tree,

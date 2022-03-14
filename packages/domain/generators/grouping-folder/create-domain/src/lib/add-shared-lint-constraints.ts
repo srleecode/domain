@@ -19,10 +19,12 @@ export const addSharedLintContraints = (
     depConstraints.push({
       sourceTag: scope,
       onlyDependOnLibsWithTags: [scope],
+      notDependOnLibsWithTags: [],
     });
     if (groupingFolders.domain.length > 1) {
       depConstraints.push({
         sourceTag: scope,
+        notDependOnLibsWithTags: [],
         onlyDependOnLibsWithTags: [
           `scope:${groupingFolders.app}-${groupingFolders.domain[0]}-shared`,
         ],
@@ -30,11 +32,13 @@ export const addSharedLintContraints = (
     }
     depConstraints.push({
       sourceTag: scope,
+      notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [`scope:${groupingFolders.app}-shared`],
     });
     const appType = groupingFolders.app.split('-')?.[0];
     depConstraints.push({
       sourceTag: scope,
+      notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [`app:${appType}-shared`],
     });
   });

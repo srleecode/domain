@@ -2,19 +2,15 @@ import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import * as frontEndSharedMock from '../../../shared';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import * as setupComponentTestSpy from '../../../../cypress/component-test/angular/src/generator';
 import { defaultOptions } from './default-options.constant';
 import { createComponentGenerator } from './generator';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
-  MountType,
-  ElementType,
   ApplicationType,
   getDasherizedFolderPath,
   getGroupingFolders,
-} from '@srleecode/domain/shared/utils';
+} from '../../../../shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
-import { ComponentType } from './model/component-type.enum';
 
 describe('createComponentGenerator', () => {
   let tree: Tree;
@@ -23,7 +19,6 @@ describe('createComponentGenerator', () => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
     jest.spyOn(frontEndSharedMock, 'addDomainLibrary');
-    jest.spyOn(setupComponentTestSpy, 'setupComponentTestGenerator');
   });
 
   it('should throw an error if the project already exists', async () => {
@@ -60,24 +55,6 @@ describe('createComponentGenerator', () => {
       false,
       defaultOptions
     );
-  });
-
-  it('should pass correct parameters to setupComponentTestGenerator', async () => {
-    await createComponentGenerator(tree, {
-      ...defaultOptions,
-      mountType: MountType.Component,
-    });
-    expect(
-      setupComponentTestSpy.setupComponentTestGenerator
-    ).toHaveBeenCalledWith(expect.anything(), {
-      name: 'TestExample',
-      mountType: MountType.Component,
-      componentType: ComponentType.Feature,
-      projectName: 'test-app-test-domain-feature-test-example',
-      selector: 'test-app-test-domain-feature-test-example',
-      prefix: 'test-app',
-      type: ElementType.Component,
-    });
   });
 
   it('should set index to component file', async () => {

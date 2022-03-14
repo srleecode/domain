@@ -1,6 +1,7 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readJson } from '@nrwl/devkit';
 import { removeDepConstraint } from './remove-dep-contraint';
+import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
 
 describe('removeDepConstraint', () => {
   let appTree: Tree;
@@ -94,12 +95,14 @@ describe('removeDepConstraint', () => {
     it('should update dependency constraints in tslint.json', () => {
       removeDepConstraint(appTree, 'type:domain');
       const tslint = readJson(appTree, 'tslint.json');
-      expect(
-        tslint.rules['nx-enforce-module-boundaries'][1].depConstraints
-      ).not.toContainEqual({
+      const expected: DepConstraint = {
+        notDependOnLibsWithTags: [],
         onlyDependOnLibsWithTags: ['type:util'],
         sourceTag: 'type:domain',
-      });
+      };
+      expect(
+        tslint.rules['nx-enforce-module-boundaries'][1].depConstraints
+      ).not.toContainEqual(expected);
     });
   });
 });

@@ -1,10 +1,8 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { MountType } from '../../../../shared/utils';
+
 import { CreateDirectiveGeneratorSchema } from './schema';
 
 export const defaultOptions: CreateDirectiveGeneratorSchema = {
   groupingFolder: 'libs/test-app/test-domain',
-  mountType: MountType.None,
   name: 'TestExample',
   buildable: true,
   strict: false,

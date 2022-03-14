@@ -11,14 +11,5 @@
       }
     }
   },
-  "implicitDependencies": [
-    "domain-front-end-angular-application-layer",
-    "domain-front-end-angular-component",
-    "domain-front-end-angular-data-access-layer",
-    "domain-front-end-angular-directive",
-    "domain-front-end-angular-domain-layer",
-    "domain-front-end-angular-remove-library",
-    "domain-front-end-angular-util-layer",
-    "domain-front-end-shared"
-  ]
+  "implicitDependencies": ["domain"]
 }
