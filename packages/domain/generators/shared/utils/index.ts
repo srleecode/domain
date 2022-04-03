@@ -10,6 +10,7 @@ export { isHavingMockFile } from './src/is-having-mock-file';
 export { getMockFileResolutionPath } from './src/get-mock-file-resolution-path';
 export { removeDepConstraint } from './src/remove-dep-contraint';
 export { isHavingDepContraint } from './src/is-having-dep-constraint';
+export { getTsSourceFile } from './src/get-ts-source-file';
 export { UnitTestType } from './src/model/unit-test-type.enum';
 export { ElementType } from './src/model/element-type.enum';
 export { ApplicationType } from './src/model/application-type.enum';

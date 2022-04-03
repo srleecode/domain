@@ -18,6 +18,11 @@
       "schema": "./generators/front-end/angular/component/src/schema.json",
       "description": "Add component domain library generator"
     },
+    "ngComponentGlobalStyles": {
+      "factory": "./generators/front-end/angular/component-global-styles/src/generator#createComponentGlobalStylesSchematic",
+      "schema": "./generators/front-end/angular/component-global-styles/src/schema.json",
+      "description": "Add component global styles generator"
+    },
     "ngDataAccessLayer": {
       "factory": "./generators/front-end/angular/data-access-layer/src/generator#createDataAccessLayeSchematic",
       "schema": "./generators/front-end/angular/data-access-layer/src/schema.json",
@@ -91,6 +96,11 @@
       "factory": "./generators/front-end/angular/component/src/generator",
       "schema": "./generators/front-end/angular/component/src/schema.json",
       "description": "Add component domain library generator"
+    },
+    "ngComponentGlobalStyles": {
+      "factory": "./generators/front-end/angular/component-global-styles/src/generator",
+      "schema": "./generators/front-end/angular/component-global-styles/src/schema.json",
+      "description": "Add component global styles generator"
     },
     "ngDataAccessLayer": {
       "factory": "./generators/front-end/angular/data-access-layer/src/generator",

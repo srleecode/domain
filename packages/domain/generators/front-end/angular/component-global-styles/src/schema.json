@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "CreateComponentGlobalStylesGenerator",
+  "title": "Create Component Global Styles",
+  "cli": "nx",
+  "type": "object",
+  "description": "Creates global styles for an existing SCAM (Single Component Angular Module) library",
+  "properties": {
+    "componentLibraryPath": {
+      "description": "The path to the component library",
+      "type": "string"
+    }
+  },
+  "required": ["componentLibraryPath"]
+}
