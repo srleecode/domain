@@ -57,7 +57,7 @@ describe('createComponentGlobalStylesGenerator', () => {
     const componentTemplatePath = componentFilePath.replace('.ts', '.html');
     const componentFile = tree.read(componentTemplatePath).toString();
     expect(componentFile.replace(/\s/g, '')).toMatch(
-      `<test-app-test-domain-feature-test-example><p>test-exampleworks!</p></test-app-test-domain-feature-test-example>`
+      `<test-app-test-domain-feature-test-example-base><p>test-exampleworks!</p></test-app-test-domain-feature-test-example-base>`
     );
   });
 });
