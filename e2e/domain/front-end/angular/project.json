@@ -1,5 +1,4 @@
 {
-  "root": "e2e/domain/front-end/angular",
   "sourceRoot": "e2e/domain/front-end/angular/src",
   "projectType": "application",
   "targets": {
@@ -7,7 +6,7 @@
       "executor": "@nrwl/nx-plugin:e2e",
       "options": {
         "target": "domain:build",
-        "jestConfig": "e2e/domain/front-end/angular/jest.config.js"
+        "jestConfig": "e2e/domain/front-end/angular/jest.config.ts"
       }
     }
   },
