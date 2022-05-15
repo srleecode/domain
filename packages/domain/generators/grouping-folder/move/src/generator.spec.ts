@@ -65,4 +65,38 @@ describe('moveGenerator', () => {
       'libs/second-test-app/test-domain/data-access'
     );
   });
+  it('should fix updated tsconfig path imports from nrwl move', async () => {
+    const startDirectory = 'test-app/test-domain';
+    await libraryGenerator(appTree, {
+      name: 'data-access',
+      directory: startDirectory,
+    });
+    await libraryGenerator(appTree, {
+      name: 'shell',
+      directory: startDirectory,
+    });
+    appTree.write(
+      `libs/test-app/test-domain/shell/src/lib/test-app-test-domain-shell.ts`,
+      `import { testAppTestDomainDataAccess } from "@proj/${startDirectory}/data-access";\n` +
+        appTree
+          .read(
+            `libs/test-app/test-domain/shell/src/lib/test-app-test-domain-shell.ts`
+          )
+          .toString()
+    );
+    await moveGenerator(appTree, {
+      groupingFolder: originalFolder,
+      destination,
+    });
+    const shellFile = appTree
+      .read(
+        `libs/second-test-app/test-domain/shell/src/lib/test-app-test-domain-shell.ts`
+      )
+      .toString();
+    expect(shellFile).toMatch('@proj/second-test-app/test-domain/data-access');
+    const readme = appTree
+      .read(`libs/second-test-app/test-domain/shell/README.md`)
+      .toString();
+    expect(readme).toMatch('second-test-app-test-domain-shell');
+  });
 });

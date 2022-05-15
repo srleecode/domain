@@ -18,6 +18,7 @@ import { moveDomainTestProject } from './lib/move-domain-test-project';
 import { moveEslintReference } from './lib/move-eslint-reference';
 import { moveLibraryResolutionPath } from './lib/move-library-resolution-path';
 import { moveMockFileResolutionPath } from './lib/move-mock-file-resolution-path';
+import { fixTsconfigPathImports } from './lib/fix-tsconfig-path-imports';
 
 export async function moveGenerator(tree: Tree, options: MoveGeneratorSchema) {
   const { groupingFolder, destination } = options;
@@ -52,6 +53,7 @@ export async function moveGenerator(tree: Tree, options: MoveGeneratorSchema) {
     if (isHavingMockFile(tree, project.root)) {
       moveMockFileResolutionPath(tree, project.root, movedProjectRoot);
     }
+    fixTsconfigPathImports(tree, movedProjectRoot);
   }
   moveEslintReference(tree, groupingFolder, destination);
   tree.delete(groupingFolder);
