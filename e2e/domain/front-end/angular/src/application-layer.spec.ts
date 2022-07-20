@@ -1,13 +1,11 @@
-import {
-  checkFilesExist,
-  ensureNxProject,
-  runNxCommandAsync,
-} from '@nrwl/nx-plugin/testing';
+import { logger } from '@nrwl/devkit';
+import { createProject } from '../../../utils/util';
+import { checkFilesExist, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
 
 describe('application-layer', () => {
   const groupingFolder = 'libs/ng-test-app/test-domain';
   beforeAll(async () => {
-    ensureNxProject('@srleecode/domain', 'dist/packages/domain');
+    createProject();
     await runNxCommandAsync(`generate @srleecode/domain:ng-add`);
     await runNxCommandAsync(
       `generate @srleecode/domain:appGroupingFolder --name test-app --applicationType ng`
@@ -20,7 +18,11 @@ describe('application-layer', () => {
   it('should create application layer library', async () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:ngApplicationLayer --groupingFolder ${groupingFolder}`
-    );
+    ).catch((e) => {
+      logger.error(e.message);
+      logger.error(e.stack);
+      throw e;
+    });
     checkFilesExist(`${groupingFolder}/application/src/index.ts`);
   });
 });

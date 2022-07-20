@@ -1,14 +1,14 @@
 import {
   checkFilesExist,
-  ensureNxProject,
   runNxCommandAsync,
   updateFile,
 } from '@nrwl/nx-plugin/testing';
 import { EMPTY_ESLINT } from './model/empty-eslint.const';
+import { createProject } from '../../utils/util';
 
 describe('app grouping folder', () => {
   beforeAll(async () => {
-    ensureNxProject('@srleecode/domain', 'dist/packages/domain');
+    createProject();
     updateFile('.eslintrc.json', JSON.stringify(EMPTY_ESLINT));
     await runNxCommandAsync(`generate @srleecode/domain:ng-add`);
   });
