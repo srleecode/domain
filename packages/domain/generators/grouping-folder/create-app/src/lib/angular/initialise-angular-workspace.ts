@@ -1,5 +1,4 @@
 import { readJson, Tree } from '@nrwl/devkit';
-import { addGlobalComponentTestingOptions } from './add-global-component-testing-options/add-global-component-testing-options';
 import { cypressInitGenerator } from '@nrwl/cypress';
 import { angularInitGenerator } from '@nrwl/angular/generators';
 
@@ -21,9 +20,6 @@ export const initialiseAngularWorkspace = async (tree: Tree): Promise<void> => {
     throw Error(
       '@nrwl/cypress is not installed. Did you run ng add @srleecode/domain?'
     );
-  }
-  if (!tree.exists(`.component-testing/global-mount-options.constant.ts`)) {
-    addGlobalComponentTestingOptions(tree);
   }
 };
 

@@ -16,9 +16,9 @@ describe('setupDomainTestGenerator', () => {
     });
 
     it('should move cypress directory from apps to libs', async () => {
-      expect(tree.exists(`libs/test-app/test-domain/.e2e/cypress.json`)).toBe(
-        true
-      );
+      expect(
+        tree.exists(`libs/test-app/test-domain/.e2e/cypress.config.ts`)
+      ).toBe(true);
     });
 
     it('should update cypress cypress project name to correct name', async () => {
@@ -79,9 +79,9 @@ describe('setupDomainTestGenerator', () => {
     });
 
     it('should move cypress directory from apps to libs', async () => {
-      expect(tree.exists(`libs/test-app/test-domain/.ct/cypress.json`)).toBe(
-        true
-      );
+      expect(
+        tree.exists(`libs/test-app/test-domain/.ct/cypress.config.ts`)
+      ).toBe(true);
     });
   });
 });
