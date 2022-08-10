@@ -1,4 +1,5 @@
 {
+  "$schema": "..\\..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "e2e/domain/front-end/angular/src",
   "projectType": "application",
   "targets": {

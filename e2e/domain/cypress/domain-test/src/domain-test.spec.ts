@@ -1,13 +1,10 @@
-import {
-  checkFilesExist,
-  ensureNxProject,
-  runNxCommandAsync,
-} from '@nrwl/nx-plugin/testing';
+import { checkFilesExist, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
+import { createProject } from '../../../utils/util';
 
 describe('domainTest e2e', () => {
   const groupingFolder = 'libs/ng-test-app/test-domain';
   beforeAll(async () => {
-    ensureNxProject('@srleecode/domain', 'dist/packages/domain');
+    createProject();
     await runNxCommandAsync(`generate @srleecode/domain:ng-add`);
     await runNxCommandAsync(
       `generate @srleecode/domain:appGroupingFolder --name test-app --applicationType ng`
