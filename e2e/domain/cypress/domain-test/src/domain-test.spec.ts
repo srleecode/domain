@@ -17,14 +17,14 @@ describe('domainTest e2e', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:domainTest --groupingFolder ${groupingFolder}`
     );
-    checkFilesExist(`${groupingFolder}/.e2e/cypress.json`);
+    checkFilesExist(`${groupingFolder}/.e2e/cypress.config.ts`);
     checkFilesExist(`${groupingFolder}/.e2e/project.json`);
   });
   it('should create ct project for domain', async () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:domainTest --groupingFolder ${groupingFolder} --type ct`
     );
-    checkFilesExist(`${groupingFolder}/.ct/cypress.json`);
+    checkFilesExist(`${groupingFolder}/.ct/cypress.config.ts`);
     checkFilesExist(`${groupingFolder}/.ct/project.json`);
   });
 });

@@ -1,3 +1,4 @@
+import { logger } from '@nrwl/devkit';
 import {
   ensureNxProject,
   fileExists,
@@ -6,7 +7,7 @@ import {
 
 export const createProject = () => {
   if (isProjectExisting()) {
-    throw new Error(`Project was not cleaned up at ${tmpProjPath()}`);
+    logger.warn(`Project was not cleaned up at ${tmpProjPath()}`);
   }
   ensureNxProject('@srleecode/domain', 'dist/packages/domain');
 };
