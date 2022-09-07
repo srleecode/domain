@@ -23,7 +23,7 @@ describe('createComponentGlobalStylesGenerator', () => {
     await createComponentGlobalStylesGenerator(tree, {
       componentLibraryPath,
     });
-  });
+  }, 240000);
 
   it('should create base component file', () => {
     const filesContents = getFilesContents(

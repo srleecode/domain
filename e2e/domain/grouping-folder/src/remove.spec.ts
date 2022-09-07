@@ -10,7 +10,7 @@ describe('remove', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:removeGroupingFolder --groupingFolder ${groupingFolder}`
     );
-  });
+  }, 240000);
 
   it('should remove domain grouping folder', async () => {
     expect(fileExists(`${groupingFolder}/util/src/index.ts`)).toBe(false);

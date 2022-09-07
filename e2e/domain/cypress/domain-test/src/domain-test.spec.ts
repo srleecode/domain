@@ -3,6 +3,7 @@ import { createProject } from '../../../utils/util';
 
 describe('domainTest e2e', () => {
   const groupingFolder = 'libs/ng-test-app/test-domain';
+
   beforeAll(async () => {
     createProject();
     await runNxCommandAsync(`generate @srleecode/domain:ng-add`);
@@ -12,7 +13,8 @@ describe('domainTest e2e', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:domainGroupingFolder --name test-domain --groupingFolder libs/ng-test-app`
     );
-  });
+  }, 240000);
+
   it('should create e2e project for domain', async () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:domainTest --groupingFolder ${groupingFolder}`
