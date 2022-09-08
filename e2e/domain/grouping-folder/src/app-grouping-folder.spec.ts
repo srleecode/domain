@@ -11,7 +11,7 @@ describe('app grouping folder', () => {
     createProject();
     updateFile('.eslintrc.json', JSON.stringify(EMPTY_ESLINT));
     await runNxCommandAsync(`generate @srleecode/domain:ng-add`);
-  });
+  }, 240000);
 
   it('should create directory with language prefixed to name', async () => {
     await runNxCommandAsync(

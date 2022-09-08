@@ -8,7 +8,6 @@ import {
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { addDomainLibrary } from './add-domain-library';
 import { AngularCreateLibrarySchema } from './model/angular-create-library-schema.model';
-import * as libraryGeneratorMock from '@nrwl/angular/src/generators/library/library';
 import { ApplicationType } from '@srleecode/domain/shared/utils';
 
 describe('addDomainLibrary', () => {
@@ -23,32 +22,6 @@ describe('addDomainLibrary', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
-    jest.spyOn(libraryGeneratorMock, 'libraryGenerator');
-  });
-
-  it('should pass correct parameters to @nrwl/angular generator', async () => {
-    await addDomainLibrary(
-      tree,
-      '',
-      'application',
-      'libs/test-app/test-domain',
-      'test-app',
-      ApplicationType.Angular,
-      true,
-      commonLibraryOptions
-    );
-    expect(libraryGeneratorMock.libraryGenerator).toHaveBeenCalledWith(
-      expect.anything(),
-      {
-        directory: 'test-app/test-domain',
-        importPath: '@proj/test-app/test-domain/application',
-        name: 'application',
-        standaloneConfig: false,
-        tags: 'app:test-app,scope:test-app-test-domain,type:application',
-        prefix: 'test-app',
-        ...commonLibraryOptions,
-      }
-    );
   });
 
   it('should clear lint file overrides', async () => {

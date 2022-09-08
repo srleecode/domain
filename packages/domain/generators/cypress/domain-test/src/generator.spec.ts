@@ -13,7 +13,7 @@ describe('setupDomainTestGenerator', () => {
         groupingFolder: 'libs/test-app/test-domain',
         type: 'e2e',
       });
-    });
+    }, 240000);
 
     it('should move cypress directory from apps to libs', async () => {
       expect(
@@ -76,7 +76,7 @@ describe('setupDomainTestGenerator', () => {
         groupingFolder: 'libs/test-app/test-domain',
         type: 'ct',
       });
-    });
+    }, 240000);
 
     it('should move cypress directory from apps to libs', async () => {
       expect(

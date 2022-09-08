@@ -15,7 +15,7 @@ describe('mockFile e2e', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:ngUtilLayer --groupingFolder ${groupingFolder}`
     );
-  });
+  }, 240000);
 
   it('should add mock file to domain library', async () => {
     await runNxCommandAsync(

@@ -19,7 +19,8 @@ describe('move', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:moveGroupingFolder --groupingFolder ${groupingFolder} --destination ${movedDomainGroupingFolder}`
     );
-  });
+  }, 240000);
+
   it('should move domain grouping folder', async () => {
     checkFilesExist(`${movedDomainGroupingFolder}/util/src/index.ts`);
   });

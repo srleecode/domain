@@ -14,7 +14,7 @@ describe('isHavingDepContraint', () => {
       appsDir: 'apps',
       libsDir: 'libs',
       npmScope: '@proj',
-      standaloneAsDefault: false,
+      standaloneAsDefault: true,
     });
   });
 });
