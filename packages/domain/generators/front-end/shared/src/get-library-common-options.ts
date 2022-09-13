@@ -24,14 +24,13 @@ export const getLibraryCommonOptions = (
       `project already exists in: ${groupingFolder}/${libraryName}`
     );
   }
-  const { npmScope, standaloneAsDefault } = getWorkspaceLayout(tree);
+  const { npmScope } = getWorkspaceLayout(tree);
   const domainPath = getDomainPath(tree, groupingFolder);
   const importPath = `${npmScope}/${domainPath}/${libraryName}`;
   return {
     name: libraryName,
     importPath,
     directory: domainPath,
-    standaloneConfig: standaloneAsDefault,
     tags: [
       `app:${domainPath.split('/')?.[0]}`,
       `scope:${domain}`,

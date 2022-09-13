@@ -4,5 +4,7 @@ import { Component, ViewEncapsulation } from "@angular/core";
     selector: "<%= selector %>-base",
     template: "<ng-content></ng-content>",
     styleUrls: ["./global.scss"],
+    standalone: true,
+    imports: [CommonModule],
     encapsulation: ViewEncapsulation.None
 }) export class <%= componentClassName %> {}

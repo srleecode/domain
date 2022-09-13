@@ -6,9 +6,8 @@ export const addBaseComponentDeclaration = (
   componentClassName: string
 ) => {
   const file = tree.read(componentFilePath).toString();
-  const newFile = file.replace(
-    /declarations:.*\[/i,
-    `declarations: [${componentClassName}, `
-  );
+  const newFile = file.includes('imports')
+    ? file.replace(/imports:.*\[/i, `imports: [${componentClassName}, `)
+    : file.replace(/})/i, `imports: [${componentClassName}] })`);
   tree.write(componentFilePath, newFile);
 };

@@ -7,7 +7,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './<%= fileName %>.component.html',
   styleUrls: ['./<%= fileName %>.component.<%= style %>']<% if(isUsingNonDefaultViewEncapsulation) { %>,
   encapsulation: ViewEncapsulation.<%= viewEncapsulation %><% } if (changeDetection !== 'Default') { %>,
-  changeDetection: ChangeDetectionStrategy.<%= changeDetection %><% } %>
+  changeDetection: ChangeDetectionStrategy.<%= changeDetection %><% } %>,
+  standalone: true,
+  imports: [CommonModule]
 })
 export class <%= componentName %> implements OnInit {
 
@@ -16,10 +18,3 @@ export class <%= componentName %> implements OnInit {
   ngOnInit(): void {
   }
 }
-
-@NgModule({
-  declarations: [<%= componentName %>],
-  imports: [CommonModule],
-  exports: [<%= componentName %>]
-})
-export class <%= moduleName %> {}
