@@ -11,7 +11,7 @@ import { dasherize } from '@nrwl/workspace/src/utils/strings';
 describe('component file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
-  defaultOptions.name
+    defaultOptions.name
   )}.component.ts`;
 
   beforeEach(() => {
@@ -32,7 +32,9 @@ describe('component file', () => {
       ...defaultOptions,
       type: ComponentType.Ui,
     });
-    const uiTestFilePath =  `${LIB_PATH.replace('feature', 'ui')}/${dasherize(defaultOptions.name)}.component.ts`;
+    const uiTestFilePath = `${LIB_PATH.replace('feature', 'ui')}/${dasherize(
+      defaultOptions.name
+    )}.component.ts`;
     const componentFile = tree.read(uiTestFilePath).toString();
     expect(componentFile).toMatch(
       /changeDetection: ChangeDetectionStrategy.OnPush/

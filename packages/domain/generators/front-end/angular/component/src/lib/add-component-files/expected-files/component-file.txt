@@ -5,17 +5,12 @@ import { CommonModule } from '@angular/common';
 @Component({
     selector:'test-app-test-domain-feature-test-example',
     templateUrl:'./test-example.component.html',
-    styleUrls: ['./test-example.component.scss']
+    styleUrls: ['./test-example.component.scss'],
+    standalone: true,
+    imports: [CommonModule]
 }) export class FeatureTestExampleComponent implements OnInit {
     constructor() {}
 
     ngOnInit():void {
     }
 }
-
-@NgModule({
-  declarations: [FeatureTestExampleComponent],
-  imports: [CommonModule],
-  exports: [FeatureTestExampleComponent]
-})
-export class TestAppTestDomainFeatureTestExampleModule {}

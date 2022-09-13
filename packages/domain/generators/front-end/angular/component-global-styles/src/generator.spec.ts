@@ -47,10 +47,10 @@ describe('createComponentGlobalStylesGenerator', () => {
       `import { FeatureTestExampleBaseComponent } from './base.component';`
     );
   });
-  it('should add base component class to declarations', () => {
+  it('should add base component class to component imports', () => {
     const componentFile = tree.read(componentFilePath).toString();
     expect(componentFile).toMatch(
-      `declarations: [FeatureTestExampleBaseComponent, FeatureTestExampleComponent],`
+      `imports: [FeatureTestExampleBaseComponent, CommonModule]`
     );
   });
   it('should add base component class to template', () => {
