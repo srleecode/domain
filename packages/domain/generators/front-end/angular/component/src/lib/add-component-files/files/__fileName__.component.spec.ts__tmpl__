@@ -7,7 +7,7 @@ describe('<%= className %>Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ <%= className %>Component ]
+      imports: [ <%= className %>Component ]
     })
     .compileComponents();
   });

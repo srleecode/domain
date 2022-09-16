@@ -1,0 +1,10 @@
+import{ CommonModule } from '@angular/common';
+import{ Component } from '@angular/core';
+import{ TestExampleDirective } from './test-example.directive';
+
+@Component({
+    selector: 'test-example-directive-test',
+    template: '<div testAppTestDomainDirectiveTestExample></div>',
+    standalone: true,
+    imports: [ CommonModule, TestExampleDirective ]
+}) export class TestComponent {}

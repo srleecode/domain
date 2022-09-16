@@ -1,0 +1,10 @@
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { <%= directiveName %> } from './<%= fileName %>.directive';
+@Component({
+  selector: '<%= testComponentName %>',
+  template: '<div <%= selector %>></div>',
+  standalone: true,
+  imports: [CommonModule, <%= directiveName %>]
+})
+export class TestComponent {}

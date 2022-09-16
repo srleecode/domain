@@ -1,11 +1,8 @@
 import { Directive } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Directive({
   selector: '[testAppTestDomainDirectiveTestExample]',
-  standalone: true,
-  imports: [CommonModule]
+  standalone: true
 })
 export class TestExampleDirective {
 }
