@@ -1,14 +1,13 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
-import { <%= moduleName %> } from './<%= fileName %>.directive';
 import { GLOBAL_MOUNT_OPTIONS } from '@cypress/component-testing';
-import { TestModule, TestComponent } from './test.component';
+import { TestComponent } from './test.component';
 
 export default {
   component: TestComponent,
   title: '<%= storybookTitle %>',
   decorators: [
     moduleMetadata({
-      imports: [ <%= moduleName %>, TestModule, ...GLOBAL_MOUNT_OPTIONS.imports ]
+      imports: [ TestComponent, ...GLOBAL_MOUNT_OPTIONS.imports ]
     })
   ]
 } as Meta;

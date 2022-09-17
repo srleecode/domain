@@ -1,5 +1,5 @@
 import { names, Tree, generateFiles } from '@nrwl/devkit';
-import { classify } from '@nrwl/workspace/src/utils/strings';
+import { classify, dasherize } from '@nrwl/workspace/src/utils/strings';
 import { join, normalize } from 'path';
 import { CreateDirectiveGeneratorSchema } from '../../schema';
 
@@ -19,6 +19,7 @@ export const addDirectiveFiles = (
     selector,
     storybookTitle: getStorybookTitle(libraryPath),
     directiveName: classify(`${name}Directive`),
+    testComponentName: dasherize(`${name}DirectiveTest`),
     moduleName: classify(`${dasherisedGroupingFolder}-${libraryName}Module`),
     tmpl: '',
   };

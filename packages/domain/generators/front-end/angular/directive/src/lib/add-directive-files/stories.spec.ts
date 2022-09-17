@@ -25,4 +25,14 @@ describe('stories file', () => {
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
+
+  it('should create test component file ', async () => {
+    await createDirectiveGenerator(tree, defaultOptions);
+    const filesContents = getFilesContents(
+      tree,
+      `${LIB_PATH}/test.component.ts`,
+      join(__dirname, './expected-files/test-component.txt')
+    );
+    expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
+  });
 });
