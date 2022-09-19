@@ -1,4 +1,4 @@
-import { Tree, convertNxGenerator, logger, formatFiles } from '@nrwl/devkit';
+import { Tree, convertNxGenerator, formatFiles } from '@nrwl/devkit';
 import { CreateComponentGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
@@ -16,7 +16,7 @@ export async function createComponentGenerator(
   tree: Tree,
   options: CreateComponentGeneratorSchema
 ): Promise<void> {
-  const { name, groupingFolder, type } = options;
+  const { name, groupingFolder, type, prefix } = options;
   const dasherisedGroupingFolder = `${getDasherizedFolderPath(
     tree,
     groupingFolder
@@ -26,9 +26,10 @@ export async function createComponentGenerator(
     type,
     domainName: dasherisedGroupingFolder,
   });
-  const typedName = name ? `${type}-${dasherize(name)}` : type;
+  const dasherizedName = dasherize(name);
+  const typedName = name ? `${type}-${dasherizedName}` : type;
   const projectName = `${dasherisedGroupingFolder}-${typedName}`;
-  const selector = projectName;
+  const selector = prefix ? `${prefix}-${dasherizedName}` : projectName;
   const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
     tree,

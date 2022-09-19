@@ -13,4 +13,5 @@ export interface CreateComponentGeneratorSchema
   viewEncapsulation?: ViewEncapsulation;
   style?: StyleType;
   unitTestType?: UnitTestType;
+  prefix?: string;
 }

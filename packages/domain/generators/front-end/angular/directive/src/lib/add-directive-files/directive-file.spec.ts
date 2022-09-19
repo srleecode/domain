@@ -25,4 +25,17 @@ describe('directive file', () => {
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
+
+  it('should include only prefix and directive name when passing in prefix', async () => {
+    await createDirectiveGenerator(tree, {
+      ...defaultOptions,
+      prefix: 'prefix',
+    });
+    const filesContents = getFilesContents(
+      tree,
+      testFilePath,
+      join(__dirname, './expected-files/directive-file.txt')
+    );
+    expect(filesContents.treeFile).toMatch(`selector:'[prefixTestExample]'`);
+  });
 });

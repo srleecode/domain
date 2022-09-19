@@ -11,7 +11,7 @@ import { dasherize } from '@nrwl/workspace/src/utils/strings';
 describe('component file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
-  defaultOptions.name
+    defaultOptions.name
   )}.component.ts`;
 
   beforeEach(() => {
@@ -27,12 +27,27 @@ describe('component file', () => {
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
 
+  it('should include only prefix and component name when passing in prefix', async () => {
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      prefix: 'prefix',
+    });
+    const filesContents = getFilesContents(
+      tree,
+      testFilePath,
+      join(__dirname, './expected-files/component-file.txt')
+    );
+    expect(filesContents.treeFile).toMatch(`selector:'prefix-test-example'`);
+  });
+
   it('should have OnPush change detection strategy when component type is ui', async () => {
     await createComponentGenerator(tree, {
       ...defaultOptions,
       type: ComponentType.Ui,
     });
-    const uiTestFilePath =  `${LIB_PATH.replace('feature', 'ui')}/${dasherize(defaultOptions.name)}.component.ts`;
+    const uiTestFilePath = `${LIB_PATH.replace('feature', 'ui')}/${dasherize(
+      defaultOptions.name
+    )}.component.ts`;
     const componentFile = tree.read(uiTestFilePath).toString();
     expect(componentFile).toMatch(
       /changeDetection: ChangeDetectionStrategy.OnPush/
