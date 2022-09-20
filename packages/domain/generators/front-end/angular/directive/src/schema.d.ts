@@ -5,4 +5,5 @@ export interface CreateDirectiveGeneratorSchema
   groupingFolder: string;
   name: string;
   mountType?: MountType;
+  prefix?: string;
 }

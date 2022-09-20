@@ -26,7 +26,18 @@ describe('component file', () => {
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
-
+  it('should include only prefix and component name when passing in prefix', async () => {
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      prefix: 'prefix',
+    });
+    const filesContents = getFilesContents(
+      tree,
+      testFilePath,
+      join(__dirname, './expected-files/component-file.txt')
+    );
+    expect(filesContents.treeFile).toMatch(`selector:'prefix-test-example'`);
+  });
   it('should have OnPush change detection strategy when component type is ui', async () => {
     await createComponentGenerator(tree, {
       ...defaultOptions,
