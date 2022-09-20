@@ -14,4 +14,5 @@ export interface CreateComponentGeneratorSchema
   style?: StyleType;
   unitTestType?: UnitTestType;
   prefix?: string;
+  addJestJunitReporter?: boolean;
 }

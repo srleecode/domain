@@ -59,4 +59,18 @@ describe('createDirectiveGenerator', () => {
       .toString();
     expect(index).toBe(`export * from './lib/test-example.directive';`);
   });
+  it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
+    await createDirectiveGenerator(tree, {
+      ...defaultOptions,
+      addJestJunitReporter: true,
+    });
+    const jestConfig = tree
+      .read(
+        `${defaultOptions.groupingFolder}/directive-test-example/jest.config.js`
+      )
+      .toString();
+    expect(jestConfig).toMatch(
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "libs/test-app/test-domain/directive-test-example.xml" } ] ]`
+    );
+  });
 });
