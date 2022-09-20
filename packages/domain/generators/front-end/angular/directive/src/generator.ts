@@ -6,7 +6,11 @@ import {
   getDasherizedFolderPath,
   getGroupingFolders,
 } from '../../../../shared/utils';
-import { camelize, dasherize } from '@nrwl/workspace/src/utils/strings';
+import {
+  camelize,
+  classify,
+  dasherize,
+} from '@nrwl/workspace/src/utils/strings';
 import { addDirectiveFiles } from './lib/add-directive-files/add-directive-files';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { addDomainLibrary, getLibraryName } from '../../../shared';
@@ -16,7 +20,7 @@ export async function createDirectiveGenerator(
   tree: Tree,
   options: CreateDirectiveGeneratorSchema
 ): Promise<void> {
-  const { name, groupingFolder } = options;
+  const { name, groupingFolder, prefix } = options;
   const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
     tree,
@@ -37,13 +41,14 @@ export async function createDirectiveGenerator(
     type: 'directive',
     domainName: dasherisedGroupingFolder,
   });
-  const projectName = `${dasherisedGroupingFolder}-directive-${dasherize(
-    name
-  )}`;
+  const dasherizedName = dasherize(name);
+  const projectName = `${dasherisedGroupingFolder}-directive-${dasherizedName}`;
   tree.delete(
     `${groupingFolder}/${libraryName}/src/lib/${projectName}.module.ts`
   );
-  const selector = camelize(projectName);
+  const selector = prefix
+    ? `${prefix}${classify(name)}`
+    : camelize(projectName);
   addDirectiveFiles(
     tree,
     options,
