@@ -17,6 +17,7 @@ describe('createDomainLayerGenerator', () => {
     enableIvy: true,
     publishable: false,
   };
+  const groupingFolder = 'libs/test-app/test-domain';
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
@@ -25,7 +26,7 @@ describe('createDomainLayerGenerator', () => {
 
   it('should pass correct parameters to @nrwl/angular generator', async () => {
     const schema: CreateDomainLayerGeneratorSchema = {
-      groupingFolder: 'libs/test-app/test-domain',
+      groupingFolder,
       buildable: true,
       strict: false,
       enableIvy: true,
@@ -46,7 +47,7 @@ describe('createDomainLayerGenerator', () => {
   });
   it('should remove test target from generated library', async () => {
     await createDomainLayerGenerator(tree, {
-      groupingFolder: 'libs/test-app/test-domain',
+      groupingFolder,
       ...commonLibraryOptions,
     });
     const projectConfig = readProjectConfiguration(
@@ -54,5 +55,18 @@ describe('createDomainLayerGenerator', () => {
       'test-app-test-domain-domain'
     );
     expect(projectConfig.targets['test']).toBeUndefined();
+  });
+  it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
+    await createDomainLayerGenerator(tree, {
+      ...commonLibraryOptions,
+      groupingFolder,
+      addJestJunitReporter: true,
+    });
+    const jestConfig = tree
+      .read(`${groupingFolder}/domain/jest.config.js`)
+      .toString();
+    expect(jestConfig).toMatch(
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "libs/test-app/test-domain/domain.xml" } ] ]`
+    );
   });
 });

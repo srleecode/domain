@@ -9,7 +9,13 @@ import * as mock from '../../../shared';
 
 describe('createUtilGenerator', () => {
   let tree: Tree;
-
+  const schema: CreateUtilGeneratorSchema = {
+    groupingFolder: 'libs/test-app/test-domain',
+    buildable: true,
+    strict: false,
+    enableIvy: true,
+    publishable: false,
+  };
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
@@ -17,13 +23,6 @@ describe('createUtilGenerator', () => {
   });
 
   it('should pass correct parameters to @nrwl/angular generator', async () => {
-    const schema: CreateUtilGeneratorSchema = {
-      groupingFolder: 'libs/test-app/test-domain',
-      buildable: true,
-      strict: false,
-      enableIvy: true,
-      publishable: false,
-    };
     const groupingFolders = getGroupingFolders(tree, schema.groupingFolder);
     await createUtilGenerator(tree, schema);
     expect(mock.addDomainLibrary).toHaveBeenCalledWith(
@@ -35,6 +34,18 @@ describe('createUtilGenerator', () => {
       ApplicationType.Angular,
       true,
       schema
+    );
+  });
+  it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
+    await createUtilGenerator(tree, {
+      ...schema,
+      addJestJunitReporter: true,
+    });
+    const jestConfig = tree
+      .read(`${schema.groupingFolder}/util/jest.config.js`)
+      .toString();
+    expect(jestConfig).toMatch(
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "libs/test-app/test-domain/util.xml" } ] ]`
     );
   });
 });

@@ -134,6 +134,11 @@
     "prefix": {
       "type": "string",
       "description": "Prefix to use for the selector. If nothing is passed, the domain grouping folder + type + component name will be used"
+    },
+    "addJestJunitReporter": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to add the jest junit reporter to the jest config"
     }
   },
   "required": ["groupingFolder"]
