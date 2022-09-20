@@ -9,7 +9,13 @@ import { CreateApplicationLayerGeneratorSchema } from './schema';
 
 describe('createDomainLayerGenerator', () => {
   let tree: Tree;
-
+  const schema: CreateApplicationLayerGeneratorSchema = {
+    groupingFolder: 'libs/test-app/test-domain',
+    buildable: true,
+    strict: false,
+    enableIvy: true,
+    publishable: false,
+  };
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
@@ -17,13 +23,6 @@ describe('createDomainLayerGenerator', () => {
   });
 
   it('should pass correct parameters to addDomainLibrary', async () => {
-    const schema: CreateApplicationLayerGeneratorSchema = {
-      groupingFolder: 'libs/test-app/test-domain',
-      buildable: true,
-      strict: false,
-      enableIvy: true,
-      publishable: false,
-    };
     await createApplicationLayerGenerator(tree, schema);
     const groupingFolders = getGroupingFolders(tree, schema.groupingFolder);
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
@@ -35,6 +34,18 @@ describe('createDomainLayerGenerator', () => {
       ApplicationType.Angular,
       true,
       schema
+    );
+  });
+  it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
+    await createApplicationLayerGenerator(tree, {
+      ...schema,
+      addJestJunitReporter: true,
+    });
+    const jestConfig = tree
+      .read(`${schema.groupingFolder}/application/jest.config.js`)
+      .toString();
+    expect(jestConfig).toMatch(
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "libs/test-app/test-domain/application.xml" } ] ]`
     );
   });
 });

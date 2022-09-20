@@ -6,4 +6,5 @@ export interface CreateDirectiveGeneratorSchema
   name: string;
   mountType?: MountType;
   prefix?: string;
+  addJestJunitReporter?: boolean;
 }
