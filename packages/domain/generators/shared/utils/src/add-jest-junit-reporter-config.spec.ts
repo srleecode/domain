@@ -1,8 +1,8 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { addJestJunitReporter } from './add-jest-junit-reporter-config';
+import { addJestJunitReporterConfig } from './add-jest-junit-reporter-config';
 
-describe('addJestJunitReporter', () => {
+describe('addJestJunitReporterConfig', () => {
   const libraryPath = `test-application/test-domain/ui-example`;
   const jestConfigPath = `libs/${libraryPath}/jest.config.js`;
   let appTree: Tree;
@@ -16,7 +16,7 @@ describe('addJestJunitReporter', () => {
   });
 
   it('should add reporter to jest config', () => {
-    addJestJunitReporter(appTree, libraryPath);
+    addJestJunitReporterConfig(appTree, libraryPath);
     expect(appTree.read(jestConfigPath).toString()).toMatch(
       `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-application/test-domain/ui-example.xml" } ] ]`
     );
