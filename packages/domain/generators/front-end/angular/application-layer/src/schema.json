@@ -29,6 +29,11 @@
       "type": "boolean",
       "default": false,
       "description": "Makes the library publishable."
+    },
+    "addJestJunitReporter": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to add the jest junit reporter to the jest config"
     }
   },
   "required": ["groupingFolder"]

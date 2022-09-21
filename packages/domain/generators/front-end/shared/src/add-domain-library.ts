@@ -4,12 +4,14 @@ import { getLibraryCommonOptions } from './get-library-common-options';
 import { libraryGenerator } from '@nrwl/angular/generators';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
+  addJestJunitReporterConfig,
   ApplicationType,
   getDasherizedFolderPath,
 } from '../../../shared/utils';
 import { isProjectExisting } from './is-project-existing';
 import { addImplicitDependency } from './add-implicit-dependency';
 import { removeLintOverrideRules } from './remove-lint-override-rules';
+import { getLibraryName } from './get-library-name';
 
 export const addDomainLibrary = async (
   tree: Tree,
@@ -19,7 +21,7 @@ export const addDomainLibrary = async (
   appGroupingFolder: string,
   applicationType: ApplicationType,
   removeLintOverrides: boolean,
-  schema?: Partial<Schema>
+  schema?: Partial<Schema> & { addJestJunitReporter?: boolean }
 ): Promise<void> => {
   const libraryCommonOptions = getLibraryCommonOptions(
     tree,
@@ -50,5 +52,13 @@ export const addDomainLibrary = async (
   }
   if (removeLintOverrides) {
     removeLintOverrideRules(tree, projectName);
+  }
+  if (schema.addJestJunitReporter) {
+    const libraryName = getLibraryName({
+      name,
+      type,
+      domainName: dasherisedGroupingFolder,
+    });
+    addJestJunitReporterConfig(tree, `${groupingFolderPath}/${libraryName}`);
   }
 };
