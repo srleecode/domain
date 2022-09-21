@@ -76,4 +76,18 @@ describe('createComponentGenerator', () => {
       .toString();
     expect(index).toBe(`export * from './lib/feature.component';`);
   });
+  it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      addJestJunitReporter: true,
+    });
+    const jestConfig = tree
+      .read(
+        `${defaultOptions.groupingFolder}/feature-test-example/jest.config.js`
+      )
+      .toString();
+    expect(jestConfig).toMatch(
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "libs/test-app/test-domain/feature-test-example.xml" } ] ]`
+    );
+  });
 });
