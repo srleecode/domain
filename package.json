@@ -1,6 +1,6 @@
 {
   "name": "@srleecode/domain",
-  "version": "13.10.6",
+  "version": "13.1",
   "private": true,
   "description": "Nrwl nx plugin to allow operations at the domain level",
   "homepage": "https://github.com/srleecode/domain",
