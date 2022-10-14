@@ -4,7 +4,7 @@ We would love for you to contribute to @srleecode/domain! Read this document to 
 
 ## Got a Question?
 
-If you have general questions about this project or want to discuss issues you are facing or potential ideas to improve the project you can add messages to the [gitter chat](https://gitter.im/srleecode/domain). 
+If you have general questions about this project or want to discuss issues you are facing or potential ideas to improve the project you can add messages to the [gitter chat](https://gitter.im/srleecode/domain).
 
 ## Found an Issue?
 
@@ -52,7 +52,7 @@ body
 
 The type must be one of the following:
 
-- feat - New or improved behavior being introduced (e.g. Updating to new versions of React or Jest which bring in new features)
+- feat - New or improved behavior being introduced (e.g. Updating to new versions of which bring in new features)
 - fix - Fixes the current unexpected behavior to match expected behavior (e.g. Fixing the library generator to create the proper named project)
 - cleanup - Code Style changes that have little to no effect on the user (e.g. Refactoring some functions into a different file)
 - docs - Changes to the documentation (e.g. Adding more details into the getting started guide)

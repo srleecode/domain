@@ -1,5 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { getProjects, Tree } from '@nrwl/devkit';
+import { getProjects, readJson, Tree } from '@nrwl/devkit';
 import { moveGenerator } from './generator';
 import { libraryGenerator } from '@nrwl/workspace';
 import { setupDomainTestGenerator } from '@srleecode/domain/cypress/domain-test';
@@ -44,8 +44,8 @@ describe('moveGenerator', () => {
     });
     const projects = getProjects(appTree);
     expect([...projects.keys()]).toEqual([
-      'second-test-app-second-test-domain-shell',
       'second-test-app-test-domain-data-access',
+      'second-test-app-second-test-domain-shell',
       'second-test-app-test-domain-e2e',
     ]);
   });
@@ -64,6 +64,12 @@ describe('moveGenerator', () => {
     expect(projects.get('second-test-app-test-domain-data-access').root).toBe(
       'libs/second-test-app/test-domain/data-access'
     );
+    const tsConfig = readJson(appTree, 'tsconfig.base.json');
+    expect(tsConfig.compilerOptions.paths).toEqual({
+      '@proj/second-test-app/test-domain/data-access': [
+        'libs/second-test-app/test-domain/data-access/src/index.ts',
+      ],
+    });
   });
   it('should fix updated tsconfig path imports from nrwl move', async () => {
     const startDirectory = 'test-app/test-domain';

@@ -15,10 +15,7 @@ export const moveLibraryResolutionPath = (
     const { npmScope } = getWorkspaceLayout(tree);
     updateJson(tree, tsConfigPath, (json) => {
       if (!!json.compilerOptions && !!json.compilerOptions?.paths) {
-        const projectName = `${npmScope}/${getDasherizedFolderPath(
-          tree,
-          newLibraryFolder
-        )}`;
+        const projectName = `${npmScope}/${newLibraryFolder}`;
         const projectReference = json.compilerOptions.paths[projectName];
         delete json.compilerOptions.paths[projectName];
         const newProjectName = `${npmScope}/${getDomainPath(

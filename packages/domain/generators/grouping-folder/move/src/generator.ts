@@ -69,7 +69,8 @@ const getMovedProjectRoot = (
   const workspaceLayout = getWorkspaceLayout(tree);
   return normalisedProjectRoot
     .replace(folder, destination)
-    .replace(`${workspaceLayout.libsDir}/`, '');
+    .replace(`${workspaceLayout.libsDir}/`, '')
+    .replace('.', '');
 };
 
 export default moveGenerator;
