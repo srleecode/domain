@@ -17,10 +17,11 @@ export const renameCypressProject = (
   const projectName = `${dasherisedFolderPath}-.${type}`;
   const movedProjectConfig = readProjectConfiguration(tree, projectName);
   removeProjectConfiguration(tree, projectName);
+  const newProjectName = `${type}-${dasherisedFolderPath}`;
   addProjectConfiguration(
     tree,
-    `${type}-${dasherisedFolderPath}`,
-    movedProjectConfig,
+    newProjectName,
+    { ...movedProjectConfig, name: newProjectName },
     standaloneAsDefault
   );
 };

@@ -7,8 +7,5 @@
     "types": ["node"]
   },
   "exclude": ["**/*.spec.ts", "jest.config.ts"],
-  "include": [
-    "**/*.ts",
-    "generators/front-end/angular/directive/src/lib/add-directive-files/files/test.component.ts__tmpl__"
-  ]
+  "include": ["**/*.ts"]
 }
