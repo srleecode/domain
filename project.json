@@ -10,5 +10,6 @@
         "versionTagPrefix": ""
       }
     }
-  }
+  },
+  "name": "."
 }

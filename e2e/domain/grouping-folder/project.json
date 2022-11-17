@@ -11,5 +11,6 @@
       }
     }
   },
-  "implicitDependencies": ["domain"]
+  "implicitDependencies": ["domain"],
+  "name": "domain-grouping-folder"
 }
