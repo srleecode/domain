@@ -1,12 +1,7 @@
 {
   "name": "@srleecode/domain",
-  "version": "15.0.0",
+  "version": "15.1.1",
   "main": "index.js",
-  "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=8.0.0",
-    "yarn": ">=1.22.7"
-  },
   "executors": "./executors.json",
   "generators": "./generators.json",
   "ng-add": {
