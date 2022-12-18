@@ -2,9 +2,8 @@ import { readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createAppGroupingFolderGenerator } from './generator';
 import * as initialiseAngularWorkspaceMock from './lib/angular/initialise-angular-workspace';
-import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { ApplicationType } from '../../../shared/utils';
+import { ApplicationType, DepConstraint } from '../../../shared/utils';
 
 describe('createAppGroupingFolderGenerator', () => {
   let tree: Tree;

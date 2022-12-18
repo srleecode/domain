@@ -1,7 +1,7 @@
 import { logger, Tree, updateJson } from '@nrwl/devkit';
-import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
 import { getBoundariesRule } from './get-boundaries-rule';
 import { getLintFilePath } from './get-lint-file-path';
+import { DepConstraint } from './model/dep-constraint.model';
 
 export function removeDepConstraint(tree: Tree, sourceTag: string) {
   const filePath = getLintFilePath(tree);

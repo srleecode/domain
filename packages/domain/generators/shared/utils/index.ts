@@ -15,3 +15,4 @@ export { addJestJunitReporterConfig } from './src/add-jest-junit-reporter-config
 export { UnitTestType } from './src/model/unit-test-type.enum';
 export { ElementType } from './src/model/element-type.enum';
 export { ApplicationType } from './src/model/application-type.enum';
+export { DepConstraint } from './src/model/dep-constraint.model';

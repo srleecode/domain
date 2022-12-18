@@ -5,7 +5,6 @@ import {
   getDasherizedFolderPath,
   ApplicationType,
   getGroupingFolders,
-  addJestJunitReporterConfig,
 } from '../../../../shared/utils';
 import { addComponentFiles } from './lib/add-component-files/add-component-files';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries

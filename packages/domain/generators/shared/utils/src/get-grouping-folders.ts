@@ -6,7 +6,8 @@ export const getGroupingFolders = (
   tree: Tree,
   groupingFolderPath: string
 ): GroupingFolders => {
-  const groupingFolders = getDomainPath(tree, groupingFolderPath).split('/');
+  let groupingFolders = getDomainPath(tree, groupingFolderPath).split('/');
+  groupingFolders = groupingFolders.filter(folder => folder !== 'libs');
   return {
     app: groupingFolders?.[0],
     domain: groupingFolders.slice(1),
