@@ -76,6 +76,26 @@ describe('createComponentGenerator', () => {
       .toString();
     expect(index).toBe(`export * from './lib/feature.component';`);
   });
+  it('should add prefix to eslint selector rules', async () => {
+    const prefix = 'test';
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      prefix,
+    });
+    const eslint = JSON.parse(
+      tree
+        .read(
+          `${defaultOptions.groupingFolder}/feature-test-example/.eslintrc.json`
+        )
+        .toString()
+    );
+    expect(
+      eslint.overrides[0].rules['@angular-eslint/component-selector'][1].prefix
+    ).toBe(prefix);
+    expect(
+      eslint.overrides[0].rules['@angular-eslint/directive-selector'][1].prefix
+    ).toBe(prefix);
+  });
   it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
     await createComponentGenerator(tree, {
       ...defaultOptions,
