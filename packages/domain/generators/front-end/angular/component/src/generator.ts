@@ -12,6 +12,7 @@ import { addComponentFiles } from './lib/add-component-files/add-component-files
 import { addDomainLibrary, getLibraryName } from '../../../shared';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 import { setIndexToComponentFile } from './lib/set-index-to-component-file';
+import { addPrefixToEslint } from './lib/add-prefix-to-eslint';
 
 export async function createComponentGenerator(
   tree: Tree,
@@ -53,6 +54,9 @@ export async function createComponentGenerator(
     selector
   );
   setIndexToComponentFile(tree, groupingFolder, libraryName, name, type);
+  if (prefix) {
+    addPrefixToEslint(tree, groupingFolder, libraryName, prefix);
+  }
   await formatFiles(tree);
 }
 
