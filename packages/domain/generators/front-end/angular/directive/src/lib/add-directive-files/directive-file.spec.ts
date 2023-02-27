@@ -10,7 +10,7 @@ describe('directive file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
     defaultOptions.name
-  )}.directive.ts`;
+  )}/${dasherize(defaultOptions.name)}.directive.ts`;
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();

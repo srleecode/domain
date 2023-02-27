@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "CreatePresentationLayerGenerator",
+  "title": "Create Presentation Layer Library Generator Schema",
+  "cli": "nx",
+  "type": "object",
+  "description": "Creates a presentation layer library",
+  "properties": {
+    "groupingFolder": {
+      "description": "The grouping folder that the library will be created in",
+      "type": "string"
+    },
+    "buildable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Makes the library buildable"
+    },
+    "strict": {
+      "type": "boolean",
+      "description": "Makes the library have stricter type checking and build optimization options",
+      "default": false
+    },
+    "enableIvy": {
+      "description": "Makes the library have ivy enabled in tsconfig.lib.prod.json. Should not be used with publishable libraries.",
+      "type": "boolean",
+      "default": false
+    },
+    "publishable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Makes the library publishable."
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix to use for the selector. If nothing is passed, the domain grouping folder will be used"
+    },
+    "addJestJunitReporter": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to add the jest junit reporter to the jest config"
+    }
+  },
+  "required": ["groupingFolder"]
+}

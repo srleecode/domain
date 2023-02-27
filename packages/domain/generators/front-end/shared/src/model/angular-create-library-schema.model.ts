@@ -3,4 +3,5 @@ export interface AngularCreateLibrarySchema {
   strict?: boolean;
   enableIvy?: boolean;
   publishable?: boolean;
+  addJestJunitReporter?: boolean;
 }

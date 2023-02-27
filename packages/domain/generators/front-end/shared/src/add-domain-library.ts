@@ -34,7 +34,7 @@ export const addDomainLibrary = async (
     await libraryGenerator(tree, {
       ...(schema || {}),
       ...libraryCommonOptions,
-      prefix: appGroupingFolder,
+      prefix: schema.prefix || appGroupingFolder,
     }).catch((e: Error) => {
       logger.error(e.message);
       logger.error(e.stack);
@@ -57,7 +57,6 @@ export const addDomainLibrary = async (
     const libraryName = getLibraryName({
       name,
       type,
-      domainName: dasherisedGroupingFolder,
     });
     addJestJunitReporterConfig(tree, `${groupingFolderPath}/${libraryName}`);
   }
