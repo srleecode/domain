@@ -10,7 +10,7 @@ describe('stories file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
     defaultOptions.name
-  )}.stories.ts`;
+  )}/${dasherize(defaultOptions.name)}.stories.ts`;
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
@@ -30,9 +30,17 @@ describe('stories file', () => {
     await createDirectiveGenerator(tree, defaultOptions);
     const filesContents = getFilesContents(
       tree,
-      `${LIB_PATH}/test.component.ts`,
+      `${LIB_PATH}/${dasherize(defaultOptions.name)}/test.component.ts`,
       join(__dirname, './expected-files/test-component.txt')
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
+    });
+  
+  it('should not create stories file when addStory is false', async () => {
+    await createDirectiveGenerator(tree, {
+      ...defaultOptions,
+      addStory: false,
+    });
+    expect(tree.exists(testFilePath)).toBe(false);
   });
 });

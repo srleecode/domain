@@ -8,7 +8,7 @@ describe('style file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
     defaultOptions.name
-  )}.component.${defaultOptions.style}`;
+  )}/${dasherize(defaultOptions.name)}.component.${defaultOptions.style}`;
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();

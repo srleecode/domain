@@ -13,10 +13,11 @@ export const defaultOptions: CreateComponentGeneratorSchema = {
   viewEncapsulation: ViewEncapsulation.Emulated,
   style: StyleType.Scss,
   unitTestType: UnitTestType.NoTestBed,
+  addStory: true,
   buildable: true,
   strict: false,
   enableIvy: true,
   publishable: false,
 };
 
-export const LIB_PATH = `${defaultOptions.groupingFolder}/feature-test-example/src/lib`;
+export const LIB_PATH = `${defaultOptions.groupingFolder}/presentation/src/lib/feature`;
