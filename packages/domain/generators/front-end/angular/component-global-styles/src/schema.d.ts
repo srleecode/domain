@@ -1,3 +1,3 @@
 export interface CreateComponentGlobalStylesGeneratorSchema {
-  componentLibraryPath: string;
+  componentFolderPath: string;
 }

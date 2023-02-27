@@ -18,4 +18,4 @@ export const defaultOptions: CreateComponentGeneratorSchema = {
   publishable: false,
 };
 
-export const LIB_PATH = `${defaultOptions.groupingFolder}/feature-test-example/src/lib`;
+export const LIB_PATH = `${defaultOptions.groupingFolder}/presentation/src/lib/feature`;

@@ -12,7 +12,7 @@ describe('component file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
     defaultOptions.name
-  )}.component.ts`;
+  )}/${dasherize(defaultOptions.name)}.component.ts`;
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
@@ -47,7 +47,7 @@ describe('component file', () => {
     });
     const uiTestFilePath = `${LIB_PATH.replace('feature', 'ui')}/${dasherize(
       defaultOptions.name
-    )}.component.ts`;
+    )}/${dasherize(defaultOptions.name)}.component.ts`;
     const componentFile = tree.read(uiTestFilePath).toString();
     expect(componentFile).toMatch(
       /changeDetection: ChangeDetectionStrategy.OnPush/

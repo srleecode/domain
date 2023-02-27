@@ -10,7 +10,7 @@ describe('stories file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
     defaultOptions.name
-  )}.stories.ts`;
+  )}/${dasherize(defaultOptions.name)}.stories.ts`;
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();

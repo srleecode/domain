@@ -4,32 +4,46 @@ import { join, normalize } from 'path';
 import { ChangeDetection } from '../../model/change-detection-type.enum';
 import { ComponentType } from '../../model/component-type.enum';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { UnitTestType } from '../../../../../../shared/utils';
+import {
+  UnitTestType,
+  getDasherizedFolderPath,
+} from '../../../../../../shared/utils';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
 import { CreateComponentGeneratorSchema } from '../../schema';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { getLibraryName } from '../../../../../shared';
 
 export const addComponentFiles = (
   tree: Tree,
-  options: CreateComponentGeneratorSchema,
-  dasherisedGroupingFolder: string,
-  libraryName: string,
-  selector: string
+  options: CreateComponentGeneratorSchema
 ): void => {
-  const { groupingFolder, name, type } = options;
-  const libraryPath = `${groupingFolder}/${libraryName}`;
-  const target = normalize(`${libraryPath}/src/lib`);
+  const { groupingFolder, name, type, prefix } = options;
+  const dasherisedGroupingFolder = `${getDasherizedFolderPath(
+    tree,
+    groupingFolder
+  )}`;
+  const dasherizedName = dasherize(name);
+  const projectName = dasherize(`${dasherisedGroupingFolder}-${type}-${name}`);
+  const selector = prefix ? `${prefix}-${dasherizedName}` : projectName;
+  const libraryName = getLibraryName({
+    name,
+    type,
+  });
 
+  const target = normalize(
+    `${groupingFolder}/presentation/src/lib/${type}/${dasherizedName}`
+  );
   const templateOptions = {
     ...options,
-    ...names(libraryName),
-    fileName: dasherize(name) || type,
+    ...names(name),
+    fileName: dasherize(name),
     selector,
-    componentName: classify(`${libraryName}Component`),
+    componentName: classify(`${type}-${name}Component`),
     moduleName: classify(`${dasherisedGroupingFolder}-${libraryName}Module`),
     isUsingNonDefaultViewEncapsulation:
       options.viewEncapsulation !== ViewEncapsulation.Emulated,
     isTestUsingTestBed: options.unitTestType === UnitTestType.TestBed,
-    storybookTitle: getStorybookTitle(libraryPath),
+    storybookTitle: getStorybookTitle(`${groupingFolder}/${libraryName}`),
     changeDetection:
       options.type === ComponentType.Ui
         ? ChangeDetection.OnPush
@@ -38,7 +52,7 @@ export const addComponentFiles = (
   };
   generateFiles(tree, join(__dirname, './files'), target, templateOptions);
   if (options.unitTestType === UnitTestType.NoTests) {
-    tree.delete(join(target, `${dasherize(name) || type}.component.spec.ts`));
+    tree.delete(join(target, `${dasherize(name)}.component.spec.ts`));
   }
 };
 

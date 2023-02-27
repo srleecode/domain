@@ -12,8 +12,4 @@ export default {
     ]
 } as Meta;
 
-const Template: Story<FeatureTestExampleComponent> = (args) => ({
-    props: args
-});
-
-export const Default = Template.bind({})
+export const Default: Story = () => ({});

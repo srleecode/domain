@@ -141,5 +141,5 @@
       "description": "Whether to add the jest junit reporter to the jest config"
     }
   },
-  "required": ["groupingFolder"]
+  "required": ["groupingFolder", "name", "type"]
 }

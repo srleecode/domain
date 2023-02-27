@@ -5,29 +5,28 @@ describe('component', () => {
 
   it('should create shell component library', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type shell`
+      `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type shell --name test-example`
     );
-    checkFilesExist(`${groupingFolder}/shell/src/index.ts`);
+    checkFilesExist(
+      `${groupingFolder}/presentation/src/lib/shell/test-example/test-example.component.ts`
+    );
   });
 
   it('should create feature component library', async () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type feature --name test-example`
     );
-    checkFilesExist(`${groupingFolder}/feature-test-example/src/index.ts`);
+    checkFilesExist(
+      `${groupingFolder}/presentation/src/lib/feature/test-example/test-example.component.ts`
+    );
   });
 
   it('should create ui component library', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type ui `
-    );
-    checkFilesExist(`${groupingFolder}/ui/src/index.ts`);
-  });
-
-  it('should create ui component library with name', async () => {
-    await runNxCommandAsync(
       `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type ui --name test-example`
     );
-    checkFilesExist(`${groupingFolder}/ui-test-example/src/index.ts`);
+    checkFilesExist(
+      `${groupingFolder}/presentation/src/lib/ui/test-example/test-example.component.ts`
+    );
   });
 });

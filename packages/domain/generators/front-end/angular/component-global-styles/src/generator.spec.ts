@@ -9,10 +9,12 @@ import { join } from 'path';
 
 describe('createComponentGlobalStylesGenerator', () => {
   let tree: Tree;
-  const componentLibraryPath = `${defaultOptions.groupingFolder}/${
-    defaultOptions.type
-  }-${dasherize(defaultOptions.name)}`;
-  const componentFilePath = `${componentLibraryPath}/src/lib/${dasherize(
+  const componentLibraryPath = `${
+    defaultOptions.groupingFolder
+  }/presentation/src/lib/${defaultOptions.type}/${dasherize(
+    defaultOptions.name
+  )}`;
+  const componentFilePath = `${componentLibraryPath}/${dasherize(
     defaultOptions.name
   )}.component.ts`;
 
@@ -21,14 +23,14 @@ describe('createComponentGlobalStylesGenerator', () => {
     tree = createTreeWithEmptyWorkspace();
     await createComponentGenerator(tree, defaultOptions);
     await createComponentGlobalStylesGenerator(tree, {
-      componentLibraryPath,
+      componentFolderPath: componentLibraryPath,
     });
   });
 
   it('should create base component file', () => {
     const filesContents = getFilesContents(
       tree,
-      `${componentLibraryPath}/src/lib/base.component.ts`,
+      `${componentLibraryPath}/base.component.ts`,
       join(__dirname, './lib/expected-files/base-component.txt')
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
@@ -36,7 +38,7 @@ describe('createComponentGlobalStylesGenerator', () => {
   it('should create global scss file', () => {
     const filesContents = getFilesContents(
       tree,
-      `${componentLibraryPath}/src/lib/global.scss`,
+      `${componentLibraryPath}/global.scss`,
       join(__dirname, './lib/expected-files/global.txt')
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);

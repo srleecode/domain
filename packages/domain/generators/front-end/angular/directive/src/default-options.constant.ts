@@ -1,4 +1,3 @@
-
 import { CreateDirectiveGeneratorSchema } from './schema';
 
 export const defaultOptions: CreateDirectiveGeneratorSchema = {
@@ -10,4 +9,4 @@ export const defaultOptions: CreateDirectiveGeneratorSchema = {
   publishable: false,
 };
 
-export const LIB_PATH = `${defaultOptions.groupingFolder}/directive-test-example/src/lib`;
+export const LIB_PATH = `${defaultOptions.groupingFolder}/presentation/src/lib/directive`;
