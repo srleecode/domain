@@ -1,13 +1,9 @@
 import { Tree, convertNxGenerator } from '@nrwl/devkit';
 import { CreateDomainLayerGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { addDomainLibrary, removeTestTarget } from '../../../shared';
+import { addDomainLibrary } from '../../../shared';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import {
-  ApplicationType,
-  getDasherizedFolderPath,
-  getGroupingFolders,
-} from '../../../../shared/utils';
+import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
 
 export async function createDomainLayerGenerator(
   tree: Tree,
@@ -26,8 +22,6 @@ export async function createDomainLayerGenerator(
     true,
     options
   );
-  const domain = getDasherizedFolderPath(tree, groupingFolder);
-  removeTestTarget(tree, `${domain}-${libraryName}`);
 }
 
 export default createDomainLayerGenerator;

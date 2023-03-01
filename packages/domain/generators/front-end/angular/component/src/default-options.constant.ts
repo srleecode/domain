@@ -12,6 +12,7 @@ export const defaultOptions: CreateComponentGeneratorSchema = {
   viewEncapsulation: ViewEncapsulation.Emulated,
   style: StyleType.Scss,
   unitTestType: UnitTestType.NoTestBed,
+  addStory: true,
   buildable: true,
   strict: false,
   enableIvy: true,

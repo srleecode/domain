@@ -93,6 +93,18 @@ describe('createPresentationLayerGenerator', () => {
       eslint.overrides[0].rules['@angular-eslint/directive-selector'][1].prefix
     ).toBe(prefix);
   });
+  it('should clear index.ts', async () => {
+    const prefix = 'test';
+    await createPresentationLayerGenerator(tree, {
+      ...commonLibraryOptions,
+      groupingFolder,
+      prefix,
+    });
+    const indexTs = tree
+      .read(`${groupingFolder}/presentation/src/index.ts`)
+      .toString();
+    expect(indexTs).toBe('');
+  });
   describe('eslint layer rules', () => {
     beforeEach(() => {
       const json = {

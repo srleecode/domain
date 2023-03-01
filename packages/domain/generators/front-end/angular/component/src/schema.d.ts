@@ -9,6 +9,7 @@ export interface CreateComponentGeneratorSchema
   groupingFolder: string;
   name: string;
   type: ComponentType;
+  addStory?: boolean;
   displayBlock?: boolean;
   viewEncapsulation?: ViewEncapsulation;
   style?: StyleType;

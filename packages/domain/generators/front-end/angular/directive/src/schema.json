@@ -39,6 +39,11 @@
         ]
       }
     },
+    "addStory": {
+      "type": "boolean",
+      "default": true,
+      "description": "Determines whether or not to add a story file for the directive"
+    },
     "buildable": {
       "type": "boolean",
       "default": false,

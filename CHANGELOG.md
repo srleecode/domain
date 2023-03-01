@@ -4,6 +4,12 @@
 
 ## Changed
 
+- added addStory to schemato allow skipping the generation of the stories file
+
+## [13.10.9]
+
+## Changed
+
 - updated component and directive generators to write to the presentation layer library instead of creating a seperate library for each component/directive
 
 ## [13.4.1](https://github.com/srleecode/domain/compare/13.3.4...13.4.1) (2021-12-27)

@@ -34,6 +34,7 @@ export async function createPresentationLayerGenerator(
   tree.delete(
     `${groupingFolder}/${libraryName}/src/lib/${dasherisedGroupingFolder}-${libraryName}.module.ts`
   );
+  tree.write(`${groupingFolder}/${libraryName}/src/index.ts`, '');
   addPresentationLayerEslintConstraint(tree);
 }
 

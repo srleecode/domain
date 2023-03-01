@@ -1,4 +1,11 @@
-import { names, Tree, generateFiles } from '@nrwl/devkit';
+import {
+  names,
+  Tree,
+  generateFiles,
+  StringChange,
+  ChangeType,
+  applyChangesToString,
+} from '@nrwl/devkit';
 import { dasherize, classify } from '@nrwl/workspace/src/utils/strings';
 import { join, normalize } from 'path';
 import { ChangeDetection } from '../../model/change-detection-type.enum';
@@ -7,11 +14,15 @@ import { ComponentType } from '../../model/component-type.enum';
 import {
   UnitTestType,
   getDasherizedFolderPath,
+  getTsSourceFile,
+  spacify,
 } from '../../../../../../shared/utils';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
 import { CreateComponentGeneratorSchema } from '../../schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { getLibraryName } from '../../../../../shared';
+import { SyntaxKind } from 'typescript';
+import { findNodes } from '@nrwl/workspace';
 
 export const addComponentFiles = (
   tree: Tree,
@@ -43,7 +54,7 @@ export const addComponentFiles = (
     isUsingNonDefaultViewEncapsulation:
       options.viewEncapsulation !== ViewEncapsulation.Emulated,
     isTestUsingTestBed: options.unitTestType === UnitTestType.TestBed,
-    storybookTitle: getStorybookTitle(`${groupingFolder}/${libraryName}`),
+    storybookTitle: getStorybookTitle(groupingFolder, libraryName),
     changeDetection:
       options.type === ComponentType.Ui
         ? ChangeDetection.OnPush
@@ -54,11 +65,45 @@ export const addComponentFiles = (
   if (options.unitTestType === UnitTestType.NoTests) {
     tree.delete(join(target, `${dasherize(name)}.component.spec.ts`));
   }
+  if (options.addStory === false) {
+    tree.delete(join(target, `${dasherize(name)}.stories.ts`));
+  }
+  addComponentToIndex(
+    tree,
+    `${groupingFolder}/presentation`,
+    type,
+    dasherizedName
+  );
 };
 
-const getStorybookTitle = (libraryPath: string): string =>
-  libraryPath
+const getStorybookTitle = (groupingFolder: string, libraryName): string =>
+  `${groupingFolder}/${libraryName}`
     .replace('libs/', '')
     .split('/')
-    .map((folder) => classify(folder))
+    .map((folder) => spacify(folder))
     .join('/');
+
+const addComponentToIndex = (
+  tree: Tree,
+  libraryPath: string,
+  type: ComponentType,
+  dasherizedName: string
+): void => {
+  const indexPath = `${libraryPath}/src/index.ts`;
+  const source = getTsSourceFile(tree, indexPath);
+  const allExports = findNodes(source, SyntaxKind.ExportDeclaration);
+  const exportIndex =
+    allExports.length > 0 ? allExports[allExports.length - 1].end + 1 : 0;
+  const changes: StringChange[] = [
+    {
+      type: ChangeType.Insert,
+      index: exportIndex,
+      text: `export * from './lib/${type}/${dasherizedName}.component.ts';\n`,
+    },
+  ];
+  const newFile = applyChangesToString(
+    tree.read(indexPath).toString(),
+    changes
+  );
+  tree.write(indexPath, newFile);
+};

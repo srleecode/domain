@@ -9,7 +9,10 @@ import { CreateDirectiveGeneratorSchema } from '../../schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { getLibraryName } from '../../../../../shared';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { getDasherizedFolderPath } from '../../../../../../shared/utils';
+import {
+  getDasherizedFolderPath,
+  spacify,
+} from '../../../../../../shared/utils';
 
 export const addDirectiveFiles = (
   tree: Tree,
@@ -44,11 +47,14 @@ export const addDirectiveFiles = (
     tmpl: '',
   };
   generateFiles(tree, join(__dirname, './files'), target, templateOptions);
+  if (options.addStory === false) {
+    tree.delete(join(target, `${dasherize(name)}.stories.ts`));
+  }
 };
 
 const getStorybookTitle = (libraryPath: string): string =>
   libraryPath
     .replace('libs/', '')
     .split('/')
-    .map((folder) => classify(folder))
+    .map((folder) => spacify(folder))
     .join('/');

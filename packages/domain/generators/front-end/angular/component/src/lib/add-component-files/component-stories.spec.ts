@@ -25,4 +25,11 @@ describe('stories file', () => {
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
+  it('should not create stories file when addStory is false', async () => {
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      addStory: false,
+    });
+    expect(tree.exists(testFilePath)).toBe(false);
+  });
 });

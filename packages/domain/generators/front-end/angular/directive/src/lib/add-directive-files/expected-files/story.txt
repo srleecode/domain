@@ -5,7 +5,7 @@ import { TestModule, TestComponent } from './test.component';
 
 export default {
     component: TestComponent,
-    title: 'TestApp/TestDomain/DirectiveTestExample',
+    title: 'Test App/Test Domain/Directive Test Example',
      decorators: [
         moduleMetadata({
             imports:[TestAppTestDomainDirectiveTestExampleModule, TestModule, ...GLOBAL_MOUNT_OPTIONS.imports]

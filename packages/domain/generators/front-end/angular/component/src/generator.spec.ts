@@ -6,7 +6,7 @@ import { ComponentType } from './model/component-type.enum';
 
 describe('createComponentGenerator', () => {
   let tree: Tree;
-
+  const libraryPath = 'libs/test-app/test-domain/presentation';
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
   });
@@ -33,7 +33,6 @@ describe('createComponentGenerator', () => {
     ]);
   });
   it('should only add component when presentation library already exists', async () => {
-    const libraryPath = 'libs/test-app/test-domain/presentation';
     await createComponentGenerator(tree, defaultOptions);
     await createComponentGenerator(tree, {
       ...defaultOptions,
@@ -50,5 +49,19 @@ describe('createComponentGenerator', () => {
         `${libraryPath}/src/lib/ui/test-example/test-example.component.ts`
       )
     ).toBe(true);
+  });
+  it('should add export to index', async () => {
+    await createComponentGenerator(tree, defaultOptions);
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      type: ComponentType.Ui,
+    });
+    const indexTs = tree.read(`${libraryPath}/src/index.ts`).toString();
+    expect(indexTs).toMatch(
+      `export * from './lib/feature/test-example.component.ts';`
+    );
+    expect(indexTs).toMatch(
+      `export * from './lib/ui/test-example.component.ts';`
+    );
   });
 });
