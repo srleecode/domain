@@ -1,6 +1,6 @@
 {
   "name": "@srleecode/domain",
-  "version": "14.8.7",
+  "version": "14.8.8",
   "private": true,
   "description": "Nrwl nx plugin to allow operations at the domain level",
   "homepage": "https://github.com/srleecode/domain",
@@ -10,7 +10,7 @@
     "affected": "nx affected",
     "affected:build": "nx affected:build",
     "affected:lint": "nx affected:lint",
-    "affected:test": "nx affected:test",
+    "affected:test": "nx affected:test --maxWorkers=10%",
     "build": "nx build domain",
     "create-version": "npx nx run workspace:version",
     "dep-graph": "nx dep-graph",

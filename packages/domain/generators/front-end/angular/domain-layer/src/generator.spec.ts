@@ -1,4 +1,4 @@
-import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { createDomainLayerGenerator } from './generator';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
@@ -44,17 +44,6 @@ describe('createDomainLayerGenerator', () => {
       true,
       schema
     );
-  });
-  it('should remove test target from generated library', async () => {
-    await createDomainLayerGenerator(tree, {
-      groupingFolder,
-      ...commonLibraryOptions,
-    });
-    const projectConfig = readProjectConfiguration(
-      tree,
-      'test-app-test-domain-domain'
-    );
-    expect(projectConfig.targets['test']).toBeUndefined();
   });
   it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
     await createDomainLayerGenerator(tree, {

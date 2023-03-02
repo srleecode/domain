@@ -4,7 +4,7 @@ import { TestComponent } from './test.component';
 
 export default {
     component: TestComponent,
-    title: 'TestApp/TestDomain/DirectiveTestExample',
+    title: 'Test App/Test Domain/Directive Test Example',
      decorators: [
         moduleMetadata({
             imports:[ TestComponent, ...GLOBAL_MOUNT_OPTIONS.imports]
@@ -12,8 +12,4 @@ export default {
     ]
 } as Meta;
 
-const Template: Story<TestComponent> = (args) => ({
-    props: args
-});
-
-export const Default = Template.bind({});
+export const Default: Story = () => ({});

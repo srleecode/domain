@@ -38,6 +38,11 @@
       "schema": "./generators/front-end/angular/domain-layer/src/schema.json",
       "description": "Add domain layer domain library generator"
     },
+    "ngPresentationLayer": {
+      "factory": "./generators/front-end/angular/presentation-layer/src/generator#createPresentationLayerSchematic",
+      "schema": "./generators/front-end/angular/presentation-layer/src/schema.json",
+      "description": "Add presentation layer domain library generator"
+    },
     "ngRemoveLibrary": {
       "factory": "./generators/front-end/angular/remove-library/src/generator#removeLibrarySchematic",
       "schema": "./generators/front-end/angular/remove-library/src/schema.json",
@@ -116,6 +121,11 @@
       "factory": "./generators/front-end/angular/domain-layer/src/generator",
       "schema": "./generators/front-end/angular/domain-layer/src/schema.json",
       "description": "Add domain layer domain library generator"
+    },
+    "ngPresentationLayer": {
+      "factory": "./generators/front-end/angular/presentation-layer/src/generator",
+      "schema": "./generators/front-end/angular/presentation-layer/src/schema.json",
+      "description": "Add presentation layer domain library generator"
     },
     "ngRemoveLibrary": {
       "factory": "./generators/front-end/angular/remove-library/src/generator",
