@@ -9,8 +9,8 @@ import { dasherize } from '@nrwl/workspace/src/utils/strings';
 describe('component template file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
-  defaultOptions.name
-  )}.component.html`;
+    defaultOptions.name
+  )}/${dasherize(defaultOptions.name)}.component.html`;
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();

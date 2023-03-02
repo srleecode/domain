@@ -6,51 +6,12 @@ import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
 export const addEslintLayerConstraints = (tree: Tree) => {
   updateDepConstraint(tree, (depConstraints: DepConstraint[]) => {
     depConstraints.push({
-      sourceTag: 'type:shell',
+      sourceTag: 'type:presentation',
       notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [
         'type:application',
         'type:domain',
-        'type:shell',
-        'type:directive',
-        'type:feature',
-        'type:ui',
-        'type:util',
-      ],
-    });
-    depConstraints.push({
-      sourceTag: 'type:feature',
-      notDependOnLibsWithTags: [],
-      onlyDependOnLibsWithTags: [
-        'type:application',
-        'type:shell',
-        'type:domain',
-        'type:feature',
-        'type:directive',
-        'type:ui',
-        'type:util',
-      ],
-    });
-    depConstraints.push({
-      sourceTag: 'type:ui',
-      notDependOnLibsWithTags: [],
-      onlyDependOnLibsWithTags: [
-        'type:application',
-        'type:shell',
-        'type:feature',
-        'type:domain',
-        'type:directive',
-        'type:ui',
-        'type:util',
-      ],
-    });
-    depConstraints.push({
-      sourceTag: 'type:directive',
-      notDependOnLibsWithTags: [],
-      onlyDependOnLibsWithTags: [
-        'type:application',
-        'type:domain',
-        'type:directive',
+        'type:presentation',
         'type:util',
       ],
     });

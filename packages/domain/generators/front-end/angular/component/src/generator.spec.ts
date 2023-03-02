@@ -1,113 +1,78 @@
-import { Tree } from '@nrwl/devkit';
+import { readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import * as frontEndSharedMock from '../../../shared';
 import { defaultOptions } from './default-options.constant';
-import { createComponentGenerator } from './generator';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import {
-  ApplicationType,
-  getDasherizedFolderPath,
-  getGroupingFolders,
-} from '../../../../shared/utils';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import createComponentGenerator from './generator';
+import { ComponentType } from './model/component-type.enum';
 
 describe('createComponentGenerator', () => {
   let tree: Tree;
-
+  const libraryPath = 'libs/test-app/test-domain/presentation';
   beforeEach(() => {
-    jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
-    jest.spyOn(frontEndSharedMock, 'addDomainLibrary');
   });
 
-  it('should throw an error if the project already exists', async () => {
+  it('should create presentation library when it doesnt exist', async () => {
+    const libraryPath = 'libs/test-app/test-domain/presentation';
     await createComponentGenerator(tree, defaultOptions);
-    await expect(
-      createComponentGenerator(tree, defaultOptions)
-    ).rejects.toThrowError();
-  });
-
-  it('should remove module created by angular library generator', async () => {
-    await createComponentGenerator(tree, defaultOptions);
-    const libraryName = dasherize(defaultOptions.name);
-    const fileName = `${getDasherizedFolderPath(
-      tree,
-      defaultOptions.groupingFolder
-    )}-${libraryName}.module.ts`;
-    const filePath = `${defaultOptions.groupingFolder}/src/lib/${fileName}`;
-    expect(tree.exists(filePath)).toBe(false);
-  });
-
-  it('should pass correct parameters to addDomainLibrary', async () => {
-    await createComponentGenerator(tree, defaultOptions);
-    const groupingFolders = getGroupingFolders(
-      tree,
-      defaultOptions.groupingFolder
-    );
-    expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
-      expect.anything(),
-      defaultOptions.name,
-      defaultOptions.type,
-      defaultOptions.groupingFolder,
-      groupingFolders.app,
-      ApplicationType.Angular,
-      false,
-      defaultOptions
-    );
-  });
-
-  it('should set index to component file', async () => {
-    await createComponentGenerator(tree, defaultOptions);
-    const index = tree
-      .read(
-        `${defaultOptions.groupingFolder}/feature-test-example/src/index.ts`
-      )
-      .toString();
-    expect(index).toBe(`export * from './lib/test-example.component';`);
-  });
-  it('should set index to component file when name is empty', async () => {
-    await createComponentGenerator(tree, {
-      ...defaultOptions,
-      name: '',
-    });
-    const index = tree
-      .read(`${defaultOptions.groupingFolder}/feature/src/index.ts`)
-      .toString();
-    expect(index).toBe(`export * from './lib/feature.component';`);
-  });
-  it('should add prefix to eslint selector rules', async () => {
-    const prefix = 'test';
-    await createComponentGenerator(tree, {
-      ...defaultOptions,
-      prefix,
-    });
-    const eslint = JSON.parse(
-      tree
-        .read(
-          `${defaultOptions.groupingFolder}/feature-test-example/.eslintrc.json`
-        )
-        .toString()
-    );
     expect(
-      eslint.overrides[0].rules['@angular-eslint/component-selector'][1].prefix
-    ).toBe(prefix);
-    expect(
-      eslint.overrides[0].rules['@angular-eslint/directive-selector'][1].prefix
-    ).toBe(prefix);
+      tree.exists(
+        `${libraryPath}/src/lib/feature/test-example/test-example.component.ts`
+      )
+    ).toBe(true);
   });
-  it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
+  it('should create project with the correct tags', async () => {
+    await createComponentGenerator(tree, defaultOptions);
+    const projectConfig = readProjectConfiguration(
+      tree,
+      'test-app-test-domain-presentation'
+    );
+    expect(projectConfig.tags).toEqual([
+      'app:test-app',
+      'scope:test-app-test-domain',
+      'type:presentation',
+    ]);
+  });
+  it('should only add component when presentation library already exists', async () => {
+    await createComponentGenerator(tree, defaultOptions);
     await createComponentGenerator(tree, {
       ...defaultOptions,
-      addJestJunitReporter: true,
+      type: ComponentType.Ui,
     });
-    const jestConfig = tree
-      .read(
-        `${defaultOptions.groupingFolder}/feature-test-example/jest.config.js`
+
+    expect(
+      tree.exists(
+        `${libraryPath}/src/lib/feature/test-example/test-example.component.ts`
       )
-      .toString();
-    expect(jestConfig).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "libs/test-app/test-domain/feature-test-example.xml" } ] ]`
+    ).toBe(true);
+    expect(
+      tree.exists(
+        `${libraryPath}/src/lib/ui/test-example/test-example.component.ts`
+      )
+    ).toBe(true);
+  });
+  it('should add shell component at the root level of the library', async () => {
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      type: ComponentType.Shell,
+    });
+
+    expect(
+      tree.exists(`${libraryPath}/src/lib/test-example.component.ts`)
+    ).toBe(true);
+  });
+  it('should add export to index', async () => {
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      type: ComponentType.Shell,
+    });
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      type: ComponentType.Ui,
+    });
+    const indexTs = tree.read(`${libraryPath}/src/index.ts`).toString();
+    expect(indexTs).toMatch(`export * from './lib/test-example.component.ts';`);
+    expect(indexTs).toMatch(
+      `export * from './lib/ui/test-example.component.ts';`
     );
   });
 });

@@ -6,10 +6,10 @@
   "type": "object",
   "description": "Creates global styles for an existing SCAM (Single Component Angular Module) library",
   "properties": {
-    "componentLibraryPath": {
-      "description": "The path to the component library",
+    "componentFolderPath": {
+      "description": "The path to the components folder",
       "type": "string"
     }
   },
-  "required": ["componentLibraryPath"]
+  "required": ["componentFolderPath"]
 }

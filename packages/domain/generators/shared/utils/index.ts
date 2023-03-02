@@ -12,6 +12,7 @@ export { removeDepConstraint } from './src/remove-dep-contraint';
 export { isHavingDepContraint } from './src/is-having-dep-constraint';
 export { getTsSourceFile } from './src/get-ts-source-file';
 export { addJestJunitReporterConfig } from './src/add-jest-junit-reporter-config';
+export { spacify } from './src/spacify';
 export { UnitTestType } from './src/model/unit-test-type.enum';
 export { ElementType } from './src/model/element-type.enum';
 export { ApplicationType } from './src/model/application-type.enum';

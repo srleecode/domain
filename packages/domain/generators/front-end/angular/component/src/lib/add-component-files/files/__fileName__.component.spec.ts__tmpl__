@@ -1,23 +1,23 @@
 <% if(isTestUsingTestBed) { %>import { ComponentFixture, TestBed } from '@angular/core/testing';<% } %>
-import { <%= className %>Component } from './<%= fileName %>.component';
+import { <%= componentName %> } from './<%= fileName %>.component';
 
-describe('<%= className %>Component', () => {
-  let component: <%= className %>Component;
-  <% if(isTestUsingTestBed) { %>let fixture: ComponentFixture<<%= className %>Component>;
+describe('<%= componentName %>', () => {
+  let component: <%= componentName %>;
+  <% if(isTestUsingTestBed) { %>let fixture: ComponentFixture<<%= componentName %>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ <%= className %>Component ]
+      imports: [ <%= componentName %> ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(<%= className %>Component);
+    fixture = TestBed.createComponent(<%= componentName %>);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });<% } else { %>beforeEach(() => {
-    component = new <%= className %>Component();
+    component = new <%= componentName %>();
   });<% } %>
 
   it('should create', () => {

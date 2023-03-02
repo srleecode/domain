@@ -10,7 +10,7 @@ describe('stories file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
     defaultOptions.name
-  )}.stories.ts`;
+  )}/${dasherize(defaultOptions.name)}.stories.ts`;
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
@@ -24,5 +24,12 @@ describe('stories file', () => {
       join(__dirname, './expected-files/story.txt')
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
+  });
+  it('should not create stories file when addStory is false', async () => {
+    await createComponentGenerator(tree, {
+      ...defaultOptions,
+      addStory: false,
+    });
+    expect(tree.exists(testFilePath)).toBe(false);
   });
 });
