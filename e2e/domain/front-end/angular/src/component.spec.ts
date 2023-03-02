@@ -8,7 +8,7 @@ describe('component', () => {
       `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type shell --name test-example`
     );
     checkFilesExist(
-      `${groupingFolder}/presentation/src/lib/shell/test-example/test-example.component.ts`
+      `${groupingFolder}/presentation/src/lib/test-example.component.ts`
     );
   });
 

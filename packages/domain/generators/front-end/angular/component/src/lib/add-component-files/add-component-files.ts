@@ -42,7 +42,9 @@ export const addComponentFiles = (
   });
 
   const target = normalize(
-    `${groupingFolder}/presentation/src/lib/${type}/${dasherizedName}`
+    type === ComponentType.Shell
+      ? `${groupingFolder}/presentation/src/lib`
+      : `${groupingFolder}/presentation/src/lib/${type}/${dasherizedName}`
   );
   const templateOptions = {
     ...options,
@@ -94,11 +96,15 @@ const addComponentToIndex = (
   const allExports = findNodes(source, SyntaxKind.ExportDeclaration);
   const exportIndex =
     allExports.length > 0 ? allExports[allExports.length - 1].end + 1 : 0;
+  const componentPath =
+    type === ComponentType.Shell
+      ? `./lib/${dasherizedName}.component.ts`
+      : `./lib/${type}/${dasherizedName}.component.ts`;
   const changes: StringChange[] = [
     {
       type: ChangeType.Insert,
       index: exportIndex,
-      text: `export * from './lib/${type}/${dasherizedName}.component.ts';\n`,
+      text: `export * from '${componentPath}';\n`,
     },
   ];
   const newFile = applyChangesToString(
