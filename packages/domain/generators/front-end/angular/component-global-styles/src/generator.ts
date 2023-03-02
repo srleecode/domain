@@ -12,15 +12,14 @@ export async function createComponentGlobalStylesGenerator(
   tree: Tree,
   options: CreateComponentGlobalStylesGeneratorSchema
 ): Promise<void> {
-  const { componentLibraryPath } = options;
-  const basePath = `${componentLibraryPath}/src/lib`;
-  const componentFilePath = getComponentFilePath(tree, basePath);
+  const { componentFolderPath } = options;
+  const componentFilePath = getComponentFilePath(tree, componentFolderPath);
   const componentClassName = getComponentClassName(
     tree,
     componentFilePath
   ).replace('Component', 'BaseComponent');
   const selector = getComponentSelector(tree, componentFilePath);
-  addFiles(tree, basePath, componentClassName, selector);
+  addFiles(tree, componentFolderPath, componentClassName, selector);
   addBaseComponentImport(tree, componentFilePath, componentClassName);
   addBaseComponentDeclaration(tree, componentFilePath, componentClassName);
   addBaseComponentToTemplate(tree, componentFilePath, selector);

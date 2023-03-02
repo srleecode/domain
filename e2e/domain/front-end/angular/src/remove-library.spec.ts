@@ -1,7 +1,7 @@
 import { fileExists, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
 
 describe('remove-library', () => {
-  const libraryFolder = 'libs/ng-test-app/test-domain/ui-test-example';
+  const libraryFolder = 'libs/ng-test-app/test-domain/presentation';
 
   it('should remove domain library', async () => {
     await runNxCommandAsync(

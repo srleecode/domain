@@ -7,12 +7,12 @@ import { AngularCreateLibrarySchema } from '@srleecode/domain/front-end/shared';
 export interface CreateComponentGeneratorSchema
   extends AngularCreateLibrarySchema {
   groupingFolder: string;
-  name?: string;
-  type?: ComponentType;
+  name: string;
+  type: ComponentType;
+  addStory?: boolean;
   displayBlock?: boolean;
   viewEncapsulation?: ViewEncapsulation;
   style?: StyleType;
   unitTestType?: UnitTestType;
   prefix?: string;
-  addJestJunitReporter?: boolean;
 }

@@ -7,6 +7,8 @@ describe('directive', () => {
     await runNxCommandAsync(
       `generate @srleecode/domain:ngDirective --groupingFolder ${groupingFolder} --name test-example`
     );
-    checkFilesExist(`${groupingFolder}/directive-test-example/src/index.ts`);
+    checkFilesExist(
+      `${groupingFolder}/presentation/src/lib/directive/test-example/test-example.directive.ts`
+    );
   });
 });

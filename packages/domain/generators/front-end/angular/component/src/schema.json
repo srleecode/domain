@@ -111,6 +111,11 @@
         ]
       }
     },
+    "addStory": {
+      "type": "boolean",
+      "default": true,
+      "description": "Determines whether or not to add a story file for the component"
+    },
     "buildable": {
       "type": "boolean",
       "default": false,
@@ -141,5 +146,5 @@
       "description": "Whether to add the jest junit reporter to the jest config"
     }
   },
-  "required": ["groupingFolder"]
+  "required": ["groupingFolder", "name", "type"]
 }

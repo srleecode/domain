@@ -13,7 +13,7 @@ describe('test file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
     defaultOptions.name
-  )}.component.spec.ts`;
+  )}/${dasherize(defaultOptions.name)}.component.spec.ts`;
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();

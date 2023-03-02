@@ -9,7 +9,7 @@ class CustomSequencer extends Sequencer {
     'directive.spec.ts': 3,
     'domain-layer.spec.ts': 4,
     'util.spec.ts': 5,
-    'remove-library.spec.ts': 6
+    'remove-library.spec.ts': 6,
   };
   sort(tests) {
     const orderedTests = [];

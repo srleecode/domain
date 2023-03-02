@@ -4,7 +4,7 @@ import { GLOBAL_MOUNT_OPTIONS } from '@cypress/component-testing';
 
 export default {
     component: FeatureTestExampleComponent,
-    title: 'TestApp/TestDomain/FeatureTestExample',
+    title: 'Test App/Test Domain/Feature Test Example',
     decorators: [
         moduleMetadata({
             imports: [ TestAppTestDomainFeatureTestExampleModule, ...GLOBAL_MOUNT_OPTIONS.imports ]
@@ -12,8 +12,4 @@ export default {
     ]
 } as Meta;
 
-const Template: Story<FeatureTestExampleComponent> = (args) => ({
-    props: args
-});
-
-export const Default = Template.bind({})
+export const Default: Story = () => ({});
