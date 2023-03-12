@@ -3,6 +3,7 @@ import { LibraryCommonOptions } from './model/library-common-options.model';
 import {
   getDasherizedFolderPath,
   getDomainPath,
+  getNormalisedPath,
   getWorkspaceLayout,
 } from '../../../shared/utils';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
@@ -30,7 +31,7 @@ export const getLibraryCommonOptions = (
   return {
     name: libraryName,
     importPath,
-    directory: domainPath,
+    directory: getNormalisedPath(groupingFolder),
     tags: [
       `app:${domainPath.split('/')?.[0]}`,
       `scope:${domain}`,

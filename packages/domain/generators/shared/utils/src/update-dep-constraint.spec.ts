@@ -1,7 +1,7 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readJson } from '@nrwl/devkit';
 import { updateDepConstraint } from './update-dep-contraint';
-import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
+import { DepConstraint } from './model/dep-constraint';
 
 describe('updateDepConstraint', () => {
   let appTree: Tree;

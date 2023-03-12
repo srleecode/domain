@@ -6,11 +6,13 @@ import { createMockFileGenerator } from './generator';
 describe('createMockFileGenerator', () => {
   let tree: Tree;
   const sourceRoot = 'libs/test-app/test-domain/feature-test-example/src';
-  beforeEach(async () => {
+  beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
+  });
+  const runGenerators = async () => {
     await libraryGenerator(tree, {
       name: 'feature-test-example',
-      directory: 'test-app/test-domain',
+      directory: 'libs/test-app/test-domain',
     }).catch((e: Error) => {
       logger.error(e.message);
       logger.error(e.stack);
@@ -20,21 +22,23 @@ describe('createMockFileGenerator', () => {
       projectName: 'test-app-test-domain-feature-test-example',
       mockFileName: 'test-example',
     });
-  });
-
-  it('should create mock file', () => {
+  };
+  it('should create mock file', async () => {
+    await runGenerators();
     const mockFile = tree
       .read(`${sourceRoot}/lib/mocks/test-example.mock.ts`)
       .toString();
     expect(mockFile).toBe(`export const TEST_EXAMPLE_MOCK = {};`);
   });
 
-  it('should create index exporting mock file', () => {
+  it('should create index exporting mock file', async () => {
+    await runGenerators();
     const indexFile = tree.read(`${sourceRoot}/testing.ts`).toString();
     expect(indexFile).toBe(`export * from './lib/mocks/test-example.mock';`);
   });
 
-  it('should create tsconfig path', () => {
+  it('should create tsconfig path', async () => {
+    await runGenerators();
     const tsConfig = readJson(tree, 'tsconfig.base.json');
     expect(
       tsConfig.compilerOptions.paths[

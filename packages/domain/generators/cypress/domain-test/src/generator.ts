@@ -20,7 +20,7 @@ export async function setupDomainTestGenerator(
 ): Promise<void> {
   const { groupingFolder, type } = options;
   const dasherisedFolderPath = getDasherizedFolderPath(tree, groupingFolder);
-  const { appsDir, standaloneAsDefault, npmScope } = getWorkspaceLayout(tree);
+  const { libsDir, standaloneAsDefault, npmScope } = getWorkspaceLayout(tree);
   const domainPath = getDomainPath(tree, groupingFolder);
   await cypressProjectGenerator(tree, {
     baseUrl: './',
@@ -33,8 +33,6 @@ export async function setupDomainTestGenerator(
     throw e;
   });
   const originalProjectName = `${dasherisedFolderPath}-${type}-${dasherisedFolderPath}`;
-  const originalProjectPath = `${appsDir}/${domainPath}/${type}-${dasherisedFolderPath}`;
-  removeUneededCypressProjectFiles(tree, originalProjectPath);
   removeDevServerTarget(tree, originalProjectName);
   setProjectToLibraryType(tree, originalProjectName);
   addImplicitDependencies(
@@ -56,6 +54,7 @@ export async function setupDomainTestGenerator(
     throw e;
   });
   renameCypressProject(tree, dasherisedFolderPath, standaloneAsDefault, type);
+  removeUneededCypressProjectFiles(tree, `${libsDir}/${domainPath}/.${type}`);
 }
 
 export default setupDomainTestGenerator;

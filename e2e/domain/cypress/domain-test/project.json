@@ -1,4 +1,5 @@
 {
+  "name": "e2e-domain-cypress-domain-test",
   "$schema": "..\\..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "e2e/domain/cypress/domain-test/src",
   "projectType": "application",
@@ -11,6 +12,5 @@
       }
     }
   },
-  "implicitDependencies": ["domain"],
-  "name": "domain-cypress-domain-test"
+  "implicitDependencies": ["domain"]
 }

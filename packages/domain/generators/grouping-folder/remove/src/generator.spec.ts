@@ -1,35 +1,12 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import {
-  addProjectConfiguration,
-  getProjects,
-  ProjectConfiguration,
-  Tree,
-} from '@nrwl/devkit';
+import { getProjects, Tree } from '@nrwl/devkit';
 import { removeGenerator } from './generator';
-import { libraryGenerator } from '@nrwl/workspace';
+import { CreateDataAccessLayerGeneratorSchema } from '../../../front-end/angular/data-access-layer/src/schema';
+import createDataAccessLayerGenerator from '../../../front-end/angular/data-access-layer/src/generator';
 
 describe('removeGenerator', () => {
   let appTree: Tree;
   const folderToDelete = 'libs/test-app';
-  const addProjects = async () => {
-    await libraryGenerator(appTree, {
-      name: 'data-access',
-      directory: `test-app/test-domain`,
-    });
-    await libraryGenerator(appTree, {
-      name: 'shell',
-      directory: `test-app/second-test-domain`,
-    });
-    const mockProjectConfiguration: ProjectConfiguration = {
-      root: `${folderToDelete}/test-domain/.cypress`,
-      targets: {},
-    };
-    addProjectConfiguration(
-      appTree,
-      'e2e-test-app-test-domain',
-      mockProjectConfiguration
-    );
-  };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
@@ -44,7 +21,17 @@ describe('removeGenerator', () => {
   });
 
   it('should remove all projects under the given folder', async () => {
-    await addProjects();
+    const schema: CreateDataAccessLayerGeneratorSchema = {
+      groupingFolder: 'libs/test-app/test-domain',
+      buildable: true,
+      strict: false,
+      enableIvy: true,
+      publishable: false,
+    };
+    await createDataAccessLayerGenerator(appTree, {
+      ...schema,
+      addJestJunitReporter: true,
+    });
     await removeGenerator(appTree, {
       groupingFolder: folderToDelete,
     });

@@ -1,7 +1,9 @@
 import { Tree } from '@nrwl/devkit';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { updateDepConstraint } from '../../../../../shared/utils';
-import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
+import {
+  updateDepConstraint,
+  DepConstraint,
+} from '../../../../../shared/utils';
 
 export const addEslintLayerConstraints = (tree: Tree) => {
   updateDepConstraint(tree, (depConstraints: DepConstraint[]) => {

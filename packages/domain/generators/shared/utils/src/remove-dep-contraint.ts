@@ -1,5 +1,5 @@
 import { logger, Tree, updateJson } from '@nrwl/devkit';
-import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
+import { DepConstraint } from './model/dep-constraint';
 import { getBoundariesRule } from './get-boundaries-rule';
 import { getLintFilePath } from './get-lint-file-path';
 
