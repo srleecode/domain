@@ -1,4 +1,3 @@
-import { DepConstraint } from '@nrwl/workspace/src/utils/runtime-lint-utils';
 import {
   checkFilesExist,
   readJson,
@@ -30,7 +29,7 @@ describe('move', () => {
     const depConstraints =
       eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
         .depConstraints;
-    const depConstraint: DepConstraint = {
+    const depConstraint = {
       notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [
         'scope:ng-test-app-new-domain',

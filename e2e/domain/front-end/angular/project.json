@@ -1,4 +1,5 @@
 {
+  "name": "e2e-domain-front-end-angular",
   "$schema": "..\\..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "e2e/domain/front-end/angular/src",
   "projectType": "application",
@@ -11,6 +12,5 @@
       }
     }
   },
-  "implicitDependencies": ["domain"],
-  "name": "domain-front-end-angular"
+  "implicitDependencies": ["domain"]
 }

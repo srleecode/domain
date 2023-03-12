@@ -1,3 +1,4 @@
+import { logger } from '@nrwl/devkit';
 import { checkFilesExist, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
 import { createProject } from '../../../utils/util';
 

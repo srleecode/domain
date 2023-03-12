@@ -1,5 +1,7 @@
-import { logger, Tree, updateJson } from '@nrwl/devkit';
+import { getImportPath, logger, Tree, updateJson } from '@nrwl/devkit';
 import { moveGenerator } from '@nrwl/workspace';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { getWorkspaceLayout } from '../../../../shared/utils';
 import { DomainTest } from './model/domain-test.type';
 
 export const moveProjectToDomain = async (
@@ -10,7 +12,18 @@ export const moveProjectToDomain = async (
   npmScope: string,
   type: DomainTest
 ): Promise<void> => {
-  addDummyTsConfigPath(tree, domainPath, dasherisedFolderPath, npmScope, type);
+  const workspaceLayout = getWorkspaceLayout(tree);
+  const dummyPaths = [
+    `${getImportPath(
+      npmScope,
+      domainPath.replace(/^\/|\\/, '')
+    )}/${type}-${dasherisedFolderPath}`.replace('@@', '@'),
+    `${getImportPath(
+      npmScope,
+      domainPath.slice(workspaceLayout.libsDir.length).replace(/^\/|\\/, '')
+    )}/${type}-${dasherisedFolderPath}`.replace('@@', '@'),
+  ];
+  addDummyTsConfigPaths(tree, dummyPaths);
   await moveGenerator(tree, {
     projectName,
     destination: `${domainPath}/.${type}`,
@@ -20,18 +33,12 @@ export const moveProjectToDomain = async (
     logger.error(e.stack);
     throw e;
   });
-  removeDummyTsConfigPath(tree, dasherisedFolderPath, npmScope, type);
+  removeDummyTsConfigPaths(tree, dummyPaths);
 };
 
 // a cypress project doesn't have a tsconfig path, but one is required by the move generator
 // this creates a dummy tsconfig path that will be removed after the move generator runs
-const addDummyTsConfigPath = (
-  tree: Tree,
-  domainPath: string,
-  dasherisedFolderPath: string,
-  npmScope: string,
-  type: DomainTest
-) => {
+const addDummyTsConfigPaths = (tree: Tree, dummyPaths: string[]) => {
   updateJson(tree, 'tsconfig.base.json', (json) => {
     if (!json.compilerOptions) {
       json.compilerOptions = {};
@@ -39,23 +46,20 @@ const addDummyTsConfigPath = (
         json.compilerOptions.paths = {};
       }
     }
-    json.compilerOptions.paths[
-      `${npmScope}/${domainPath}/${type}-${dasherisedFolderPath}`
-    ] = [];
+    dummyPaths.forEach((path) => {
+      json.compilerOptions.paths[path] = [];
+    });
     return json;
   });
 };
 
-const removeDummyTsConfigPath = (
-  tree: Tree,
-  dasherisedFolderPath: string,
-  npmScope: string,
-  type: DomainTest
-): void => {
+const removeDummyTsConfigPaths = (tree: Tree, dummyPaths: string[]) => {
   updateJson(tree, 'tsconfig.base.json', (json) => {
-    delete json.compilerOptions.paths[
-      `${npmScope}/${dasherisedFolderPath}-.${type}`
-    ];
+    dummyPaths.forEach((path) => {
+      if (json.compilerOptions.paths[path]) {
+        delete json.compilerOptions.paths[path];
+      }
+    });
     return json;
   });
 };

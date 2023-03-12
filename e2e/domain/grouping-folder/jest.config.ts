@@ -10,7 +10,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/packages/e2e-domain-grouping-folder',
   preset: '../../../jest.preset.js',
   testSequencer: './test-sequencer.js',
   setupFilesAfterEnv: ['./jest.setup.ts'],

@@ -16,3 +16,4 @@ export { spacify } from './src/spacify';
 export { UnitTestType } from './src/model/unit-test-type.enum';
 export { ElementType } from './src/model/element-type.enum';
 export { ApplicationType } from './src/model/application-type.enum';
+export { DepConstraint } from './src/model/dep-constraint';
