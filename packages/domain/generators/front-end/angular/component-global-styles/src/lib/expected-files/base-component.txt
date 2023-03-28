@@ -5,4 +5,4 @@ import { Component, ViewEncapsulation } from "@angular/core";
     template: "<ng-content></ng-content>",
     styleUrls: ["./global.scss"],
     encapsulation: ViewEncapsulation.None
-}) export class FeatureTestExampleBaseComponent {}
+}) export class TestExampleBaseComponent {}
