@@ -1,14 +1,5 @@
 {
   "root": ".",
   "sourceRoot": ".",
-  "targets": {
-    "version": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "syncVersions": true,
-        "baseBranch": "master",
-        "versionTagPrefix": ""
-      }
-    }
-  }
+  "targets": {}
 }
