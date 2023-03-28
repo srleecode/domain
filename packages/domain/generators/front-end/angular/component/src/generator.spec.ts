@@ -70,9 +70,9 @@ describe('createComponentGenerator', () => {
       type: ComponentType.Ui,
     });
     const indexTs = tree.read(`${libraryPath}/src/index.ts`).toString();
-    expect(indexTs).toMatch(`export * from './lib/test-example.component.ts';`);
+    expect(indexTs).toMatch(`export * from './lib/test-example.component';`);
     expect(indexTs).toMatch(
-      `export * from './lib/ui/test-example.component.ts';`
+      `export * from './lib/ui/test-example/test-example.component';`
     );
   });
 });
