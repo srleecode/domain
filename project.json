@@ -2,14 +2,5 @@
   "name": ".",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "sourceRoot": ".",
-  "targets": {
-    "version": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "syncVersions": true,
-        "baseBranch": "master",
-        "versionTagPrefix": ""
-      }
-    }
-  }
+  "targets": {}
 }

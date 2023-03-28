@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
     styleUrls: ['./test-example.component.scss'],
     standalone: true,
     imports: [CommonModule]
-}) export class FeatureTestExampleComponent implements OnInit {
+}) export class TestExampleComponent implements OnInit {
     constructor() {}
 
     ngOnInit():void {

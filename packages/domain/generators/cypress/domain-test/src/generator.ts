@@ -13,6 +13,7 @@ import {
   getWorkspaceLayout,
   getDasherizedFolderPath,
 } from '../../../shared/utils';
+import { addDomainTestEslintTags } from './lib/add-domain-test-eslint-tags';
 
 export async function setupDomainTestGenerator(
   tree: Tree,
@@ -41,6 +42,7 @@ export async function setupDomainTestGenerator(
     groupingFolder,
     dasherisedFolderPath
   );
+  addDomainTestEslintTags(tree, originalProjectName, groupingFolder, type);
   await moveProjectToDomain(
     tree,
     originalProjectName,

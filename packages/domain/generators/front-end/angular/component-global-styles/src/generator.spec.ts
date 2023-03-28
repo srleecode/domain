@@ -46,13 +46,13 @@ describe('createComponentGlobalStylesGenerator', () => {
   it('should add base component class import to main component', () => {
     const componentFile = tree.read(componentFilePath).toString();
     expect(componentFile).toMatch(
-      `import { FeatureTestExampleBaseComponent } from './base.component';`
+      `import { TestExampleBaseComponent } from './base.component';`
     );
   });
   it('should add base component class to component imports', () => {
     const componentFile = tree.read(componentFilePath).toString();
     expect(componentFile).toMatch(
-      `imports: [FeatureTestExampleBaseComponent, CommonModule]`
+      `imports: [TestExampleBaseComponent, CommonModule]`
     );
   });
   it('should add base component class to template', () => {
