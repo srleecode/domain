@@ -7,7 +7,7 @@ export default {
     title: 'Test App/Test Domain/Feature Test Example',
     decorators: [
         moduleMetadata({
-            imports: [ FeatureTestExampleComponent, ...GLOBAL_MOUNT_OPTIONS.imports ]
+            imports: [ TestExampleComponent, ...GLOBAL_MOUNT_OPTIONS.imports ]
         })
     ]
 } as Meta;
