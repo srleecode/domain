@@ -66,6 +66,17 @@ describe('setupDomainTestGenerator', () => {
         'test-app-test-domain-shell',
       ]);
     });
+    it('should add tags', () => {
+      const projectConfig = readProjectConfiguration(
+        tree,
+        'e2e-test-app-test-domain'
+      );
+      expect(projectConfig.tags).toEqual([
+        'app:test-app',
+        'scope:test-app-test-domain',
+        'type:e2e',
+      ]);
+    });
   });
 
   describe('ct', () => {

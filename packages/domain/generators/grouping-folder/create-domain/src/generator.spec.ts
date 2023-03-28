@@ -66,4 +66,15 @@ describe('createAppGroupingFolderGenerator', () => {
     });
     expectDepConstraint('scope:ng-test-app-parent-domain-shared');
   });
+  it('should not add scope to eslint when adding domain in app:shared', async () => {
+    await createDomainGroupingFolderGenerator(tree, {
+      groupingFolder: 'libs/ng-shared',
+      name: 'child-domain',
+    });
+    const eslint = readJson(tree, '.eslintrc.json');
+    expect(
+      eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+        .depConstraints
+    ).toEqual([]);
+  });
 });
