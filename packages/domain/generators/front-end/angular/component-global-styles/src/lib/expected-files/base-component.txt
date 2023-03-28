@@ -7,4 +7,4 @@ import { Component, ViewEncapsulation } from "@angular/core";
     standalone: true,
     imports: [CommonModule],
     encapsulation: ViewEncapsulation.None
-}) export class FeatureTestExampleBaseComponent {}
+}) export class TestExampleBaseComponent {}

@@ -1,10 +1,10 @@
-import { FeatureTestExampleComponent } from './test-example.component';
+import { TestExampleComponent } from './test-example.component';
 
-describe('FeatureTestExampleComponent', () => {
-  let component: FeatureTestExampleComponent;
+describe('TestExampleComponent', () => {
+  let component: TestExampleComponent;
 
   beforeEach(() => {
-    component = new FeatureTestExampleComponent();
+    component = new TestExampleComponent();
   });
 
   it('should create', () => {

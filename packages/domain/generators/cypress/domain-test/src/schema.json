@@ -31,5 +31,5 @@
       }
     }
   },
-  "required": ["groupingFolder"]
+  "required": ["groupingFolder", "type"]
 }

@@ -51,7 +51,7 @@ export const addComponentFiles = (
     ...names(name),
     fileName: dasherize(name),
     selector,
-    componentName: classify(`${type}-${name}Component`),
+    componentName: classify(`${name}Component`),
     moduleName: classify(`${dasherisedGroupingFolder}-${libraryName}Module`),
     isUsingNonDefaultViewEncapsulation:
       options.viewEncapsulation !== ViewEncapsulation.Emulated,
@@ -98,8 +98,8 @@ const addComponentToIndex = (
     allExports.length > 0 ? allExports[allExports.length - 1].end + 1 : 0;
   const componentPath =
     type === ComponentType.Shell
-      ? `./lib/${dasherizedName}.component.ts`
-      : `./lib/${type}/${dasherizedName}.component.ts`;
+      ? `./lib/${dasherizedName}.component`
+      : `./lib/${type}/${dasherizedName}/${dasherizedName}.component`;
   const changes: StringChange[] = [
     {
       type: ChangeType.Insert,
