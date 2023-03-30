@@ -4,7 +4,6 @@ import { getLibraryCommonOptions } from './get-library-common-options';
 import { libraryGenerator } from '@nrwl/angular/generators';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
-  addJestJunitReporterConfig,
   ApplicationType,
   getDasherizedFolderPath,
 } from '../../../shared/utils';
@@ -12,6 +11,8 @@ import { isProjectExisting } from './is-project-existing';
 import { addImplicitDependency } from './add-implicit-dependency';
 import { removeLintOverrideRules } from './remove-lint-override-rules';
 import { getLibraryName } from './get-library-name';
+import { addJestJunitReporterConfig } from './add-jest-junit-reporter-config';
+import { removeGlobalJestConfig } from './remove-global-jest-config';
 
 export const addDomainLibrary = async (
   tree: Tree,
@@ -53,11 +54,13 @@ export const addDomainLibrary = async (
   if (removeLintOverrides) {
     removeLintOverrideRules(tree, projectName);
   }
+  const libraryName = getLibraryName({
+    name,
+    type,
+  });
+  const libraryPath = `${groupingFolderPath}/${libraryName}`;
   if (schema.addJestJunitReporter) {
-    const libraryName = getLibraryName({
-      name,
-      type,
-    });
-    addJestJunitReporterConfig(tree, `${groupingFolderPath}/${libraryName}`);
+    addJestJunitReporterConfig(tree, libraryPath);
   }
+  removeGlobalJestConfig(tree, libraryPath);
 };
