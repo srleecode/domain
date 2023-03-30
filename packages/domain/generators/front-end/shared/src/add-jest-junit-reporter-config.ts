@@ -2,7 +2,7 @@ import { Tree } from '@nrwl/devkit';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
 
 export const addJestJunitReporterConfig = (tree: Tree, libraryPath: string) => {
-  let jestConfigPath = `${libraryPath}/jest.config.js`;
+  let jestConfigPath = `${libraryPath}/jest.config.ts`;
   if (!jestConfigPath.startsWith('libs')) {
     jestConfigPath = `libs/${jestConfigPath}`;
   }
@@ -16,7 +16,7 @@ export const addJestJunitReporterConfig = (tree: Tree, libraryPath: string) => {
   jestConfigString = `${jestConfigString.slice(0, lastBracketIndex)}${
     includesLastLineCommaPrefix ? '' : ','
   } reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "${dasherize(
-    libraryPath
+    libraryPath.replace('libs/', '')
   )}.xml" } ] ]${jestConfigString.slice(lastBracketIndex)}`;
   tree.write(jestConfigPath, jestConfigString);
 };
