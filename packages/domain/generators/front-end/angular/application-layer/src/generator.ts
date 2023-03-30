@@ -3,11 +3,7 @@ import { CreateApplicationLayerGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { addDomainLibrary } from '../../../shared';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import {
-  addJestJunitReporterConfig,
-  ApplicationType,
-  getGroupingFolders,
-} from '../../../../shared/utils';
+import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
 
 export async function createApplicationLayerGenerator(
   tree: Tree,

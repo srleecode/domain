@@ -4,14 +4,14 @@ import { addJestJunitReporterConfig } from './add-jest-junit-reporter-config';
 
 describe('addJestJunitReporter', () => {
   const libraryPath = `test-application/test-domain/ui-example`;
-  const jestConfigPath = `libs/${libraryPath}/jest.config.js`;
+  const jestConfigPath = `libs/${libraryPath}/jest.config.ts`;
   let appTree: Tree;
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
     appTree.write(
       jestConfigPath,
-      `module.exports = {preset: '../../jest.config.js'};`
+      `module.exports = {preset: '../../jest.config.ts'};`
     );
   });
 

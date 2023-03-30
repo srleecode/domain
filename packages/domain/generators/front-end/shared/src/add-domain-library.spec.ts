@@ -18,6 +18,7 @@ describe('addDomainLibrary', () => {
     enableIvy: true,
     publishable: false,
   };
+  const groupingFolderPath = 'libs/test-app/test-domain';
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -29,7 +30,7 @@ describe('addDomainLibrary', () => {
       tree,
       '',
       'application',
-      'libs/test-app/test-domain',
+      groupingFolderPath,
       'test-app',
       ApplicationType.Angular,
       true,
@@ -40,6 +41,46 @@ describe('addDomainLibrary', () => {
       'libs/test-app/test-domain/application/.eslintrc.json'
     );
     expect(lintJson.overrides).toEqual([]);
+  });
+
+  it('should add jest junit report config when addJestJunitReporter is true', async () => {
+    const type = 'application';
+    await addDomainLibrary(
+      tree,
+      '',
+      type,
+      groupingFolderPath,
+      'test-app',
+      ApplicationType.Angular,
+      true,
+      { ...commonLibraryOptions, addJestJunitReporter: true }
+    );
+    const jestConfig = tree
+      .read(`${groupingFolderPath}/${type}/jest.config.ts`)
+      .toString();
+    expect(jestConfig).toMatch(
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app/test-domain/application.xml" } ] ]`
+    );
+  });
+
+  it('should remove config that should be in the jest preset as it can be global', async () => {
+    const type = 'application';
+    await addDomainLibrary(
+      tree,
+      '',
+      type,
+      groupingFolderPath,
+      'test-app',
+      ApplicationType.Angular,
+      true,
+      commonLibraryOptions
+    );
+    const jestFile = tree
+      .read(`${groupingFolderPath}/${type}/jest.config.ts`)
+      .toString();
+    expect(jestFile).not.toMatch(
+      /snapshotSerializers|transformIgnorePatterns|transform/
+    );
   });
 
   it('should add project to e2e projects implicitDependencies', async () => {
@@ -56,7 +97,7 @@ describe('addDomainLibrary', () => {
       tree,
       '',
       'application',
-      'libs/test-app/test-domain',
+      groupingFolderPath,
       'test-app',
       ApplicationType.Angular,
       true,
