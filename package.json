@@ -1,6 +1,6 @@
 {
   "name": "@srleecode/domain",
-  "version": "13.10.13",
+  "version": "13.10.14",
   "private": true,
   "description": "Nrwl nx plugin to allow operations at the domain level",
   "homepage": "https://github.com/srleecode/domain",
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@angular/core": "13.2.1",
+    "@srleecode/domain": "^13.10.13",
     "@storybook/builder-webpack5": "6.4.18",
     "@storybook/manager-webpack5": "6.4.18",
     "tslib": "^2.3.1"
@@ -58,13 +59,13 @@
     "eslint-config-prettier": "8.3.0",
     "husky": "^7.0.4",
     "jest": "27.4.5",
+    "nx": "13.10.6",
     "prettier": "2.5.1",
     "ts-jest": "27.1.2",
     "ts-node": "~10.4.0",
     "tslib": "^2.3.1",
     "typescript": "4.5.5",
-    "yarn": "^1.22.17",
-    "nx": "13.10.6"
+    "yarn": "^1.22.17"
   },
   "engines": {
     "node": ">=16.0.0",

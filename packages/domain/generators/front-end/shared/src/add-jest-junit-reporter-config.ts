@@ -16,7 +16,7 @@ export const addJestJunitReporterConfig = (tree: Tree, libraryPath: string) => {
   jestConfigString = `${jestConfigString.slice(0, lastBracketIndex)}${
     includesLastLineCommaPrefix ? '' : ','
   } reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "${dasherize(
-    libraryPath
+    libraryPath.replace('libs/', '')
   )}.xml" } ] ]${jestConfigString.slice(lastBracketIndex)}`;
   tree.write(jestConfigPath, jestConfigString);
 };

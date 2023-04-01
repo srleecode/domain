@@ -44,7 +44,7 @@ describe('createDataAccessLayerGenerator', () => {
       .read(`${schema.groupingFolder}/data-access/jest.config.js`)
       .toString();
     expect(jestConfig).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "libs/test-app/test-domain/data-access.xml" } ] ]`
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app/test-domain/data-access.xml" } ] ]`
     );
   });
 });
