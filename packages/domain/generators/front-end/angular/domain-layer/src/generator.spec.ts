@@ -52,10 +52,10 @@ describe('createDomainLayerGenerator', () => {
       addJestJunitReporter: true,
     });
     const jestConfig = tree
-      .read(`${groupingFolder}/domain/jest.config.js`)
+      .read(`${groupingFolder}/domain/jest.config.ts`)
       .toString();
     expect(jestConfig).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "libs/test-app/test-domain/domain.xml" } ] ]`
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app/test-domain/domain.xml" } ] ]`
     );
   });
 });
