@@ -1,6 +1,6 @@
 import { AngularCreateLibrarySchema } from '@srleecode/domain/front-end/shared';
 
-export interface CreateDataAccessLayerGeneratorSchema
+export interface CreateInfrastructureLayerGeneratorSchema
   extends AngularCreateLibrarySchema {
   groupingFolder: string;
 }

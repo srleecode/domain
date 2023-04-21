@@ -1,14 +1,14 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { createDataAccessLayerGenerator } from './generator';
+import { createInfrastructureLayerGenerator } from './generator';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import * as frontEndSharedMock from '../../../shared';
-import { CreateDataAccessLayerGeneratorSchema } from './schema';
+import { CreateInfrastructureLayerGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
-describe('createDataAccessLayerGenerator', () => {
+describe('createInfrastructureLayerGenerator', () => {
   let tree: Tree;
-  const schema: CreateDataAccessLayerGeneratorSchema = {
+  const schema: CreateInfrastructureLayerGeneratorSchema = {
     groupingFolder: 'libs/test-app/test-domain',
     buildable: true,
     strict: false,
@@ -23,11 +23,11 @@ describe('createDataAccessLayerGenerator', () => {
 
   it('should pass correct parameters to @nrwl/angular generator', async () => {
     const groupingFolders = getGroupingFolders(tree, schema.groupingFolder);
-    await createDataAccessLayerGenerator(tree, schema);
+    await createInfrastructureLayerGenerator(tree, schema);
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(
       expect.anything(),
       '',
-      'data-access',
+      'infrastructure',
       schema.groupingFolder,
       groupingFolders.app,
       ApplicationType.Angular,
@@ -36,15 +36,15 @@ describe('createDataAccessLayerGenerator', () => {
     );
   });
   it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
-    await createDataAccessLayerGenerator(tree, {
+    await createInfrastructureLayerGenerator(tree, {
       ...schema,
       addJestJunitReporter: true,
     });
     const jestConfig = tree
-      .read(`${schema.groupingFolder}/data-access/jest.config.ts`)
+      .read(`${schema.groupingFolder}/infrastructure/jest.config.ts`)
       .toString();
     expect(jestConfig).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app/test-domain/data-access.xml" } ] ]`
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app/test-domain/infrastructure.xml" } ] ]`
     );
   });
 });
