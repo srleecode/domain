@@ -28,7 +28,7 @@ describe('createPresentationLayerGenerator', () => {
     jest.spyOn(frontEndSharedMock, 'addDomainLibrary');
   });
 
-  it('should remove module created by angular library generator', async () => {
+  it('should convert module to shell module', async () => {
     await createPresentationLayerGenerator(tree, {
       ...commonLibraryOptions,
       groupingFolder,
@@ -37,9 +37,11 @@ describe('createPresentationLayerGenerator', () => {
     const fileName = `${getDasherizedFolderPath(
       tree,
       groupingFolder
-    )}-presentation.module.ts`;
-    const filePath = `${groupingFolder}/src/lib/${fileName}`;
-    expect(tree.exists(filePath)).toBe(false);
+    )}-shell.module.ts`;
+    const filePath = `${groupingFolder}/presentation/src/lib/${fileName}`;
+    expect(tree.read(filePath).toString()).toMatch(
+      'TestAppTestDomainShellModule'
+    );
   });
 
   it('should pass correct parameters to @nrwl/angular generator', async () => {
@@ -93,18 +95,7 @@ describe('createPresentationLayerGenerator', () => {
       eslint.overrides[0].rules['@angular-eslint/directive-selector'][1].prefix
     ).toBe(prefix);
   });
-  it('should clear index.ts', async () => {
-    const prefix = 'test';
-    await createPresentationLayerGenerator(tree, {
-      ...commonLibraryOptions,
-      groupingFolder,
-      prefix,
-    });
-    const indexTs = tree
-      .read(`${groupingFolder}/presentation/src/index.ts`)
-      .toString();
-    expect(indexTs).toBe('');
-  });
+
   describe('eslint layer rules', () => {
     beforeEach(() => {
       const json = {

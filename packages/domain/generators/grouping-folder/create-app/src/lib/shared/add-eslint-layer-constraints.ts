@@ -20,7 +20,7 @@ export const addEslintLayerConstraints = (tree: Tree) => {
       notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [
         'type:application',
-        'type:data-access',
+        'type:infrastructure',
         'type:domain',
         'type:util',
       ],
@@ -31,10 +31,10 @@ export const addEslintLayerConstraints = (tree: Tree) => {
       onlyDependOnLibsWithTags: ['type:domain'],
     });
     depConstraints.push({
-      sourceTag: 'type:data-access',
+      sourceTag: 'type:infrastructure',
       notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [
-        'type:data-access',
+        'type:infrastructure',
         'type:domain',
         'type:util',
       ],
