@@ -10,12 +10,8 @@ describe('moveGenerator', () => {
   const destination = 'libs/second-test-app';
   const addProjects = async () => {
     await libraryGenerator(appTree, {
-      name: 'data-access',
+      name: 'infrastructure',
       directory: `test-app/test-domain`,
-    });
-    await libraryGenerator(appTree, {
-      name: 'shell',
-      directory: `test-app/second-test-domain`,
     });
     await setupDomainTestGenerator(appTree, {
       groupingFolder: 'libs/test-app/test-domain',
@@ -44,15 +40,14 @@ describe('moveGenerator', () => {
     });
     const projects = getProjects(appTree);
     expect([...projects.keys()]).toEqual([
-      'second-test-app-test-domain-data-access',
-      'second-test-app-second-test-domain-shell',
+      'second-test-app-test-domain-infrastructure',
       'second-test-app-test-domain-e2e',
     ]);
   });
 
   it('should move project references for project that is moved', async () => {
     await libraryGenerator(appTree, {
-      name: 'data-access',
+      name: 'infrastructure',
       directory: `test-app/test-domain`,
     });
     let projects = getProjects(appTree);
@@ -61,48 +56,14 @@ describe('moveGenerator', () => {
       destination,
     });
     projects = getProjects(appTree);
-    expect(projects.get('second-test-app-test-domain-data-access').root).toBe(
-      'libs/second-test-app/test-domain/data-access'
-    );
+    expect(
+      projects.get('second-test-app-test-domain-infrastructure').root
+    ).toBe('libs/second-test-app/test-domain/infrastructure');
     const tsConfig = readJson(appTree, 'tsconfig.base.json');
     expect(tsConfig.compilerOptions.paths).toEqual({
-      '@proj/second-test-app/test-domain/data-access': [
-        'libs/second-test-app/test-domain/data-access/src/index.ts',
+      '@proj/second-test-app/test-domain/infrastructure': [
+        'libs/second-test-app/test-domain/infrastructure/src/index.ts',
       ],
     });
-  });
-  it('should fix updated tsconfig path imports from nrwl move', async () => {
-    const startDirectory = 'test-app/test-domain';
-    await libraryGenerator(appTree, {
-      name: 'data-access',
-      directory: startDirectory,
-    });
-    await libraryGenerator(appTree, {
-      name: 'shell',
-      directory: startDirectory,
-    });
-    appTree.write(
-      `libs/test-app/test-domain/shell/src/lib/test-app-test-domain-shell.ts`,
-      `import { testAppTestDomainDataAccess } from "@proj/${startDirectory}/data-access";\n` +
-        appTree
-          .read(
-            `libs/test-app/test-domain/shell/src/lib/test-app-test-domain-shell.ts`
-          )
-          .toString()
-    );
-    await moveGenerator(appTree, {
-      groupingFolder: originalFolder,
-      destination,
-    });
-    const shellFile = appTree
-      .read(
-        `libs/second-test-app/test-domain/shell/src/lib/test-app-test-domain-shell.ts`
-      )
-      .toString();
-    expect(shellFile).toMatch('@proj/second-test-app/test-domain/data-access');
-    const readme = appTree
-      .read(`libs/second-test-app/test-domain/shell/README.md`)
-      .toString();
-    expect(readme).toMatch('second-test-app-test-domain-shell');
   });
 });

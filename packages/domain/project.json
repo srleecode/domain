@@ -25,7 +25,7 @@
           {
             "input": "packages/domain",
             "glob": "**/*.js",
-            "ignore": ["**/jest.config.js"],
+            "ignore": ["**/jest.config.ts"],
             "output": "/"
           },
           {
