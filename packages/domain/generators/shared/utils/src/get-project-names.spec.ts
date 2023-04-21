@@ -16,7 +16,7 @@ describe('getProjectNames', () => {
 
   it('should get all libraries under the domain folder', async () => {
     addProjectConfiguration(appTree, 'test-app-test-domain', {
-      root: `${groupingFolder}/data-access`,
+      root: `${groupingFolder}/infrastructure`,
       targets: {},
     });
     expect(getProjectNames(appTree, groupingFolder)).toEqual([
@@ -36,7 +36,7 @@ describe('getProjectNames', () => {
 
   it('should get all libraries under a app grouping folder', async () => {
     addProjectConfiguration(appTree, 'test-app-test-domain', {
-      root: `${groupingFolder}/data-access`,
+      root: `${groupingFolder}/infrastructure`,
       targets: {},
     });
     expect(getProjectNames(appTree, 'libs/test-app')).toEqual([
@@ -46,7 +46,7 @@ describe('getProjectNames', () => {
 
   it('should get all libraries under a parent domain grouping folder', async () => {
     addProjectConfiguration(appTree, 'test-app-parent-domain-child-domain', {
-      root: `libs/test-app/parent-domain/child-domain/data-access`,
+      root: `libs/test-app/parent-domain/child-domain/infrastructure`,
       targets: {},
     });
     expect(getProjectNames(appTree, 'libs/test-app/parent-domain')).toEqual([

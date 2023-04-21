@@ -3,12 +3,9 @@ import { CreatePresentationLayerGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { addDomainLibrary } from '../../../shared';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import {
-  ApplicationType,
-  getDasherizedFolderPath,
-  getGroupingFolders,
-} from '../../../../shared/utils';
+import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
 import { addPresentationLayerEslintConstraint } from './lib/add-presentation-eslint-constraint';
+import { convertModuleToShell } from './lib/convert-module-to-shell';
 
 export async function createPresentationLayerGenerator(
   tree: Tree,
@@ -27,14 +24,7 @@ export async function createPresentationLayerGenerator(
     false,
     options
   );
-  const dasherisedGroupingFolder = getDasherizedFolderPath(
-    tree,
-    groupingFolder
-  );
-  tree.delete(
-    `${groupingFolder}/${libraryName}/src/lib/${dasherisedGroupingFolder}-${libraryName}.module.ts`
-  );
-  tree.write(`${groupingFolder}/${libraryName}/src/index.ts`, '');
+  convertModuleToShell(tree, groupingFolder, libraryName);
   addPresentationLayerEslintConstraint(tree);
 }
 

@@ -1,8 +1,8 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { getProjects, Tree } from '@nrwl/devkit';
 import { removeGenerator } from './generator';
-import { CreateDataAccessLayerGeneratorSchema } from '../../../front-end/angular/data-access-layer/src/schema';
-import createDataAccessLayerGenerator from '../../../front-end/angular/data-access-layer/src/generator';
+import { CreateInfrastructureLayerGeneratorSchema } from '../../../front-end/angular/infrastructure-layer/src/schema';
+import { createInfrastructureLayerGenerator } from '../../../front-end/angular/infrastructure-layer/src/generator';
 
 describe('removeGenerator', () => {
   let appTree: Tree;
@@ -21,14 +21,14 @@ describe('removeGenerator', () => {
   });
 
   it('should remove all projects under the given folder', async () => {
-    const schema: CreateDataAccessLayerGeneratorSchema = {
+    const schema: CreateInfrastructureLayerGeneratorSchema = {
       groupingFolder: 'libs/test-app/test-domain',
       buildable: true,
       strict: false,
       enableIvy: true,
       publishable: false,
     };
-    await createDataAccessLayerGenerator(appTree, {
+    await createInfrastructureLayerGenerator(appTree, {
       ...schema,
       addJestJunitReporter: true,
     });

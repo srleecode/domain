@@ -84,7 +84,7 @@ describe('createAppGroupingFolderGenerator', () => {
           notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: [
             'type:application',
-            'type:data-access',
+            'type:infrastructure',
             'type:domain',
             'type:util',
           ],
@@ -98,11 +98,11 @@ describe('createAppGroupingFolderGenerator', () => {
         {
           notDependOnLibsWithTags: [],
           onlyDependOnLibsWithTags: [
-            'type:data-access',
+            'type:infrastructure',
             'type:domain',
             'type:util',
           ],
-          sourceTag: 'type:data-access',
+          sourceTag: 'type:infrastructure',
         },
         {
           notDependOnLibsWithTags: [],
