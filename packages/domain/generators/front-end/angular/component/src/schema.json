@@ -17,9 +17,9 @@
     },
     "type": {
       "description": "The type of component to create",
-      "enum": ["feature", "shell", "ui"],
+      "enum": ["feature", "ui"],
       "type": "string",
-      "default": "shell",
+      "default": "ui",
       "x-prompt": {
         "message": "Which type of component would you like to create?",
         "type": "list",
@@ -27,10 +27,6 @@
           {
             "value": "feature",
             "label": "feature - for smart components (containers)"
-          },
-          {
-            "value": "shell",
-            "label": "shell - for the parent smart component, i.e. container for the page. It also includes routing for the domain and is the export point for the domain. The shell module will be lazy loaded in other domains and applications"
           },
           {
             "value": "ui",

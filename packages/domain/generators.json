@@ -23,10 +23,10 @@
       "schema": "./generators/front-end/angular/component-global-styles/src/schema.json",
       "description": "Add component global styles generator"
     },
-    "ngDataAccessLayer": {
-      "factory": "./generators/front-end/angular/data-access-layer/src/generator#createDataAccessLayeSchematic",
-      "schema": "./generators/front-end/angular/data-access-layer/src/schema.json",
-      "description": "Add data access layer domain library generator"
+    "ngInfrastructureLayer": {
+      "factory": "./generators/front-end/angular/infrastructure-layer/src/generator#createInfrastructureLayeSchematic",
+      "schema": "./generators/front-end/angular/infrastructure-layer/src/schema.json",
+      "description": "Add infrastructure layer domain library generator"
     },
     "ngDirective": {
       "factory": "./generators/front-end/angular/directive/src/generator#createDirectiveSchematic",
@@ -107,10 +107,10 @@
       "schema": "./generators/front-end/angular/component-global-styles/src/schema.json",
       "description": "Add component global styles generator"
     },
-    "ngDataAccessLayer": {
-      "factory": "./generators/front-end/angular/data-access-layer/src/generator",
-      "schema": "./generators/front-end/angular/data-access-layer/src/schema.json",
-      "description": "Add data access layer domain library generator"
+    "ngInfrastructureLayer": {
+      "factory": "./generators/front-end/angular/infrastructure-layer/src/generator",
+      "schema": "./generators/front-end/angular/infrastructure-layer/src/schema.json",
+      "description": "Add infrastructure layer domain library generator"
     },
     "ngDirective": {
       "factory": "./generators/front-end/angular/directive/src/generator",

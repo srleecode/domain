@@ -50,27 +50,12 @@ describe('createComponentGenerator', () => {
       )
     ).toBe(true);
   });
-  it('should add shell component at the root level of the library', async () => {
-    await createComponentGenerator(tree, {
-      ...defaultOptions,
-      type: ComponentType.Shell,
-    });
-
-    expect(
-      tree.exists(`${libraryPath}/src/lib/test-example.component.ts`)
-    ).toBe(true);
-  });
   it('should add export to index', async () => {
-    await createComponentGenerator(tree, {
-      ...defaultOptions,
-      type: ComponentType.Shell,
-    });
     await createComponentGenerator(tree, {
       ...defaultOptions,
       type: ComponentType.Ui,
     });
     const indexTs = tree.read(`${libraryPath}/src/index.ts`).toString();
-    expect(indexTs).toMatch(`export * from './lib/test-example.component';`);
     expect(indexTs).toMatch(
       `export * from './lib/ui/test-example/test-example.component';`
     );
