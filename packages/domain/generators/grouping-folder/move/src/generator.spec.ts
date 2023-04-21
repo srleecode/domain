@@ -10,7 +10,7 @@ describe('moveGenerator', () => {
   const destination = 'libs/second-test-app';
   const addProjects = async () => {
     await libraryGenerator(appTree, {
-      name: 'data-access',
+      name: 'infrastructure',
       directory: `test-app/test-domain`,
     });
     await libraryGenerator(appTree, {
@@ -45,14 +45,14 @@ describe('moveGenerator', () => {
     const projects = getProjects(appTree);
     expect([...projects.keys()]).toEqual([
       'second-test-app-second-test-domain-shell',
-      'second-test-app-test-domain-data-access',
+      'second-test-app-test-domain-infrastructure',
       'second-test-app-test-domain-e2e',
     ]);
   });
 
   it('should move project references for project that is moved', async () => {
     await libraryGenerator(appTree, {
-      name: 'data-access',
+      name: 'infrastructure',
       directory: `test-app/test-domain`,
     });
     let projects = getProjects(appTree);
@@ -61,8 +61,8 @@ describe('moveGenerator', () => {
       destination,
     });
     projects = getProjects(appTree);
-    expect(projects.get('second-test-app-test-domain-data-access').root).toBe(
-      'libs/second-test-app/test-domain/data-access'
-    );
+    expect(
+      projects.get('second-test-app-test-domain-infrastructure').root
+    ).toBe('libs/second-test-app/test-domain/infrastructure');
   });
 });

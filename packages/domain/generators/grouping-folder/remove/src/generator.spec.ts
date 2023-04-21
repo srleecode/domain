@@ -13,7 +13,7 @@ describe('removeGenerator', () => {
   const folderToDelete = 'libs/test-app';
   const addProjects = async () => {
     await libraryGenerator(appTree, {
-      name: 'data-access',
+      name: 'infrastructure',
       directory: `test-app/test-domain`,
     });
     await libraryGenerator(appTree, {

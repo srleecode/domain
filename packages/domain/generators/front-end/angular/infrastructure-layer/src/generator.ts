@@ -1,20 +1,20 @@
 import { Tree, convertNxGenerator } from '@nrwl/devkit';
-import { CreateDataAccessLayerGeneratorSchema } from './schema';
+import { CreateInfrastructureLayerGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { addDomainLibrary } from '../../../shared';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
 
-export async function createDataAccessLayerGenerator(
+export async function createInfrastructureLayerGenerator(
   tree: Tree,
-  options: CreateDataAccessLayerGeneratorSchema
+  options: CreateInfrastructureLayerGeneratorSchema
 ): Promise<void> {
   const { groupingFolder } = options;
   const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
     tree,
     '',
-    'data-access',
+    'infrastructure',
     groupingFolder,
     groupingFolders.app,
     ApplicationType.Angular,
@@ -23,8 +23,8 @@ export async function createDataAccessLayerGenerator(
   );
 }
 
-export default createDataAccessLayerGenerator;
+export default createInfrastructureLayerGenerator;
 
-export const createDataAccessLayeSchematic = convertNxGenerator(
-  createDataAccessLayerGenerator
+export const createInfrastructureLayeSchematic = convertNxGenerator(
+  createInfrastructureLayerGenerator
 );
