@@ -94,5 +94,18 @@ describe('setupDomainTestGenerator', () => {
         true
       );
     });
+    it('should replace e2e with the ct target', async () => {
+      const projectConfig = readProjectConfiguration(
+        tree,
+        'ct-test-app-test-domain'
+      );
+      const ctTarget = projectConfig.targets['ct'];
+      expect(ctTarget).toEqual({
+        executor: '@nrwl/cypress:cypress',
+        options: {
+          cypressConfig: 'libs/test-app/test-domain/.ct/cypress.json',
+        },
+      });
+    });
   });
 });
