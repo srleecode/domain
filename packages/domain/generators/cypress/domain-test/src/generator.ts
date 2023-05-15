@@ -14,6 +14,7 @@ import {
   getDasherizedFolderPath,
 } from '../../../shared/utils';
 import { addDomainTestEslintTags } from './lib/add-domain-test-eslint-tags';
+import { convertE2ETargetToCt } from './lib/convert-e2e-target-to-ct';
 
 export async function setupDomainTestGenerator(
   tree: Tree,
@@ -57,6 +58,9 @@ export async function setupDomainTestGenerator(
   });
   renameCypressProject(tree, dasherisedFolderPath, standaloneAsDefault, type);
   removeUneededCypressProjectFiles(tree, `${libsDir}/${domainPath}/.${type}`);
+  if (type === 'ct') {
+    convertE2ETargetToCt(tree, dasherisedFolderPath);
+  }
 }
 
 export default setupDomainTestGenerator;
