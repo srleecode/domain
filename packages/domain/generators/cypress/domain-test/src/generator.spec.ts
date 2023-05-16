@@ -1,4 +1,4 @@
-import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { setupDomainTestGenerator } from './generator';
 
@@ -80,6 +80,7 @@ describe('setupDomainTestGenerator', () => {
   });
 
   describe('ct', () => {
+    const cypressFile = 'libs/test-app/test-domain/.ct/cypress.config.ts';
     beforeAll(async () => {
       tree = createTreeWithEmptyWorkspace();
       tree.write(`libs/test-app/test-domain/shell/src.index.ts`, '');
@@ -89,12 +90,10 @@ describe('setupDomainTestGenerator', () => {
       });
     }, 240000);
 
-    it('should move cypress directory from apps to libs', async () => {
-      expect(
-        tree.exists(`libs/test-app/test-domain/.ct/cypress.config.ts`)
-      ).toBe(true);
+    it('should move cypress directory from apps to libs', () => {
+      expect(tree.exists(cypressFile)).toBe(true);
     });
-    it('should replace e2e with the ct target', async () => {
+    it('should replace e2e with the ct target', () => {
       const projectConfig = readProjectConfiguration(
         tree,
         'ct-test-app-test-domain'
@@ -103,8 +102,9 @@ describe('setupDomainTestGenerator', () => {
       expect(ctTarget).toEqual({
         executor: '@nrwl/cypress:cypress',
         options: {
-          cypressConfig: 'libs/test-app/test-domain/.ct/cypress.config.ts',
+          cypressConfig: cypressFile,
           testingType: 'e2e',
+          baseUrl: 'http://localhost:4400',
         },
       });
     });
