@@ -15,6 +15,7 @@ import {
 } from '../../../shared/utils';
 import { addDomainTestEslintTags } from './lib/add-domain-test-eslint-tags';
 import { convertE2ETargetToCt } from './lib/convert-e2e-target-to-ct';
+import { addCtBaseUrl } from './lib/add-ct-base-url';
 
 export async function setupDomainTestGenerator(
   tree: Tree,
@@ -22,7 +23,8 @@ export async function setupDomainTestGenerator(
 ): Promise<void> {
   const { groupingFolder, type } = options;
   const dasherisedFolderPath = getDasherizedFolderPath(tree, groupingFolder);
-  const { libsDir, standaloneAsDefault, npmScope } = getWorkspaceLayout(tree);
+  const { appsDir, libsDir, standaloneAsDefault, npmScope } =
+    getWorkspaceLayout(tree);
   const domainPath = getDomainPath(tree, groupingFolder);
   await cypressProjectGenerator(tree, {
     baseUrl: './',
@@ -35,6 +37,7 @@ export async function setupDomainTestGenerator(
     throw e;
   });
   const originalProjectName = `${dasherisedFolderPath}-${type}-${dasherisedFolderPath}`;
+  const originalProjectPath = `${appsDir}/${domainPath}/${type}-${dasherisedFolderPath}`;
   removeDevServerTarget(tree, originalProjectName);
   setProjectToLibraryType(tree, originalProjectName);
   addImplicitDependencies(
@@ -44,6 +47,9 @@ export async function setupDomainTestGenerator(
     dasherisedFolderPath
   );
   addDomainTestEslintTags(tree, originalProjectName, groupingFolder, type);
+  if (type === 'ct') {
+    convertE2ETargetToCt(tree, originalProjectName);
+  }
   await moveProjectToDomain(
     tree,
     originalProjectName,
@@ -58,9 +64,6 @@ export async function setupDomainTestGenerator(
   });
   renameCypressProject(tree, dasherisedFolderPath, standaloneAsDefault, type);
   removeUneededCypressProjectFiles(tree, `${libsDir}/${domainPath}/.${type}`);
-  if (type === 'ct') {
-    convertE2ETargetToCt(tree, dasherisedFolderPath);
-  }
 }
 
 export default setupDomainTestGenerator;
