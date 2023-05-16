@@ -46,6 +46,9 @@ export async function setupDomainTestGenerator(
     dasherisedFolderPath
   );
   addDomainTestEslintTags(tree, originalProjectName, groupingFolder, type);
+  if (type === 'ct') {
+    convertE2ETargetToCt(tree, originalProjectName);
+  }
   await moveProjectToDomain(
     tree,
     originalProjectName,
@@ -59,9 +62,6 @@ export async function setupDomainTestGenerator(
     throw e;
   });
   renameCypressProject(tree, dasherisedFolderPath, standaloneAsDefault, type);
-  if (type === 'ct') {
-    convertE2ETargetToCt(tree, dasherisedFolderPath);
-  }
 }
 
 export default setupDomainTestGenerator;
