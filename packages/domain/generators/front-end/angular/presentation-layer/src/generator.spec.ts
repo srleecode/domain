@@ -75,7 +75,7 @@ describe('createPresentationLayerGenerator', () => {
       .read(`${groupingFolder}/presentation/jest.config.js`)
       .toString();
     expect(jestConfig).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app/test-domain/presentation.xml" } ] ]`
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app-test-domain-presentation.xml" } ] ]`
     );
   });
   it('should add prefix to eslint selector rules', async () => {

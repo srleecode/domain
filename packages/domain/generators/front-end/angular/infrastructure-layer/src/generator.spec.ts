@@ -44,7 +44,7 @@ describe('createInfrastructureLayerGenerator', () => {
       .read(`${schema.groupingFolder}/infrastructure/jest.config.js`)
       .toString();
     expect(jestConfig).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app/test-domain/infrastructure.xml" } ] ]`
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app-test-domain-infrastructure.xml" } ] ]`
     );
   });
 });

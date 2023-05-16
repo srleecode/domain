@@ -85,7 +85,7 @@ describe('addDomainLibrary', () => {
     expect(
       tree.read(`${groupingFolderPath}/${type}/jest.config.js`).toString()
     ).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app/test-domain/application.xml" } ] ]`
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app-test-domain-application.xml" } ] ]`
     );
   });
 
