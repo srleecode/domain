@@ -3,9 +3,9 @@ import {
   convertNxGenerator,
   logger,
   readProjectConfiguration,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { RemoveGeneratorSchema } from './schema';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
   getProjectNames,
@@ -13,7 +13,7 @@ import {
   isHavingMockFile,
   removeDepConstraint,
 } from '../../../shared/utils';
-import { removeGenerator as nrwlRemoveGenerator } from '@nrwl/workspace';
+import { removeGenerator as nrwlRemoveGenerator } from '@nx/workspace';
 import { removeMockFileResolutionPath } from './lib/remove-mock-file-resolution-path';
 
 export async function removeGenerator(

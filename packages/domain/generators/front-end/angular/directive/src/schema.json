@@ -2,7 +2,6 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "CreateDirectiveGenerator",
   "title": "Create Directive Generator Schema",
-  "cli": "nx",
   "type": "object",
   "description": "Creates a SDAM (Single Directive Angular Module) library",
   "properties": {
@@ -18,7 +17,11 @@
     "unitTestType": {
       "description": "The type of unit test file to create",
       "type": "string",
-      "enum": ["noTest", "testBed", "noTestBed"],
+      "enum": [
+        "noTest",
+        "testBed",
+        "noTestBed"
+      ],
       "default": "noTest",
       "x-prompt": {
         "message": "What type of test file do you want to create?",
@@ -74,5 +77,8 @@
       "description": "Whether to add the jest junit reporter to the jest config"
     }
   },
-  "required": ["groupingFolder", "name"]
+  "required": [
+    "groupingFolder",
+    "name"
+  ]
 }

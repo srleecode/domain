@@ -2,8 +2,8 @@ import {
   readProjectConfiguration,
   Tree,
   updateProjectConfiguration,
-} from '@nrwl/devkit';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+} from '@nx/devkit';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
   getDomainPath,

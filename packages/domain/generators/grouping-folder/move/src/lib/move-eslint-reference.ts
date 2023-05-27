@@ -1,5 +1,5 @@
-import { logger, readJson, Tree, writeJson } from '@nrwl/devkit';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { logger, readJson, Tree, writeJson } from '@nx/devkit';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
   getLintFilePath,

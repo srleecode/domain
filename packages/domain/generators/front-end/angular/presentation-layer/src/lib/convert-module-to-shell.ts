@@ -1,10 +1,10 @@
-import { Tree } from '@nrwl/devkit';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { Tree } from '@nx/devkit';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
   getDomainPath,
 } from '../../../../../shared/utils';
-import { classify } from '@nrwl/workspace/src/utils/strings';
+import { classify } from '@nx/workspace/src/utils/strings';
 
 export const convertModuleToShell = (
   tree: Tree,

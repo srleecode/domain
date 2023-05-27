@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 
 export const getComponentFilePath = (tree: Tree, basePath: string): string => {
   let filePath = '';

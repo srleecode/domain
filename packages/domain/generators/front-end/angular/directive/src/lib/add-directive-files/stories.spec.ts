@@ -1,10 +1,10 @@
-import { Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 import { createDirectiveGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import { dasherize } from '@nx/workspace/src/utils/strings';
 
 describe('stories file', () => {
   let tree: Tree;
@@ -34,8 +34,8 @@ describe('stories file', () => {
       join(__dirname, './expected-files/test-component.txt')
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
-    });
-  
+  });
+
   it('should not create stories file when addStory is false', async () => {
     await createDirectiveGenerator(tree, {
       ...defaultOptions,

@@ -1,14 +1,10 @@
-import { names, Tree, generateFiles } from '@nrwl/devkit';
-import {
-  classify,
-  dasherize,
-  camelize,
-} from '@nrwl/workspace/src/utils/strings';
+import { names, Tree, generateFiles } from '@nx/devkit';
+import { classify, dasherize, camelize } from '@nx/workspace/src/utils/strings';
 import { join, normalize } from 'path';
 import { CreateDirectiveGeneratorSchema } from '../../schema';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { getLibraryName } from '../../../../../shared';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
   spacify,

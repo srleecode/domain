@@ -1,7 +1,7 @@
 import {
   Tree,
   getWorkspaceLayout as devKitGetWorkspaceLayout,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 export const getWorkspaceLayout = (tree: Tree) => {
   const workspaceLayout = devKitGetWorkspaceLayout(tree);

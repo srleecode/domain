@@ -1,5 +1,5 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { getProjects, Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { getProjects, Tree } from '@nx/devkit';
 import { removeGenerator } from './generator';
 import { CreateInfrastructureLayerGeneratorSchema } from '../../../front-end/angular/infrastructure-layer/src/schema';
 import { createInfrastructureLayerGenerator } from '../../../front-end/angular/infrastructure-layer/src/generator';

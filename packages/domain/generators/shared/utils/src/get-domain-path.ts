@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { getNormalisedPath } from './get-normalised-path';
 import { getWorkspaceLayout } from './get-workspace-layout';
 

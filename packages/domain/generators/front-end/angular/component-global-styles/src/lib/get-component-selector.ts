@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 
 export const getComponentSelector = (tree: Tree, path: string): string => {
   const file = tree.read(path).toString();

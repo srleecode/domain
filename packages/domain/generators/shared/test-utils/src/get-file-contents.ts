@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { readFileSync } from 'fs';
 import { FilesContents } from './model/file-contents.model';
 

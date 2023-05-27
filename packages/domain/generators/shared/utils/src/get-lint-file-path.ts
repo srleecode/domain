@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 
 export const getLintFilePath = (tree: Tree): string => {
   if (tree.exists('tslint.json')) {

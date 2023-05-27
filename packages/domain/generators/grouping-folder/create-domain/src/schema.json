@@ -2,7 +2,6 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "CreateDomainGroupingFolderGenerator",
   "title": "Create Domain Grouping Folder Generator Schema",
-  "cli": "nx",
   "type": "object",
   "description": "Creates domain grouping folder",
   "properties": {
@@ -15,5 +14,8 @@
       "type": "string"
     }
   },
-  "required": ["name", "groupingFolder"]
+  "required": [
+    "name",
+    "groupingFolder"
+  ]
 }

@@ -1,8 +1,8 @@
-import { readJson, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { readJson, Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { createAppGroupingFolderGenerator } from './generator';
 import * as initialiseAngularWorkspaceMock from './lib/angular/initialise-angular-workspace';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { ApplicationType, DepConstraint } from '../../../shared/utils';
 
 describe('createAppGroupingFolderGenerator', () => {
@@ -48,7 +48,7 @@ describe('createAppGroupingFolderGenerator', () => {
           {
             files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
             rules: {
-              '@nrwl/nx/enforce-module-boundaries': [
+              '@nx/enforce-module-boundaries': [
                 'error',
                 {
                   enforceBuildableLibDependency: true,
@@ -111,7 +111,7 @@ describe('createAppGroupingFolderGenerator', () => {
         },
       ];
       expect(
-        eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+        eslint.overrides[0].rules['@nx/enforce-module-boundaries'][1]
           .depConstraints
       ).toEqual(expected);
     });

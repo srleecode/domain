@@ -1,8 +1,8 @@
-import { Tree, convertNxGenerator } from '@nrwl/devkit';
+import { Tree, convertNxGenerator } from '@nx/devkit';
 import { addSharedLintContraints } from './lib/add-shared-lint-constraints';
 import { CreateDomainGroupingFolderGeneratorSchema } from './schema';
 import { mkdirSync } from 'fs';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { getNormalisedPath } from '../../../shared/utils';
 
 export async function createDomainGroupingFolderGenerator(

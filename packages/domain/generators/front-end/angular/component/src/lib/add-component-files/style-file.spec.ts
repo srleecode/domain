@@ -1,8 +1,8 @@
-import { Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { createComponentGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import { dasherize } from '@nx/workspace/src/utils/strings';
 
 describe('style file', () => {
   let tree: Tree;

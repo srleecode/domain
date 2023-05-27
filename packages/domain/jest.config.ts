@@ -1,8 +1,6 @@
 /* eslint-disable */
 export default {
   displayName: 'domain',
-
-  globals: {},
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]sx?$': [

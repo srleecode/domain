@@ -1,7 +1,7 @@
-import { logger, readProjectConfiguration, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { logger, readProjectConfiguration, Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { removeTestTarget } from './remove-test-target';
-import { libraryGenerator } from '@nrwl/angular/generators';
+import { libraryGenerator } from '@nx/angular/generators';
 
 describe('removeTestTarget', () => {
   let tree: Tree;

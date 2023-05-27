@@ -1,4 +1,4 @@
-import { visitNotIgnoredFiles, Tree } from '@nrwl/devkit';
+import { visitNotIgnoredFiles, Tree } from '@nx/devkit';
 import { getDasherizedFolderPath } from '../../../../shared/utils/src/get-dasherized-folder-path';
 import { getWorkspaceLayout } from '../../../../shared/utils/src/get-workspace-layout';
 

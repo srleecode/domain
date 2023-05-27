@@ -1,8 +1,4 @@
-import {
-  fileExists,
-  readJson,
-  runNxCommandAsync,
-} from '@nrwl/nx-plugin/testing';
+import { fileExists, readJson, runNxCommandAsync } from '@nx/plugin/testing';
 
 describe('remove', () => {
   const groupingFolder = 'libs/ng-test-app/new-domain';
@@ -19,7 +15,7 @@ describe('remove', () => {
   it('should remove project references', async () => {
     const eslint = readJson('.eslintrc.json');
     const depConstraints =
-      eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+      eslint.overrides[0].rules['@nx/enforce-module-boundaries'][1]
         .depConstraints;
     expect(JSON.stringify(depConstraints)).not.toMatch(
       'scope:ng-test-app-new-domain'

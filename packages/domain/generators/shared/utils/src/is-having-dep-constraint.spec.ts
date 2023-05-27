@@ -1,5 +1,5 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree } from '@nx/devkit';
 import { isHavingDepContraint } from './is-having-dep-constraint';
 
 describe('isHavingDepContraint', () => {
@@ -16,7 +16,7 @@ describe('isHavingDepContraint', () => {
           {
             files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
             rules: {
-              '@nrwl/nx/enforce-module-boundaries': [
+              '@nx/enforce-module-boundaries': [
                 'error',
                 {
                   enforceBuildableLibDependency: true,
@@ -46,7 +46,7 @@ describe('isHavingDepContraint', () => {
       appTree = createTreeWithEmptyWorkspace();
       const json = {
         rulesDirectory: [
-          'node_modules/@nrwl/workspace/src/tslint',
+          'node_modules/@nx/workspace/src/tslint',
           'node_modules/codelyzer',
         ],
         rules: {

@@ -1,14 +1,14 @@
 import { LibraryCommonOptions } from './model/library-common-options.model';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
   getDomainPath,
   getNormalisedPath,
   getWorkspaceLayout,
 } from '../../../shared/utils';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import { dasherize } from '@nx/workspace/src/utils/strings';
 import { AngularCreateLibrarySchema } from './model/angular-create-library-schema.model';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 
 export const getLibraryCommonOptions = (
   tree: Tree,

@@ -1,10 +1,10 @@
-import { Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { createUtilGenerator } from './generator';
 import { CreateUtilGeneratorSchema } from './schema';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { getGroupingFolders, ApplicationType } from '../../../../shared/utils';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import * as mock from '../../../shared';
 
 describe('createUtilGenerator', () => {
@@ -22,7 +22,7 @@ describe('createUtilGenerator', () => {
     jest.spyOn(mock, 'addDomainLibrary');
   });
 
-  it('should pass correct parameters to @nrwl/angular generator', async () => {
+  it('should pass correct parameters to @nx/angular generator', async () => {
     const groupingFolders = getGroupingFolders(tree, schema.groupingFolder);
     await createUtilGenerator(tree, schema);
     expect(mock.addDomainLibrary).toHaveBeenCalledWith(

@@ -1,5 +1,5 @@
-import { Tree } from '@nrwl/devkit';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import { Tree } from '@nx/devkit';
+import { dasherize } from '@nx/workspace/src/utils/strings';
 
 export const addJestJunitReporterConfig = (tree: Tree, libraryPath: string) => {
   let jestConfigPath = `${libraryPath}/jest.config.ts`;

@@ -1,5 +1,5 @@
-import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { setupDomainTestGenerator } from './generator';
 
 describe('setupDomainTestGenerator', () => {
@@ -100,7 +100,7 @@ describe('setupDomainTestGenerator', () => {
       );
       const ctTarget = projectConfig.targets['ct'];
       expect(ctTarget).toEqual({
-        executor: '@nrwl/cypress:cypress',
+        executor: '@nx/cypress:cypress',
         options: {
           cypressConfig: cypressFile,
           testingType: 'e2e',

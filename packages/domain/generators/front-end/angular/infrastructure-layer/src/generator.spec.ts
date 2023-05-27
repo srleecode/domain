@@ -1,10 +1,10 @@
-import { Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { createInfrastructureLayerGenerator } from './generator';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import * as frontEndSharedMock from '../../../shared';
 import { CreateInfrastructureLayerGeneratorSchema } from './schema';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
 describe('createInfrastructureLayerGenerator', () => {
   let tree: Tree;
@@ -21,7 +21,7 @@ describe('createInfrastructureLayerGenerator', () => {
     jest.spyOn(frontEndSharedMock, 'addDomainLibrary');
   });
 
-  it('should pass correct parameters to @nrwl/angular generator', async () => {
+  it('should pass correct parameters to @nx/angular generator', async () => {
     const groupingFolders = getGroupingFolders(tree, schema.groupingFolder);
     await createInfrastructureLayerGenerator(tree, schema);
     expect(frontEndSharedMock.addDomainLibrary).toHaveBeenCalledWith(

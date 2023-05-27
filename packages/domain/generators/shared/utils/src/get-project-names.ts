@@ -1,4 +1,4 @@
-import { getProjects, Tree } from '@nrwl/devkit';
+import { getProjects, Tree } from '@nx/devkit';
 import { getNormalisedPath } from './get-normalised-path';
 
 export const getProjectNames = (tree: Tree, baseFolder: string): string[] => {

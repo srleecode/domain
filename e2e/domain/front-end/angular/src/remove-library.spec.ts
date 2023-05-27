@@ -1,4 +1,4 @@
-import { fileExists, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
+import { fileExists, runNxCommandAsync } from '@nx/plugin/testing';
 
 describe('remove-library', () => {
   const libraryFolder = 'libs/ng-test-app/test-domain/presentation';

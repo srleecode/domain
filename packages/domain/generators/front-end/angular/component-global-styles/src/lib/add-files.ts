@@ -1,4 +1,4 @@
-import { Tree, generateFiles } from '@nrwl/devkit';
+import { Tree, generateFiles } from '@nx/devkit';
 import { join } from 'path';
 
 export const addFiles = (

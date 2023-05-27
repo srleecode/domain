@@ -1,4 +1,4 @@
-import { convertNxGenerator, formatFiles, Tree } from '@nrwl/devkit';
+import { convertNxGenerator, formatFiles, Tree } from '@nx/devkit';
 import { addBaseComponentDeclaration } from './lib/add-base-component-declaration';
 import { addBaseComponentImport } from './lib/add-base-component-import';
 import { addBaseComponentToTemplate } from './lib/add-base-component-to-template';

@@ -1,17 +1,17 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { createPresentationLayerGenerator } from './generator';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { AngularCreateLibrarySchema } from '../../../shared';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import * as frontEndSharedMock from '../../../shared';
 import { CreatePresentationLayerGeneratorSchema } from './schema';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   ApplicationType,
   getDasherizedFolderPath,
   getGroupingFolders,
 } from '../../../../shared/utils';
-import { readJson, Tree } from '@nrwl/devkit';
+import { readJson, Tree } from '@nx/devkit';
 
 describe('createPresentationLayerGenerator', () => {
   let tree: Tree;
@@ -44,7 +44,7 @@ describe('createPresentationLayerGenerator', () => {
     );
   });
 
-  it('should pass correct parameters to @nrwl/angular generator', async () => {
+  it('should pass correct parameters to @nx/angular generator', async () => {
     const schema: CreatePresentationLayerGeneratorSchema = {
       groupingFolder,
       buildable: true,
@@ -106,7 +106,7 @@ describe('createPresentationLayerGenerator', () => {
           {
             files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
             rules: {
-              '@nrwl/nx/enforce-module-boundaries': [
+              '@nx/enforce-module-boundaries': [
                 'error',
                 {
                   enforceBuildableLibDependency: true,
@@ -129,7 +129,7 @@ describe('createPresentationLayerGenerator', () => {
       const eslint = readJson(tree, '.eslintrc.json');
       expect(
         eslint.overrides[0].rules[
-          '@nrwl/nx/enforce-module-boundaries'
+          '@nx/enforce-module-boundaries'
         ][1].depConstraints.find((c) => c.sourceTag === 'type:presentation')
       ).toEqual({
         notDependOnLibsWithTags: [],

@@ -1,7 +1,7 @@
-import { Tree, convertNxGenerator, formatFiles } from '@nrwl/devkit';
+import { Tree, convertNxGenerator, formatFiles } from '@nx/devkit';
 import { CreateComponentGeneratorSchema } from './schema';
 import { addComponentFiles } from './lib/add-component-files/add-component-files';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import createPresentationLayerGenerator from '../../presentation-layer/src/generator';
 
 export async function createComponentGenerator(

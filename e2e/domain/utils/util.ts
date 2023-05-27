@@ -1,9 +1,5 @@
-import { logger } from '@nrwl/devkit';
-import {
-  ensureNxProject,
-  fileExists,
-  tmpProjPath,
-} from '@nrwl/nx-plugin/testing';
+import { logger } from '@nx/devkit';
+import { ensureNxProject, fileExists, tmpProjPath } from '@nx/plugin/testing';
 
 export const createProject = () => {
   if (isProjectExisting()) {

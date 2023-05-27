@@ -1,6 +1,6 @@
-import { logger, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { libraryGenerator } from '@nrwl/angular/generators';
+import { logger, Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { libraryGenerator } from '@nx/angular/generators';
 import { getMockFileResolutionPath } from './get-mock-file-resolution-path';
 
 describe('getMockFileResolutionPath', () => {

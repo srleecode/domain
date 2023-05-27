@@ -1,7 +1,7 @@
-import * as devKitMock from '@nrwl/devkit';
+import * as devKitMock from '@nx/devkit';
 import * as getMockFileResolutionPathMock from './get-mock-file-resolution-path';
-import { Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { isHavingMockFile } from './is-having-mock-file';
 
 describe('isHavingMockFile', () => {

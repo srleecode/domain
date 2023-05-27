@@ -3,11 +3,11 @@ import {
   ChangeType,
   StringChange,
   Tree,
-} from '@nrwl/devkit';
-import { findNodes } from '@nrwl/workspace';
+} from '@nx/devkit';
 import { SyntaxKind } from 'typescript';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { getTsSourceFile } from '../../../shared/utils';
+import { findNodes } from '@nx/workspace/src/utilities/ts-config';
 
 // these are excluded as they should be set globally in the jest.preset
 const excludedProperties = [
