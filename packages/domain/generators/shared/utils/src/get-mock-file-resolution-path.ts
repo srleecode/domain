@@ -1,11 +1,11 @@
 import { Tree } from '@nx/devkit';
 import { getDomainPath } from './get-domain-path';
-import { getWorkspaceLayout } from './get-workspace-layout';
+import { getNpmScope } from './get-npm-scope';
 
 export const getMockFileResolutionPath = (
   tree: Tree,
   libraryPath: string
 ): string => {
-  const { npmScope } = getWorkspaceLayout(tree);
+  const npmScope = getNpmScope(tree);
   return `${npmScope}/${getDomainPath(tree, libraryPath)}/testing`;
 };

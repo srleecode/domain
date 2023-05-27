@@ -12,6 +12,7 @@ export { removeDepConstraint } from './src/remove-dep-contraint';
 export { isHavingDepContraint } from './src/is-having-dep-constraint';
 export { getTsSourceFile } from './src/get-ts-source-file';
 export { spacify } from './src/spacify';
+export { getNpmScope } from './src/get-npm-scope';
 export { UnitTestType } from './src/model/unit-test-type.enum';
 export { ElementType } from './src/model/element-type.enum';
 export { ApplicationType } from './src/model/application-type.enum';

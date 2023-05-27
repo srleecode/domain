@@ -1,4 +1,4 @@
-import { getImportPath, logger, Tree, updateJson } from '@nx/devkit';
+import { logger, Tree, updateJson } from '@nx/devkit';
 import { moveGenerator } from '@nx/workspace';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { getWorkspaceLayout } from '../../../../shared/utils';
@@ -35,6 +35,11 @@ export const moveProjectToDomain = async (
   });
   removeDummyTsConfigPaths(tree, dummyPaths);
 };
+
+const getImportPath = (npmScope: string, projectDirectory: string): string =>
+  npmScope
+    ? `${npmScope === '@' ? '' : '@'}${npmScope}/${projectDirectory}`
+    : projectDirectory;
 
 // a cypress project doesn't have a tsconfig path, but one is required by the move generator
 // this creates a dummy tsconfig path that will be removed after the move generator runs

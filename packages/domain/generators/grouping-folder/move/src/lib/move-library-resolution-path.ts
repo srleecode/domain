@@ -1,10 +1,6 @@
 import { Tree, updateJson } from '@nx/devkit';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import {
-  getDasherizedFolderPath,
-  getDomainPath,
-  getWorkspaceLayout,
-} from '../../../../shared/utils';
+import { getDomainPath, getNpmScope } from '../../../../shared/utils';
 
 export const moveLibraryResolutionPath = (
   tree: Tree,
@@ -12,7 +8,7 @@ export const moveLibraryResolutionPath = (
 ): void => {
   const tsConfigPath = 'tsconfig.base.json';
   if (tree.exists(tsConfigPath)) {
-    const { npmScope } = getWorkspaceLayout(tree);
+    const npmScope = getNpmScope(tree);
     updateJson(tree, tsConfigPath, (json) => {
       if (!!json.compilerOptions && !!json.compilerOptions?.paths) {
         const projectName = `${npmScope}/${newLibraryFolder}`;
