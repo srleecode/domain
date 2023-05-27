@@ -2,7 +2,7 @@ import {
   checkFilesExist,
   readJson,
   runNxCommandAsync,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 
 describe('move', () => {
   const groupingFolder = 'libs/ng-test-app/test-domain';
@@ -27,7 +27,7 @@ describe('move', () => {
   it('should update project references', async () => {
     const eslint = readJson('.eslintrc.json');
     const depConstraints =
-      eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+      eslint.overrides[0].rules['@nx/enforce-module-boundaries'][1]
         .depConstraints;
     const depConstraint = {
       notDependOnLibsWithTags: [],

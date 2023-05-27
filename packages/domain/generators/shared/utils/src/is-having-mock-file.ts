@@ -1,4 +1,4 @@
-import { readJson, Tree } from '@nrwl/devkit';
+import { readJson, Tree } from '@nx/devkit';
 import { getMockFileResolutionPath } from './get-mock-file-resolution-path';
 
 export const isHavingMockFile = (

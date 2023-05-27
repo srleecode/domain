@@ -5,12 +5,12 @@ import {
   StringChange,
   ChangeType,
   applyChangesToString,
-} from '@nrwl/devkit';
-import { dasherize, classify } from '@nrwl/workspace/src/utils/strings';
+} from '@nx/devkit';
+import { dasherize, classify } from '@nx/workspace/src/utils/strings';
 import { join, normalize } from 'path';
 import { ChangeDetection } from '../../model/change-detection-type.enum';
 import { ComponentType } from '../../model/component-type.enum';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   UnitTestType,
   getDasherizedFolderPath,
@@ -19,10 +19,10 @@ import {
 } from '../../../../../../shared/utils';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
 import { CreateComponentGeneratorSchema } from '../../schema';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { getLibraryName } from '../../../../../shared';
 import { SyntaxKind } from 'typescript';
-import { findNodes } from '@nrwl/workspace';
+import { findNodes } from '@nx/workspace/src/utilities/ts-config';
 
 export const addComponentFiles = (
   tree: Tree,

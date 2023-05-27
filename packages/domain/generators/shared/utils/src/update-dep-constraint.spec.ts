@@ -1,5 +1,5 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, readJson } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree, readJson } from '@nx/devkit';
 import { updateDepConstraint } from './update-dep-contraint';
 import { DepConstraint } from './model/dep-constraint';
 
@@ -27,7 +27,7 @@ describe('updateDepConstraint', () => {
           {
             files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
             rules: {
-              '@nrwl/nx/enforce-module-boundaries': [
+              '@nx/enforce-module-boundaries': [
                 'error',
                 {
                   enforceBuildableLibDependency: true,
@@ -53,7 +53,7 @@ describe('updateDepConstraint', () => {
         sourceTag: 'type:domain',
       };
       expect(
-        eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+        eslint.overrides[0].rules['@nx/enforce-module-boundaries'][1]
           .depConstraints[1]
       ).toEqual(expected);
     });
@@ -75,7 +75,7 @@ describe('updateDepConstraint', () => {
         },
       ];
       expect(
-        eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+        eslint.overrides[0].rules['@nx/enforce-module-boundaries'][1]
           .depConstraints
       ).toEqual(expected);
     });
@@ -103,7 +103,7 @@ describe('updateDepConstraint', () => {
         },
       ];
       expect(
-        eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+        eslint.overrides[0].rules['@nx/enforce-module-boundaries'][1]
           .depConstraints
       ).toEqual(expected);
     });
@@ -113,7 +113,7 @@ describe('updateDepConstraint', () => {
       appTree = createTreeWithEmptyWorkspace();
       const json = {
         rulesDirectory: [
-          'node_modules/@nrwl/workspace/src/tslint',
+          'node_modules/@nx/workspace/src/tslint',
           'node_modules/codelyzer',
         ],
         rules: {

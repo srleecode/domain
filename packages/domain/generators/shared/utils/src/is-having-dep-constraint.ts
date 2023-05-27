@@ -1,4 +1,4 @@
-import { logger, readJson, Tree } from '@nrwl/devkit';
+import { logger, readJson, Tree } from '@nx/devkit';
 import { DepConstraint } from './model/dep-constraint';
 import { getBoundariesRule } from './get-boundaries-rule';
 import { getLintFilePath } from './get-lint-file-path';

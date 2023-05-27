@@ -1,4 +1,4 @@
-import { checkFilesExist, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
+import { checkFilesExist, runNxCommandAsync } from '@nx/plugin/testing';
 
 describe('util', () => {
   const groupingFolder = 'libs/ng-test-app/test-domain';

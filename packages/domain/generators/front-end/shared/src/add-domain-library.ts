@@ -1,8 +1,8 @@
-import { logger, Tree } from '@nrwl/devkit';
-import { Schema } from '@nrwl/angular/src/generators/library/schema';
+import { logger, Tree } from '@nx/devkit';
+import { Schema } from '@nx/angular/src/generators/library/schema';
 import { getLibraryCommonOptions } from './get-library-common-options';
-import { libraryGenerator } from '@nrwl/angular/generators';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { libraryGenerator } from '@nx/angular/generators';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   ApplicationType,
   getDasherizedFolderPath,

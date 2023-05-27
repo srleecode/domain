@@ -4,8 +4,8 @@ import {
   readJson,
   readProjectConfiguration,
   Tree,
-} from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+} from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { addDomainLibrary } from './add-domain-library';
 import { AngularCreateLibrarySchema } from './model/angular-create-library-schema.model';
 import { ApplicationType } from '@srleecode/domain/shared/utils';

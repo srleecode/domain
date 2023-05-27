@@ -1,4 +1,4 @@
-import { classify } from '@nrwl/workspace/src/utils/strings';
+import { classify } from '@nx/workspace/src/utils/strings';
 
 export const spacify = (words: string): string => {
   let spacifiedWords = '';

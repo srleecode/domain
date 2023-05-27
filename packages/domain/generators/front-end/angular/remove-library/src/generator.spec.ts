@@ -1,8 +1,8 @@
-import { logger, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import * as nrwlWorkspaceMock from '@nrwl/workspace';
+import { logger, Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import * as nrwlWorkspaceMock from '@nx/workspace';
 import { removeLibraryGenerator } from './generator';
-import { libraryGenerator } from '@nrwl/angular/generators';
+import { libraryGenerator } from '@nx/angular/generators';
 
 describe('removeLibraryGenerator', () => {
   let tree: Tree;
@@ -21,7 +21,7 @@ describe('removeLibraryGenerator', () => {
     jest.spyOn(nrwlWorkspaceMock, 'removeGenerator');
   });
 
-  it('should pass correct parameters to @nrwl/workspace:remove generator', async () => {
+  it('should pass correct parameters to @nx/workspace:remove generator', async () => {
     await removeLibraryGenerator(tree, {
       libraryFolder: 'libs/test-app/test-domain/feature-test-example',
     });

@@ -2,7 +2,7 @@ import {
   readProjectConfiguration,
   Tree,
   updateProjectConfiguration,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 export const removeTestTarget = (tree: Tree, projectName: string): void => {
   const projectConfig = readProjectConfiguration(tree, projectName);

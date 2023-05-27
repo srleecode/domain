@@ -23,11 +23,11 @@
       "@srleecode/domain/angular/component": [
         "packages/domain/generators/front-end/angular/component/src/generator.ts"
       ],
-      "@srleecode/domain/angular/infrastructure-layer": [
-        "packages/domain/generators/front-end/angular/infrastructure-layer/src/generator.ts"
-      ],
       "@srleecode/domain/angular/domain-layer": [
         "packages/domain/generators/front-end/angular/domain-layer/src/generator.ts"
+      ],
+      "@srleecode/domain/angular/infrastructure-layer": [
+        "packages/domain/generators/front-end/angular/infrastructure-layer/src/generator.ts"
       ],
       "@srleecode/domain/angular/remove-library": [
         "packages/domain/generators/front-end/angular/remove-library/src/generator.ts"

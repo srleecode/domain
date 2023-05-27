@@ -2,7 +2,6 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "SetupDomainTestGenerator",
   "title": "Setup Domain Test Generator Schema",
-  "cli": "nx",
   "type": "object",
   "description": "Creates cypress domain test files",
   "properties": {
@@ -12,7 +11,10 @@
     },
     "type": {
       "description": "The type of domain tests",
-      "enum": ["e2e", "ct"],
+      "enum": [
+        "e2e",
+        "ct"
+      ],
       "type": "string",
       "default": "e2e",
       "x-prompt": {
@@ -31,5 +33,8 @@
       }
     }
   },
-  "required": ["groupingFolder", "type"]
+  "required": [
+    "groupingFolder",
+    "type"
+  ]
 }

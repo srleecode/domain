@@ -1,5 +1,5 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { getProjects, readJson, Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { getProjects, readJson, Tree } from '@nx/devkit';
 import { moveGenerator } from './generator';
 import { setupDomainTestGenerator } from '@srleecode/domain/cypress/domain-test';
 import { CreateInfrastructureLayerGeneratorSchema } from '../../../front-end/angular/infrastructure-layer/src/schema';

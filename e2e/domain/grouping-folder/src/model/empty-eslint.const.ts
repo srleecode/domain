@@ -6,7 +6,7 @@ export const EMPTY_ESLINT = {
     {
       files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
       rules: {
-        '@nrwl/nx/enforce-module-boundaries': [
+        '@nx/enforce-module-boundaries': [
           'error',
           {
             enforceBuildableLibDependency: true,

@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { getDomainPath } from './get-domain-path';
 
 export const getDasherizedFolderPath = (

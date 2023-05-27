@@ -2,7 +2,7 @@ import {
   Tree,
   readProjectConfiguration,
   updateProjectConfiguration,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 export const convertE2ETargetToCt = (tree: Tree, projectName: string) => {
   const projectConfig = readProjectConfiguration(tree, projectName);

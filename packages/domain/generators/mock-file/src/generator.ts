@@ -1,4 +1,4 @@
-import { Tree, convertNxGenerator } from '@nrwl/devkit';
+import { Tree, convertNxGenerator } from '@nx/devkit';
 import { addMockFile } from './lib/add-mock-file';
 import { addMockFileResolutionPath } from './lib/add-mock-file-resolution-path';
 import { CreateMockFileSchema } from './schema';

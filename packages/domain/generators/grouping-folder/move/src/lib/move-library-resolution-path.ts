@@ -1,5 +1,5 @@
-import { Tree, updateJson } from '@nrwl/devkit';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { Tree, updateJson } from '@nx/devkit';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
   getDomainPath,

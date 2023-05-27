@@ -1,5 +1,5 @@
 import { SchematicsException } from '@angular-devkit/schematics';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { createSourceFile, ScriptTarget, SourceFile } from 'typescript';
 
 export const getTsSourceFile = (host: Tree, path: string): SourceFile => {

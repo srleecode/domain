@@ -1,6 +1,6 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   updateDepConstraint,
   DepConstraint,

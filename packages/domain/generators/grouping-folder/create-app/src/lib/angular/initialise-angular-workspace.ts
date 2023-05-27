@@ -1,24 +1,24 @@
-import { logger, readJson, Tree } from '@nrwl/devkit';
-import { cypressInitGenerator } from '@nrwl/cypress';
-import { angularInitGenerator } from '@nrwl/angular/generators';
+import { logger, readJson, Tree } from '@nx/devkit';
+import { cypressInitGenerator } from '@nx/cypress';
+import { angularInitGenerator } from '@nx/angular/generators';
 
 export const initialiseAngularWorkspace = async (tree: Tree): Promise<void> => {
   const packageJson = readJson(tree, 'package.json');
-  if (isPackageAdded('@nrwl/angular', packageJson)) {
+  if (isPackageAdded('@nx/angular', packageJson)) {
     await angularInitGenerator(tree, {
       style: 'scss',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any);
   } else {
     logger.warn(
-      '@nrwl/angular is not installed. It is used by this library so should be installed'
+      '@nx/angular is not installed. It is used by this library so should be installed'
     );
   }
-  if (isPackageAdded('@nrwl/cypress', packageJson)) {
+  if (isPackageAdded('@nx/cypress', packageJson)) {
     await cypressInitGenerator(tree, {});
   } else {
     logger.warn(
-      '@nrwl/angular is not installed. It is used by this library so should be installed'
+      '@nx/angular is not installed. It is used by this library so should be installed'
     );
   }
 };

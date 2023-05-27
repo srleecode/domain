@@ -2,7 +2,7 @@ import { Directive } from '@angular/core';
 
 @Directive({
   selector: '[testAppTestDomainDirectiveTestExample]',
-  standalone: true
+  standalone: true,
 })
 export class TestExampleDirective {
 }

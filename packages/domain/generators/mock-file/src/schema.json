@@ -2,7 +2,6 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "CreateMockFileGenerator",
   "title": "Create Mock File Generator Schema",
-  "cli": "nx",
   "type": "object",
   "description": "Creates a file for mocks",
   "properties": {
@@ -17,5 +16,8 @@
       "x-prompt": "What is the name that you want for the mock file? For example, test-example will create text-example.mock.ts"
     }
   },
-  "required": ["projectName", "mockFileName"]
+  "required": [
+    "projectName",
+    "mockFileName"
+  ]
 }

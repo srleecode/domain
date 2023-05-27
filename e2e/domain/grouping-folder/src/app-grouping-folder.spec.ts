@@ -2,7 +2,7 @@ import {
   checkFilesExist,
   runNxCommandAsync,
   updateFile,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 import { EMPTY_ESLINT } from './model/empty-eslint.const';
 import { createProject } from '../../utils/util';
 

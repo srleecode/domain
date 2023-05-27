@@ -2,7 +2,6 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "CreatePresentationLayerGenerator",
   "title": "Create Presentation Layer Library Generator Schema",
-  "cli": "nx",
   "type": "object",
   "description": "Creates a presentation layer library",
   "properties": {
@@ -40,5 +39,7 @@
       "description": "Whether to add the jest junit reporter to the jest config"
     }
   },
-  "required": ["groupingFolder"]
+  "required": [
+    "groupingFolder"
+  ]
 }

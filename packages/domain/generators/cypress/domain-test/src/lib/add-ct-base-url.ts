@@ -1,4 +1,4 @@
-import { Tree, updateJson } from '@nrwl/devkit';
+import { Tree, updateJson } from '@nx/devkit';
 
 export const addCtBaseUrl = (tree: Tree, projectPath: string): void =>
   updateJson(tree, `${projectPath}/cypress.json`, (json) => ({

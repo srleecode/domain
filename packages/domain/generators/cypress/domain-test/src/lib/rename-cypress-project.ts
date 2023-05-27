@@ -3,7 +3,7 @@ import {
   readProjectConfiguration,
   removeProjectConfiguration,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { DomainTest } from './model/domain-test.type';
 
 // By default, the project name is set to the directory path, e.g. `test-app-test-domain-.e2e`

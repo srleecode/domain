@@ -1,5 +1,5 @@
-import { logger } from '@nrwl/devkit';
-import { checkFilesExist, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
+import { logger } from '@nx/devkit';
+import { checkFilesExist, runNxCommandAsync } from '@nx/plugin/testing';
 import { createProject } from '../../../utils/util';
 
 describe('domainTest e2e', () => {

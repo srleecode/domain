@@ -1,6 +1,6 @@
-import { logger } from '@nrwl/devkit';
+import { logger } from '@nx/devkit';
 import { createProject } from '../../../utils/util';
-import { checkFilesExist, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
+import { checkFilesExist, runNxCommandAsync } from '@nx/plugin/testing';
 
 describe('application-layer', () => {
   const groupingFolder = 'libs/ng-test-app/test-domain';

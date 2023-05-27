@@ -2,7 +2,6 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "RemoveLibraryGenerator",
   "title": "Remove library Generator Schema",
-  "cli": "nx",
   "type": "object",
   "description": "Removes a domain library",
   "properties": {
@@ -11,5 +10,7 @@
       "type": "string"
     }
   },
-  "required": ["libraryFolder"]
+  "required": [
+    "libraryFolder"
+  ]
 }

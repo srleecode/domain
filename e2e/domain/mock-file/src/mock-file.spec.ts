@@ -1,5 +1,5 @@
 import { createProject } from '../../utils/util';
-import { checkFilesExist, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
+import { checkFilesExist, runNxCommandAsync } from '@nx/plugin/testing';
 
 describe('mockFile e2e', () => {
   const groupingFolder = 'libs/ng-test-app/test-domain';

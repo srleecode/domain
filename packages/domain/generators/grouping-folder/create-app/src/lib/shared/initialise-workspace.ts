@@ -1,6 +1,6 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { initialiseAngularWorkspace } from '../angular/initialise-angular-workspace';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { ApplicationType } from '../../../../../shared/utils';
 import { addEslintLayerConstraints } from './add-eslint-layer-constraints';
 

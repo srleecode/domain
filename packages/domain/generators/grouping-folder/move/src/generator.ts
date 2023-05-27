@@ -4,16 +4,16 @@ import {
   logger,
   getProjects,
   ProjectConfiguration,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { MoveGeneratorSchema } from './schema';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getNormalisedPath,
   getProjectNames,
   getWorkspaceLayout,
   isHavingMockFile,
 } from '../../../shared/utils';
-import { moveGenerator as nrwlMoveGenerator } from '@nrwl/workspace';
+import { moveGenerator as nrwlMoveGenerator } from '@nx/workspace';
 import { moveDomainTestProject } from './lib/move-domain-test-project';
 import { moveEslintReference } from './lib/move-eslint-reference';
 import { moveLibraryResolutionPath } from './lib/move-library-resolution-path';

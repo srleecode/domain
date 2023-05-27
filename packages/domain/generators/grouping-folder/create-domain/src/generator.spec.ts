@@ -1,5 +1,5 @@
-import { readJson, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { readJson, Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { createDomainGroupingFolderGenerator } from './generator';
 import { CreateDomainGroupingFolderGeneratorSchema } from './schema';
 
@@ -14,7 +14,7 @@ describe('createAppGroupingFolderGenerator', () => {
   const expectDepConstraint = (dependencyTag: string): void => {
     const eslint = readJson(tree, '.eslintrc.json');
     expect(
-      eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+      eslint.overrides[0].rules['@nx/enforce-module-boundaries'][1]
         .depConstraints[0].onlyDependOnLibsWithTags
     ).toContainEqual(dependencyTag);
   };
@@ -29,7 +29,7 @@ describe('createAppGroupingFolderGenerator', () => {
         {
           files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
           rules: {
-            '@nrwl/nx/enforce-module-boundaries': [
+            '@nx/enforce-module-boundaries': [
               'error',
               {
                 enforceBuildableLibDependency: true,
@@ -73,7 +73,7 @@ describe('createAppGroupingFolderGenerator', () => {
     });
     const eslint = readJson(tree, '.eslintrc.json');
     expect(
-      eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+      eslint.overrides[0].rules['@nx/enforce-module-boundaries'][1]
         .depConstraints
     ).toEqual([]);
   });

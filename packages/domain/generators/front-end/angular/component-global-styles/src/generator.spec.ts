@@ -1,6 +1,6 @@
-import { Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import { Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { dasherize } from '@nx/workspace/src/utils/strings';
 import { getFilesContents } from '@srleecode/domain/shared/test-utils';
 import createComponentGenerator from '../../component/src/generator';
 import { defaultOptions } from '../../component/src/default-options.constant';

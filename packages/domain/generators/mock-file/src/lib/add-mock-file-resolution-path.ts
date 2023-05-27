@@ -1,5 +1,5 @@
-import { readProjectConfiguration, Tree, updateJson } from '@nrwl/devkit';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { readProjectConfiguration, Tree, updateJson } from '@nx/devkit';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { getMockFileResolutionPath } from '../../../shared/utils';
 
 export const addMockFileResolutionPath = (

@@ -1,4 +1,4 @@
-import { checkFilesExist, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
+import { checkFilesExist, runNxCommandAsync } from '@nx/plugin/testing';
 
 describe('domain grouping folder', () => {
   it('should create directory', async () => {

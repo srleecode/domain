@@ -1,5 +1,5 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, readJson } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree, readJson } from '@nx/devkit';
 import { removeDepConstraint } from './remove-dep-contraint';
 import { DepConstraint } from './model/dep-constraint';
 
@@ -17,7 +17,7 @@ describe('removeDepConstraint', () => {
           {
             files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
             rules: {
-              '@nrwl/nx/enforce-module-boundaries': [
+              '@nx/enforce-module-boundaries': [
                 'error',
                 {
                   enforceBuildableLibDependency: true,
@@ -42,7 +42,7 @@ describe('removeDepConstraint', () => {
       removeDepConstraint(appTree, 'type:domain');
       const eslint = readJson(appTree, '.eslintrc.json');
       expect(
-        eslint.overrides[0].rules['@nrwl/nx/enforce-module-boundaries'][1]
+        eslint.overrides[0].rules['@nx/enforce-module-boundaries'][1]
           .depConstraints
       ).not.toContainEqual({
         onlyDependOnLibsWithTags: ['type:util'],
@@ -55,7 +55,7 @@ describe('removeDepConstraint', () => {
       appTree = createTreeWithEmptyWorkspace();
       const json = {
         rulesDirectory: [
-          'node_modules/@nrwl/workspace/src/tslint',
+          'node_modules/@nx/workspace/src/tslint',
           'node_modules/codelyzer',
         ],
         rules: {

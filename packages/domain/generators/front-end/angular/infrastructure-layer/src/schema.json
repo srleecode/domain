@@ -2,7 +2,6 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "CreateInfrastructureGenerator",
   "title": "Create infrastructure Layer Library Generator Schema",
-  "cli": "nx",
   "type": "object",
   "description": "Creates a infrastructure layer library",
   "properties": {
@@ -36,5 +35,7 @@
       "description": "Whether to add the jest junit reporter to the jest config"
     }
   },
-  "required": ["groupingFolder"]
+  "required": [
+    "groupingFolder"
+  ]
 }

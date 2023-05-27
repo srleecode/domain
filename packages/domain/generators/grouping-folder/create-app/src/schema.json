@@ -2,14 +2,15 @@
   "$schema": "http://json-schema.org/schema",
   "$id": "CreateAppGroupingFolderGenerator",
   "title": "Create Application Grouping Folder Generator Schema",
-  "cli": "nx",
   "type": "object",
   "description": "Creates application grouping folder",
   "properties": {
     "applicationType": {
       "description": "The type of application",
       "type": "string",
-      "enum": ["ng"],
+      "enum": [
+        "ng"
+      ],
       "default": "ng"
     },
     "name": {
@@ -17,5 +18,7 @@
       "type": "string"
     }
   },
-  "required": ["name"]
+  "required": [
+    "name"
+  ]
 }

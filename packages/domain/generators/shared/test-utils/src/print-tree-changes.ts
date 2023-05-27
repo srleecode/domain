@@ -1,4 +1,4 @@
-import { Tree, logger } from '@nrwl/devkit';
+import { Tree, logger } from '@nx/devkit';
 
 export const printTreeChanges = (tree: Tree): void =>
   logger.info(

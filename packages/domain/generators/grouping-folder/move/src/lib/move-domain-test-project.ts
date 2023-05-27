@@ -5,9 +5,9 @@ import {
   readProjectConfiguration,
   removeProjectConfiguration,
   addProjectConfiguration,
-} from '@nrwl/devkit';
-import { moveGenerator } from '@nrwl/workspace';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+} from '@nx/devkit';
+import { moveGenerator } from '@nx/workspace';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
   getDomainPath,

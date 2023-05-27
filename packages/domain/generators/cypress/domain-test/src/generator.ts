@@ -1,5 +1,5 @@
-import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
-import { cypressProjectGenerator } from '@nrwl/cypress';
+import { Tree, convertNxGenerator, logger } from '@nx/devkit';
+import { cypressProjectGenerator } from '@nx/cypress';
 import { removeUneededCypressProjectFiles } from './lib/remove-uneeded-cypress-project-files';
 import { removeDevServerTarget } from './lib/remove-dev-server-target';
 import { setProjectToLibraryType } from './lib/set-project-to-library-type';
@@ -7,7 +7,7 @@ import { renameCypressProject } from './lib/rename-cypress-project';
 import { addImplicitDependencies } from './lib/add-implicit-dependencies';
 import { SetupDomainTestGeneratorSchema } from './schema';
 import { moveProjectToDomain } from './lib/move-project-to-domain';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getDomainPath,
   getWorkspaceLayout,
