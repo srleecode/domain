@@ -5,11 +5,12 @@
   "projectType": "application",
   "targets": {
     "e2e": {
-      "executor": "@nx/plugin:e2e",
+      "executor": "@nx/jest:jest",
       "options": {
-        "target": "domain:build",
-        "jestConfig": "e2e/domain/cypress/domain-test/jest.config.ts"
-      }
+        "jestConfig": "e2e/domain/cypress/domain-test/jest.config.ts",
+        "runInBand": true
+      },
+      "dependsOn": ["domain:build"]
     }
   },
   "implicitDependencies": ["domain"]

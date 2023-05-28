@@ -11,7 +11,7 @@ import { moveGenerator } from '@nx/workspace';
 import {
   getDasherizedFolderPath,
   getDomainPath,
-  getWorkspaceLayout,
+  getNpmScope,
 } from '../../../../shared/utils';
 
 export const moveDomainTestProject = async (
@@ -19,7 +19,7 @@ export const moveDomainTestProject = async (
   projectName: string,
   destination: string
 ): Promise<void> => {
-  const { npmScope } = getWorkspaceLayout(tree);
+  const npmScope = getNpmScope(tree);
   const projectConfig = readProjectConfiguration(tree, projectName);
   const tsConfigPath = `${npmScope}/${getDomainPath(tree, projectConfig.root)}`;
   addDummyTsConfigPath(tree, tsConfigPath);

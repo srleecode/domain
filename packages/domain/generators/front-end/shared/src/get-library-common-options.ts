@@ -4,7 +4,7 @@ import {
   getDasherizedFolderPath,
   getDomainPath,
   getNormalisedPath,
-  getWorkspaceLayout,
+  getNpmScope,
 } from '../../../shared/utils';
 import { dasherize } from '@nx/workspace/src/utils/strings';
 import { AngularCreateLibrarySchema } from './model/angular-create-library-schema.model';
@@ -25,7 +25,7 @@ export const getLibraryCommonOptions = (
       `project already exists in: ${groupingFolder}/${libraryName}`
     );
   }
-  const { npmScope } = getWorkspaceLayout(tree);
+  const npmScope = getNpmScope(tree);
   const domainPath = getDomainPath(tree, groupingFolder);
   const importPath = `${npmScope}/${domainPath}/${libraryName}`;
   return {
