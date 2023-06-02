@@ -3,7 +3,7 @@ import { CreateComponentGeneratorSchema } from './schema';
 import { addComponentFiles } from './lib/add-component-files/add-component-files';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import createPresentationLayerGenerator from '../../presentation-layer/src/generator';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { validateGroupingFolder } from '../../../../shared/utils';
 
 export async function createComponentGenerator(

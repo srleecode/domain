@@ -3,7 +3,7 @@ import { CreateDirectiveGeneratorSchema } from './schema';
 import { addDirectiveFiles } from './lib/add-directive-files/add-directive-files';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import createPresentationLayerGenerator from '../../presentation-layer/src/generator';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { validateGroupingFolder } from '../../../../shared/utils';
 
 export async function createDirectiveGenerator(

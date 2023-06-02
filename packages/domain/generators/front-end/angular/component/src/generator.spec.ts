@@ -3,7 +3,7 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { defaultOptions } from './default-options.constant';
 import createComponentGenerator from './generator';
 import { ComponentType } from './model/component-type.enum';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { createDummyGroupingFolder } from '../../../../shared/test-utils';
 
 describe('createComponentGenerator', () => {
