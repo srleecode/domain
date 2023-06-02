@@ -6,6 +6,7 @@ import * as frontEndSharedMock from '../../../shared';
 import { CreateInfrastructureLayerGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
+import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
 describe('createInfrastructureLayerGenerator', () => {
   let tree: Tree;
   const schema: CreateInfrastructureLayerGeneratorSchema = {
@@ -18,6 +19,7 @@ describe('createInfrastructureLayerGenerator', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(tree, schema.groupingFolder);
     jest.spyOn(frontEndSharedMock, 'addDomainLibrary');
   });
 

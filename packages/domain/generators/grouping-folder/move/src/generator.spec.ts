@@ -4,6 +4,7 @@ import { moveGenerator } from './generator';
 import { setupDomainTestGenerator } from '@srleecode/domain/cypress/domain-test';
 import { CreateInfrastructureLayerGeneratorSchema } from '../../../front-end/angular/infrastructure-layer/src/schema';
 import { createInfrastructureLayerGenerator } from '../../../front-end/angular/infrastructure-layer/src/generator';
+import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
 
 describe('moveGenerator', () => {
   let appTree: Tree;
@@ -19,10 +20,13 @@ describe('moveGenerator', () => {
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(appTree, `${originalFolder}/test-domain`);
   });
 
   it('should be no changes when no projects root starts with given folder', async () => {
-    const existingFileChanges = appTree.listChanges();
+    const existingFileChanges = appTree
+      .listChanges()
+      .filter((c) => c.path !== `${originalFolder}/test-domain/dummyFile`);
     await moveGenerator(appTree, {
       groupingFolder: originalFolder,
       destination,
