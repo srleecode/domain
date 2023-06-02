@@ -1,4 +1,4 @@
-import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
+import { readProjectConfiguration, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { setupDomainTestGenerator } from './generator';
 

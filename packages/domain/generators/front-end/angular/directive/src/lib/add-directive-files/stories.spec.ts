@@ -1,6 +1,9 @@
 import { Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import { getFilesContents } from '@srleecode/domain/shared/test-utils';
+import {
+  getFilesContents,
+  createDummyGroupingFolder,
+} from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 import { createDirectiveGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
@@ -14,6 +17,7 @@ describe('stories file', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(tree, defaultOptions.groupingFolder);
   });
 
   it('should create stories file ', async () => {

@@ -3,12 +3,15 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { defaultOptions } from './default-options.constant';
 import createComponentGenerator from './generator';
 import { ComponentType } from './model/component-type.enum';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { createDummyGroupingFolder } from '../../../../shared/test-utils';
 
 describe('createComponentGenerator', () => {
   let tree: Tree;
   const libraryPath = 'libs/test-app/test-domain/presentation';
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(tree, defaultOptions.groupingFolder);
   });
 
   it('should create presentation library when it doesnt exist', async () => {

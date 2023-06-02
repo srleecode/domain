@@ -12,3 +12,5 @@ export * from './generators/grouping-folder/move/src/generator';
 export * from './generators/grouping-folder/remove/src/generator';
 export * from './generators/init/ng-add/src/generator';
 export * from './generators/mock-file/src/generator';
+export * from './generators/front-end/angular/presentation-layer/src/generator';
+export * from './generators/front-end/angular/component-global-styles/src/generator';

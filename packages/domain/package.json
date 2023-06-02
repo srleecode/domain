@@ -1,6 +1,6 @@
 {
   "name": "@srleecode/domain",
-  "version": "16.2.2",
+  "version": "16.3.1",
   "main": "index.js",
   "executors": "./executors.json",
   "generators": "./generators.json",

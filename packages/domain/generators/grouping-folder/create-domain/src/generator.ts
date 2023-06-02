@@ -3,13 +3,17 @@ import { addSharedLintContraints } from './lib/add-shared-lint-constraints';
 import { CreateDomainGroupingFolderGeneratorSchema } from './schema';
 import { mkdirSync } from 'fs';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { getNormalisedPath } from '../../../shared/utils';
+import {
+  getNormalisedPath,
+  validateGroupingFolder,
+} from '../../../shared/utils';
 
 export async function createDomainGroupingFolderGenerator(
   tree: Tree,
   options: CreateDomainGroupingFolderGeneratorSchema
 ) {
   const { name, groupingFolder } = options;
+  validateGroupingFolder(tree, groupingFolder);
   const splitGroupingFolder = getNormalisedPath(groupingFolder).split('/');
   const isSharedAppDomain =
     splitGroupingFolder.length === 2 &&

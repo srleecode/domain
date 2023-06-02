@@ -2,6 +2,7 @@ import { readJson, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { createDomainGroupingFolderGenerator } from './generator';
 import { CreateDomainGroupingFolderGeneratorSchema } from './schema';
+import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
 
 describe('createAppGroupingFolderGenerator', () => {
   let tree: Tree;
@@ -21,6 +22,9 @@ describe('createAppGroupingFolderGenerator', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(tree, 'libs/ng-test-app/test-domain');
+    createDummyGroupingFolder(tree, 'libs/ng-test-app/parent-domain');
+    createDummyGroupingFolder(tree, 'libs/ng-shared/child-domain');
     const json = {
       root: true,
       ignorePatterns: ['**/*'],

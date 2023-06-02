@@ -12,6 +12,7 @@ import {
   getProjectNames,
   getWorkspaceLayout,
   isHavingMockFile,
+  validateGroupingFolder,
 } from '../../../shared/utils';
 import { moveGenerator as nrwlMoveGenerator } from '@nx/workspace';
 import { moveDomainTestProject } from './lib/move-domain-test-project';
@@ -22,6 +23,7 @@ import { fixTsconfigPathImports } from './lib/fix-tsconfig-path-imports';
 
 export async function moveGenerator(tree: Tree, options: MoveGeneratorSchema) {
   const { groupingFolder, destination } = options;
+  validateGroupingFolder(tree, groupingFolder);
   const projectNames = getProjectNames(tree, groupingFolder);
   const projects = getProjects(tree);
   for (const projectName of projectNames) {

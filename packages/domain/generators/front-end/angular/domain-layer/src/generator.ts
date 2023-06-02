@@ -3,13 +3,18 @@ import { CreateDomainLayerGeneratorSchema } from './schema';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { addDomainLibrary } from '../../../shared';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
+import {
+  ApplicationType,
+  getGroupingFolders,
+  validateGroupingFolder,
+} from '../../../../shared/utils';
 
 export async function createDomainLayerGenerator(
   tree: Tree,
   options: CreateDomainLayerGeneratorSchema
 ): Promise<void> {
   const { groupingFolder } = options;
+  validateGroupingFolder(tree, groupingFolder);
   const libraryName = 'domain';
   const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
