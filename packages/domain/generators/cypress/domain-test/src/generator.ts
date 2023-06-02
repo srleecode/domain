@@ -12,6 +12,7 @@ import {
   getDomainPath,
   getWorkspaceLayout,
   getDasherizedFolderPath,
+  validateGroupingFolder,
 } from '../../../shared/utils';
 import { addDomainTestEslintTags } from './lib/add-domain-test-eslint-tags';
 import { convertE2ETargetToCt } from './lib/convert-e2e-target-to-ct';
@@ -22,6 +23,7 @@ export async function setupDomainTestGenerator(
   options: SetupDomainTestGeneratorSchema
 ): Promise<void> {
   const { groupingFolder, type } = options;
+  validateGroupingFolder(tree, groupingFolder);
   const dasherisedFolderPath = getDasherizedFolderPath(tree, groupingFolder);
   const { appsDir, libsDir, standaloneAsDefault, npmScope } =
     getWorkspaceLayout(tree);

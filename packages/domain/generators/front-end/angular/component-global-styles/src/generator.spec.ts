@@ -1,7 +1,10 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
-import { getFilesContents } from '@srleecode/domain/shared/test-utils';
+import {
+  createDummyGroupingFolder,
+  getFilesContents,
+} from '@srleecode/domain/shared/test-utils';
 import createComponentGenerator from '../../component/src/generator';
 import { defaultOptions } from '../../component/src/default-options.constant';
 import createComponentGlobalStylesGenerator from './generator';
@@ -21,6 +24,7 @@ describe('createComponentGlobalStylesGenerator', () => {
   beforeAll(async () => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(tree, defaultOptions.groupingFolder);
     await createComponentGenerator(tree, defaultOptions);
     await createComponentGlobalStylesGenerator(tree, {
       componentFolderPath: componentLibraryPath,

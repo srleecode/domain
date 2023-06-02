@@ -12,6 +12,7 @@ import {
   getGroupingFolders,
 } from '../../../../shared/utils';
 import { readJson, Tree } from '@nrwl/devkit';
+import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
 
 describe('createPresentationLayerGenerator', () => {
   let tree: Tree;
@@ -25,6 +26,7 @@ describe('createPresentationLayerGenerator', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(tree, groupingFolder);
     jest.spyOn(frontEndSharedMock, 'addDomainLibrary');
   });
 
