@@ -3,6 +3,7 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { createComponentGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
 import { dasherize } from '@nx/workspace/src/utils/strings';
+import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
 
 describe('style file', () => {
   let tree: Tree;
@@ -12,6 +13,7 @@ describe('style file', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(tree, defaultOptions.groupingFolder);
   });
   it('should be empty', async () => {
     await createComponentGenerator(tree, defaultOptions);

@@ -5,6 +5,8 @@ import { createApplicationLayerGenerator } from './generator';
 import * as frontEndSharedMock from '../../../shared';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { createDummyGroupingFolder } from '../../../../shared/test-utils';
 import { CreateApplicationLayerGeneratorSchema } from './schema';
 
 describe('createDomainLayerGenerator', () => {
@@ -19,6 +21,7 @@ describe('createDomainLayerGenerator', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(tree, schema.groupingFolder);
     jest.spyOn(frontEndSharedMock, 'addDomainLibrary');
   });
 

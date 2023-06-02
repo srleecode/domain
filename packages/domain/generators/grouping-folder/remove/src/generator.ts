@@ -12,6 +12,7 @@ import {
   isHavingDepContraint,
   isHavingMockFile,
   removeDepConstraint,
+  validateGroupingFolder,
 } from '../../../shared/utils';
 import { removeGenerator as nrwlRemoveGenerator } from '@nx/workspace';
 import { removeMockFileResolutionPath } from './lib/remove-mock-file-resolution-path';
@@ -21,6 +22,7 @@ export async function removeGenerator(
   options: RemoveGeneratorSchema
 ): Promise<void> {
   const { groupingFolder } = options;
+  validateGroupingFolder(tree, groupingFolder);
   const projectNames = getProjectNames(tree, groupingFolder);
   for (const projectName of projectNames) {
     const project = readProjectConfiguration(tree, projectName);
