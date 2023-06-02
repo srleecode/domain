@@ -7,6 +7,7 @@ import {
 } from '@nrwl/devkit';
 import { removeGenerator } from './generator';
 import { libraryGenerator } from '@nrwl/workspace';
+import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
 
 describe('removeGenerator', () => {
   let appTree: Tree;
@@ -33,13 +34,17 @@ describe('removeGenerator', () => {
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(appTree, `libs/test-app/test-domain`);
   });
 
   it('should be no changes when no projects root starts with given folder', async () => {
-    const existingFileChanges = appTree.listChanges();
+    const existingFileChanges = appTree
+      .listChanges()
+      .filter((c) => c.path !== 'libs/test-app/test-domain/dummyFile');
     await removeGenerator(appTree, {
       groupingFolder: folderToDelete,
     });
+
     expect(appTree.listChanges()).toEqual(existingFileChanges);
   });
 

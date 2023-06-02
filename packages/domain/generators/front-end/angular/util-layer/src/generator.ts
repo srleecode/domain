@@ -3,13 +3,18 @@ import { CreateUtilGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { addDomainLibrary } from '../../../shared';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
+import {
+  ApplicationType,
+  getGroupingFolders,
+  validateGroupingFolder,
+} from '../../../../shared/utils';
 
 export async function createUtilGenerator(
   tree: Tree,
   options: CreateUtilGeneratorSchema
 ): Promise<void> {
   const { groupingFolder } = options;
+  validateGroupingFolder(tree, groupingFolder);
   const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
     tree,
