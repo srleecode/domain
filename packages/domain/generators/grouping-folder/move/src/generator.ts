@@ -12,6 +12,7 @@ import {
   getProjectNames,
   getWorkspaceLayout,
   isHavingMockFile,
+  validateGroupingFolder,
 } from '../../../shared/utils';
 import { moveGenerator as nrwlMoveGenerator } from '@nrwl/workspace';
 import { moveDomainTestProject } from './lib/move-domain-test-project';
@@ -21,6 +22,7 @@ import { moveMockFileResolutionPath } from './lib/move-mock-file-resolution-path
 
 export async function moveGenerator(tree: Tree, options: MoveGeneratorSchema) {
   const { groupingFolder, destination } = options;
+  validateGroupingFolder(tree, groupingFolder);
   const projectNames = getProjectNames(tree, groupingFolder);
   const projects = getProjects(tree);
   for (const projectName of projectNames) {

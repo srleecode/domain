@@ -1,7 +1,10 @@
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
-import { getFilesContents } from '@srleecode/domain/shared/test-utils';
+import {
+  createDummyGroupingFolder,
+  getFilesContents,
+} from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 import { ComponentType } from '../../model/component-type.enum';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
@@ -16,6 +19,7 @@ describe('component file', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(tree, defaultOptions.groupingFolder);
   });
   it('should create component file', async () => {
     await createComponentGenerator(tree, defaultOptions);

@@ -4,10 +4,12 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { UnitTestType } from '../../../../../../shared/utils';
 import { createComponentGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { getFilesContents } from '../../../../../../shared/test-utils';
 import { join } from 'path';
 import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import {
+  createDummyGroupingFolder,
+  getFilesContents,
+} from '@srleecode/domain/shared/test-utils';
 
 describe('test file', () => {
   let tree: Tree;
@@ -17,7 +19,9 @@ describe('test file', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
+    createDummyGroupingFolder(tree, defaultOptions.groupingFolder);
   });
+
   it('should create test bed file when unitTestType is TestBed', async () => {
     await createComponentGenerator(tree, {
       ...defaultOptions,
