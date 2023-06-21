@@ -34,7 +34,6 @@ describe('move', () => {
       onlyDependOnLibsWithTags: [
         'scope:ng-test-app-new-domain',
         'scope:ng-test-app-shared',
-        'app:ng-shared',
       ],
       sourceTag: 'scope:ng-test-app-new-domain',
     };

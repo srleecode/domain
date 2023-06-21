@@ -1,4 +1,4 @@
-import { Tree, convertNxGenerator, logger } from '@nx/devkit';
+import { Tree, convertNxGenerator, formatFiles, logger } from '@nx/devkit';
 import { cypressProjectGenerator } from '@nx/cypress';
 import { removeUneededCypressProjectFiles } from './lib/remove-uneeded-cypress-project-files';
 import { removeDevServerTarget } from './lib/remove-dev-server-target';
@@ -65,6 +65,7 @@ export async function setupDomainTestGenerator(
   });
   renameCypressProject(tree, dasherisedFolderPath, standaloneAsDefault, type);
   removeUneededCypressProjectFiles(tree, `${libsDir}/${domainPath}/.${type}`);
+  await formatFiles(tree);
 }
 
 export default setupDomainTestGenerator;

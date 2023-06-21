@@ -28,13 +28,13 @@ describe('createMockFileGenerator', () => {
     const mockFile = tree
       .read(`${sourceRoot}/lib/mocks/test-example.mock.ts`)
       .toString();
-    expect(mockFile).toBe(`export const TEST_EXAMPLE_MOCK = {};`);
+    expect(mockFile).toMatch(`export const TEST_EXAMPLE_MOCK = {};`);
   });
 
   it('should create index exporting mock file', async () => {
     await runGenerators();
     const indexFile = tree.read(`${sourceRoot}/testing.ts`).toString();
-    expect(indexFile).toBe(`export * from './lib/mocks/test-example.mock';`);
+    expect(indexFile).toMatch(`export * from './lib/mocks/test-example.mock';`);
   });
 
   it('should create tsconfig path', async () => {

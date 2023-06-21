@@ -1,4 +1,4 @@
-import { Tree, convertNxGenerator } from '@nx/devkit';
+import { Tree, convertNxGenerator, formatFiles } from '@nx/devkit';
 import { addMockFile } from './lib/add-mock-file';
 import { addMockFileResolutionPath } from './lib/add-mock-file-resolution-path';
 import { CreateMockFileSchema } from './schema';
@@ -10,6 +10,7 @@ export async function createMockFileGenerator(
   const { projectName, mockFileName } = options;
   addMockFile(tree, projectName, mockFileName);
   addMockFileResolutionPath(tree, projectName);
+  await formatFiles(tree);
 }
 
 export default createMockFileGenerator;

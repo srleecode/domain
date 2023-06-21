@@ -3,6 +3,7 @@ import {
   convertNxGenerator,
   logger,
   getProjects,
+  formatFiles,
   ProjectConfiguration,
 } from '@nx/devkit';
 import { MoveGeneratorSchema } from './schema';
@@ -59,6 +60,7 @@ export async function moveGenerator(tree: Tree, options: MoveGeneratorSchema) {
   }
   moveEslintReference(tree, groupingFolder, destination);
   tree.delete(groupingFolder);
+  await formatFiles(tree);
 }
 
 const getMovedProjectRoot = (
