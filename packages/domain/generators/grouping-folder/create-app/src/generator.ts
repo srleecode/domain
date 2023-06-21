@@ -1,4 +1,4 @@
-import { Tree, convertNxGenerator } from '@nrwl/devkit';
+import { Tree, convertNxGenerator, formatFiles } from '@nrwl/devkit';
 import { CreateAppGroupingFolderGeneratorSchema } from './schema';
 import { isAppFolderExisting } from './lib/shared/is-app-folder-existing';
 import { initialiseWorkspace } from './lib/shared/initialise-workspace';
@@ -19,6 +19,7 @@ export async function createAppGroupingFolderGenerator(
   const directory = applicationType
     ? `${libsDir}/${applicationType}-${name}`
     : `${libsDir}/${name}`;
+  await formatFiles(tree);
   return () => {
     mkdirSync(directory);
   };

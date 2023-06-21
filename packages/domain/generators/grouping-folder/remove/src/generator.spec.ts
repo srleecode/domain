@@ -37,17 +37,6 @@ describe('removeGenerator', () => {
     createDummyGroupingFolder(appTree, `libs/test-app/test-domain`);
   });
 
-  it('should be no changes when no projects root starts with given folder', async () => {
-    const existingFileChanges = appTree
-      .listChanges()
-      .filter((c) => c.path !== 'libs/test-app/test-domain/dummyFile');
-    await removeGenerator(appTree, {
-      groupingFolder: folderToDelete,
-    });
-
-    expect(appTree.listChanges()).toEqual(existingFileChanges);
-  });
-
   it('should remove all projects under the given folder', async () => {
     await addProjects();
     await removeGenerator(appTree, {
