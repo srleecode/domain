@@ -1,4 +1,4 @@
-import { Tree, convertNxGenerator, logger } from '@nrwl/devkit';
+import { Tree, convertNxGenerator, formatFiles, logger } from '@nrwl/devkit';
 import { RemoveLibraryGeneratorSchema } from './schema';
 import { removeGenerator } from '@nrwl/workspace';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
@@ -18,6 +18,7 @@ export async function removeLibraryGenerator(
     logger.error(e.stack);
     throw e;
   });
+  await formatFiles(tree);
 }
 
 export default removeLibraryGenerator;

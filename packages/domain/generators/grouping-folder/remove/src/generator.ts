@@ -1,6 +1,7 @@
 import {
   Tree,
   convertNxGenerator,
+  formatFiles,
   logger,
   readProjectConfiguration,
 } from '@nrwl/devkit';
@@ -45,6 +46,7 @@ export async function removeGenerator(
     }
   }
   tree.delete(groupingFolder);
+  await formatFiles(tree);
 }
 
 export default removeGenerator;
