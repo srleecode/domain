@@ -4,6 +4,7 @@ import {
   logger,
   getProjects,
   ProjectConfiguration,
+  formatFiles,
 } from '@nrwl/devkit';
 import { MoveGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
@@ -59,6 +60,7 @@ export async function moveGenerator(tree: Tree, options: MoveGeneratorSchema) {
   }
   moveEslintReference(tree, groupingFolder, destination);
   tree.delete(groupingFolder);
+  await formatFiles(tree);
 }
 
 const getMovedProjectRoot = (
