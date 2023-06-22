@@ -1,4 +1,4 @@
-import { Tree, convertNxGenerator } from '@nx/devkit';
+import { Tree, convertNxGenerator, formatFiles } from '@nx/devkit';
 import { CreatePresentationLayerGeneratorSchema } from './schema';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { addDomainLibrary } from '../../../shared';
@@ -31,6 +31,7 @@ export async function createPresentationLayerGenerator(
   );
   convertModuleToShell(tree, groupingFolder, libraryName);
   addPresentationLayerEslintConstraint(tree);
+  await formatFiles(tree);
 }
 
 export default createPresentationLayerGenerator;

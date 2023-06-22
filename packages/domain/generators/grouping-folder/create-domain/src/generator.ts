@@ -1,4 +1,4 @@
-import { Tree, convertNxGenerator } from '@nx/devkit';
+import { Tree, convertNxGenerator, formatFiles } from '@nx/devkit';
 import { addSharedLintContraints } from './lib/add-shared-lint-constraints';
 import { CreateDomainGroupingFolderGeneratorSchema } from './schema';
 import { mkdirSync } from 'fs';
@@ -19,8 +19,9 @@ export async function createDomainGroupingFolderGenerator(
     splitGroupingFolder.length === 2 &&
     splitGroupingFolder[1].endsWith('shared');
   if (!isSharedAppDomain) {
-    addSharedLintContraints(tree, options);
+    addSharedLintContraints(tree, options, splitGroupingFolder[0]);
   }
+  await formatFiles(tree);
   return () => {
     mkdirSync(`${groupingFolder}/${name}`);
   };

@@ -8,7 +8,8 @@ import { CreateDomainGroupingFolderGeneratorSchema } from '../schema';
 
 export const addSharedLintContraints = (
   tree: Tree,
-  options: CreateDomainGroupingFolderGeneratorSchema
+  options: CreateDomainGroupingFolderGeneratorSchema,
+  firstFolder: string
 ): void => {
   const { name, groupingFolder } = options;
   const groupingFolders = getGroupingFolders(tree, `${groupingFolder}/${name}`);
@@ -35,11 +36,14 @@ export const addSharedLintContraints = (
       notDependOnLibsWithTags: [],
       onlyDependOnLibsWithTags: [`scope:${groupingFolders.app}-shared`],
     });
-    const appType = groupingFolders.app.split('-')?.[0];
-    depConstraints.push({
-      sourceTag: scope,
-      notDependOnLibsWithTags: [],
-      onlyDependOnLibsWithTags: [`app:${appType}-shared`],
+    tree.children(firstFolder).forEach((folder) => {
+      if (folder.endsWith('shared')) {
+        depConstraints.push({
+          sourceTag: scope,
+          notDependOnLibsWithTags: [],
+          onlyDependOnLibsWithTags: [`app:${folder}`],
+        });
+      }
     });
   });
 };
