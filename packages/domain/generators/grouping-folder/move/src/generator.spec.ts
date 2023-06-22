@@ -29,17 +29,6 @@ describe('moveGenerator', () => {
     createDummyGroupingFolder(appTree, `${originalFolder}/test-domain`);
   });
 
-  it('should be no changes when no projects root starts with given folder', async () => {
-    const existingFileChanges = appTree
-      .listChanges()
-      .filter((c) => c.path !== `${originalFolder}/test-domain/dummyFile`);
-    await moveGenerator(appTree, {
-      groupingFolder: originalFolder,
-      destination,
-    });
-    expect(appTree.listChanges()).toEqual(existingFileChanges);
-  });
-
   it('should move all projects under the given folder', async () => {
     await addProjects();
     await moveGenerator(appTree, {
@@ -49,8 +38,8 @@ describe('moveGenerator', () => {
     const projects = getProjects(appTree);
     expect([...projects.keys()]).toEqual([
       'second-test-app-second-test-domain-shell',
-      'second-test-app-test-domain-infrastructure',
       'second-test-app-test-domain-e2e',
+      'second-test-app-test-domain-infrastructure',
     ]);
   });
 

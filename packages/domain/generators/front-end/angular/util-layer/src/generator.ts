@@ -1,4 +1,4 @@
-import { Tree, convertNxGenerator } from '@nrwl/devkit';
+import { Tree, convertNxGenerator, formatFiles } from '@nrwl/devkit';
 import { CreateUtilGeneratorSchema } from './schema';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { addDomainLibrary } from '../../../shared';
@@ -26,6 +26,7 @@ export async function createUtilGenerator(
     true,
     options
   );
+  await formatFiles(tree);
 }
 
 export default createUtilGenerator;
