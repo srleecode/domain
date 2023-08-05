@@ -1,11 +1,19 @@
 {
   "name": "@srleecode/domain",
-  "version": "16.3.1",
+  "version": "16.6.0",
   "main": "index.js",
   "executors": "./executors.json",
   "generators": "./generators.json",
   "ng-add": {
     "save": "devDependencies"
   },
-  "schematics": "./generators.json"
+  "schematics": "./generators.json",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/srleecode/domain.git",
+    "directory": "packages/domain"
+  },
+  "peerDependencies": {
+    "@nx/devkit": "^16.0.0"
+  }
 }
