@@ -30,4 +30,17 @@ export const convertModuleToShell = (
     modulePath,
     `${groupingFolder}/${libraryName}/src/lib/${dasherisedGroupingFolder}-shell.module.ts`
   );
+  updateModuleReference(tree, groupingFolder, libraryName);
+};
+
+const updateModuleReference = (
+  tree: Tree,
+  groupingFolder: string,
+  libraryName: string
+) => {
+  const indexPath = `${groupingFolder}/${libraryName}/src/index.ts`;
+  tree.write(
+    indexPath,
+    tree.read(indexPath).toString().replace(`presentation`, `shell`)
+  );
 };

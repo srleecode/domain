@@ -46,6 +46,18 @@ describe('createPresentationLayerGenerator', () => {
     );
   });
 
+  it('should convert module reference in index', async () => {
+    await createPresentationLayerGenerator(tree, {
+      ...commonLibraryOptions,
+      groupingFolder,
+      addJestJunitReporter: true,
+    });
+    const filePath = `${groupingFolder}/presentation/src/index.ts`;
+    expect(tree.read(filePath).toString()).toMatch(
+      `export * from './lib/test-app-test-domain-shell.module`
+    );
+  });
+
   it('should pass correct parameters to @nx/angular generator', async () => {
     const schema: CreatePresentationLayerGeneratorSchema = {
       groupingFolder,
