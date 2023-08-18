@@ -5,6 +5,7 @@ import {
   readProjectConfiguration,
   removeProjectConfiguration,
   addProjectConfiguration,
+  getProjects,
 } from '@nx/devkit';
 import { moveGenerator } from '@nx/workspace';
 // eslint-disable-next-line @nx/enforce-module-boundaries
@@ -34,12 +35,18 @@ export const moveDomainTestProject = async (
   });
   removeDummyTsConfigPath(tree, tsConfigPath);
   renameToCommonFormat(tree, getDasherizedFolderPath(tree, destination));
+  const x = getProjects(tree);
+  console.log(x);
 };
 
 const renameToCommonFormat = (tree: Tree, projectName: string): void => {
   const projectConfig = readProjectConfiguration(tree, projectName);
+  const splitProjectName = projectName.split('-');
+  const type = splitProjectName[splitProjectName.length - 1].slice(1);
+  const newProjectName = `${type}-${splitProjectName.slice(0, -1).join('-')}`;
   removeProjectConfiguration(tree, projectName);
-  addProjectConfiguration(tree, projectName.replace(`.`, ''), projectConfig);
+  projectConfig.name = newProjectName;
+  addProjectConfiguration(tree, newProjectName, projectConfig);
 };
 // a cypress project doesn't have a tsconfig path, but one is required by the move generator
 // this creates a dummy tsconfig path that will be removed after the move generator runs

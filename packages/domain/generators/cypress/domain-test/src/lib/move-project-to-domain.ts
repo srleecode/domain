@@ -26,7 +26,7 @@ export const moveProjectToDomain = async (
   addDummyTsConfigPaths(tree, dummyPaths);
   await moveGenerator(tree, {
     projectName,
-    destination: `${domainPath}/.${type}`,
+    destination: `${domainPath}/_${type}`,
     updateImportPath: true,
   }).catch((e: Error) => {
     logger.error(e.message);

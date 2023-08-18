@@ -39,7 +39,7 @@ describe('moveGenerator', () => {
     const projects = getProjects(appTree);
     expect([...projects.keys()]).toEqual([
       'second-test-app-test-domain-infrastructure',
-      'second-test-app-test-domain-e2e',
+      'e2e-second-test-app-test-domain',
     ]);
   });
 
