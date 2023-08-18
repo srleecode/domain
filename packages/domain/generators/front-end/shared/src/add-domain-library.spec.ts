@@ -85,7 +85,7 @@ describe('addDomainLibrary', () => {
 
   it('should add project to e2e projects implicitDependencies', async () => {
     const mockProjectConfiguration: ProjectConfiguration = {
-      root: `libs/test-app/test-domain/.e2e`,
+      root: `libs/test-app/test-domain/_e2e`,
       targets: {},
     };
     addProjectConfiguration(

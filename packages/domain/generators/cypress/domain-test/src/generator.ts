@@ -64,7 +64,7 @@ export async function setupDomainTestGenerator(
     throw e;
   });
   renameCypressProject(tree, dasherisedFolderPath, standaloneAsDefault, type);
-  removeUneededCypressProjectFiles(tree, `${libsDir}/${domainPath}/.${type}`);
+  removeUneededCypressProjectFiles(tree, `${libsDir}/${domainPath}/_${type}`);
   await formatFiles(tree);
 }
 

@@ -74,6 +74,7 @@ export const addComponentFiles = (
     type,
     dasherizedName
   );
+  fixJestConfigFormat(tree, `${groupingFolder}/presentation`);
 };
 
 const getStorybookTitle = (groupingFolder: string, libraryName): string =>
@@ -107,4 +108,11 @@ const addComponentToIndex = (
     changes
   );
   tree.write(indexPath, newFile);
+};
+
+const fixJestConfigFormat = (tree: Tree, libraryPath: string): void => {
+  const jestFilePath = `${libraryPath}/jest.config.ts`;
+  let jestFile = tree.read(jestFilePath).toString();
+  jestFile = jestFile.replace('exportdefault{', 'export default {');
+  tree.write(jestFilePath, jestFile);
 };

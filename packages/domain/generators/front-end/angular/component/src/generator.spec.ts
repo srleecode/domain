@@ -63,4 +63,11 @@ describe('createComponentGenerator', () => {
       `export * from './lib/ui/test-example/test-example.component';`
     );
   });
+  it('should create correct jest config', async () => {
+    await createComponentGenerator(tree, defaultOptions);
+    const jestConfig = tree.read(`${libraryPath}/jest.config.ts`).toString();
+    expect(jestConfig).toBe(
+      `/* eslint-disable */\nexport default {\n  displayName: 'test-app-test-domain-presentation',\n  preset: '../../../../jest.preset.js',\n  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],\n  coverageDirectory:\n    '../../../../coverage/libs/test-app/test-domain/presentation',\n};\n`
+    );
+  });
 });
