@@ -32,13 +32,15 @@ export function updateDepConstraint(
         const boundariesRuleIndex = json.overrides.findIndex(
           (override) => !!override.rules[boundariesRule]
         );
-        const depConstraints =
-          json.overrides[boundariesRuleIndex].rules[boundariesRule][1]
-            .depConstraints;
-        update(depConstraints);
-        json.overrides[boundariesRuleIndex].rules[
-          boundariesRule
-        ][1].depConstraints = getDedupedDepConstraints(depConstraints);
+        if (json.overrides[boundariesRuleIndex]) {
+          const depConstraints =
+            json.overrides[boundariesRuleIndex].rules[boundariesRule][1]
+              .depConstraints;
+          update(depConstraints);
+          json.overrides[boundariesRuleIndex].rules[
+            boundariesRule
+          ][1].depConstraints = getDedupedDepConstraints(depConstraints);
+        }
       }
       return json;
     });
