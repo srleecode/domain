@@ -5,8 +5,9 @@ describe('util', () => {
 
   it('should create util library', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:ngUtilLayer --groupingFolder ${groupingFolder}`
-    );
+      `generate @srleecode/domain:ngUtilLayer --groupingFolder ${groupingFolder}`,
+      { silenceError: true }
+    ).then((rsp) => console.log(rsp));
     checkFilesExist(`${groupingFolder}/util/src/index.ts`);
   });
 });

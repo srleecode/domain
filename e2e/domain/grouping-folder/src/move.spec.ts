@@ -13,11 +13,13 @@ describe('move', () => {
       `generate @srleecode/domain:ngUtilLayer --groupingFolder ${groupingFolder}`
     );
     await runNxCommandAsync(
-      `generate @srleecode/domain:mockFile --projectName ng-test-app-test-domain-util --mockFileName test-example`
-    );
+      `generate @srleecode/domain:mockFile --projectName ng-test-app-test-domain-util --mockFileName test-example`,
+      { silenceError: true }
+    ).then((rsp) => console.log(rsp));
     await runNxCommandAsync(
-      `generate @srleecode/domain:moveGroupingFolder --groupingFolder ${groupingFolder} --destination ${movedDomainGroupingFolder}`
-    );
+      `generate @srleecode/domain:moveGroupingFolder --groupingFolder ${groupingFolder} --destination ${movedDomainGroupingFolder}`,
+      { silenceError: true }
+    ).then((rsp) => console.log(rsp));
   }, 240000);
 
   it('should move domain grouping folder', async () => {

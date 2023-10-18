@@ -61,7 +61,7 @@ Angular domain libraries
 
 Other:
 
-- domainTest - creates a project in a grouping folder for E2E tests related to that grouping folder. By default, E2E projects are created as applications. This generator moves the created E2E cypress project into the grouping folder. For example, if you run this generator in the shared/table domain grouping folder it will create a folder \_e2e. This will create a project called: e2e-shared-table which would have the default e2e tas and hold the cypress specifc config including test specs.
+- domainTest - creates a project in a grouping folder for E2E tests related to that grouping folder. By default, E2E projects are created as applications. This generator moves the created E2E cypress project into the grouping folder. For example, if you run this generator in the shared/table domain grouping folder it will create a folder \.e2e. This will create a project called: e2e-shared-table which would have the default e2e tas and hold the cypress specifc config including test specs.
 - mockFile - the naive approach of using mock files in your tests involves exporting them in the index.ts. This will cause the mock files to be included in the build output. As mock files are only used in the tests, this makes the build output larger than neccessary. This generator creates a seperate tsconfig path for the mock files which allows them to be imported into other libraies and not be included in the build output
 
 ## tags

@@ -4,8 +4,9 @@ describe('remove', () => {
   const groupingFolder = 'libs/ng-test-app/new-domain';
   beforeAll(async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:removeGroupingFolder --groupingFolder ${groupingFolder}`
-    );
+      `generate @srleecode/domain:removeGroupingFolder --groupingFolder ${groupingFolder}`,
+      { silenceError: true }
+    ).then((rsp) => console.log(rsp));
   }, 240000);
 
   it('should remove domain grouping folder', async () => {

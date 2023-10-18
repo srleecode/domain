@@ -9,6 +9,8 @@ import { RemoveGeneratorSchema } from './schema';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
+  getDomainPath,
+  getNpmScope,
   getProjectNames,
   isHavingDepContraint,
   isHavingMockFile,
@@ -17,6 +19,7 @@ import {
 } from '../../../shared/utils';
 import { removeGenerator as nrwlRemoveGenerator } from '@nx/workspace';
 import { removeMockFileResolutionPath } from './lib/remove-mock-file-resolution-path';
+import { removeImportPath } from './lib/remove-import-path';
 
 export async function removeGenerator(
   tree: Tree,
@@ -30,10 +33,14 @@ export async function removeGenerator(
     if (isHavingMockFile(tree, project.root)) {
       removeMockFileResolutionPath(tree, project.root);
     }
+    const npmScope = getNpmScope(tree);
+    const importPath = `${npmScope}/${getDomainPath(tree, project.root)}`;
+    removeImportPath(tree, importPath);
     await nrwlRemoveGenerator(tree, {
       projectName,
       skipFormat: false,
       forceRemove: true,
+      importPath,
     }).catch((e: Error) => {
       logger.error(e.message);
       logger.error(e.stack);

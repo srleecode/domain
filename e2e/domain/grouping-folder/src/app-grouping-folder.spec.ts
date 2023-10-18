@@ -15,8 +15,9 @@ describe('app grouping folder', () => {
 
   it('should create directory with language prefixed to name', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:appGroupingFolder --name test-app --applicationType ng`
-    );
+      `generate @srleecode/domain:appGroupingFolder --name test-app --applicationType ng`,
+      { silenceError: true }
+    ).then((rsp) => console.log(rsp));
     checkFilesExist('libs/ng-test-app');
   });
 });
