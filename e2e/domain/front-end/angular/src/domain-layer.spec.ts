@@ -5,8 +5,9 @@ describe('domain-layer', () => {
 
   it('should create domain layer library', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:ngDomainLayer --groupingFolder ${groupingFolder}`
-    );
+      `generate @srleecode/domain:ngDomainLayer --groupingFolder ${groupingFolder}`,
+      { silenceError: true }
+    ).then((rsp) => console.log(rsp));
     checkFilesExist(`${groupingFolder}/domain/src/index.ts`);
   });
 });

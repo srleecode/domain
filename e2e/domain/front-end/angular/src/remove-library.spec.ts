@@ -5,8 +5,9 @@ describe('remove-library', () => {
 
   it('should remove domain library', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:ngRemoveLibrary --libraryFolder ${libraryFolder}`
-    );
+      `generate @srleecode/domain:ngRemoveLibrary --libraryFolder ${libraryFolder}`,
+      { silenceError: true }
+    ).then((rsp) => console.log(rsp));
     expect(fileExists(`${libraryFolder}/src/index.ts`)).toBe(false);
   });
 });

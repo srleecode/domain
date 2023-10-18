@@ -1,6 +1,7 @@
 import { readProjectConfiguration, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { setupDomainTestGenerator } from './generator';
+import createApplicationLayerGenerator from '@srleecode/domain/angular/application-layer';
 
 describe('setupDomainTestGenerator', () => {
   let tree: Tree;
@@ -9,6 +10,13 @@ describe('setupDomainTestGenerator', () => {
     beforeAll(async () => {
       tree = createTreeWithEmptyWorkspace();
       tree.write(`libs/test-app/test-domain/shell/src.index.ts`, '');
+      await createApplicationLayerGenerator(tree, {
+        groupingFolder: 'libs/test-app/test-domain',
+        buildable: true,
+        strict: false,
+        enableIvy: true,
+        publishable: false,
+      });
       await setupDomainTestGenerator(tree, {
         groupingFolder: 'libs/test-app/test-domain',
         type: 'e2e',
@@ -17,7 +25,7 @@ describe('setupDomainTestGenerator', () => {
 
     it('should move cypress directory from apps to libs', async () => {
       expect(
-        tree.exists(`libs/test-app/test-domain/_e2e/cypress.config.ts`)
+        tree.exists(`libs/test-app/test-domain/.e2e/cypress.config.ts`)
       ).toBe(true);
     });
 
@@ -39,20 +47,20 @@ describe('setupDomainTestGenerator', () => {
 
     it('should remove page object file', () => {
       expect(
-        tree.exists(`libs/test-app/test-domain/_e2e/src/support/app.po.ts`)
+        tree.exists(`libs/test-app/test-domain/.e2e/src/support/app.po.ts`)
       ).toBe(false);
     });
 
     it('should remove custom commands file', () => {
       expect(
-        tree.exists(`libs/test-app/test-domain/_e2e/src/support/commands.ts`)
+        tree.exists(`libs/test-app/test-domain/.e2e/src/support/commands.ts`)
       ).toBe(false);
     });
 
     it('should reset index.ts to an empty file', () => {
       expect(
         tree
-          .read(`libs/test-app/test-domain/_e2e/src/support/index.ts`)
+          .read(`libs/test-app/test-domain/.e2e/src/support/index.ts`)
           .toString()
       ).toBe('');
     });
@@ -64,6 +72,7 @@ describe('setupDomainTestGenerator', () => {
       );
       expect(projectConfig.implicitDependencies).toEqual([
         'test-app-test-domain-shell',
+        'test-app-test-domain-application',
       ]);
     });
     it('should add tags', () => {
@@ -80,7 +89,7 @@ describe('setupDomainTestGenerator', () => {
   });
 
   describe('ct', () => {
-    const cypressFile = 'libs/test-app/test-domain/_ct/cypress.config.ts';
+    const cypressFile = 'libs/test-app/test-domain/.ct/cypress.config.ts';
     beforeAll(async () => {
       tree = createTreeWithEmptyWorkspace();
       tree.write(`libs/test-app/test-domain/shell/src.index.ts`, '');

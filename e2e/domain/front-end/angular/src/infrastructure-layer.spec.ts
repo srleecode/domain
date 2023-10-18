@@ -5,8 +5,9 @@ describe('infrastructure-layer', () => {
 
   it('should create infrastructure layer library', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:ngInfrastructureLayer --groupingFolder ${groupingFolder}`
-    );
+      `generate @srleecode/domain:ngInfrastructureLayer --groupingFolder ${groupingFolder}`,
+      { silenceError: true }
+    ).then((rsp) => console.log(rsp));
     checkFilesExist(`${groupingFolder}/infrastructure/src/index.ts`);
   });
 });

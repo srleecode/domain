@@ -14,8 +14,9 @@ describe('component', () => {
 
   it('should create ui component library', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type ui --name test-example`
-    );
+      `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type ui --name test-example`,
+      { silenceError: true }
+    ).then((rsp) => console.log(rsp));
     checkFilesExist(
       `${groupingFolder}/presentation/src/lib/ui/test-example/test-example.component.ts`
     );

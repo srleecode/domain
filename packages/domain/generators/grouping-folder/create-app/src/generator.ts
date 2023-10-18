@@ -21,7 +21,7 @@ export async function createAppGroupingFolderGenerator(
     : `${libsDir}/${name}`;
   await formatFiles(tree);
   return () => {
-    mkdirSync(directory);
+    mkdirSync(directory, { recursive: true });
   };
 }
 

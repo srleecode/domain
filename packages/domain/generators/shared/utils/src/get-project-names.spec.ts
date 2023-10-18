@@ -26,7 +26,7 @@ describe('getProjectNames', () => {
 
   it('should get e2e project under the domain folder', async () => {
     addProjectConfiguration(appTree, 'e2e-test-app-test-domain', {
-      root: `${groupingFolder}/_e2e`,
+      root: `${groupingFolder}/.e2e`,
       targets: {},
     });
     expect(getProjectNames(appTree, groupingFolder)).toEqual([
