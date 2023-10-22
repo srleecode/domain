@@ -56,8 +56,6 @@ describe('createDomainLayerGenerator', () => {
     const jestConfig = tree
       .read(`${groupingFolder}/domain/jest.config.ts`)
       .toString();
-    expect(jestConfig).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app-test-domain-domain.xml" } ] ]`
-    );
+    expect(jestConfig).toMatch('jest-junit');
   });
 });

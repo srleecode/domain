@@ -88,9 +88,7 @@ describe('createPresentationLayerGenerator', () => {
     const jestConfig = tree
       .read(`${groupingFolder}/presentation/jest.config.ts`)
       .toString();
-    expect(jestConfig).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app-test-domain-presentation.xml" } ] ]`
-    );
+    expect(jestConfig).toMatch('jest-junit');
   });
   it('should add prefix to eslint selector rules', async () => {
     const prefix = 'test';

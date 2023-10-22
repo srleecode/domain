@@ -63,4 +63,12 @@ export const addDomainLibrary = async (
     addJestJunitReporterConfig(tree, libraryPath);
   }
   removeGlobalJestConfig(tree, libraryPath);
+  fixJestConfigFormat(tree, libraryPath);
+};
+
+const fixJestConfigFormat = (tree: Tree, libraryPath: string): void => {
+  const jestFilePath = `${libraryPath}/jest.config.ts`;
+  let jestFile = tree.read(jestFilePath).toString();
+  jestFile = jestFile.replace('exportdefault{', 'export default {');
+  tree.write(jestFilePath, jestFile);
 };
