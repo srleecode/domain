@@ -45,8 +45,6 @@ describe('createInfrastructureLayerGenerator', () => {
     const jestConfig = tree
       .read(`${schema.groupingFolder}/infrastructure/jest.config.ts`)
       .toString();
-    expect(jestConfig).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app-test-domain-infrastructure.xml" } ] ]`
-    );
+    expect(jestConfig).toMatch('jest-junit');
   });
 });

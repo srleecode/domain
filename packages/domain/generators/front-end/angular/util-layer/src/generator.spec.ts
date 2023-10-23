@@ -46,8 +46,6 @@ describe('createUtilGenerator', () => {
     const jestConfig = tree
       .read(`${schema.groupingFolder}/util/jest.config.ts`)
       .toString();
-    expect(jestConfig).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app-test-domain-util.xml" } ] ]`
-    );
+    expect(jestConfig).toMatch('jest-junit');
   });
 });

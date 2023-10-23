@@ -1,4 +1,4 @@
-import { classify } from '@nx/workspace/src/utils/strings';
+import { classify } from '@angular-devkit/core/src/utils/strings';
 
 export const spacify = (words: string): string => {
   let spacifiedWords = '';

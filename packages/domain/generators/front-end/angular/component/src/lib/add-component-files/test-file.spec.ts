@@ -10,7 +10,7 @@ import {
   createDummyGroupingFolder,
 } from '../../../../../../shared/test-utils';
 import { join } from 'path';
-import { dasherize } from '@nx/workspace/src/utils/strings';
+import { dasherize } from '@angular-devkit/core/src/utils/strings';
 
 describe('test file', () => {
   let tree: Tree;

@@ -6,7 +6,7 @@ import {
   getNormalisedPath,
   getNpmScope,
 } from '../../../shared/utils';
-import { dasherize } from '@nx/workspace/src/utils/strings';
+import { dasherize } from '@angular-devkit/core/src/utils/strings';
 import { AngularCreateLibrarySchema } from './model/angular-create-library-schema.model';
 import { Tree } from '@nx/devkit';
 
