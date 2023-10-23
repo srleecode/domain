@@ -1,4 +1,4 @@
-import { dasherize } from '@nx/workspace/src/utils/strings';
+import { dasherize } from '@angular-devkit/core/src/utils/strings';
 import { LibraryNameOptions } from './model/library-name-options.model';
 
 export const getLibraryName = (options: LibraryNameOptions): string => {

@@ -6,7 +6,6 @@ import {
   ChangeType,
   applyChangesToString,
 } from '@nx/devkit';
-import { dasherize, classify } from '@nx/workspace/src/utils/strings';
 import { join, normalize } from 'path';
 import { ChangeDetection } from '../../model/change-detection-type.enum';
 import { ComponentType } from '../../model/component-type.enum';
@@ -23,6 +22,7 @@ import { CreateComponentGeneratorSchema } from '../../schema';
 import { getLibraryName } from '../../../../../shared';
 import { SyntaxKind } from 'typescript';
 import { findNodes } from '@nx/workspace/src/utilities/ts-config';
+import { classify, dasherize } from '@angular-devkit/core/src/utils/strings';
 
 export const addComponentFiles = (
   tree: Tree,

@@ -1,5 +1,5 @@
+import { underscore } from '@angular-devkit/core/src/utils/strings';
 import { readProjectConfiguration, Tree } from '@nx/devkit';
-import { underscore } from '@nx/workspace/src/utils/strings';
 
 export const addMockFile = (
   tree: Tree,

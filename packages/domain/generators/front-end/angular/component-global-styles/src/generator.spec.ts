@@ -1,6 +1,6 @@
 import { Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import { dasherize } from '@nx/workspace/src/utils/strings';
+import { dasherize } from '@angular-devkit/core/src/utils/strings';
 import {
   getFilesContents,
   createDummyGroupingFolder,

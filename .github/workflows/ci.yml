@@ -22,11 +22,11 @@ jobs:
         uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: 'master'
-      - uses: actions/setup-node@v1 
-        with: 
-          node-version: '16'
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '18'
       - run: npm ci
-      - run: npx nx-cloud start-ci-run    
+      - run: npx nx-cloud start-ci-run
       - run: npm run build
       - run: npx nx affected --target=lint --parallel --max-parallel=3
       - run: npx nx affected --target=test --parallel --max-parallel=3
@@ -44,11 +44,11 @@ jobs:
         uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: 'master'
-      - uses: actions/setup-node@v1 
-        with: 
-          node-version: '16'
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '18'
       - run: npm ci
-      - run: npx nx-cloud start-ci-run    
+      - run: npx nx-cloud start-ci-run
       - run: npm run build
       - run: npx nx affected --target=lint --parallel --max-parallel=3
       - run: npx nx affected --target=test --parallel --max-parallel=3
@@ -60,12 +60,12 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        agent: [ 1, 2, 3 ]
+        agent: [1, 2, 3]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-        with: 
-          node-version: '16'
+        with:
+          node-version: '18'
       - run: npm ci
       - name: Start Nx Agent ${{ matrix.agent }}
         run: npx nx-cloud start-agent

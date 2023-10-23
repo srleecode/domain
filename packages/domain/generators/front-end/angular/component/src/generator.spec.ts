@@ -70,4 +70,9 @@ describe('createComponentGenerator', () => {
       `/* eslint-disable */\nexport default {\n  displayName: 'test-app-test-domain-presentation',\n  preset: '../../../../jest.preset.js',\n  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],\n  coverageDirectory:\n    '../../../../coverage/libs/test-app/test-domain/presentation',\n};\n`
     );
   });
+  it('should use provided prefix in eslint', async () => {
+    await createComponentGenerator(tree, { ...defaultOptions, prefix: 'test' });
+    const eslintFile = tree.read(`${libraryPath}/.eslintrc.json`).toString();
+    expect(eslintFile).toMatch(`"prefix": "test"`);
+  });
 });

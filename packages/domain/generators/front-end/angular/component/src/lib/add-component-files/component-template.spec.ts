@@ -7,7 +7,7 @@ import {
   getFilesContents,
 } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
-import { dasherize } from '@nx/workspace/src/utils/strings';
+import { dasherize } from '@angular-devkit/core/src/utils/strings';
 
 describe('component template file', () => {
   let tree: Tree;

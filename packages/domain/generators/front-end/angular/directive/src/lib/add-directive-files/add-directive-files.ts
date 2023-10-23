@@ -1,5 +1,5 @@
 import { names, Tree, generateFiles } from '@nx/devkit';
-import { classify, dasherize, camelize } from '@nx/workspace/src/utils/strings';
+
 import { join, normalize } from 'path';
 import { CreateDirectiveGeneratorSchema } from '../../schema';
 // eslint-disable-next-line @nx/enforce-module-boundaries
@@ -9,6 +9,11 @@ import {
   getDasherizedFolderPath,
   spacify,
 } from '../../../../../../shared/utils';
+import {
+  dasherize,
+  classify,
+  camelize,
+} from '@angular-devkit/core/src/utils/strings';
 
 export const addDirectiveFiles = (
   tree: Tree,

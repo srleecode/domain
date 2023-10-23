@@ -9,7 +9,7 @@ import { join } from 'path';
 import { ComponentType } from '../../model/component-type.enum';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
 import { createComponentGenerator } from '../../generator';
-import { dasherize } from '@nx/workspace/src/utils/strings';
+import { dasherize } from '@angular-devkit/core/src/utils/strings';
 
 describe('component file', () => {
   let tree: Tree;

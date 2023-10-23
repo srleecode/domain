@@ -7,7 +7,7 @@ import {
 import { join } from 'path';
 import { createDirectiveGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
-import { dasherize } from '@nx/workspace/src/utils/strings';
+import { dasherize } from '@angular-devkit/core/src/utils/strings';
 
 describe('stories file', () => {
   let tree: Tree;

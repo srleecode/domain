@@ -1,5 +1,5 @@
 import { Tree } from '@nx/devkit';
-import { dasherize } from '@nx/workspace/src/utils/strings';
+import { dasherize } from '@angular-devkit/core/src/utils/strings';
 
 export const addJestJunitReporterConfig = (tree: Tree, libraryPath: string) => {
   let jestConfigPath = `${libraryPath}/jest.config.ts`;

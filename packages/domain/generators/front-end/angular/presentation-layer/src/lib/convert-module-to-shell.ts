@@ -4,7 +4,7 @@ import {
   getDasherizedFolderPath,
   getDomainPath,
 } from '../../../../../shared/utils';
-import { classify } from '@nx/workspace/src/utils/strings';
+import { classify } from '@angular-devkit/core/src/utils/strings';
 
 export const convertModuleToShell = (
   tree: Tree,
