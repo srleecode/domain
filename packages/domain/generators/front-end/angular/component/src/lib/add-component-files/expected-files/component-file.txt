@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
     templateUrl:'./test-example.component.html',
     styleUrls: ['./test-example.component.scss'],
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule]
 }) export class TestExampleComponent implements OnInit {
     constructor() {}
 

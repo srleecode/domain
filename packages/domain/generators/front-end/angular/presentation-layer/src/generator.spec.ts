@@ -30,7 +30,7 @@ describe('createPresentationLayerGenerator', () => {
     jest.spyOn(frontEndSharedMock, 'addDomainLibrary');
   });
 
-  it('should convert module to shell module', async () => {
+  it('should create shell module', async () => {
     await createPresentationLayerGenerator(tree, {
       ...commonLibraryOptions,
       groupingFolder,
@@ -46,7 +46,7 @@ describe('createPresentationLayerGenerator', () => {
     );
   });
 
-  it('should convert module reference in index', async () => {
+  it('should add shell module reference in index', async () => {
     await createPresentationLayerGenerator(tree, {
       ...commonLibraryOptions,
       groupingFolder,

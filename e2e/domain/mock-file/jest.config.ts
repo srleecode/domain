@@ -11,7 +11,6 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   preset: '../../../jest.preset.js',
-  testSequencer: './test-sequencer.js',
   setupFilesAfterEnv: ['./jest.setup.ts'],
   maxWorkers: 1,
 };

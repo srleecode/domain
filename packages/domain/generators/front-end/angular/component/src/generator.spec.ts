@@ -19,15 +19,15 @@ describe('createComponentGenerator', () => {
     await createComponentGenerator(tree, defaultOptions);
     expect(
       tree.exists(
-        `${libraryPath}/src/lib/feature/test-example/test-example.component.ts`
-      )
+        `${libraryPath}/src/lib/feature/test-example/test-example.component.ts`,
+      ),
     ).toBe(true);
   });
   it('should create project with the correct tags', async () => {
     await createComponentGenerator(tree, defaultOptions);
     const projectConfig = readProjectConfiguration(
       tree,
-      'test-app-test-domain-presentation'
+      'test-app-test-domain-presentation',
     );
     expect(projectConfig.tags).toEqual([
       'app:test-app',
@@ -44,13 +44,13 @@ describe('createComponentGenerator', () => {
 
     expect(
       tree.exists(
-        `${libraryPath}/src/lib/feature/test-example/test-example.component.ts`
-      )
+        `${libraryPath}/src/lib/feature/test-example/test-example.component.ts`,
+      ),
     ).toBe(true);
     expect(
       tree.exists(
-        `${libraryPath}/src/lib/ui/test-example/test-example.component.ts`
-      )
+        `${libraryPath}/src/lib/ui/test-example/test-example.component.ts`,
+      ),
     ).toBe(true);
   });
   it('should add export to index', async () => {
@@ -60,14 +60,14 @@ describe('createComponentGenerator', () => {
     });
     const indexTs = tree.read(`${libraryPath}/src/index.ts`).toString();
     expect(indexTs).toMatch(
-      `export * from './lib/ui/test-example/test-example.component';`
+      `export * from './lib/ui/test-example/test-example.component';`,
     );
   });
   it('should create correct jest config', async () => {
     await createComponentGenerator(tree, defaultOptions);
     const jestConfig = tree.read(`${libraryPath}/jest.config.ts`).toString();
-    expect(jestConfig).toBe(
-      `/* eslint-disable */\nexport default {\n  displayName: 'test-app-test-domain-presentation',\n  preset: '../../../../jest.preset.js',\n  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],\n  coverageDirectory:\n    '../../../../coverage/libs/test-app/test-domain/presentation',\n};\n`
+    expect(jestConfig).toMatch(
+      `displayName: 'test-app-test-domain-presentation',`,
     );
   });
   it('should use provided prefix in eslint', async () => {

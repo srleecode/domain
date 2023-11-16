@@ -7,9 +7,9 @@ const meta: Meta<TestExampleComponent> = {
   title: 'Test App/Test Domain/Feature Test Example',
   decorators: [
     moduleMetadata({
-      imports: [ TestExampleComponent, ...GLOBAL_MOUNT_OPTIONS.imports ],
-    }),
-  ],
+      imports: [ TestExampleComponent, ...GLOBAL_MOUNT_OPTIONS.imports ]
+    })
+  ]
 };
 export default meta;
 type Story = StoryObj<TestExampleComponent>;

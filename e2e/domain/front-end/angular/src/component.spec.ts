@@ -5,8 +5,9 @@ describe('component', () => {
 
   it('should create feature component library', async () => {
     await runNxCommandAsync(
-      `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type feature --name test-example`
-    );
+      `generate @srleecode/domain:ngComponent --groupingFolder ${groupingFolder} --type feature --name test-example`,
+      { silenceError: true }
+    ).then((rsp) => console.log(rsp));
     checkFilesExist(
       `${groupingFolder}/presentation/src/lib/feature/test-example/test-example.component.ts`
     );

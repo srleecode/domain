@@ -6,5 +6,5 @@ import { Component, ViewEncapsulation } from '@angular/core';
     styleUrls: ['./global.scss'],
     standalone: true,
     imports: [CommonModule],
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 }) export class TestExampleBaseComponent {}
