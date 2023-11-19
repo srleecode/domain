@@ -10,7 +10,7 @@ const meta: Meta<<%= componentName %>> = {
       imports: [ <%= componentName %>, ...GLOBAL_MOUNT_OPTIONS.imports ]
     })
   ]
-}
+};
 export default meta;
 type Story = StoryObj<<%= componentName %>>;
 

@@ -6,7 +6,7 @@ import {
 } from '../../../../../shared/utils';
 import { classify } from '@angular-devkit/core/src/utils/strings';
 
-export const convertModuleToShell = (
+export const createShellModule = (
   tree: Tree,
   groupingFolder: string,
   libraryName: string
@@ -18,29 +18,34 @@ export const convertModuleToShell = (
   const classifiedDomain = classify(
     getDomainPath(tree, groupingFolder).replace('/', '-')
   );
-  const modulePath = `${groupingFolder}/${libraryName}/src/lib/${dasherisedGroupingFolder}-${libraryName}.module.ts`;
   tree.write(
-    modulePath,
-    tree
-      .read(modulePath)
-      .toString()
-      .replace(`${classifiedDomain}Presentation`, `${classifiedDomain}Shell`)
+    `${groupingFolder}/${libraryName}/src/lib/${dasherisedGroupingFolder}-shell.module.ts`,
+    `import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@NgModule({
+  imports: [CommonModule],
+})
+export class Ng${classifiedDomain}ShellModule {}`
   );
-  tree.rename(
-    modulePath,
-    `${groupingFolder}/${libraryName}/src/lib/${dasherisedGroupingFolder}-shell.module.ts`
+  updateModuleReference(
+    tree,
+    groupingFolder,
+    libraryName,
+    dasherisedGroupingFolder
   );
-  updateModuleReference(tree, groupingFolder, libraryName);
 };
 
 const updateModuleReference = (
   tree: Tree,
   groupingFolder: string,
-  libraryName: string
+  libraryName: string,
+  dasherisedGroupingFolder: string
 ) => {
   const indexPath = `${groupingFolder}/${libraryName}/src/index.ts`;
   tree.write(
     indexPath,
-    tree.read(indexPath).toString().replace(`presentation`, `shell`)
+    tree.read(indexPath).toString() +
+      `export * from './lib/${dasherisedGroupingFolder}-shell.module.ts';`
   );
 };

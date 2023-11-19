@@ -44,8 +44,6 @@ Grouping folders:
 - domainGroupingFolder
   - creates a domain grouping folder
   - sets up the eslint rules for that domain
-- moveGroupingFolder
-  - moves a grouping folder to another location. It also moves all of the libraries under the grouping folder
 - removeGroupingFolder
   - removes a grouping folder. It also removes all of the libraries under the grouping folder
 

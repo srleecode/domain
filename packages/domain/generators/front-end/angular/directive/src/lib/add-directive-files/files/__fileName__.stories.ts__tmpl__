@@ -7,9 +7,9 @@ const meta: Meta<TestComponent> = {
   title: '<%= storybookTitle %>',
   decorators: [
     moduleMetadata({
-      imports: [ TestComponent, ...GLOBAL_MOUNT_OPTIONS.imports ],
-    }),
-  ],
+      imports: [ TestComponent, ...GLOBAL_MOUNT_OPTIONS.imports ]
+    })
+  ]
 };
 export default meta;
 type Story = StoryObj<TestComponent>;

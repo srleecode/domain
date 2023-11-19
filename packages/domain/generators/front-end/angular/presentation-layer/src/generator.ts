@@ -9,7 +9,7 @@ import {
   validateGroupingFolder,
 } from '../../../../shared/utils';
 import { addPresentationLayerEslintConstraint } from './lib/add-presentation-eslint-constraint';
-import { convertModuleToShell } from './lib/convert-module-to-shell';
+import { createShellModule } from './lib/create-shell-module';
 
 export async function createPresentationLayerGenerator(
   tree: Tree,
@@ -29,7 +29,7 @@ export async function createPresentationLayerGenerator(
     false,
     options
   );
-  convertModuleToShell(tree, groupingFolder, libraryName);
+  createShellModule(tree, groupingFolder, libraryName);
   addPresentationLayerEslintConstraint(tree);
   await formatFiles(tree);
 }

@@ -6,5 +6,5 @@ import{ TestExampleDirective } from './test-example.directive';
     selector: 'test-example-directive-test',
     template: '<div testAppTestDomainDirectiveTestExample></div>',
     standalone: true,
-    imports: [ CommonModule, TestExampleDirective ],
+    imports: [ CommonModule, TestExampleDirective ]
 }) export class TestComponent {}

@@ -63,11 +63,6 @@
       "schema": "./generators/grouping-folder/create-domain/src/schema.json",
       "description": "Add domain grouping folder generator"
     },
-    "moveGroupingFolder": {
-      "factory": "./generators/grouping-folder/move/src/generator#moveSchematic",
-      "schema": "./generators/grouping-folder/move/src/schema.json",
-      "description": "Move grouping folder generator"
-    },
     "removeGroupingFolder": {
       "factory": "./generators/grouping-folder/remove/src/generator#removeSchematic",
       "schema": "./generators/grouping-folder/remove/src/schema.json",
@@ -146,11 +141,6 @@
       "factory": "./generators/grouping-folder/create-domain/src/generator",
       "schema": "./generators/grouping-folder/create-domain/src/schema.json",
       "description": "Add domain grouping folder generator"
-    },
-    "moveGroupingFolder": {
-      "factory": "./generators/grouping-folder/move/src/generator",
-      "schema": "./generators/grouping-folder/move/src/schema.json",
-      "description": "Move grouping folder generator"
     },
     "removeGroupingFolder": {
       "factory": "./generators/grouping-folder/remove/src/generator",
