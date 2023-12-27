@@ -3,5 +3,5 @@ import { getNpmScope as nxGetNpmScope } from '@nx/js/src/utils/package-json/get-
 
 export const getNpmScope = (tree: Tree): string => {
   const npmScope = nxGetNpmScope(tree);
-  return npmScope.startsWith('@') ? npmScope : `@${npmScope}`;
+  return (npmScope || '').startsWith('@') ? npmScope : `@${npmScope}`;
 };

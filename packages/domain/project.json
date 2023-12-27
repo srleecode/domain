@@ -50,9 +50,6 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["packages/domain/**/*.ts"]
-      },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
