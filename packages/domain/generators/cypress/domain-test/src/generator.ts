@@ -20,9 +20,13 @@ import { ProjectType } from '@nx/workspace';
 
 export async function setupDomainTestGenerator(
   tree: Tree,
-  options: SetupDomainTestGeneratorSchema
+  options: SetupDomainTestGeneratorSchema,
 ): Promise<void> {
-  const { groupingFolder, type } = options;
+  let { groupingFolder } = options;
+  const { type } = options;
+  groupingFolder = groupingFolder.endsWith('/')
+    ? groupingFolder.slice(0, -1)
+    : groupingFolder;
   validateGroupingFolder(tree, groupingFolder);
   const dasherisedFolderPath = getDasherizedFolderPath(tree, groupingFolder);
   const projectName = `${type}-${dasherisedFolderPath}`;
@@ -37,12 +41,12 @@ export async function setupDomainTestGenerator(
       implicitDependencies: getImplicitDependencies(
         tree,
         groupingFolder,
-        dasherisedFolderPath
+        dasherisedFolderPath,
       ),
       targets: {},
       tags: getTags(tree, groupingFolder, type),
     },
-    true
+    true,
   );
 
   await cypressE2EConfigurationGenerator(tree, {
@@ -63,5 +67,5 @@ export async function setupDomainTestGenerator(
 export default setupDomainTestGenerator;
 
 export const setupDomainTestSchematic = convertNxGenerator(
-  setupDomainTestGenerator
+  setupDomainTestGenerator,
 );

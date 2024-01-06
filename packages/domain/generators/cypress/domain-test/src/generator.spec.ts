@@ -11,34 +11,34 @@ describe('setupDomainTestGenerator', () => {
       tree = createTreeWithEmptyWorkspace();
       tree.write(`libs/test-app/test-domain/shell/src.index.ts`, '');
       await createApplicationLayerGenerator(tree, {
-        groupingFolder: 'libs/test-app/test-domain',
+        groupingFolder: 'libs/test-app/test-domain/',
         buildable: true,
         strict: false,
         enableIvy: true,
         publishable: false,
       });
       await setupDomainTestGenerator(tree, {
-        groupingFolder: 'libs/test-app/test-domain',
+        groupingFolder: 'libs/test-app/test-domain/',
         type: 'e2e',
       });
     }, 240000);
 
     it('should move cypress directory from apps to libs', async () => {
       expect(
-        tree.exists(`libs/test-app/test-domain/.e2e/cypress.config.ts`)
+        tree.exists(`libs/test-app/test-domain/.e2e/cypress.config.ts`),
       ).toBe(true);
     });
 
     it('should update cypress cypress project name to correct name', async () => {
       expect(
-        readProjectConfiguration(tree, 'e2e-test-app-test-domain')
+        readProjectConfiguration(tree, 'e2e-test-app-test-domain'),
       ).toBeDefined();
     });
 
     it('should delete dev server target from e2e target', async () => {
       const projectConfig = readProjectConfiguration(
         tree,
-        'e2e-test-app-test-domain'
+        'e2e-test-app-test-domain',
       );
       const e2eTarget = projectConfig.targets['e2e'];
       expect(e2eTarget.options.devServerTarget).toBeUndefined();
@@ -47,13 +47,13 @@ describe('setupDomainTestGenerator', () => {
 
     it('should remove page object file', () => {
       expect(
-        tree.exists(`libs/test-app/test-domain/.e2e/src/support/app.po.ts`)
+        tree.exists(`libs/test-app/test-domain/.e2e/src/support/app.po.ts`),
       ).toBe(false);
     });
 
     it('should remove custom commands file', () => {
       expect(
-        tree.exists(`libs/test-app/test-domain/.e2e/src/support/commands.ts`)
+        tree.exists(`libs/test-app/test-domain/.e2e/src/support/commands.ts`),
       ).toBe(false);
     });
 
@@ -61,14 +61,14 @@ describe('setupDomainTestGenerator', () => {
       expect(
         tree
           .read(`libs/test-app/test-domain/.e2e/src/support/index.ts`)
-          .toString()
+          .toString(),
       ).toBe('');
     });
 
     it('should add existing domain libraries as implicit dependencies', () => {
       const projectConfig = readProjectConfiguration(
         tree,
-        'e2e-test-app-test-domain'
+        'e2e-test-app-test-domain',
       );
       expect(projectConfig.implicitDependencies).toEqual([
         'test-app-test-domain-shell',
@@ -78,7 +78,7 @@ describe('setupDomainTestGenerator', () => {
     it('should add tags', () => {
       const projectConfig = readProjectConfiguration(
         tree,
-        'e2e-test-app-test-domain'
+        'e2e-test-app-test-domain',
       );
       expect(projectConfig.tags).toEqual([
         'app:test-app',
@@ -105,7 +105,7 @@ describe('setupDomainTestGenerator', () => {
     it('should replace e2e with the ct target', () => {
       const projectConfig = readProjectConfiguration(
         tree,
-        'ct-test-app-test-domain'
+        'ct-test-app-test-domain',
       );
       const ctTarget = projectConfig.targets['ct'];
       expect(ctTarget).toEqual({

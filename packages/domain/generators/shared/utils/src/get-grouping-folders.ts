@@ -4,11 +4,11 @@ import { GroupingFolders } from './model/grouping-folders.model';
 
 export const getGroupingFolders = (
   tree: Tree,
-  groupingFolderPath: string
+  groupingFolderPath: string,
 ): GroupingFolders => {
   const groupingFolders = getDomainPath(tree, groupingFolderPath).split('/');
   return {
     app: groupingFolders?.[0],
-    domain: groupingFolders.slice(1),
+    domain: groupingFolders.slice(1).filter((folder) => folder),
   };
 };

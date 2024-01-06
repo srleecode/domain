@@ -23,7 +23,7 @@ describe('removeLibraryGenerator', () => {
 
   it('should pass correct parameters to @nx/workspace:remove generator', async () => {
     await removeLibraryGenerator(tree, {
-      libraryFolder: 'libs/test-app/test-domain/feature-test-example',
+      libraryFolder: 'libs/test-app/test-domain/feature-test-example/',
     });
     expect(nrwlWorkspaceMock.removeGenerator).toHaveBeenCalledWith(
       expect.anything(),
@@ -31,7 +31,7 @@ describe('removeLibraryGenerator', () => {
         forceRemove: true,
         projectName: 'test-app-test-domain-feature-test-example',
         skipFormat: false,
-      }
+      },
     );
   });
 });
