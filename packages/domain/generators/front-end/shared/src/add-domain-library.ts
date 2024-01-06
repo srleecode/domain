@@ -42,6 +42,10 @@ export const addDomainLibrary = async (
       throw e;
     });
   }
+  const libraryFolder = `${groupingFolderPath}/${libraryCommonOptions.name}/src/lib`;
+  tree
+    .children(libraryFolder)
+    .forEach((folder) => tree.delete(`${libraryFolder}/${folder}`));
   const dasherisedGroupingFolder = getDasherizedFolderPath(
     tree,
     groupingFolderPath,
