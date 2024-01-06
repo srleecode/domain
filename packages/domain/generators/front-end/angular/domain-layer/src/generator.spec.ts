@@ -18,7 +18,7 @@ describe('createDomainLayerGenerator', () => {
     enableIvy: true,
     publishable: false,
   };
-  const groupingFolder = 'libs/test-app/test-domain';
+  const groupingFolder = 'libs/test-app/test-domain/';
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
@@ -44,7 +44,7 @@ describe('createDomainLayerGenerator', () => {
       groupingFolders.app,
       ApplicationType.Angular,
       true,
-      schema
+      schema,
     );
   });
   it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
@@ -57,5 +57,16 @@ describe('createDomainLayerGenerator', () => {
       .read(`${groupingFolder}/domain/jest.config.ts`)
       .toString();
     expect(jestConfig).toMatch('jest-junit');
+  });
+  it('should add create correct domain name in tsconfig', async () => {
+    await createDomainLayerGenerator(tree, {
+      ...commonLibraryOptions,
+      groupingFolder,
+      addJestJunitReporter: true,
+    });
+    const jestConfig = tree
+      .read(`${groupingFolder}/domain/project.json`)
+      .toString();
+    expect(jestConfig).toMatch('"name": "test-app-test-domain-domain"');
   });
 });

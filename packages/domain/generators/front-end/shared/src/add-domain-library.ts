@@ -22,14 +22,17 @@ export const addDomainLibrary = async (
   appGroupingFolder: string,
   applicationType: ApplicationType,
   removeLintOverrides: boolean,
-  schema?: Partial<Schema> & { addJestJunitReporter?: boolean }
+  schema?: Partial<Schema> & { addJestJunitReporter?: boolean },
 ): Promise<void> => {
+  groupingFolderPath = groupingFolderPath.endsWith('/')
+    ? groupingFolderPath.slice(0, -1)
+    : groupingFolderPath;
   const libraryCommonOptions = getLibraryCommonOptions(
     tree,
     name,
     type,
     groupingFolderPath,
-    schema
+    schema,
   );
   if (applicationType === ApplicationType.Angular) {
     await libraryGenerator(tree, {
@@ -44,7 +47,7 @@ export const addDomainLibrary = async (
   }
   const dasherisedGroupingFolder = getDasherizedFolderPath(
     tree,
-    groupingFolderPath
+    groupingFolderPath,
   );
   const e2eProjectName = `e2e-${dasherisedGroupingFolder}`;
   const projectName = `${dasherisedGroupingFolder}-${libraryCommonOptions.name}`;

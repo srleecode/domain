@@ -15,14 +15,14 @@ export const getLibraryCommonOptions = (
   name: string,
   type: string,
   groupingFolder: string,
-  createLibrarySchema: AngularCreateLibrarySchema
+  createLibrarySchema: AngularCreateLibrarySchema,
 ): LibraryCommonOptions => {
   const { buildable, strict, enableIvy, publishable } = createLibrarySchema;
   const libraryName = name ? `${type}-${dasherize(name)}` : type;
   const domain = `${getDasherizedFolderPath(tree, groupingFolder)}`;
   if (tree.children(`${groupingFolder}/${libraryName}`).length > 1) {
     throw new Error(
-      `project already exists in: ${groupingFolder}/${libraryName}`
+      `project already exists in: ${groupingFolder}/${libraryName}`,
     );
   }
   const npmScope = getNpmScope(tree);

@@ -4,11 +4,11 @@ import { getWorkspaceLayout } from './get-workspace-layout';
 
 export const getDomainPath = (
   tree: Tree,
-  groupingFolderPath: string
+  groupingFolderPath: string,
 ): string => {
   const workspaceLayout = getWorkspaceLayout(tree);
   return (getNormalisedPath(groupingFolderPath) || '').replace(
     `${workspaceLayout.libsDir}/`,
-    ''
+    '',
   );
 };
