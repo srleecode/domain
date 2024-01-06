@@ -107,7 +107,17 @@ describe('createPresentationLayerGenerator', () => {
       eslint.overrides[0].rules['@angular-eslint/directive-selector'][1].prefix,
     ).toBe(prefix);
   });
-
+  it('should should remove comopnent that is added by default to the library', async () => {
+    await createPresentationLayerGenerator(tree, {
+      ...commonLibraryOptions,
+      groupingFolder,
+    });
+    expect(
+      tree.children(
+        `${groupingFolder}presentation/src/lib/test-app-test-domain-presentation`,
+      ).length,
+    ).toBe(0);
+  });
   describe('eslint layer rules', () => {
     beforeEach(() => {
       const json = {
