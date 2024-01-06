@@ -26,12 +26,13 @@ import { classify, dasherize } from '@angular-devkit/core/src/utils/strings';
 
 export const addComponentFiles = (
   tree: Tree,
-  options: CreateComponentGeneratorSchema
+  options: CreateComponentGeneratorSchema,
+  groupingFolder: string,
 ): void => {
-  const { groupingFolder, name, type, prefix } = options;
+  const { name, type, prefix } = options;
   const dasherisedGroupingFolder = `${getDasherizedFolderPath(
     tree,
-    groupingFolder
+    groupingFolder,
   )}`;
   const dasherizedName = dasherize(name);
   const projectName = dasherize(`${dasherisedGroupingFolder}-${type}-${name}`);
@@ -42,7 +43,7 @@ export const addComponentFiles = (
   });
 
   const target = normalize(
-    `${groupingFolder}/presentation/src/lib/${type}/${dasherizedName}`
+    `${groupingFolder}/presentation/src/lib/${type}/${dasherizedName}`,
   );
   const templateOptions = {
     ...options,
@@ -72,7 +73,7 @@ export const addComponentFiles = (
     tree,
     `${groupingFolder}/presentation`,
     type,
-    dasherizedName
+    dasherizedName,
   );
 };
 
@@ -87,7 +88,7 @@ const addComponentToIndex = (
   tree: Tree,
   libraryPath: string,
   type: ComponentType,
-  dasherizedName: string
+  dasherizedName: string,
 ): void => {
   const indexPath = `${libraryPath}/src/index.ts`;
   const source = getTsSourceFile(tree, indexPath);
@@ -104,7 +105,7 @@ const addComponentToIndex = (
   ];
   const newFile = applyChangesToString(
     tree.read(indexPath).toString(),
-    changes
+    changes,
   );
   tree.write(indexPath, newFile);
 };

@@ -6,7 +6,7 @@ import { CreateComponentGeneratorSchema } from './schema';
 import { StyleType } from './model/style-type.enum';
 
 export const defaultOptions: CreateComponentGeneratorSchema = {
-  groupingFolder: 'libs/test-app/test-domain',
+  groupingFolder: 'libs/test-app/test-domain/',
   type: ComponentType.Feature,
   name: 'TestExample',
   viewEncapsulation: ViewEncapsulation.Emulated,

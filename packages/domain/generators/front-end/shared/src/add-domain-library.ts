@@ -24,9 +24,6 @@ export const addDomainLibrary = async (
   removeLintOverrides: boolean,
   schema?: Partial<Schema> & { addJestJunitReporter?: boolean },
 ): Promise<void> => {
-  groupingFolderPath = groupingFolderPath.endsWith('/')
-    ? groupingFolderPath.slice(0, -1)
-    : groupingFolderPath;
   const libraryCommonOptions = getLibraryCommonOptions(
     tree,
     name,

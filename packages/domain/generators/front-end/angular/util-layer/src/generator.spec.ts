@@ -11,7 +11,7 @@ import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
 describe('createUtilGenerator', () => {
   let tree: Tree;
   const schema: CreateUtilGeneratorSchema = {
-    groupingFolder: 'libs/test-app/test-domain',
+    groupingFolder: 'libs/test-app/test-domain/',
     buildable: true,
     strict: false,
     enableIvy: true,
@@ -31,11 +31,11 @@ describe('createUtilGenerator', () => {
       expect.anything(),
       '',
       'util',
-      schema.groupingFolder,
+      'libs/test-app/test-domain',
       groupingFolders.app,
       ApplicationType.Angular,
       true,
-      schema
+      schema,
     );
   });
   it('should add jest junit reporter config when addJestJunitReporter is true', async () => {

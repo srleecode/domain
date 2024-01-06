@@ -6,6 +6,7 @@ import { addDomainLibrary } from '../../../shared';
 import {
   ApplicationType,
   getGroupingFolders,
+  getProcessedGroupingFolder,
   validateGroupingFolder,
 } from '../../../../shared/utils';
 import { addPresentationLayerEslintConstraint } from './lib/add-presentation-eslint-constraint';
@@ -13,9 +14,10 @@ import { createShellModule } from './lib/create-shell-module';
 
 export async function createPresentationLayerGenerator(
   tree: Tree,
-  options: CreatePresentationLayerGeneratorSchema
+  options: CreatePresentationLayerGeneratorSchema,
 ): Promise<void> {
-  const { groupingFolder } = options;
+  let { groupingFolder } = options;
+  groupingFolder = getProcessedGroupingFolder(groupingFolder);
   validateGroupingFolder(tree, groupingFolder);
   const libraryName = 'presentation';
   const groupingFolders = getGroupingFolders(tree, groupingFolder);
@@ -27,7 +29,7 @@ export async function createPresentationLayerGenerator(
     groupingFolders.app,
     ApplicationType.Angular,
     false,
-    options
+    options,
   );
   createShellModule(tree, groupingFolder, libraryName);
   addPresentationLayerEslintConstraint(tree);
@@ -37,5 +39,5 @@ export async function createPresentationLayerGenerator(
 export default createPresentationLayerGenerator;
 
 export const createPresentationLayerSchematic = convertNxGenerator(
-  createPresentationLayerGenerator
+  createPresentationLayerGenerator,
 );

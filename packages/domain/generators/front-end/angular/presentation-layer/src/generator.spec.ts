@@ -22,7 +22,7 @@ describe('createPresentationLayerGenerator', () => {
     enableIvy: true,
     publishable: false,
   };
-  const groupingFolder = 'libs/test-app/test-domain';
+  const groupingFolder = 'libs/test-app/test-domain/';
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
@@ -38,11 +38,11 @@ describe('createPresentationLayerGenerator', () => {
     });
     const fileName = `${getDasherizedFolderPath(
       tree,
-      groupingFolder
+      groupingFolder,
     )}-shell.module.ts`;
     const filePath = `${groupingFolder}/presentation/src/lib/${fileName}`;
     expect(tree.read(filePath).toString()).toMatch(
-      'TestAppTestDomainShellModule'
+      'TestAppTestDomainShellModule',
     );
   });
 
@@ -54,7 +54,7 @@ describe('createPresentationLayerGenerator', () => {
     });
     const filePath = `${groupingFolder}/presentation/src/index.ts`;
     expect(tree.read(filePath).toString()).toMatch(
-      `export * from './lib/test-app-test-domain-shell.module`
+      `export * from './lib/test-app-test-domain-shell.module`,
     );
   });
 
@@ -72,11 +72,11 @@ describe('createPresentationLayerGenerator', () => {
       expect.anything(),
       '',
       'presentation',
-      schema.groupingFolder,
+      'libs/test-app/test-domain',
       groupingFolders.app,
       ApplicationType.Angular,
       false,
-      schema
+      schema,
     );
   });
   it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
@@ -98,13 +98,13 @@ describe('createPresentationLayerGenerator', () => {
       prefix,
     });
     const eslint = JSON.parse(
-      tree.read(`${groupingFolder}/presentation/.eslintrc.json`).toString()
+      tree.read(`${groupingFolder}/presentation/.eslintrc.json`).toString(),
     );
     expect(
-      eslint.overrides[0].rules['@angular-eslint/component-selector'][1].prefix
+      eslint.overrides[0].rules['@angular-eslint/component-selector'][1].prefix,
     ).toBe(prefix);
     expect(
-      eslint.overrides[0].rules['@angular-eslint/directive-selector'][1].prefix
+      eslint.overrides[0].rules['@angular-eslint/directive-selector'][1].prefix,
     ).toBe(prefix);
   });
 
@@ -142,7 +142,7 @@ describe('createPresentationLayerGenerator', () => {
       expect(
         eslint.overrides[0].rules[
           '@nx/enforce-module-boundaries'
-        ][1].depConstraints.find((c) => c.sourceTag === 'type:presentation')
+        ][1].depConstraints.find((c) => c.sourceTag === 'type:presentation'),
       ).toEqual({
         notDependOnLibsWithTags: [],
         onlyDependOnLibsWithTags: [

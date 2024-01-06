@@ -16,7 +16,7 @@ describe('removeGenerator', () => {
 
   it('should remove all projects under the given folder', async () => {
     const schema: CreateInfrastructureLayerGeneratorSchema = {
-      groupingFolder: 'libs/test-app/test-domain',
+      groupingFolder: 'libs/test-app/test-domain/',
       buildable: true,
       strict: false,
       enableIvy: true,

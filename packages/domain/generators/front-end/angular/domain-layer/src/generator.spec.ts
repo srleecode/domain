@@ -40,7 +40,7 @@ describe('createDomainLayerGenerator', () => {
       expect.anything(),
       '',
       'domain',
-      schema.groupingFolder,
+      'libs/test-app/test-domain',
       groupingFolders.app,
       ApplicationType.Angular,
       true,
