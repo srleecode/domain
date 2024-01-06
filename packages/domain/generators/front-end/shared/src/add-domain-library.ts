@@ -46,6 +46,10 @@ export const addDomainLibrary = async (
   tree
     .children(libraryFolder)
     .forEach((folder) => tree.delete(`${libraryFolder}/${folder}`));
+  tree.write(
+    `${groupingFolderPath}/${libraryCommonOptions.name}/src/index.ts`,
+    '',
+  );
   const dasherisedGroupingFolder = getDasherizedFolderPath(
     tree,
     groupingFolderPath,
