@@ -11,6 +11,7 @@ import {
   getDasherizedFolderPath,
   getDomainPath,
   getNpmScope,
+  getProcessedGroupingFolder,
   getProjectNames,
   isHavingDepContraint,
   isHavingMockFile,
@@ -23,9 +24,10 @@ import { removeImportPath } from './lib/remove-import-path';
 
 export async function removeGenerator(
   tree: Tree,
-  options: RemoveGeneratorSchema
+  options: RemoveGeneratorSchema,
 ): Promise<void> {
-  const { groupingFolder } = options;
+  let { groupingFolder } = options;
+  groupingFolder = getProcessedGroupingFolder(groupingFolder);
   validateGroupingFolder(tree, groupingFolder);
   const projectNames = getProjectNames(tree, groupingFolder);
   for (const projectName of projectNames) {

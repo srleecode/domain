@@ -5,14 +5,17 @@ import { mkdirSync } from 'fs';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getNormalisedPath,
+  getProcessedGroupingFolder,
   validateGroupingFolder,
 } from '../../../shared/utils';
 
 export async function createDomainGroupingFolderGenerator(
   tree: Tree,
-  options: CreateDomainGroupingFolderGeneratorSchema
+  options: CreateDomainGroupingFolderGeneratorSchema,
 ) {
-  const { name, groupingFolder } = options;
+  let { groupingFolder } = options;
+  const { name } = options;
+  groupingFolder = getProcessedGroupingFolder(groupingFolder);
   validateGroupingFolder(tree, groupingFolder);
   const splitGroupingFolder = getNormalisedPath(groupingFolder).split('/');
   const isSharedAppDomain =
@@ -30,5 +33,5 @@ export async function createDomainGroupingFolderGenerator(
 export default createDomainGroupingFolderGenerator;
 
 export const createDomainGroupingFolderSchematic = convertNxGenerator(
-  createDomainGroupingFolderGenerator
+  createDomainGroupingFolderGenerator,
 );

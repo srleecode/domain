@@ -4,13 +4,17 @@ import { addDirectiveFiles } from './lib/add-directive-files/add-directive-files
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import createPresentationLayerGenerator from '../../presentation-layer/src/generator';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { validateGroupingFolder } from '../../../../shared/utils';
+import {
+  getProcessedGroupingFolder,
+  validateGroupingFolder,
+} from '../../../../shared/utils';
 
 export async function createDirectiveGenerator(
   tree: Tree,
-  options: CreateDirectiveGeneratorSchema
+  options: CreateDirectiveGeneratorSchema,
 ): Promise<void> {
-  const { groupingFolder } = options;
+  let { groupingFolder } = options;
+  groupingFolder = getProcessedGroupingFolder(groupingFolder);
   validateGroupingFolder(tree, groupingFolder);
   if (tree.children(`${groupingFolder}/presentation`).length === 0) {
     await createPresentationLayerGenerator(tree, options);
@@ -22,5 +26,5 @@ export async function createDirectiveGenerator(
 export default createDirectiveGenerator;
 
 export const createDirectiveSchematic = convertNxGenerator(
-  createDirectiveGenerator
+  createDirectiveGenerator,
 );

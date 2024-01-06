@@ -14,6 +14,7 @@ export { getTsSourceFile } from './src/get-ts-source-file';
 export { spacify } from './src/spacify';
 export { getNpmScope } from './src/get-npm-scope';
 export { validateGroupingFolder } from './src/validate-grouping-folder';
+export { getProcessedGroupingFolder } from './src/get-processed-grouping-folder';
 export { UnitTestType } from './src/model/unit-test-type.enum';
 export { ElementType } from './src/model/element-type.enum';
 export { ApplicationType } from './src/model/application-type.enum';

@@ -17,12 +17,12 @@ import {
 
 export const addDirectiveFiles = (
   tree: Tree,
-  options: CreateDirectiveGeneratorSchema
+  options: CreateDirectiveGeneratorSchema,
 ): void => {
   const { groupingFolder, name, prefix } = options;
   const dasherisedGroupingFolder = `${getDasherizedFolderPath(
     tree,
-    groupingFolder
+    groupingFolder,
   )}`;
   const libraryName = getLibraryName({
     name,
@@ -30,10 +30,10 @@ export const addDirectiveFiles = (
   });
   const libraryPath = `${groupingFolder}/${libraryName}`;
   const target = normalize(
-    `${groupingFolder}/presentation/src/lib/directive/${dasherize(name)}`
+    `${groupingFolder}/presentation/src/lib/directive/${dasherize(name)}`,
   );
   const projectName = dasherize(
-    `${dasherisedGroupingFolder}-directive-${name}`
+    `${dasherisedGroupingFolder}-directive-${name}`,
   );
   const selector = prefix
     ? `${prefix}${classify(name)}`

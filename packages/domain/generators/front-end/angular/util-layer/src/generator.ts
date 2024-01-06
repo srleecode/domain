@@ -6,14 +6,16 @@ import { addDomainLibrary } from '../../../shared';
 import {
   ApplicationType,
   getGroupingFolders,
+  getProcessedGroupingFolder,
   validateGroupingFolder,
 } from '../../../../shared/utils';
 
 export async function createUtilGenerator(
   tree: Tree,
-  options: CreateUtilGeneratorSchema
+  options: CreateUtilGeneratorSchema,
 ): Promise<void> {
-  const { groupingFolder } = options;
+  let { groupingFolder } = options;
+  groupingFolder = getProcessedGroupingFolder(groupingFolder);
   validateGroupingFolder(tree, groupingFolder);
   const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
@@ -24,7 +26,7 @@ export async function createUtilGenerator(
     groupingFolders.app,
     ApplicationType.Angular,
     true,
-    options
+    options,
   );
   await formatFiles(tree);
 }

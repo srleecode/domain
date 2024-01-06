@@ -6,14 +6,16 @@ import { addDomainLibrary } from '../../../shared';
 import {
   ApplicationType,
   getGroupingFolders,
+  getProcessedGroupingFolder,
   validateGroupingFolder,
 } from '../../../../shared/utils';
 
 export async function createApplicationLayerGenerator(
   tree: Tree,
-  options: CreateApplicationLayerGeneratorSchema
+  options: CreateApplicationLayerGeneratorSchema,
 ): Promise<void> {
-  const { groupingFolder } = options;
+  let { groupingFolder } = options;
+  groupingFolder = getProcessedGroupingFolder(groupingFolder);
   validateGroupingFolder(tree, groupingFolder);
   const groupingFolders = getGroupingFolders(tree, groupingFolder);
   await addDomainLibrary(
@@ -24,7 +26,7 @@ export async function createApplicationLayerGenerator(
     groupingFolders.app,
     ApplicationType.Angular,
     true,
-    options
+    options,
   );
   await formatFiles(tree);
 }
@@ -32,5 +34,5 @@ export async function createApplicationLayerGenerator(
 export default createApplicationLayerGenerator;
 
 export const createApplicationLayerSchematic = convertNxGenerator(
-  createApplicationLayerGenerator
+  createApplicationLayerGenerator,
 );

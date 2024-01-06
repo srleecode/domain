@@ -7,7 +7,7 @@ import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
 describe('createAppGroupingFolderGenerator', () => {
   let tree: Tree;
   const options: CreateDomainGroupingFolderGeneratorSchema = {
-    groupingFolder: 'libs/ng-test-app',
+    groupingFolder: 'libs/ng-test-app/',
     name: 'test-domain',
   };
   const domainScope = 'scope:ng-test-app-test-domain';
@@ -16,7 +16,7 @@ describe('createAppGroupingFolderGenerator', () => {
     const eslint = readJson(tree, '.eslintrc.json');
     expect(
       eslint.overrides[0].rules['@nx/enforce-module-boundaries'][1]
-        .depConstraints[0].onlyDependOnLibsWithTags
+        .depConstraints[0].onlyDependOnLibsWithTags,
     ).toContainEqual(dependencyTag);
   };
 
@@ -78,7 +78,7 @@ describe('createAppGroupingFolderGenerator', () => {
     const eslint = readJson(tree, '.eslintrc.json');
     expect(
       eslint.overrides[0].rules['@nx/enforce-module-boundaries'][1]
-        .depConstraints
+        .depConstraints,
     ).toEqual([]);
   });
 });

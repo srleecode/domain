@@ -12,6 +12,7 @@ import { SetupDomainTestGeneratorSchema } from './schema';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getDasherizedFolderPath,
+  getProcessedGroupingFolder,
   validateGroupingFolder,
 } from '../../../shared/utils';
 import { getTags } from './lib/get-domain-test-eslint-tags';
@@ -24,10 +25,8 @@ export async function setupDomainTestGenerator(
 ): Promise<void> {
   let { groupingFolder } = options;
   const { type } = options;
-  groupingFolder = groupingFolder.endsWith('/')
-    ? groupingFolder.slice(0, -1)
-    : groupingFolder;
   validateGroupingFolder(tree, groupingFolder);
+  groupingFolder = getProcessedGroupingFolder(groupingFolder);
   const dasherisedFolderPath = getDasherizedFolderPath(tree, groupingFolder);
   const projectName = `${type}-${dasherisedFolderPath}`;
   const directory = `${groupingFolder}/.${type}`;

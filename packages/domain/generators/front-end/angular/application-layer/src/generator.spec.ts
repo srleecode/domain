@@ -9,10 +9,10 @@ import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
 import { createDummyGroupingFolder } from '../../../../shared/test-utils';
 import { CreateApplicationLayerGeneratorSchema } from './schema';
 
-describe('createDomainLayerGenerator', () => {
+describe('createApplicationLayerGenerator', () => {
   let tree: Tree;
   const schema: CreateApplicationLayerGeneratorSchema = {
-    groupingFolder: 'libs/test-app/test-domain',
+    groupingFolder: 'libs/test-app/test-domain/',
     buildable: true,
     strict: false,
     enableIvy: true,
@@ -32,11 +32,11 @@ describe('createDomainLayerGenerator', () => {
       expect.anything(),
       '',
       'application',
-      schema.groupingFolder,
+      'libs/test-app/test-domain',
       groupingFolders.app,
       ApplicationType.Angular,
       true,
-      schema
+      schema,
     );
   });
   it('should add jest junit reporter config when addJestJunitReporter is true', async () => {
