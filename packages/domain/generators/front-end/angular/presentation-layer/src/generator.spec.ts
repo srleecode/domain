@@ -53,8 +53,9 @@ describe('createPresentationLayerGenerator', () => {
       addJestJunitReporter: true,
     });
     const filePath = `${groupingFolder}/presentation/src/index.ts`;
-    expect(tree.read(filePath).toString()).toMatch(
-      `export * from './lib/test-app-test-domain-shell.module`,
+    const index = tree.read(filePath).toString();
+    expect(index).toEqual(
+      `export * from './lib/test-app-test-domain-shell.module';`,
     );
   });
 
