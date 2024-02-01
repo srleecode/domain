@@ -1,7 +1,12 @@
-import { Tree } from '@nx/devkit';
-import { getNpmScope as nxGetNpmScope } from '@nx/js/src/utils/package-json/get-npm-scope';
+import { Tree, readJson } from '@nx/devkit';
 
 export const getNpmScope = (tree: Tree): string => {
-  const npmScope = nxGetNpmScope(tree);
-  return (npmScope || '').startsWith('@') ? npmScope : `@${npmScope}`;
+  const { name } = tree.exists('package.json')
+    ? readJson<{ name?: string }>(tree, 'package.json')
+    : { name: null };
+
+  if (name?.startsWith('@')) {
+    return name.split('/')[0];
+  }
+  return `@${name}`;
 };

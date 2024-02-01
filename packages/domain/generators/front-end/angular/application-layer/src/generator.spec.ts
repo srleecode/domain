@@ -49,4 +49,16 @@ describe('createApplicationLayerGenerator', () => {
       .toString();
     expect(jestConfig).toMatch('jest-junit');
   });
+  it('should create tsconfig path', async () => {
+    await createApplicationLayerGenerator(tree, {
+      ...schema,
+      addJestJunitReporter: true,
+    });
+    const tsConfig = JSON.parse(tree.read('tsconfig.base.json').toString());
+    expect(tsConfig.compilerOptions.paths).toEqual({
+      '@proj/test-app/test-domain/application': [
+        'libs/test-app/test-domain/application/src/index.ts',
+      ],
+    });
+  });
 });

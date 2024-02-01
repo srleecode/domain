@@ -1,5 +1,4 @@
 import { Tree } from '@nx/devkit';
-import * as getNpmScopeMock from '@nx/js/src/utils/package-json/get-npm-scope';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { getNpmScope } from './get-npm-scope';
 
@@ -8,9 +7,15 @@ describe('getNpmScope', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
-    jest.spyOn(getNpmScopeMock, 'getNpmScope').mockReturnValue('test');
   });
-  it('should return with prefixed @', async () => {
+  const createPackageJson = (name: string): void =>
+    tree.write('package.json', `{"name": "${name}"}`);
+  it('should return when it has prefixed @', () => {
+    createPackageJson('@test');
+    expect(getNpmScope(tree)).toBe('@test');
+  });
+  it('should return when it does not have prefixed @', () => {
+    createPackageJson('test');
     expect(getNpmScope(tree)).toBe('@test');
   });
 });
