@@ -9,6 +9,7 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { addDomainLibrary } from './add-domain-library';
 import { AngularCreateLibrarySchema } from './model/angular-create-library-schema.model';
 import { ApplicationType } from '@srleecode/domain/shared/utils';
+jest.mock('prettier', () => null);
 
 describe('addDomainLibrary', () => {
   let tree: Tree;
@@ -34,11 +35,11 @@ describe('addDomainLibrary', () => {
       'test-app',
       ApplicationType.Angular,
       true,
-      commonLibraryOptions
+      commonLibraryOptions,
     );
     const lintJson = readJson(
       tree,
-      'libs/test-app/test-domain/application/.eslintrc.json'
+      'libs/test-app/test-domain/application/.eslintrc.json',
     );
     expect(lintJson.overrides).toEqual([]);
   });
@@ -53,13 +54,13 @@ describe('addDomainLibrary', () => {
       'test-app',
       ApplicationType.Angular,
       true,
-      { ...commonLibraryOptions, addJestJunitReporter: true }
+      { ...commonLibraryOptions, addJestJunitReporter: true },
     );
     const jestConfig = tree
       .read(`${groupingFolderPath}/${type}/jest.config.ts`)
       .toString();
     expect(jestConfig).toMatch(
-      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app-test-domain-application.xml" } ] ]`
+      `reporters: ['default', [ 'jest-junit', { outputDirectory: './test-reports', outputName: "test-app-test-domain-application.xml" } ] ]`,
     );
   });
 
@@ -73,13 +74,13 @@ describe('addDomainLibrary', () => {
       'test-app',
       ApplicationType.Angular,
       true,
-      commonLibraryOptions
+      commonLibraryOptions,
     );
     const jestFile = tree
       .read(`${groupingFolderPath}/${type}/jest.config.ts`)
       .toString();
     expect(jestFile).not.toMatch(
-      /snapshotSerializers|transformIgnorePatterns|transform/
+      /snapshotSerializers|transformIgnorePatterns|transform/,
     );
   });
 
@@ -91,7 +92,7 @@ describe('addDomainLibrary', () => {
     addProjectConfiguration(
       tree,
       'e2e-test-app-test-domain',
-      mockProjectConfiguration
+      mockProjectConfiguration,
     );
     await addDomainLibrary(
       tree,
@@ -101,11 +102,11 @@ describe('addDomainLibrary', () => {
       'test-app',
       ApplicationType.Angular,
       true,
-      commonLibraryOptions
+      commonLibraryOptions,
     );
     const projectConfig = readProjectConfiguration(
       tree,
-      'e2e-test-app-test-domain'
+      'e2e-test-app-test-domain',
     );
     expect(projectConfig.implicitDependencies).toEqual([
       'test-app-test-domain-application',

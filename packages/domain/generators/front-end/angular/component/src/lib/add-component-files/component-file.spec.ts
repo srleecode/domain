@@ -10,11 +10,12 @@ import { ComponentType } from '../../model/component-type.enum';
 import { ViewEncapsulation } from '../../model/view-encapsulation.enum';
 import { createComponentGenerator } from '../../generator';
 import { dasherize } from '@angular-devkit/core/src/utils/strings';
+jest.mock('prettier', () => null);
 
 describe('component file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
-    defaultOptions.name
+    defaultOptions.name,
   )}/${dasherize(defaultOptions.name)}.component.ts`;
 
   beforeEach(() => {
@@ -26,7 +27,7 @@ describe('component file', () => {
     const filesContents = getFilesContents(
       tree,
       testFilePath,
-      join(__dirname, './expected-files/component-file.txt')
+      join(__dirname, './expected-files/component-file.txt'),
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
@@ -38,7 +39,7 @@ describe('component file', () => {
     const filesContents = getFilesContents(
       tree,
       testFilePath,
-      join(__dirname, './expected-files/component-file.txt')
+      join(__dirname, './expected-files/component-file.txt'),
     );
     expect(filesContents.treeFile).toMatch(`selector:'prefix-test-example'`);
   });
@@ -48,11 +49,11 @@ describe('component file', () => {
       type: ComponentType.Ui,
     });
     const uiTestFilePath = `${LIB_PATH.replace('feature', 'ui')}/${dasherize(
-      defaultOptions.name
+      defaultOptions.name,
     )}/${dasherize(defaultOptions.name)}.component.ts`;
     const componentFile = tree.read(uiTestFilePath).toString();
     expect(componentFile).toMatch(
-      /changeDetection: ChangeDetectionStrategy.OnPush/
+      /changeDetection: ChangeDetectionStrategy.OnPush/,
     );
   });
   it('should have ViewEncapsulation.None when it is provided', async () => {

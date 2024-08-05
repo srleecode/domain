@@ -8,11 +8,12 @@ import {
 } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 import { dasherize } from '@angular-devkit/core/src/utils/strings';
+jest.mock('prettier', () => null);
 
 describe('component template file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
-    defaultOptions.name
+    defaultOptions.name,
   )}/${dasherize(defaultOptions.name)}.component.html`;
 
   beforeEach(() => {
@@ -24,7 +25,7 @@ describe('component template file', () => {
     const filesContents = getFilesContents(
       tree,
       testFilePath,
-      join(__dirname, './expected-files/component-template.txt')
+      join(__dirname, './expected-files/component-template.txt'),
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });

@@ -2,6 +2,7 @@ import { readProjectConfiguration, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { setupDomainTestGenerator } from './generator';
 import createApplicationLayerGenerator from '@srleecode/domain/angular/application-layer';
+jest.mock('prettier', () => null);
 
 describe('setupDomainTestGenerator', () => {
   let tree: Tree;

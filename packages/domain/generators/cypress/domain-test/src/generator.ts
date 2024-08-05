@@ -5,7 +5,7 @@ import {
   formatFiles,
   logger,
 } from '@nx/devkit';
-import { cypressE2EConfigurationGenerator } from '@nx/cypress';
+import { configurationGenerator } from '@nx/cypress';
 import { removeUneededCypressProjectFiles } from './lib/remove-uneeded-cypress-project-files';
 import { getImplicitDependencies } from './lib/get-implicit-dependencies';
 import { SetupDomainTestGeneratorSchema } from './schema';
@@ -22,7 +22,7 @@ import { ProjectType } from '@nx/workspace';
 export async function setupDomainTestGenerator(
   tree: Tree,
   options: SetupDomainTestGeneratorSchema,
-): Promise<void> {
+) {
   let { groupingFolder } = options;
   const { type } = options;
   validateGroupingFolder(tree, groupingFolder);
@@ -48,7 +48,7 @@ export async function setupDomainTestGenerator(
     true,
   );
 
-  await cypressE2EConfigurationGenerator(tree, {
+  await configurationGenerator(tree, {
     baseUrl: './',
     project: projectName,
   }).catch((e: Error) => {

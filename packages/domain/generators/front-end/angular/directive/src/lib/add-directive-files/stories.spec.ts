@@ -8,11 +8,12 @@ import { join } from 'path';
 import { createDirectiveGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
 import { dasherize } from '@angular-devkit/core/src/utils/strings';
+jest.mock('prettier', () => null);
 
 describe('stories file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
-    defaultOptions.name
+    defaultOptions.name,
   )}/${dasherize(defaultOptions.name)}.stories.ts`;
 
   beforeEach(() => {
@@ -25,7 +26,7 @@ describe('stories file', () => {
     const filesContents = getFilesContents(
       tree,
       testFilePath,
-      join(__dirname, './expected-files/story.txt')
+      join(__dirname, './expected-files/story.txt'),
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
@@ -35,7 +36,7 @@ describe('stories file', () => {
     const filesContents = getFilesContents(
       tree,
       `${LIB_PATH}/${dasherize(defaultOptions.name)}/test.component.ts`,
-      join(__dirname, './expected-files/test-component.txt')
+      join(__dirname, './expected-files/test-component.txt'),
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });

@@ -4,6 +4,7 @@ import { removeGenerator } from './generator';
 import { CreateInfrastructureLayerGeneratorSchema } from '../../../front-end/angular/infrastructure-layer/src/schema';
 import { createInfrastructureLayerGenerator } from '../../../front-end/angular/infrastructure-layer/src/generator';
 import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
+jest.mock('prettier', () => null);
 
 describe('removeGenerator', () => {
   let appTree: Tree;

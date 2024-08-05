@@ -3,6 +3,7 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { createDomainGroupingFolderGenerator } from './generator';
 import { CreateDomainGroupingFolderGeneratorSchema } from './schema';
 import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
+jest.mock('prettier', () => null);
 
 describe('createAppGroupingFolderGenerator', () => {
   let tree: Tree;

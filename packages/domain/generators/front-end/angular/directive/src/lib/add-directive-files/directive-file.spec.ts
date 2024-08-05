@@ -8,11 +8,12 @@ import {
 } from '@srleecode/domain/shared/test-utils';
 import { join } from 'path';
 import { createDirectiveGenerator } from '../../generator';
+jest.mock('prettier', () => null);
 
 describe('directive file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
-    defaultOptions.name
+    defaultOptions.name,
   )}/${dasherize(defaultOptions.name)}.directive.ts`;
 
   beforeEach(() => {
@@ -25,7 +26,7 @@ describe('directive file', () => {
     const filesContents = getFilesContents(
       tree,
       testFilePath,
-      join(__dirname, './expected-files/directive-file.txt')
+      join(__dirname, './expected-files/directive-file.txt'),
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
@@ -38,7 +39,7 @@ describe('directive file', () => {
     const filesContents = getFilesContents(
       tree,
       testFilePath,
-      join(__dirname, './expected-files/directive-file.txt')
+      join(__dirname, './expected-files/directive-file.txt'),
     );
     expect(filesContents.treeFile).toMatch(`selector:'[prefixTestExample]'`);
   });
