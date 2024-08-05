@@ -2,6 +2,7 @@ import { logger, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from '@nx/angular/generators';
 import { getMockFileResolutionPath } from './get-mock-file-resolution-path';
+jest.mock('prettier', () => null);
 
 describe('getMockFileResolutionPath', () => {
   let appTree: Tree;
@@ -21,8 +22,8 @@ describe('getMockFileResolutionPath', () => {
     expect(
       getMockFileResolutionPath(
         appTree,
-        'test-app/test-domain/feature-test-example'
-      )
+        'test-app/test-domain/feature-test-example',
+      ),
     ).toBe('@proj/test-app/test-domain/feature-test-example/testing');
   });
 });

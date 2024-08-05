@@ -2,6 +2,7 @@ import { logger, readProjectConfiguration, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { removeTestTarget } from './remove-test-target';
 import { libraryGenerator } from '@nx/angular/generators';
+jest.mock('prettier', () => null);
 
 describe('removeTestTarget', () => {
   let tree: Tree;

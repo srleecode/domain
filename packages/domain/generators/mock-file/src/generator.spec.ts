@@ -2,6 +2,7 @@ import { logger, readJson, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from '@nx/angular/generators';
 import { createMockFileGenerator } from './generator';
+jest.mock('prettier', () => null);
 
 describe('createMockFileGenerator', () => {
   let tree: Tree;
@@ -43,7 +44,7 @@ describe('createMockFileGenerator', () => {
     expect(
       tsConfig.compilerOptions.paths[
         '@proj/test-app/test-domain/feature-test-example/testing'
-      ]
+      ],
     ).toEqual([
       'libs/test-app/test-domain/feature-test-example/src/testing.ts',
     ]);

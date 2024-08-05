@@ -8,6 +8,7 @@ import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { createDummyGroupingFolder } from '../../../../shared/test-utils';
 import { CreateApplicationLayerGeneratorSchema } from './schema';
+jest.mock('prettier', () => null);
 
 describe('createApplicationLayerGenerator', () => {
   let tree: Tree;

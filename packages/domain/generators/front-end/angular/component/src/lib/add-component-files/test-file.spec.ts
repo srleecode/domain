@@ -11,11 +11,12 @@ import {
 } from '../../../../../../shared/test-utils';
 import { join } from 'path';
 import { dasherize } from '@angular-devkit/core/src/utils/strings';
+jest.mock('prettier', () => null);
 
 describe('test file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
-    defaultOptions.name
+    defaultOptions.name,
   )}/${dasherize(defaultOptions.name)}.component.spec.ts`;
 
   beforeEach(() => {
@@ -31,7 +32,7 @@ describe('test file', () => {
     const filesContents = getFilesContents(
       tree,
       testFilePath,
-      join(__dirname, './expected-files/test-bed-test.txt')
+      join(__dirname, './expected-files/test-bed-test.txt'),
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
@@ -43,7 +44,7 @@ describe('test file', () => {
     const filesContents = getFilesContents(
       tree,
       testFilePath,
-      join(__dirname, './expected-files/no-test-bed-test.txt')
+      join(__dirname, './expected-files/no-test-bed-test.txt'),
     );
     expect(filesContents.treeFile).toMatch(filesContents.expectedFile);
   });
@@ -63,8 +64,8 @@ describe('test file', () => {
     });
     expect(
       tree.exists(
-        `${defaultOptions.groupingFolder}/feature/src/lib/feature.component.spec.ts`
-      )
+        `${defaultOptions.groupingFolder}/feature/src/lib/feature.component.spec.ts`,
+      ),
     ).toBe(false);
   });
 });

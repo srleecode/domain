@@ -3,6 +3,7 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import * as nrwlWorkspaceMock from '@nx/workspace';
 import { removeLibraryGenerator } from './generator';
 import { libraryGenerator } from '@nx/angular/generators';
+jest.mock('prettier', () => null);
 
 describe('removeLibraryGenerator', () => {
   let tree: Tree;

@@ -4,11 +4,12 @@ import { createComponentGenerator } from '../../generator';
 import { defaultOptions, LIB_PATH } from '../../default-options.constant';
 import { dasherize } from '@angular-devkit/core/src/utils/strings';
 import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
+jest.mock('prettier', () => null);
 
 describe('style file', () => {
   let tree: Tree;
   const testFilePath = `${LIB_PATH}/${dasherize(
-    defaultOptions.name
+    defaultOptions.name,
   )}/${dasherize(defaultOptions.name)}.component.${defaultOptions.style}`;
 
   beforeEach(() => {

@@ -7,6 +7,7 @@ import { getGroupingFolders, ApplicationType } from '../../../../shared/utils';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import * as mock from '../../../shared';
 import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
+jest.mock('prettier', () => null);
 
 describe('createUtilGenerator', () => {
   let tree: Tree;

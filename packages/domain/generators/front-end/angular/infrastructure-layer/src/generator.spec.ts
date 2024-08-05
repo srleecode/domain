@@ -7,6 +7,8 @@ import { CreateInfrastructureLayerGeneratorSchema } from './schema';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
 import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
+jest.mock('prettier', () => null);
+
 describe('createInfrastructureLayerGenerator', () => {
   let tree: Tree;
   const schema: CreateInfrastructureLayerGeneratorSchema = {
@@ -34,7 +36,7 @@ describe('createInfrastructureLayerGenerator', () => {
       groupingFolders.app,
       ApplicationType.Angular,
       true,
-      schema
+      schema,
     );
   });
   it('should add jest junit reporter config when addJestJunitReporter is true', async () => {

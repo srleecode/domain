@@ -13,6 +13,7 @@ import {
 } from '../../../../shared/utils';
 import { readJson, Tree } from '@nx/devkit';
 import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
+jest.mock('prettier', () => null);
 
 describe('createPresentationLayerGenerator', () => {
   let tree: Tree;

@@ -9,6 +9,7 @@ import { CreateDomainLayerGeneratorSchema } from './schema';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { ApplicationType, getGroupingFolders } from '../../../../shared/utils';
 import { createDummyGroupingFolder } from '@srleecode/domain/shared/test-utils';
+jest.mock('prettier', () => null);
 
 describe('createDomainLayerGenerator', () => {
   let tree: Tree;

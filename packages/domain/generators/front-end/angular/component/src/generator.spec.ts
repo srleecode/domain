@@ -5,6 +5,7 @@ import createComponentGenerator from './generator';
 import { ComponentType } from './model/component-type.enum';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { createDummyGroupingFolder } from '../../../../shared/test-utils';
+jest.mock('prettier', () => null);
 
 describe('createComponentGenerator', () => {
   let tree: Tree;
