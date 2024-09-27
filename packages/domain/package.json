@@ -12,8 +12,5 @@
     "type": "git",
     "url": "https://github.com/srleecode/domain.git",
     "directory": "packages/domain"
-  },
-  "peerDependencies": {
-    "@nx/devkit": "^16.0.0"
   }
 }
