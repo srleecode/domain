@@ -12,7 +12,7 @@ describe('removeLibraryGenerator', () => {
     jest.clearAllMocks();
     tree = createTreeWithEmptyWorkspace();
     await libraryGenerator(tree, {
-      name: 'feature-test-example',
+      name: 'test-app-test-domain-feature-test-example',
       directory: 'test-app/test-domain',
     }).catch((e: Error) => {
       logger.error(e.message);

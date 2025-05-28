@@ -3,7 +3,7 @@ import { Tree } from '@nx/devkit';
 export const getImplicitDependencies = (
   tree: Tree,
   groupingFolder: string,
-  dasherisedFolderPath: string
+  dasherisedFolderPath: string,
 ): string[] =>
   tree
     .children(groupingFolder)
@@ -11,6 +11,6 @@ export const getImplicitDependencies = (
       (folder) =>
         !tree.isFile(`${groupingFolder}/${folder}`) &&
         folder !== '.e2e' &&
-        folder !== '.ct'
+        folder !== '.ct',
     )
     .map((folder) => `${dasherisedFolderPath}-${folder}`);
