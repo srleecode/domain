@@ -42,20 +42,17 @@ export const addDomainLibrary = async (
       throw e;
     });
   }
-  const libraryFolder = `${groupingFolderPath}/${libraryCommonOptions.name}/src/lib`;
-  tree
-    .children(libraryFolder)
-    .forEach((folder) => tree.delete(`${libraryFolder}/${folder}`));
-  tree.write(
-    `${groupingFolderPath}/${libraryCommonOptions.name}/src/index.ts`,
-    '',
-  );
+  const libraryFolder = `${groupingFolderPath}/${type}/src/lib`;
+  tree.children(libraryFolder).forEach((folder) => {
+    tree.delete(`${libraryFolder}/${folder}`);
+  });
+  tree.write(`${groupingFolderPath}/${type}/src/index.ts`, '');
   const dasherisedGroupingFolder = getDasherizedFolderPath(
     tree,
     groupingFolderPath,
   );
   const e2eProjectName = `e2e-${dasherisedGroupingFolder}`;
-  const projectName = `${dasherisedGroupingFolder}-${libraryCommonOptions.name}`;
+  const projectName = libraryCommonOptions.name;
   if (isProjectExisting(tree, e2eProjectName)) {
     addImplicitDependency(tree, e2eProjectName, projectName);
   }

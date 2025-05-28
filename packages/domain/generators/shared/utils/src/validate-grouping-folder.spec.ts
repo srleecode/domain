@@ -1,5 +1,5 @@
-import { Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { validateGroupingFolder } from './validate-grouping-folder';
 import { SchematicsException } from '@angular-devkit/schematics';
 import { createDummyGroupingFolder } from '../../test-utils';
@@ -12,8 +12,8 @@ describe('validateGroupingFolder', () => {
   it('should throw an error when the grouping folder does not exist', () => {
     expect(() => validateGroupingFolder(tree, 'libs/test')).toThrowError(
       new SchematicsException(
-        'The grouping folder directory does not exist "libs/test"'
-      )
+        'The grouping folder directory does not exist "libs/test"',
+      ),
     );
   });
   it('should not throw an error when the grouping folder exists', () => {

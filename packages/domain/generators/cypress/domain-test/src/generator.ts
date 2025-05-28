@@ -30,6 +30,11 @@ export async function setupDomainTestGenerator(
   const dasherisedFolderPath = getDasherizedFolderPath(tree, groupingFolder);
   const projectName = `${type}-${dasherisedFolderPath}`;
   const directory = `${groupingFolder}/.${type}`;
+  const implicitDependencies = getImplicitDependencies(
+    tree,
+    groupingFolder,
+    dasherisedFolderPath,
+  );
   addProjectConfiguration(
     tree,
     projectName,
@@ -37,11 +42,7 @@ export async function setupDomainTestGenerator(
       name: projectName,
       root: directory,
       projectType: ProjectType.Library,
-      implicitDependencies: getImplicitDependencies(
-        tree,
-        groupingFolder,
-        dasherisedFolderPath,
-      ),
+      implicitDependencies,
       targets: {},
       tags: getTags(tree, groupingFolder, type),
     },

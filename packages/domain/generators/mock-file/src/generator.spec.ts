@@ -1,26 +1,26 @@
 import { logger, readJson, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import { libraryGenerator } from '@nx/angular/generators';
 import { createMockFileGenerator } from './generator';
+import createDomainLayerGenerator from '../../front-end/angular/domain-layer/src/generator';
 jest.mock('prettier', () => null);
 
 describe('createMockFileGenerator', () => {
   let tree: Tree;
-  const sourceRoot = 'libs/test-app/test-domain/feature-test-example/src';
+  const sourceRoot = 'libs/test-app/test-domain/domain/src';
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
   });
   const runGenerators = async () => {
-    await libraryGenerator(tree, {
-      name: 'feature-test-example',
-      directory: 'libs/test-app/test-domain',
+    tree.write(sourceRoot + '/index.ts', '');
+    await createDomainLayerGenerator(tree, {
+      groupingFolder: 'libs/test-app/test-domain',
     }).catch((e: Error) => {
       logger.error(e.message);
       logger.error(e.stack);
       throw e;
     });
     await createMockFileGenerator(tree, {
-      projectName: 'test-app-test-domain-feature-test-example',
+      projectName: 'test-app-test-domain-domain',
       mockFileName: 'test-example',
     });
   };
@@ -43,10 +43,8 @@ describe('createMockFileGenerator', () => {
     const tsConfig = readJson(tree, 'tsconfig.base.json');
     expect(
       tsConfig.compilerOptions.paths[
-        '@proj/test-app/test-domain/feature-test-example/testing'
+        '@proj/test-app/test-domain/domain/testing'
       ],
-    ).toEqual([
-      'libs/test-app/test-domain/feature-test-example/src/testing.ts',
-    ]);
+    ).toEqual(['libs/test-app/test-domain/domain/src/testing.ts']);
   });
 });

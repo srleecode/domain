@@ -18,20 +18,21 @@ export const getLibraryCommonOptions = (
   createLibrarySchema: AngularCreateLibrarySchema,
 ): LibraryCommonOptions => {
   const { buildable, strict, enableIvy, publishable } = createLibrarySchema;
-  const libraryName = name ? `${type}-${dasherize(name)}` : type;
+  let libraryName = name ? `${type}-${dasherize(name)}` : type;
   const domain = `${getDasherizedFolderPath(tree, groupingFolder)}`;
-  if (tree.children(`${groupingFolder}/${libraryName}`).length > 1) {
-    throw new Error(
-      `project already exists in: ${groupingFolder}/${libraryName}`,
-    );
+  if (!libraryName.startsWith(`${domain}-`)) {
+    libraryName = `${domain}-${libraryName}`;
+  }
+  if (tree.children(`${groupingFolder}/${type}`).length > 1) {
+    throw new Error(`project already exists in: ${groupingFolder}/${type}`);
   }
   const npmScope = getNpmScope(tree);
   const domainPath = getDomainPath(tree, groupingFolder);
-  const importPath = `${npmScope}/${domainPath}/${libraryName}`;
+  const importPath = `${npmScope}/${domainPath}/${type}`;
   return {
     name: libraryName,
     importPath,
-    directory: getNormalisedPath(groupingFolder),
+    directory: `${getNormalisedPath(groupingFolder)}/${type}`,
     tags: [
       `app:${domainPath.split('/')?.[0]}`,
       `scope:${domain}`,

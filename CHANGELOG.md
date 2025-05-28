@@ -112,6 +112,6 @@
 
 ### Changed
 
-- Rewrite of whole library for @nrwl/devkit, i.e. rewriting schematics as generators
+- Rewrite of whole library for @nx/devkit, i.e. rewriting schematics as generators
 - Removed domain-config.json. Default library options will be run from extension preferences instead of saving the options when domain is created.
 - Removed the add e2e and add storybook options from create generator as there was an issue in devkit where the project configuration updates weren't available when the cypress project generator was internally called in create domain.
