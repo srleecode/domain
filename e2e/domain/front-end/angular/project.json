@@ -3,6 +3,7 @@
   "$schema": "..\\..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "e2e/domain/front-end/angular/src",
   "projectType": "application",
+  "implicitDependencies": ["domain"],
   "targets": {
     "e2e": {
       "executor": "@nx/jest:jest",
@@ -12,6 +13,5 @@
       },
       "dependsOn": ["domain:build"]
     }
-  },
-  "implicitDependencies": ["domain"]
+  }
 }
